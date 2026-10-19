@@ -62,15 +62,14 @@
 <body>
 <div id="controls">
   <label>Travel time:</label>
-  <input type="range" id="timeRange" min="5" max="30" value="15" step="0.5" style="width:90px" />
-  <span id="timeVal" style="font-size:13px;min-width:32px">15 min</span>
+  <input type="range" id="timeRange" min="5" max="25" value="10" step="0.5" style="width:90px" />
+  <span id="timeVal" style="font-size:13px;min-width:32px">10 min</span>
   <button id="clearBtn" class="secondary">Clear all</button>
 </div>
 <div id="map"></div>
 <div id="hint">Click anywhere on the map to place a marker and draw its reach</div>
 
 <script>
-const TOMTOM_KEY = "Vy7Ln9ByvDWn1j84lGVpk3KQdS72jRi3";
 const COLORS = ["#2563eb","#dc2626","#16a34a","#d97706","#7c3aed","#0891b2"];
 let colorIdx = 0;
 let popGrid = null;
@@ -160,6 +159,70 @@ timeRange.addEventListener("input", () => {
   timeVal.textContent = timeRange.value + " min";
 });
 
+// OSRM isochrone: spoke-based approach
+// Generate points at N angles × M distances, query travel times, build polygon
+async function osrmIsochrone(lat, lng, mins) {
+  const OSRM = "https://router.project-osrm.org/table/v1/driving";
+  const budget = mins * 60; // seconds
+  const ANGLES = 36;        // every 10 degrees
+  const DISTS  = [500, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 6500, 8000]; // metres
+  const R_EARTH = 6371000;
+
+  // Generate spoke points
+  const spokes = [];
+  for (let a = 0; a < ANGLES; a++) {
+    const angle = (a * 360 / ANGLES) * Math.PI / 180;
+    for (const d of DISTS) {
+      const dLat = (d * Math.cos(angle)) / R_EARTH * (180 / Math.PI);
+      const dLon = (d * Math.sin(angle)) / R_EARTH * (180 / Math.PI) / Math.cos(lat * Math.PI / 180);
+      spokes.push({ a, d, lat: lat + dLat, lon: lng + dLon });
+    }
+  }
+
+  // Batch into chunks of 90 destinations (OSRM public server limit ~100 coords total)
+  const CHUNK = 90;
+  const durations = new Array(spokes.length).fill(Infinity);
+
+  for (let i = 0; i < spokes.length; i += CHUNK) {
+    const chunk = spokes.slice(i, i + CHUNK);
+    const coords = `${lng},${lat};` + chunk.map(p => `${p.lon},${p.lat}`).join(";");
+    const url = `${OSRM}/${coords}?sources=0&annotations=duration`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`OSRM HTTP ${res.status}`);
+    const data = await res.json();
+    const row = data.durations[0]; // travel times from source (index 0) to each dest
+    chunk.forEach((_, j) => { durations[i + j] = row[j + 1] ?? Infinity; });
+  }
+
+  // For each angle, find furthest reachable distance
+  const boundary = [];
+  for (let a = 0; a < ANGLES; a++) {
+    const spokePoints = spokes
+      .map((p, i) => ({ ...p, dur: durations[i] }))
+      .filter(p => p.a === a)
+      .sort((x, y) => x.d - y.d);
+
+    let best = null;
+    for (const p of spokePoints) {
+      if (p.dur <= budget) best = p;
+      else break;
+    }
+    // If no point reachable, use nearest reachable from any angle fallback
+    if (!best) best = spokePoints[0];
+    boundary.push([best.lon, best.lat]);
+  }
+
+  boundary.push(boundary[0]); // close ring
+  return {
+    type: "FeatureCollection",
+    features: [{
+      type: "Feature",
+      geometry: { type: "Polygon", coordinates: [boundary] },
+      properties: {},
+    }],
+  };
+}
+
 const placed = [];
 
 map.on("click", async (e) => {
@@ -179,30 +242,7 @@ map.on("click", async (e) => {
   hint.textContent = "Fetching isochrone…";
 
   try {
-    const url = `https://api.tomtom.com/routing/1/calculateReachableRange/${lat},${lng}/json` +
-      `?key=${TOMTOM_KEY}` +
-      `&timeBudgetInSec=${Math.round(mins * 60)}` +
-      `&routeType=fastest` +
-      `&traffic=true` +
-      `&travelMode=motorcycle` +
-      `&avoid=motorways`;
-
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-
-    // Convert TomTom boundary points to GeoJSON polygon
-    const boundary = data.reachableRange.boundary;
-    const coords = boundary.map(p => [p.longitude, p.latitude]);
-    coords.push(coords[0]); // close ring
-    const geojson = {
-      type: "FeatureCollection",
-      features: [{
-        type: "Feature",
-        geometry: { type: "Polygon", coordinates: [coords] },
-        properties: {},
-      }],
-    };
+    const geojson = await osrmIsochrone(lat, lng, mins);
 
     const isoLayer = L.geoJSON(geojson, {
       style: { color, fillColor: color, fillOpacity: 0.15, weight: 2, opacity: 0.8 },
