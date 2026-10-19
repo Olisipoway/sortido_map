@@ -36,7 +36,6 @@
       cursor: pointer;
     }
     #controls button:hover { background: #1d4ed8; }
-    #controls button:disabled { background: #93c5fd; cursor: default; }
     #controls button.secondary { background: #6b7280; }
     #controls button.secondary:hover { background: #4b5563; }
 
@@ -53,6 +52,11 @@
       border-radius: 20px;
       pointer-events: none;
     }
+
+    .pop-popup { font-size: 13px; line-height: 1.7; min-width: 180px; }
+    .pop-popup b { font-size: 14px; }
+    .pop-popup .row { display: flex; justify-content: space-between; gap: 12px; }
+    .pop-popup .row span:last-child { font-weight: 600; }
   </style>
 </head>
 <body>
@@ -69,6 +73,7 @@
 const VALHALLA = "https://valhalla1.openstreetmap.de/isochrone";
 const COLORS = ["#2563eb","#dc2626","#16a34a","#d97706","#7c3aed","#0891b2"];
 let colorIdx = 0;
+let popGrid = null; // loaded once
 
 const map = L.map("map", { zoomControl: true }).setView([38.737, -9.178], 12);
 
@@ -76,6 +81,74 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   maxZoom: 19,
 }).addTo(map);
+
+// Load population grid once
+fetch("pop_grid_2025.json")
+  .then(r => r.json())
+  .then(d => { popGrid = d; })
+  .catch(() => { popGrid = null; });
+
+// Ray-casting point-in-polygon (GeoJSON coords are [lon, lat])
+function pointInRing(lon, lat, ring) {
+  let inside = false;
+  for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+    const xi = ring[i][0], yi = ring[i][1];
+    const xj = ring[j][0], yj = ring[j][1];
+    if (((yi > lat) !== (yj > lat)) && (lon < (xj - xi) * (lat - yi) / (yj - yi) + xi)) {
+      inside = !inside;
+    }
+  }
+  return inside;
+}
+
+function pointInPolygon(lon, lat, geometry) {
+  if (geometry.type === "Polygon") {
+    const outer = geometry.coordinates[0];
+    if (!pointInRing(lon, lat, outer)) return false;
+    for (let h = 1; h < geometry.coordinates.length; h++) {
+      if (pointInRing(lon, lat, geometry.coordinates[h])) return false;
+    }
+    return true;
+  }
+  if (geometry.type === "MultiPolygon") {
+    return geometry.coordinates.some(poly => {
+      if (!pointInRing(lon, lat, poly[0])) return false;
+      for (let h = 1; h < poly.length; h++) {
+        if (pointInRing(lon, lat, poly[h])) return false;
+      }
+      return true;
+    });
+  }
+  return false;
+}
+
+function sumPopulation(geojson) {
+  if (!popGrid) return null;
+  const cols = popGrid.cols; // ['lat','lon','pop','age15_24','age25_64','rented_homes']
+  const li = cols.indexOf("lat"), loi = cols.indexOf("lon");
+  const pi = cols.indexOf("pop"), a1 = cols.indexOf("age15_24");
+  const a2 = cols.indexOf("age25_64"), ri = cols.indexOf("rented_homes");
+
+  // collect all polygon geometries from the FeatureCollection
+  const geometries = geojson.features.map(f => f.geometry);
+
+  let pop = 0, age1524 = 0, age2564 = 0, rented = 0;
+  for (const row of popGrid.rows) {
+    const lat = row[li], lon = row[loi];
+    for (const geom of geometries) {
+      if (pointInPolygon(lon, lat, geom)) {
+        pop     += row[pi];
+        age1524 += row[a1];
+        age2564 += row[a2];
+        rented  += row[ri];
+        break;
+      }
+    }
+  }
+  return { pop, age1524, age2564, rented };
+}
+
+function fmt(n) { return n.toLocaleString("pt-PT"); }
 
 const timeRange = document.getElementById("timeRange");
 const timeVal   = document.getElementById("timeVal");
@@ -86,7 +159,7 @@ timeRange.addEventListener("input", () => {
   timeVal.textContent = timeRange.value + " min";
 });
 
-const placed = []; // { marker, isoLayer }
+const placed = [];
 
 map.on("click", async (e) => {
   const { lat, lng } = e.latlng;
@@ -102,8 +175,6 @@ map.on("click", async (e) => {
   });
 
   const marker = L.marker([lat, lng], { icon }).addTo(map);
-  marker.bindPopup(`<b>${lat.toFixed(4)}, ${lng.toFixed(4)}</b><br>${mins} min reach`).openPopup();
-
   hint.textContent = "Fetching isochrone…";
 
   try {
@@ -122,14 +193,30 @@ map.on("click", async (e) => {
     const geojson = await res.json();
 
     const isoLayer = L.geoJSON(geojson, {
-      style: {
-        color,
-        fillColor: color,
-        fillOpacity: 0.15,
-        weight: 2,
-        opacity: 0.8,
-      },
+      style: { color, fillColor: color, fillOpacity: 0.15, weight: 2, opacity: 0.8 },
     }).addTo(map);
+
+    // Population count
+    hint.textContent = "Counting population…";
+    const stats = sumPopulation(geojson);
+
+    let popHtml = "";
+    if (stats) {
+      popHtml = `
+        <hr style="margin:6px 0;border-color:#eee"/>
+        <div class="row"><span>Residents</span><span>${fmt(stats.pop)}</span></div>
+        <div class="row"><span>Age 15–24</span><span>${fmt(stats.age1524)}</span></div>
+        <div class="row"><span>Age 25–64</span><span>${fmt(stats.age2564)}</span></div>
+        <div class="row"><span>Rented homes</span><span>${fmt(stats.rented)}</span></div>`;
+    }
+
+    marker.bindPopup(`
+      <div class="pop-popup">
+        <b>${mins} min reach</b><br>
+        <span style="color:#666;font-size:11px">${lat.toFixed(4)}, ${lng.toFixed(4)}</span>
+        ${popHtml}
+      </div>
+    `).openPopup();
 
     placed.push({ marker, isoLayer });
     hint.textContent = "Click anywhere to add another marker";
