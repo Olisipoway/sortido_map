@@ -83,7 +83,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 // Load population grid once
-fetch("pop_grid_2025_cpe.json")
+fetch("pop_grid_2025_income.json")
   .then(r => r.json())
   .then(d => { popGrid = d; })
   .catch(() => { popGrid = null; });
@@ -124,28 +124,29 @@ function pointInPolygon(lon, lat, geometry) {
 
 function sumPopulation(geojson) {
   if (!popGrid) return null;
-  const cols = popGrid.cols; // ['lat','lon','pop','age15_24','age25_64','rented_homes']
-  const li = cols.indexOf("lat"), loi = cols.indexOf("lon");
-  const pi = cols.indexOf("pop"), a1 = cols.indexOf("age15_24");
-  const a2 = cols.indexOf("age25_64"), ri = cols.indexOf("rented_homes");
+  const cols = popGrid.cols;
+  const li  = cols.indexOf("lat"),  loi = cols.indexOf("lon");
+  const pi  = cols.indexOf("pop"),  a1  = cols.indexOf("age15_24");
+  const a2  = cols.indexOf("age25_64"), ri = cols.indexOf("rented_homes");
+  const ii  = cols.indexOf("income_idx");
 
-  // collect all polygon geometries from the FeatureCollection
   const geometries = geojson.features.map(f => f.geometry);
 
-  let pop = 0, age1524 = 0, age2564 = 0, rented = 0;
+  let pop = 0, age1524 = 0, age2564 = 0, rented = 0, spendPop = 0;
   for (const row of popGrid.rows) {
     const lat = row[li], lon = row[loi];
     for (const geom of geometries) {
       if (pointInPolygon(lon, lat, geom)) {
-        pop     += row[pi];
-        age1524 += row[a1];
-        age2564 += row[a2];
-        rented  += row[ri];
+        pop      += row[pi];
+        age1524  += row[a1];
+        age2564  += row[a2];
+        rented   += row[ri];
+        spendPop += row[pi] * (ii >= 0 ? row[ii] : 1);
         break;
       }
     }
   }
-  return { pop, age1524, age2564, rented };
+  return { pop, age1524, age2564, rented, spendPop };
 }
 
 function fmt(n) { return n.toLocaleString("pt-PT"); }
@@ -216,6 +217,7 @@ map.on("click", async (e) => {
       popHtml = `
         <hr style="margin:6px 0;border-color:#eee"/>
         <div class="row"><span>Residents</span><span>${fmt(stats.pop)}</span></div>
+        <div class="row"><span>Spending-power equiv.</span><span>${fmt(Math.round(stats.spendPop))}</span></div>
         <div class="row"><span>Age 15–24</span><span>${fmt(stats.age1524)}</span></div>
         <div class="row"><span>Age 25–64</span><span>${fmt(stats.age2564)}</span></div>
         <div class="row"><span>Rented homes</span><span>${fmt(stats.rented)}</span></div>`;
