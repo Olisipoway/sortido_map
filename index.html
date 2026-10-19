@@ -83,7 +83,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 // Load population grid once
-fetch("pop_grid_2025_income.json")
+fetch("pop_grid_2025_full.json")
   .then(r => r.json())
   .then(d => { popGrid = d; })
   .catch(() => { popGrid = null; });
