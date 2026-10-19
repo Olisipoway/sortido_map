@@ -328,19 +328,48 @@ prepRange.addEventListener("input", updateLabels);
 document.getElementById("incomeBtn").addEventListener("click", toggleIncomeLayer);
 
 async function valhallaIsochrone(lat, lng, travelMins) {
+  const ORS_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjIwYjkyM2VjZjA0MTQwNDY5OTk0NDVhNzg4MDMyODdkIiwiaCI6Im11cm11cjY0In0=";
   const body = {
-    locations: [{ lat, lon: lng }],
-    costing: "motor_scooter",
-    contours: [{ time: travelMins }, { distance: 3 }],
-    polygons: true,
+    locations: [[lng, lat]],
+    profile: "cycling-regular",
+    range: [travelMins * 60],
+    range_type: "time",
+    attributes: ["area"],
+    intersections: false,
+    units: "m",
   };
-  const res = await fetch("https://valhalla.openstreetmap.de/isochrone", {
+  const res = await fetch("https://api.openrouteservice.org/v2/isochrones/cycling-regular", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": ORS_KEY,
+    },
     body: JSON.stringify(body),
   });
-  if (!res.ok) throw new Error(`Valhalla HTTP ${res.status}`);
-  return res.json();
+  if (!res.ok) throw new Error(`ORS HTTP ${res.status}`);
+  const data = await res.json();
+
+  // Also fetch 3km distance isochrone
+  const body3km = {
+    locations: [[lng, lat]],
+    profile: "cycling-regular",
+    range: [3000],
+    range_type: "distance",
+    intersections: false,
+    units: "m",
+  };
+  const res3 = await fetch("https://api.openrouteservice.org/v2/isochrones/cycling-regular", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": ORS_KEY,
+    },
+    body: JSON.stringify(body3km),
+  });
+  if (!res3.ok) throw new Error(`ORS 3km HTTP ${res3.status}`);
+  const data3 = await res3.json();
+
+  return { time: data, dist: data3 };
 }
 
 const placed = [];
@@ -364,23 +393,19 @@ map.on("click", async (e) => {
   hint.textContent = "Fetching isochrone…";
 
   try {
-    const geojson = await valhallaIsochrone(lat, lng, travelMins);
-
-    // Valhalla returns features in contour order: [time, distance]
-    const timeFeature = { type: "FeatureCollection", features: geojson.features.filter((_, i) => i === 0) };
-    const distFeature = { type: "FeatureCollection", features: geojson.features.filter((_, i) => i === 1) };
+    const { time: timeGeo, dist: distGeo } = await valhallaIsochrone(lat, lng, travelMins);
 
     const isoLayer = L.layerGroup([
-      L.geoJSON(timeFeature, {
+      L.geoJSON(timeGeo, {
         style: { color, fillColor: color, fillOpacity: 0.15, weight: 2, opacity: 0.8 },
       }),
-      L.geoJSON(distFeature, {
+      L.geoJSON(distGeo, {
         style: { color, fillColor: "none", fillOpacity: 0, weight: 2, opacity: 0.6, dashArray: "6 4" },
       }),
     ]).addTo(map);
 
     hint.textContent = "Counting population…";
-    const stats = sumPopulation(geojson);
+    const stats = sumPopulation(timeGeo);
 
     let popHtml = "";
     if (stats) {
@@ -393,11 +418,23 @@ map.on("click", async (e) => {
         <div class="row"><span>Rented homes</span><span>${fmt(stats.rented)}</span></div>`;
     }
 
+    const delta = 0.004; // ~450m bounding box
+    const imoUrl = `https://www.imovirtual.com/arrendar/loja/?`
+      + `search%5Bfilter_float_latitude%3Agte%5D=${(lat - delta).toFixed(5)}`
+      + `&search%5Bfilter_float_latitude%3Alte%5D=${(lat + delta).toFixed(5)}`
+      + `&search%5Bfilter_float_longitude%3Agte%5D=${(lng - delta).toFixed(5)}`
+      + `&search%5Bfilter_float_longitude%3Alte%5D=${(lng + delta).toFixed(5)}`
+      + `&search%5Bdescription%5D=1`;
+
     marker.bindPopup(`
       <div class="pop-popup">
         <b>${totalMins} min delivery · ${prepMins} min prep · ${travelMins} min ride</b><br>
         <span style="color:#666;font-size:11px">${lat.toFixed(4)}, ${lng.toFixed(4)} · dashed = 3 km road</span>
         ${popHtml}
+        <hr style="margin:6px 0;border-color:#eee"/>
+        <a href="${imoUrl}" target="_blank" style="display:block;text-align:center;background:#e8520a;color:white;border-radius:4px;padding:5px 0;font-weight:600;font-size:12px;text-decoration:none;">
+          Lojas para arrendar nearby →
+        </a>
       </div>
     `).openPopup();
 
