@@ -331,7 +331,7 @@ async function valhallaIsochrone(lat, lng, travelMins) {
   const body = {
     locations: [{ lat, lon: lng }],
     costing: "motor_scooter",
-    contours: [{ time: travelMins }],
+    contours: [{ time: travelMins }, { distance: 3 }],
     polygons: true,
   };
   const res = await fetch("https://valhalla.openstreetmap.de/isochrone", {
@@ -366,9 +366,18 @@ map.on("click", async (e) => {
   try {
     const geojson = await valhallaIsochrone(lat, lng, travelMins);
 
-    const isoLayer = L.geoJSON(geojson, {
-      style: { color, fillColor: color, fillOpacity: 0.15, weight: 2, opacity: 0.8 },
-    }).addTo(map);
+    // Valhalla returns features in contour order: [time, distance]
+    const timeFeature = { type: "FeatureCollection", features: geojson.features.filter((_, i) => i === 0) };
+    const distFeature = { type: "FeatureCollection", features: geojson.features.filter((_, i) => i === 1) };
+
+    const isoLayer = L.layerGroup([
+      L.geoJSON(timeFeature, {
+        style: { color, fillColor: color, fillOpacity: 0.15, weight: 2, opacity: 0.8 },
+      }),
+      L.geoJSON(distFeature, {
+        style: { color, fillColor: "none", fillOpacity: 0, weight: 2, opacity: 0.6, dashArray: "6 4" },
+      }),
+    ]).addTo(map);
 
     hint.textContent = "Counting population…";
     const stats = sumPopulation(geojson);
@@ -387,7 +396,7 @@ map.on("click", async (e) => {
     marker.bindPopup(`
       <div class="pop-popup">
         <b>${totalMins} min delivery · ${prepMins} min prep · ${travelMins} min ride</b><br>
-        <span style="color:#666;font-size:11px">${lat.toFixed(4)}, ${lng.toFixed(4)}</span>
+        <span style="color:#666;font-size:11px">${lat.toFixed(4)}, ${lng.toFixed(4)} · dashed = 3 km road</span>
         ${popHtml}
       </div>
     `).openPopup();
