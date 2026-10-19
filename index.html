@@ -62,8 +62,8 @@
 <body>
 <div id="controls">
   <label>Travel time:</label>
-  <input type="range" id="timeRange" min="10" max="35" value="22" step="0.5" style="width:90px" />
-  <span id="timeVal" style="font-size:13px;min-width:32px">22 min</span>
+  <input type="range" id="timeRange" min="5" max="30" value="15" step="0.5" style="width:90px" />
+  <span id="timeVal" style="font-size:13px;min-width:32px">15 min</span>
   <button id="clearBtn" class="secondary">Clear all</button>
 </div>
 <div id="map"></div>
@@ -183,7 +183,7 @@ map.on("click", async (e) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         locations: [{ lon: lng, lat }],
-        costing: "auto",
+        costing: "motor_scooter",
         contours: [{ time: mins }],
         polygons: true,
       }),
