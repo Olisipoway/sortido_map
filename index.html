@@ -9,7 +9,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: sans-serif; }
-    #map { width: 100vw; height: 100vh; }
+    #map { width: 100vw; height: 100vh; cursor: crosshair; }
 
     #controls {
       position: absolute;
@@ -24,10 +24,8 @@
       display: flex;
       gap: 8px;
       align-items: center;
-      flex-wrap: wrap;
     }
     #controls label { font-size: 13px; font-weight: 600; color: #333; }
-    #controls select, #controls input[type=range] { font-size: 13px; }
     #controls button {
       font-size: 13px;
       padding: 5px 12px;
@@ -39,161 +37,117 @@
     }
     #controls button:hover { background: #1d4ed8; }
     #controls button:disabled { background: #93c5fd; cursor: default; }
-    #status {
+    #controls button.secondary { background: #6b7280; }
+    #controls button.secondary:hover { background: #4b5563; }
+
+    #hint {
       position: absolute;
       bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 1000;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.65);
       color: white;
       font-size: 12px;
-      padding: 5px 12px;
+      padding: 5px 14px;
       border-radius: 20px;
-      display: none;
-    }
-
-    .site-label {
-      background: transparent;
-      border: none;
-      font-weight: 700;
-      font-size: 12px;
-      white-space: nowrap;
-      color: #111;
-      text-shadow: 0 0 3px white, 0 0 3px white;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
 <div id="controls">
-  <label>Site:</label>
-  <select id="siteSelect">
-    <option value="lambert">Quinta do Lambert (Lumiar)</option>
-    <option value="miraflores">Miraflores (Algés)</option>
-    <option value="arif">Arif (Benfica)</option>
-  </select>
-  <label>Minutes:</label>
+  <label>Travel time:</label>
   <input type="range" id="timeRange" min="10" max="35" value="22" step="0.5" style="width:90px" />
   <span id="timeVal" style="font-size:13px;min-width:32px">22 min</span>
-  <button id="isoBtn">Draw reach</button>
-  <button id="clearBtn">Clear</button>
+  <button id="clearBtn" class="secondary">Clear all</button>
 </div>
 <div id="map"></div>
-<div id="status" id="status"></div>
+<div id="hint">Click anywhere on the map to place a marker and draw its reach</div>
 
 <script>
-const SITES = {
-  lambert:    { lat: 38.7713, lon: -9.1530, label: "Lambert (Lumiar)",    color: "#2563eb" },
-  miraflores: { lat: 38.7158, lon: -9.2314, label: "Miraflores (Algés)", color: "#16a34a" },
-  arif:       { lat: 38.7466, lon: -9.1769, label: "Arif (Benfica)",     color: "#dc2626" },
-};
-
 const VALHALLA = "https://valhalla1.openstreetmap.de/isochrone";
+const COLORS = ["#2563eb","#dc2626","#16a34a","#d97706","#7c3aed","#0891b2"];
+let colorIdx = 0;
 
 const map = L.map("map", { zoomControl: true }).setView([38.737, -9.178], 12);
 
-L.tileLayer(
-  "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    maxZoom: 19,
-  }
-).addTo(map);
-
-const markers = {};
-const isoLayers = {};
-
-Object.entries(SITES).forEach(([key, s]) => {
-  const icon = L.divIcon({
-    className: "",
-    html: `<div style="width:14px;height:14px;border-radius:50%;background:${s.color};border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.4)"></div>`,
-    iconSize: [14, 14],
-    iconAnchor: [7, 7],
-  });
-  const m = L.marker([s.lat, s.lon], { icon })
-    .addTo(map)
-    .bindPopup(`<b>${s.label}</b>`);
-
-  const labelIcon = L.divIcon({
-    className: "site-label",
-    html: s.label,
-    iconAnchor: [-10, 6],
-  });
-  L.marker([s.lat, s.lon], { icon: labelIcon, interactive: false }).addTo(map);
-
-  markers[key] = m;
-});
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 19,
+}).addTo(map);
 
 const timeRange = document.getElementById("timeRange");
 const timeVal   = document.getElementById("timeVal");
-const isoBtn    = document.getElementById("isoBtn");
 const clearBtn  = document.getElementById("clearBtn");
-const status    = document.getElementById("status");
+const hint      = document.getElementById("hint");
 
 timeRange.addEventListener("input", () => {
   timeVal.textContent = timeRange.value + " min";
 });
 
-function showStatus(msg) {
-  status.textContent = msg;
-  status.style.display = "block";
-}
-function hideStatus() {
-  status.style.display = "none";
-}
+const placed = []; // { marker, isoLayer }
 
-isoBtn.addEventListener("click", async () => {
-  const key  = document.getElementById("siteSelect").value;
-  const mins = parseFloat(timeRange.value);
-  const site = SITES[key];
+map.on("click", async (e) => {
+  const { lat, lng } = e.latlng;
+  const mins  = parseFloat(timeRange.value);
+  const color = COLORS[colorIdx % COLORS.length];
+  colorIdx++;
 
-  isoBtn.disabled = true;
-  showStatus("Fetching isochrone…");
+  const icon = L.divIcon({
+    className: "",
+    html: `<div style="width:14px;height:14px;border-radius:50%;background:${color};border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.4)"></div>`,
+    iconSize: [14, 14],
+    iconAnchor: [7, 7],
+  });
+
+  const marker = L.marker([lat, lng], { icon }).addTo(map);
+  marker.bindPopup(`<b>${lat.toFixed(4)}, ${lng.toFixed(4)}</b><br>${mins} min reach`).openPopup();
+
+  hint.textContent = "Fetching isochrone…";
 
   try {
-    const body = {
-      locations: [{ lon: site.lon, lat: site.lat }],
-      costing: "auto",
-      contours: [{ time: mins }],
-      polygons: true,
-    };
-
     const res = await fetch(VALHALLA, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        locations: [{ lon: lng, lat }],
+        costing: "auto",
+        contours: [{ time: mins }],
+        polygons: true,
+      }),
     });
 
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const geojson = await res.json();
 
-    if (isoLayers[key]) {
-      map.removeLayer(isoLayers[key]);
-    }
-
-    isoLayers[key] = L.geoJSON(geojson, {
+    const isoLayer = L.geoJSON(geojson, {
       style: {
-        color: site.color,
-        fillColor: site.color,
+        color,
+        fillColor: color,
         fillOpacity: 0.15,
         weight: 2,
         opacity: 0.8,
       },
     }).addTo(map);
 
-    map.fitBounds(isoLayers[key].getBounds(), { padding: [30, 30] });
-    hideStatus();
-  } catch (e) {
-    showStatus("Error: " + e.message);
-  } finally {
-    isoBtn.disabled = false;
+    placed.push({ marker, isoLayer });
+    hint.textContent = "Click anywhere to add another marker";
+  } catch (err) {
+    hint.textContent = "Error: " + err.message;
+    map.removeLayer(marker);
+    colorIdx--;
   }
 });
 
 clearBtn.addEventListener("click", () => {
-  Object.values(isoLayers).forEach(l => map.removeLayer(l));
-  Object.keys(isoLayers).forEach(k => delete isoLayers[k]);
-  hideStatus();
+  placed.forEach(({ marker, isoLayer }) => {
+    map.removeLayer(marker);
+    map.removeLayer(isoLayer);
+  });
+  placed.length = 0;
+  colorIdx = 0;
+  hint.textContent = "Click anywhere on the map to place a marker and draw its reach";
 });
 </script>
 </body>
