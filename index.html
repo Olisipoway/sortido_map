@@ -61,9 +61,13 @@
 </head>
 <body>
 <div id="controls">
-  <label>Travel time:</label>
-  <input type="range" id="timeRange" min="5" max="25" value="10" step="0.5" style="width:90px" />
-  <span id="timeVal" style="font-size:13px;min-width:32px">10 min</span>
+  <label>Total delivery:</label>
+  <input type="range" id="totalRange" min="10" max="45" value="30" step="1" style="width:80px" />
+  <span id="totalVal" style="font-size:13px;min-width:36px">30 min</span>
+  <label style="margin-left:8px">Prep:</label>
+  <input type="range" id="prepRange" min="0" max="25" value="10" step="1" style="width:70px" />
+  <span id="prepVal" style="font-size:13px;min-width:36px">10 min</span>
+  <span id="travelLabel" style="font-size:12px;color:#6b7280;min-width:80px">→ 20 min ride</span>
   <button id="clearBtn" class="secondary">Clear all</button>
 </div>
 <div id="map"></div>
@@ -150,84 +154,51 @@ function sumPopulation(geojson) {
 
 function fmt(n) { return n.toLocaleString("pt-PT"); }
 
-const timeRange = document.getElementById("timeRange");
-const timeVal   = document.getElementById("timeVal");
-const clearBtn  = document.getElementById("clearBtn");
-const hint      = document.getElementById("hint");
+const totalRange  = document.getElementById("totalRange");
+const totalVal    = document.getElementById("totalVal");
+const prepRange   = document.getElementById("prepRange");
+const prepVal     = document.getElementById("prepVal");
+const travelLabel = document.getElementById("travelLabel");
+const clearBtn    = document.getElementById("clearBtn");
+const hint        = document.getElementById("hint");
 
-timeRange.addEventListener("input", () => {
-  timeVal.textContent = timeRange.value + " min";
-});
+function getTravelMins() {
+  return Math.max(1, parseInt(totalRange.value) - parseInt(prepRange.value));
+}
 
-// OSRM isochrone: spoke-based approach
-// Generate points at N angles × M distances, query travel times, build polygon
-async function osrmIsochrone(lat, lng, mins) {
-  const OSRM = "https://router.project-osrm.org/table/v1/driving";
-  const budget = mins * 60; // seconds
-  const ANGLES = 36;        // every 10 degrees
-  const DISTS  = [500, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 6500, 8000]; // metres
-  const R_EARTH = 6371000;
+function updateLabels() {
+  totalVal.textContent = totalRange.value + " min";
+  prepVal.textContent  = prepRange.value + " min";
+  travelLabel.textContent = "→ " + getTravelMins() + " min ride";
+}
 
-  // Generate spoke points
-  const spokes = [];
-  for (let a = 0; a < ANGLES; a++) {
-    const angle = (a * 360 / ANGLES) * Math.PI / 180;
-    for (const d of DISTS) {
-      const dLat = (d * Math.cos(angle)) / R_EARTH * (180 / Math.PI);
-      const dLon = (d * Math.sin(angle)) / R_EARTH * (180 / Math.PI) / Math.cos(lat * Math.PI / 180);
-      spokes.push({ a, d, lat: lat + dLat, lon: lng + dLon });
-    }
-  }
+totalRange.addEventListener("input", updateLabels);
+prepRange.addEventListener("input", updateLabels);
 
-  // Batch into chunks of 90 destinations (OSRM public server limit ~100 coords total)
-  const CHUNK = 90;
-  const durations = new Array(spokes.length).fill(Infinity);
-
-  for (let i = 0; i < spokes.length; i += CHUNK) {
-    const chunk = spokes.slice(i, i + CHUNK);
-    const coords = `${lng},${lat};` + chunk.map(p => `${p.lon},${p.lat}`).join(";");
-    const url = `${OSRM}/${coords}?sources=0&annotations=duration`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`OSRM HTTP ${res.status}`);
-    const data = await res.json();
-    const row = data.durations[0]; // travel times from source (index 0) to each dest
-    chunk.forEach((_, j) => { durations[i + j] = row[j + 1] ?? Infinity; });
-  }
-
-  // For each angle, find furthest reachable distance
-  const boundary = [];
-  for (let a = 0; a < ANGLES; a++) {
-    const spokePoints = spokes
-      .map((p, i) => ({ ...p, dur: durations[i] }))
-      .filter(p => p.a === a)
-      .sort((x, y) => x.d - y.d);
-
-    let best = null;
-    for (const p of spokePoints) {
-      if (p.dur <= budget) best = p;
-      else break;
-    }
-    // If no point reachable, use nearest reachable from any angle fallback
-    if (!best) best = spokePoints[0];
-    boundary.push([best.lon, best.lat]);
-  }
-
-  boundary.push(boundary[0]); // close ring
-  return {
-    type: "FeatureCollection",
-    features: [{
-      type: "Feature",
-      geometry: { type: "Polygon", coordinates: [boundary] },
-      properties: {},
-    }],
+async function valhallaIsochrone(lat, lng, travelMins) {
+  const body = {
+    locations: [{ lat, lon: lng }],
+    costing: "motor_scooter",
+    contours: [{ time: travelMins }],
+    polygons: true,
   };
+  const url = "https://valhalla.openstreetmap.de/isochrone";
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(`Valhalla HTTP ${res.status}`);
+  return res.json(); // already a GeoJSON FeatureCollection
 }
 
 const placed = [];
 
 map.on("click", async (e) => {
   const { lat, lng } = e.latlng;
-  const mins  = parseFloat(timeRange.value);
+  const travelMins = getTravelMins();
+  const totalMins  = parseInt(totalRange.value);
+  const prepMins   = parseInt(prepRange.value);
   const color = COLORS[colorIdx % COLORS.length];
   colorIdx++;
 
@@ -242,13 +213,12 @@ map.on("click", async (e) => {
   hint.textContent = "Fetching isochrone…";
 
   try {
-    const geojson = await osrmIsochrone(lat, lng, mins);
+    const geojson = await valhallaIsochrone(lat, lng, travelMins);
 
     const isoLayer = L.geoJSON(geojson, {
       style: { color, fillColor: color, fillOpacity: 0.15, weight: 2, opacity: 0.8 },
     }).addTo(map);
 
-    // Population count
     hint.textContent = "Counting population…";
     const stats = sumPopulation(geojson);
 
@@ -265,7 +235,7 @@ map.on("click", async (e) => {
 
     marker.bindPopup(`
       <div class="pop-popup">
-        <b>${mins} min reach</b><br>
+        <b>${totalMins} min delivery · ${prepMins} min prep · ${travelMins} min ride</b><br>
         <span style="color:#666;font-size:11px">${lat.toFixed(4)}, ${lng.toFixed(4)}</span>
         ${popHtml}
       </div>
