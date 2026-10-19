@@ -38,6 +38,8 @@
     #controls button:hover { background: #1d4ed8; }
     #controls button.secondary { background: #6b7280; }
     #controls button.secondary:hover { background: #4b5563; }
+    #controls button.active { background: #059669; }
+    #controls button.active:hover { background: #047857; }
 
     #hint {
       position: absolute;
@@ -52,6 +54,28 @@
       border-radius: 20px;
       pointer-events: none;
     }
+
+    #legend {
+      position: absolute;
+      bottom: 60px;
+      right: 12px;
+      z-index: 1000;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      padding: 10px 14px;
+      display: none;
+      min-width: 160px;
+    }
+    #legend.visible { display: block; }
+    #legend h4 { font-size: 12px; font-weight: 700; color: #333; margin-bottom: 8px; }
+    #legend .bar {
+      height: 12px;
+      border-radius: 3px;
+      background: linear-gradient(to right, #313695, #4575b4, #74add1, #abd9e9, #e0f3f8, #ffffbf, #fee090, #fdae61, #f46d43, #d73027, #a50026);
+      margin-bottom: 4px;
+    }
+    #legend .labels { display: flex; justify-content: space-between; font-size: 10px; color: #666; }
 
     .pop-popup { font-size: 13px; line-height: 1.7; min-width: 180px; }
     .pop-popup b { font-size: 14px; }
@@ -68,15 +92,23 @@
   <input type="range" id="prepRange" min="0" max="25" value="10" step="1" style="width:70px" />
   <span id="prepVal" style="font-size:13px;min-width:36px">10 min</span>
   <span id="travelLabel" style="font-size:12px;color:#6b7280;min-width:80px">→ 20 min ride</span>
+  <button id="incomeBtn">Income layer</button>
   <button id="clearBtn" class="secondary">Clear all</button>
 </div>
 <div id="map"></div>
 <div id="hint">Click anywhere on the map to place a marker and draw its reach</div>
+<div id="legend">
+  <h4>Median income (€/yr)</h4>
+  <div class="bar"></div>
+  <div class="labels"><span id="legendMin"></span><span id="legendMax"></span></div>
+</div>
 
 <script>
 const COLORS = ["#2563eb","#dc2626","#16a34a","#d97706","#7c3aed","#0891b2"];
 let colorIdx = 0;
 let popGrid = null;
+let incomeLayerOn = false;
+let incomeCanvas = null;
 
 const map = L.map("map", { zoomControl: true }).setView([38.737, -9.178], 12);
 
@@ -85,10 +117,129 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
 }).addTo(map);
 
-// Load population grid once
+// Custom pane below overlayPane (400) so income sits under isochrones
+map.createPane("incomePane");
+map.getPane("incomePane").style.zIndex = 300;
+map.getPane("incomePane").style.pointerEvents = "none";
+
 fetch("pop_grid_2025_full.json")
   .then(r => r.json())
   .then(d => { popGrid = d; })
+  .catch(() => { popGrid = null; });
+
+// --- Income choropleth canvas layer ---
+
+// 11-stop diverging colormap (blue → yellow → red), maps income index 0.5–2.0
+const CMAP = [
+  [49,54,149], [69,117,180], [116,173,209], [171,217,233],
+  [224,243,248], [255,255,191], [254,224,144], [253,174,97],
+  [244,109,67], [215,48,39], [165,0,38]
+];
+
+function incomeColor(idx) {
+  const t = Math.max(0, Math.min(1, (idx - 0.5) / 1.5)); // 0.5→0, 2.0→1
+  const pos = t * (CMAP.length - 1);
+  const lo = Math.floor(pos), hi = Math.min(CMAP.length - 1, lo + 1);
+  const f = pos - lo;
+  const r = Math.round(CMAP[lo][0] + f * (CMAP[hi][0] - CMAP[lo][0]));
+  const g = Math.round(CMAP[lo][1] + f * (CMAP[hi][1] - CMAP[lo][1]));
+  const b = Math.round(CMAP[lo][2] + f * (CMAP[hi][2] - CMAP[lo][2]));
+  return `rgba(${r},${g},${b},0.7)`;
+}
+
+const IncomeLayer = L.Layer.extend({
+  onAdd(map) {
+    this._map = map;
+    const pane = map.getPane("incomePane");
+    this._canvas = document.createElement("canvas");
+    this._canvas.style.position = "absolute";
+    this._canvas.style.pointerEvents = "none";
+    pane.appendChild(this._canvas);
+    map.on("moveend zoomend", this._draw, this);
+    this._draw();
+  },
+  onRemove(map) {
+    map.off("moveend zoomend", this._draw, this);
+    this._canvas.remove();
+  },
+  _draw() {
+    if (!popGrid) return;
+    const map = this._map;
+    const size = map.getSize();
+    const canvas = this._canvas;
+    canvas.width  = size.x;
+    canvas.height = size.y;
+
+    // position canvas over map pane
+    const topLeft = map.containerPointToLayerPoint([0, 0]);
+    L.DomUtil.setPosition(canvas, topLeft);
+
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const cols = popGrid.cols;
+    const li  = cols.indexOf("lat");
+    const loi = cols.indexOf("lon");
+    const ii  = cols.indexOf("income_idx");
+    if (ii < 0) return;
+
+    const zoom = map.getZoom();
+    // cell size in pixels: 250m at current zoom
+    const cellPx = Math.max(2, Math.round(map.getZoomScale(zoom, zoom) * 250 / 156543.03392 * Math.pow(2, zoom)));
+    // simpler: project two points 250m apart
+    const origin = map.latLngToContainerPoint([38.75, -9.18]);
+    const offset = map.latLngToContainerPoint([38.75 + 250/111320, -9.18]);
+    const pxPerCell = Math.max(2, Math.abs(offset.y - origin.y));
+
+    for (const row of popGrid.rows) {
+      const pt = map.latLngToContainerPoint([row[li], row[loi]]);
+      const x = pt.x - pxPerCell / 2;
+      const y = pt.y - pxPerCell / 2;
+      if (x + pxPerCell < 0 || y + pxPerCell < 0 || x > canvas.width || y > canvas.height) continue;
+      ctx.fillStyle = incomeColor(row[ii]);
+      ctx.fillRect(Math.round(x), Math.round(y), Math.ceil(pxPerCell), Math.ceil(pxPerCell));
+    }
+  }
+});
+
+let incomeLayer = null;
+
+function toggleIncomeLayer() {
+  const btn = document.getElementById("incomeBtn");
+  const legend = document.getElementById("legend");
+  if (incomeLayerOn) {
+    if (incomeLayer) map.removeLayer(incomeLayer);
+    incomeLayerOn = false;
+    btn.classList.remove("active");
+    legend.classList.remove("visible");
+  } else {
+    if (!incomeLayer) {
+      incomeLayer = new IncomeLayer();
+      // set legend range
+      if (popGrid) {
+        const ii = popGrid.cols.indexOf("income_idx");
+        const idxs = popGrid.rows.map(r => r[ii]);
+        const mn = Math.round(Math.min(...idxs) * 12316);
+        const mx = Math.round(Math.max(...idxs) * 12316);
+        document.getElementById("legendMin").textContent = mn.toLocaleString("pt-PT") + " €";
+        document.getElementById("legendMax").textContent = mx.toLocaleString("pt-PT") + " €";
+      }
+    }
+    map.addLayer(incomeLayer);
+    incomeLayerOn = true;
+    btn.classList.add("active");
+    legend.classList.add("visible");
+  }
+}
+
+// rebuild income layer after grid loads so legend values are right
+fetch("pop_grid_2025_full.json")
+  .then(r => r.json())
+  .then(d => {
+    popGrid = d;
+    // if layer already visible, redraw
+    if (incomeLayerOn && incomeLayer) incomeLayer._draw();
+  })
   .catch(() => { popGrid = null; });
 
 // Ray-casting point-in-polygon (GeoJSON coords are [lon, lat])
@@ -174,6 +325,7 @@ function updateLabels() {
 
 totalRange.addEventListener("input", updateLabels);
 prepRange.addEventListener("input", updateLabels);
+document.getElementById("incomeBtn").addEventListener("click", toggleIncomeLayer);
 
 async function valhallaIsochrone(lat, lng, travelMins) {
   const body = {
@@ -182,14 +334,13 @@ async function valhallaIsochrone(lat, lng, travelMins) {
     contours: [{ time: travelMins }],
     polygons: true,
   };
-  const url = "https://valhalla.openstreetmap.de/isochrone";
-  const res = await fetch(url, {
+  const res = await fetch("https://valhalla.openstreetmap.de/isochrone", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
   if (!res.ok) throw new Error(`Valhalla HTTP ${res.status}`);
-  return res.json(); // already a GeoJSON FeatureCollection
+  return res.json();
 }
 
 const placed = [];
