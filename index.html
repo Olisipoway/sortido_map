@@ -77,7 +77,7 @@
     }
     #legend .labels { display: flex; justify-content: space-between; font-size: 10px; color: #666; }
 
-    .pop-popup { font-size: 13px; line-height: 1.7; min-width: 180px; }
+    .pop-popup { font-size: 13px; line-height: 1.7; min-width: 320px; }
     .pop-popup b { font-size: 14px; }
     .pop-popup .row { display: flex; justify-content: space-between; gap: 12px; }
     .pop-popup .row span:last-child { font-weight: 600; }
@@ -405,17 +405,33 @@ map.on("click", async (e) => {
     ]).addTo(map);
 
     hint.textContent = "Counting population…";
-    const stats = sumPopulation(timeGeo);
+    const statsTime = sumPopulation(timeGeo);
+    const statsDist = sumPopulation(distGeo);
+
+    function statsRows(s) {
+      if (!s) return "";
+      return `
+        <div class="row"><span>Residents</span><span>${fmt(s.pop)}</span></div>
+        <div class="row"><span>Median income</span><span>${fmt(Math.round(s.spendPop / s.pop * 12316))} €/yr</span></div>
+        <div class="row"><span>Age 15–24</span><span>${fmt(s.age1524)}</span></div>
+        <div class="row"><span>Age 25–64</span><span>${fmt(s.age2564)}</span></div>
+        <div class="row"><span>Rented homes</span><span>${fmt(s.rented)}</span></div>`;
+    }
 
     let popHtml = "";
-    if (stats) {
+    if (statsTime || statsDist) {
       popHtml = `
         <hr style="margin:6px 0;border-color:#eee"/>
-        <div class="row"><span>Residents</span><span>${fmt(stats.pop)}</span></div>
-        <div class="row"><span>Median income</span><span>${fmt(Math.round(stats.spendPop / stats.pop * 12316))} €/yr</span></div>
-        <div class="row"><span>Age 15–24</span><span>${fmt(stats.age1524)}</span></div>
-        <div class="row"><span>Age 25–64</span><span>${fmt(stats.age2564)}</span></div>
-        <div class="row"><span>Rented homes</span><span>${fmt(stats.rented)}</span></div>`;
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 12px">
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#2563eb;margin-bottom:2px">● ${travelMins} min ride</div>
+            ${statsRows(statsTime)}
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;color:#6b7280;margin-bottom:2px">╌ 3 km road</div>
+            ${statsRows(statsDist)}
+          </div>
+        </div>`;
     }
 
     const delta = 0.004; // ~450m bounding box
