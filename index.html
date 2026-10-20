@@ -78,6 +78,8 @@
     #legend .labels { display: flex; justify-content: space-between; font-size: 10px; color: #666; }
 
     .pop-popup { font-size: 13px; line-height: 1.7; min-width: 320px; }
+    .sortido-tooltip { background: #111; color: white; border: none; border-radius: 4px; font-size: 11px; font-weight: 700; padding: 2px 7px; box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+    .sortido-tooltip::before { border-right-color: #111; }
     .pop-popup b { font-size: 14px; }
     .pop-popup .row { display: flex; justify-content: space-between; gap: 12px; }
     .pop-popup .row span:last-child { font-weight: 600; }
@@ -92,7 +94,8 @@
   <input type="range" id="prepRange" min="0" max="25" value="10" step="1" style="width:70px" />
   <span id="prepVal" style="font-size:13px;min-width:36px">10 min</span>
   <span id="travelLabel" style="font-size:12px;color:#6b7280;min-width:80px">→ 20 min ride</span>
-  <button id="incomeBtn">Income layer</button>
+  <button id="incomeBtn">Income</button>
+  <button id="airbnbBtn">Airbnb</button>
   <button id="clearBtn" class="secondary">Clear all</button>
 </div>
 <div id="map"></div>
@@ -122,10 +125,6 @@ map.createPane("incomePane");
 map.getPane("incomePane").style.zIndex = 300;
 map.getPane("incomePane").style.pointerEvents = "none";
 
-fetch("pop_grid_2025_full.json")
-  .then(r => r.json())
-  .then(d => { popGrid = d; })
-  .catch(() => { popGrid = null; });
 
 // --- Income choropleth canvas layer ---
 
@@ -232,15 +231,81 @@ function toggleIncomeLayer() {
   }
 }
 
-// rebuild income layer after grid loads so legend values are right
 fetch("pop_grid_2025_full.json")
   .then(r => r.json())
   .then(d => {
     popGrid = d;
-    // if layer already visible, redraw
     if (incomeLayerOn && incomeLayer) incomeLayer._draw();
   })
   .catch(() => { popGrid = null; });
+
+// --- Airbnb canvas layer ---
+let airbnbData = null;
+let airbnbLayerOn = false;
+let airbnbLayer = null;
+
+fetch("airbnb_lisbon.json")
+  .then(r => r.json())
+  .then(d => {
+    airbnbData = d;
+    if (airbnbLayerOn && airbnbLayer) airbnbLayer._draw();
+  })
+  .catch(() => { airbnbData = null; });
+
+const AirbnbLayer = L.Layer.extend({
+  onAdd(map) {
+    this._map = map;
+    const pane = map.getPane("incomePane");
+    this._canvas = document.createElement("canvas");
+    this._canvas.style.position = "absolute";
+    this._canvas.style.pointerEvents = "none";
+    pane.appendChild(this._canvas);
+    map.on("moveend zoomend", this._draw, this);
+    this._draw();
+  },
+  onRemove(map) {
+    map.off("moveend zoomend", this._draw, this);
+    this._canvas.remove();
+  },
+  _draw() {
+    if (!airbnbData) return;
+    const map = this._map;
+    const size = map.getSize();
+    const canvas = this._canvas;
+    canvas.width  = size.x;
+    canvas.height = size.y;
+    const topLeft = map.containerPointToLayerPoint([0, 0]);
+    L.DomUtil.setPosition(canvas, topLeft);
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const li = airbnbData.cols.indexOf("lat");
+    const loi = airbnbData.cols.indexOf("lon");
+
+    for (const row of airbnbData.rows) {
+      const pt = map.latLngToContainerPoint([row[li], row[loi]]);
+      if (pt.x < -2 || pt.y < -2 || pt.x > canvas.width + 2 || pt.y > canvas.height + 2) continue;
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, 3, 0, 2 * Math.PI);
+      ctx.fillStyle = "rgba(255,90,90,0.6)";
+      ctx.fill();
+    }
+  }
+});
+
+function toggleAirbnbLayer() {
+  const btn = document.getElementById("airbnbBtn");
+  if (airbnbLayerOn) {
+    if (airbnbLayer) map.removeLayer(airbnbLayer);
+    airbnbLayerOn = false;
+    btn.classList.remove("active");
+  } else {
+    if (!airbnbLayer) airbnbLayer = new AirbnbLayer();
+    map.addLayer(airbnbLayer);
+    airbnbLayerOn = true;
+    btn.classList.add("active");
+  }
+}
 
 // Ray-casting point-in-polygon (GeoJSON coords are [lon, lat])
 function pointInRing(lon, lat, ring) {
@@ -274,6 +339,20 @@ function pointInPolygon(lon, lat, geometry) {
     });
   }
   return false;
+}
+
+function countAirbnb(geojson) {
+  if (!airbnbData) return null;
+  const li  = airbnbData.cols.indexOf("lat");
+  const loi = airbnbData.cols.indexOf("lon");
+  const geometries = geojson.features.map(f => f.geometry);
+  let count = 0;
+  for (const row of airbnbData.rows) {
+    for (const geom of geometries) {
+      if (pointInPolygon(row[loi], row[li], geom)) { count++; break; }
+    }
+  }
+  return count;
 }
 
 function sumPopulation(geojson) {
@@ -326,8 +405,76 @@ function updateLabels() {
 totalRange.addEventListener("input", updateLabels);
 prepRange.addEventListener("input", updateLabels);
 document.getElementById("incomeBtn").addEventListener("click", toggleIncomeLayer);
+document.getElementById("airbnbBtn").addEventListener("click", toggleAirbnbLayer);
 
-async function valhallaIsochrone(lat, lng, travelMins) {
+// --- Existing Sortido store anchor ---
+const SORTIDO_LAT = 38.7255;
+const SORTIDO_LNG = -9.1480;
+
+async function drawSortidoAnchor() {
+  const travelMins = getTravelMins();
+
+  const anchorIcon = L.divIcon({
+    className: "",
+    html: `<div style="width:18px;height:18px;border-radius:50%;background:#111;border:3px solid white;box-shadow:0 1px 6px rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center">
+             <div style="width:6px;height:6px;border-radius:50%;background:white"></div>
+           </div>`,
+    iconSize: [18, 18],
+    iconAnchor: [9, 9],
+  });
+
+  const marker = L.marker([SORTIDO_LAT, SORTIDO_LNG], { icon: anchorIcon })
+    .bindTooltip("Sortido (atual)", { permanent: true, direction: "right", className: "sortido-tooltip" })
+    .addTo(map);
+
+  const { time: timeGeo, dist: distGeo } = await orsIsochrone(SORTIDO_LAT, SORTIDO_LNG, travelMins);
+  L.geoJSON(timeGeo, {
+    style: { color: "#ff6600", fillColor: "#ff6600", fillOpacity: 0.15, weight: 3, opacity: 1 },
+  }).addTo(map);
+  L.geoJSON(distGeo, {
+    style: { color: "#9333ea", fillColor: "none", fillOpacity: 0, weight: 3, opacity: 1, dashArray: "8 4" },
+  }).addTo(map);
+}
+
+drawSortidoAnchor().catch(e => console.error("Anchor failed:", e));
+
+async function osrmSpoke(lat, lng, travelMins) {
+  const OSRM = "https://router.project-osrm.org/table/v1/driving";
+  const budget = travelMins * 60;
+  const ANGLES = 48, R = 6371000;
+  const DISTS = [400,800,1200,1700,2200,2800,3500,4500,6000];
+  const spokes = [];
+  for (let a = 0; a < ANGLES; a++) {
+    const angle = (a * 360 / ANGLES) * Math.PI / 180;
+    for (const d of DISTS) {
+      spokes.push({ a, d,
+        lat: lat + (d * Math.cos(angle)) / R * (180 / Math.PI),
+        lon: lng + (d * Math.sin(angle)) / R * (180 / Math.PI) / Math.cos(lat * Math.PI / 180)
+      });
+    }
+  }
+  const CHUNK = 90;
+  const durs = new Array(spokes.length).fill(Infinity);
+  for (let i = 0; i < spokes.length; i += CHUNK) {
+    const chunk = spokes.slice(i, i + CHUNK);
+    const coords = `${lng},${lat};` + chunk.map(p => `${p.lon},${p.lat}`).join(";");
+    const r = await fetch(`${OSRM}/${coords}?sources=0&annotations=duration`);
+    if (!r.ok) throw new Error(`OSRM ${r.status}`);
+    const row = (await r.json()).durations[0];
+    chunk.forEach((_, j) => { durs[i + j] = row[j + 1] ?? Infinity; });
+  }
+  const boundary = [];
+  for (let a = 0; a < ANGLES; a++) {
+    const pts = spokes.map((p, i) => ({ ...p, dur: durs[i] })).filter(p => p.a === a).sort((x, y) => x.d - y.d);
+    let best = pts[0];
+    for (const p of pts) { if (p.dur <= budget) best = p; else break; }
+    boundary.push([best.lon, best.lat]);
+  }
+  boundary.push(boundary[0]);
+  return { type: "FeatureCollection", features: [{ type: "Feature", geometry: { type: "Polygon", coordinates: [boundary] }, properties: {} }] };
+}
+
+async function orsIsochrone(lat, lng, travelMins) {
   const ORS_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjIwYjkyM2VjZjA0MTQwNDY5OTk0NDVhNzg4MDMyODdkIiwiaCI6Im11cm11cjY0In0=";
   const body = {
     locations: [[lng, lat]],
@@ -338,36 +485,34 @@ async function valhallaIsochrone(lat, lng, travelMins) {
     intersections: false,
     units: "m",
   };
-  const res = await fetch("https://api.openrouteservice.org/v2/isochrones/cycling-regular", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": ORS_KEY,
-    },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) throw new Error(`ORS HTTP ${res.status}`);
-  const data = await res.json();
+  let data;
+  try {
+    const res = await fetch("https://api.openrouteservice.org/v2/isochrones/cycling-regular", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": ORS_KEY },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) throw new Error(`ORS ${res.status}`);
+    data = await res.json();
+  } catch(e) {
+    console.warn("ORS unavailable, using OSRM fallback:", e.message);
+    const time = await osrmSpoke(lat, lng, travelMins);
+    const dist = await osrmSpoke(lat, lng, 8);
+    return { time, dist };
+  }
 
-  // Also fetch 3km distance isochrone
-  const body3km = {
-    locations: [[lng, lat]],
-    profile: "cycling-regular",
-    range: [3000],
-    range_type: "distance",
-    intersections: false,
-    units: "m",
-  };
-  const res3 = await fetch("https://api.openrouteservice.org/v2/isochrones/cycling-regular", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": ORS_KEY,
-    },
-    body: JSON.stringify(body3km),
-  });
-  if (!res3.ok) throw new Error(`ORS 3km HTTP ${res3.status}`);
-  const data3 = await res3.json();
+  let data3;
+  try {
+    const res3 = await fetch("https://api.openrouteservice.org/v2/isochrones/cycling-regular", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": ORS_KEY },
+      body: JSON.stringify({ locations: [[lng, lat]], profile: "cycling-regular", range: [3000], range_type: "distance", intersections: false, units: "m" }),
+    });
+    if (!res3.ok) throw new Error(`ORS 3km ${res3.status}`);
+    data3 = await res3.json();
+  } catch(e) {
+    data3 = await osrmSpoke(lat, lng, 8);
+  }
 
   return { time: data, dist: data3 };
 }
@@ -393,7 +538,7 @@ map.on("click", async (e) => {
   hint.textContent = "Fetching isochrone…";
 
   try {
-    const { time: timeGeo, dist: distGeo } = await valhallaIsochrone(lat, lng, travelMins);
+    const { time: timeGeo, dist: distGeo } = await orsIsochrone(lat, lng, travelMins);
 
     const isoLayer = L.layerGroup([
       L.geoJSON(timeGeo, {
@@ -407,15 +552,18 @@ map.on("click", async (e) => {
     hint.textContent = "Counting population…";
     const statsTime = sumPopulation(timeGeo);
     const statsDist = sumPopulation(distGeo);
+    const airbnbTime = countAirbnb(timeGeo);
+    const airbnbDist = countAirbnb(distGeo);
 
-    function statsRows(s) {
+    function statsRows(s, ab) {
       if (!s) return "";
       return `
         <div class="row"><span>Residents</span><span>${fmt(s.pop)}</span></div>
         <div class="row"><span>Median income</span><span>${fmt(Math.round(s.spendPop / s.pop * 12316))} €/yr</span></div>
         <div class="row"><span>Age 15–24</span><span>${fmt(s.age1524)}</span></div>
         <div class="row"><span>Age 25–64</span><span>${fmt(s.age2564)}</span></div>
-        <div class="row"><span>Rented homes</span><span>${fmt(s.rented)}</span></div>`;
+        <div class="row"><span>Rented homes</span><span>${fmt(s.rented)}</span></div>
+        ${ab !== null ? `<div class="row"><span>Airbnb listings</span><span>${fmt(ab)}</span></div>` : ""}`;
     }
 
     let popHtml = "";
@@ -425,11 +573,11 @@ map.on("click", async (e) => {
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 12px">
           <div>
             <div style="font-size:11px;font-weight:700;color:#2563eb;margin-bottom:2px">● ${travelMins} min ride</div>
-            ${statsRows(statsTime)}
+            ${statsRows(statsTime, airbnbTime)}
           </div>
           <div>
             <div style="font-size:11px;font-weight:700;color:#6b7280;margin-bottom:2px">╌ 3 km road</div>
-            ${statsRows(statsDist)}
+            ${statsRows(statsDist, airbnbDist)}
           </div>
         </div>`;
     }
