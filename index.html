@@ -423,8 +423,13 @@ document.getElementById("airbnbBtn").addEventListener("click", toggleAirbnbLayer
 document.getElementById("competitorsBtn").addEventListener("click", toggleCompetitors);
 
 // --- Competitors layer (Google Places) ---
+// These are stores operating on Uber Eats / Glovo / Bolt in Lisbon in the same
+// convenience / drinks category as Sortido.
 const GPLACES_KEY = "AIzaSyCaizcuV7Mg7_-6rtS86vnHoShZUdi8Px8";
-const COMPETITOR_TYPES = ["convenience_store", "liquor_store", "supermarket"];
+const COMPETITOR_QUERIES = [
+  "Telepizza Lisboa",
+  "Pizza Hut Lisboa",
+];
 let competitorsOn = false;
 let competitorMarkers = [];
 let competitorsLoaded = false;
@@ -441,24 +446,36 @@ async function loadCompetitors() {
   hint.textContent = "Loading competitors…";
   const seen = new Set();
 
-  for (const type of COMPETITOR_TYPES) {
-    let pageToken = null;
-    do {
-      const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=38.737,-9.178&radius=8000&type=${type}&key=${GPLACES_KEY}`
-        + (pageToken ? `&pagetoken=${pageToken}` : "");
-      const res = await fetch(url);
-      const data = await res.json();
-      for (const p of data.results || []) {
-        if (seen.has(p.place_id)) continue;
-        seen.add(p.place_id);
-        const { lat, lng } = p.geometry.location;
-        const m = L.marker([lat, lng], { icon: compIcon })
-          .bindPopup(`<b>${p.name}</b><br><span style="font-size:11px;color:#666">${p.vicinity}</span>`);
-        competitorMarkers.push(m);
-      }
-      pageToken = data.next_page_token || null;
-      if (pageToken) await new Promise(r => setTimeout(r, 2000));
-    } while (pageToken);
+  for (const q of COMPETITOR_QUERIES) {
+    const res = await fetch("https://places.googleapis.com/v1/places:searchText", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Goog-Api-Key": GPLACES_KEY,
+        "X-Goog-FieldMask": "places.displayName,places.location,places.formattedAddress",
+      },
+      body: JSON.stringify({
+        textQuery: q,
+        maxResultCount: 10,
+        locationBias: {
+          circle: {
+            center: { latitude: 38.737, longitude: -9.178 },
+            radius: 10000,
+          },
+        },
+      }),
+    });
+    const data = await res.json();
+    for (const p of data.places || []) {
+      const id = p.formattedAddress;
+      if (seen.has(id)) continue;
+      seen.add(id);
+      const lat = p.location.latitude;
+      const lng = p.location.longitude;
+      const m = L.marker([lat, lng], { icon: compIcon })
+        .bindPopup(`<b>${p.displayName?.text || q}</b><br><span style="font-size:11px;color:#666">${p.formattedAddress || ""}</span>`);
+      competitorMarkers.push(m);
+    }
   }
 
   competitorsLoaded = true;
