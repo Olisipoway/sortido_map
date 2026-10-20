@@ -96,6 +96,7 @@
   <span id="travelLabel" style="font-size:12px;color:#6b7280;min-width:80px">→ 20 min ride</span>
   <button id="incomeBtn">Income</button>
   <button id="airbnbBtn">Airbnb</button>
+  <button id="competitorsBtn">Competitors</button>
   <button id="clearBtn" class="secondary">Clear all</button>
 </div>
 <div id="map"></div>
@@ -341,6 +342,19 @@ function pointInPolygon(lon, lat, geometry) {
   return false;
 }
 
+function countCompetitors(geojson) {
+  if (!competitorsLoaded) return null;
+  const geometries = geojson.features.map(f => f.geometry);
+  let count = 0;
+  for (const m of competitorMarkers) {
+    const { lat, lng } = m.getLatLng();
+    for (const geom of geometries) {
+      if (pointInPolygon(lng, lat, geom)) { count++; break; }
+    }
+  }
+  return count;
+}
+
 function countAirbnb(geojson) {
   if (!airbnbData) return null;
   const li  = airbnbData.cols.indexOf("lat");
@@ -406,6 +420,64 @@ totalRange.addEventListener("input", updateLabels);
 prepRange.addEventListener("input", updateLabels);
 document.getElementById("incomeBtn").addEventListener("click", toggleIncomeLayer);
 document.getElementById("airbnbBtn").addEventListener("click", toggleAirbnbLayer);
+document.getElementById("competitorsBtn").addEventListener("click", toggleCompetitors);
+
+// --- Competitors layer (Google Places) ---
+const GPLACES_KEY = "AIzaSyCaizcuV7Mg7_-6rtS86vnHoShZUdi8Px8";
+const COMPETITOR_TYPES = ["convenience_store", "liquor_store", "supermarket"];
+let competitorsOn = false;
+let competitorMarkers = [];
+let competitorsLoaded = false;
+
+const compIcon = L.divIcon({
+  className: "",
+  html: `<div style="width:10px;height:10px;border-radius:50%;background:#ef4444;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,0.4)"></div>`,
+  iconSize: [10, 10],
+  iconAnchor: [5, 5],
+});
+
+async function loadCompetitors() {
+  if (competitorsLoaded) return;
+  hint.textContent = "Loading competitors…";
+  const seen = new Set();
+
+  for (const type of COMPETITOR_TYPES) {
+    let pageToken = null;
+    do {
+      const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=38.737,-9.178&radius=8000&type=${type}&key=${GPLACES_KEY}`
+        + (pageToken ? `&pagetoken=${pageToken}` : "");
+      const res = await fetch(url);
+      const data = await res.json();
+      for (const p of data.results || []) {
+        if (seen.has(p.place_id)) continue;
+        seen.add(p.place_id);
+        const { lat, lng } = p.geometry.location;
+        const m = L.marker([lat, lng], { icon: compIcon })
+          .bindPopup(`<b>${p.name}</b><br><span style="font-size:11px;color:#666">${p.vicinity}</span>`);
+        competitorMarkers.push(m);
+      }
+      pageToken = data.next_page_token || null;
+      if (pageToken) await new Promise(r => setTimeout(r, 2000));
+    } while (pageToken);
+  }
+
+  competitorsLoaded = true;
+  hint.textContent = `${competitorMarkers.length} competitors loaded`;
+}
+
+async function toggleCompetitors() {
+  const btn = document.getElementById("competitorsBtn");
+  if (competitorsOn) {
+    competitorMarkers.forEach(m => map.removeLayer(m));
+    competitorsOn = false;
+    btn.classList.remove("active");
+  } else {
+    await loadCompetitors();
+    competitorMarkers.forEach(m => m.addTo(map));
+    competitorsOn = true;
+    btn.classList.add("active");
+  }
+}
 
 // --- Existing Sortido store anchor ---
 const SORTIDO_LAT = 38.7255;
@@ -554,8 +626,10 @@ map.on("click", async (e) => {
     const statsDist = sumPopulation(distGeo);
     const airbnbTime = countAirbnb(timeGeo);
     const airbnbDist = countAirbnb(distGeo);
+    const compTime = countCompetitors(timeGeo);
+    const compDist = countCompetitors(distGeo);
 
-    function statsRows(s, ab) {
+    function statsRows(s, ab, comp) {
       if (!s) return "";
       return `
         <div class="row"><span>Residents</span><span>${fmt(s.pop)}</span></div>
@@ -563,7 +637,8 @@ map.on("click", async (e) => {
         <div class="row"><span>Age 15–24</span><span>${fmt(s.age1524)}</span></div>
         <div class="row"><span>Age 25–64</span><span>${fmt(s.age2564)}</span></div>
         <div class="row"><span>Rented homes</span><span>${fmt(s.rented)}</span></div>
-        ${ab !== null ? `<div class="row"><span>Airbnb listings</span><span>${fmt(ab)}</span></div>` : ""}`;
+        ${ab !== null ? `<div class="row"><span>Airbnb listings</span><span>${fmt(ab)}</span></div>` : ""}
+        ${comp !== null ? `<div class="row"><span>Competitors</span><span>${fmt(comp)}</span></div>` : ""}`;
     }
 
     let popHtml = "";
@@ -573,11 +648,11 @@ map.on("click", async (e) => {
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 12px">
           <div>
             <div style="font-size:11px;font-weight:700;color:#2563eb;margin-bottom:2px">● ${travelMins} min ride</div>
-            ${statsRows(statsTime, airbnbTime)}
+            ${statsRows(statsTime, airbnbTime, compTime)}
           </div>
           <div>
             <div style="font-size:11px;font-weight:700;color:#6b7280;margin-bottom:2px">╌ 3 km road</div>
-            ${statsRows(statsDist, airbnbDist)}
+            ${statsRows(statsDist, airbnbDist, compDist)}
           </div>
         </div>`;
     }
