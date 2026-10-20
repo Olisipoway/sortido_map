@@ -510,7 +510,7 @@ async function drawSortidoAnchor() {
 
 drawSortidoAnchor().catch(e => console.error("Anchor failed:", e));
 
-async function osrmSpoke(lat, lng, travelMins) {
+async function osrmSpokeTime(lat, lng, travelMins) {
   const OSRM = "https://router.project-osrm.org/table/v1/driving";
   const budget = travelMins * 60;
   const ANGLES = 48, R = 6371000;
@@ -546,47 +546,54 @@ async function osrmSpoke(lat, lng, travelMins) {
   return { type: "FeatureCollection", features: [{ type: "Feature", geometry: { type: "Polygon", coordinates: [boundary] }, properties: {} }] };
 }
 
+async function osrmSpokeDist(lat, lng, distanceM) {
+  const ANGLES = 48, R = 6371000;
+  const TOLERANCE = 80; // metres
+
+  function spokePoint(angle, d) {
+    return [
+      lng + (d * Math.sin(angle)) / R * (180 / Math.PI) / Math.cos(lat * Math.PI / 180),
+      lat + (d * Math.cos(angle)) / R * (180 / Math.PI),
+    ];
+  }
+
+  async function roadDist(plon, plat) {
+    const r = await fetch(`https://router.project-osrm.org/route/v1/driving/${lng},${lat};${plon},${plat}?overview=false`);
+    if (!r.ok) return Infinity;
+    const d = await r.json();
+    return d.routes?.[0]?.distance ?? Infinity;
+  }
+
+  const promises = [];
+  for (let a = 0; a < ANGLES; a++) {
+    const angle = (a * 360 / ANGLES) * Math.PI / 180;
+    promises.push((async () => {
+      let lo = 100, hi = 10000;
+      let best = spokePoint(angle, lo);
+      // binary search
+      for (let i = 0; i < 10; i++) {
+        const mid = (lo + hi) / 2;
+        const [plon, plat] = spokePoint(angle, mid);
+        const rd = await roadDist(plon, plat);
+        if (rd <= distanceM) { best = [plon, plat]; lo = mid; }
+        else hi = mid;
+        if (hi - lo < 50) break;
+      }
+      return best;
+    })());
+  }
+
+  const pts = await Promise.all(promises);
+  pts.push(pts[0]);
+  return { type: "FeatureCollection", features: [{ type: "Feature", geometry: { type: "Polygon", coordinates: [pts] }, properties: {} }] };
+}
+
 async function orsIsochrone(lat, lng, travelMins) {
-  const ORS_KEY = "eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6IjIwYjkyM2VjZjA0MTQwNDY5OTk0NDVhNzg4MDMyODdkIiwiaCI6Im11cm11cjY0In0=";
-  const body = {
-    locations: [[lng, lat]],
-    profile: "cycling-regular",
-    range: [travelMins * 60],
-    range_type: "time",
-    attributes: ["area"],
-    intersections: false,
-    units: "m",
-  };
-  let data;
-  try {
-    const res = await fetch("https://api.openrouteservice.org/v2/isochrones/cycling-regular", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": ORS_KEY },
-      body: JSON.stringify(body),
-    });
-    if (!res.ok) throw new Error(`ORS ${res.status}`);
-    data = await res.json();
-  } catch(e) {
-    console.warn("ORS unavailable, using OSRM fallback:", e.message);
-    const time = await osrmSpoke(lat, lng, travelMins);
-    const dist = await osrmSpoke(lat, lng, 8);
-    return { time, dist };
-  }
+  const GEO_KEY = "e59009f17fe243c5a2793450af18aa16";
+  const time = await osrmSpokeTime(lat, lng, travelMins);
+  const dist = await osrmSpokeDist(lat, lng, 3000);
 
-  let data3;
-  try {
-    const res3 = await fetch("https://api.openrouteservice.org/v2/isochrones/cycling-regular", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": ORS_KEY },
-      body: JSON.stringify({ locations: [[lng, lat]], profile: "cycling-regular", range: [3000], range_type: "distance", intersections: false, units: "m" }),
-    });
-    if (!res3.ok) throw new Error(`ORS 3km ${res3.status}`);
-    data3 = await res3.json();
-  } catch(e) {
-    data3 = await osrmSpoke(lat, lng, 8);
-  }
-
-  return { time: data, dist: data3 };
+  return { time, dist };
 }
 
 const placed = [];
