@@ -8,74 +8,164 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: sans-serif; }
-    #map { width: 100vw; height: 100vh; cursor: crosshair; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
 
-    #controls {
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-      padding: 10px 14px;
-      display: flex;
-      gap: 8px;
-      align-items: center;
+    #map { position: fixed; left: 240px; top: 0; right: 0; bottom: 0; cursor: crosshair; }
+
+    #sidebar {
+      position: fixed; left: 0; top: 0; bottom: 0; width: 240px; z-index: 1000;
+      background: #fff; box-shadow: 2px 0 16px rgba(0,0,0,0.08);
+      overflow-y: auto; display: flex; flex-direction: column;
     }
-    #controls label { font-size: 13px; font-weight: 600; color: #333; }
-    #controls button {
-      font-size: 13px;
-      padding: 5px 12px;
-      background: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+    #sidebar::-webkit-scrollbar { width: 4px; }
+    #sidebar::-webkit-scrollbar-track { background: transparent; }
+    #sidebar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 2px; }
+    #sidebar::-webkit-scrollbar-thumb:hover { background: #cbd5e1; }
+
+    .sb-brand { padding: 16px 16px 12px; border-bottom: 1px solid #f1f5f9; flex-shrink: 0; }
+    .sb-logo  { display: block; font-size: 17px; font-weight: 700; color: #0f172a; letter-spacing: -0.3px; }
+    .sb-sub   { display: block; font-size: 11px; color: #94a3b8; margin-top: 2px; }
+
+    .sb-section { padding: 12px 14px 10px; border-bottom: 1px solid #f1f5f9; }
+    .sb-section-title {
+      font-size: 10px; font-weight: 700; color: #94a3b8;
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px;
     }
-    #controls button:hover { background: #1d4ed8; }
-    #controls button.secondary { background: #6b7280; }
-    #controls button.secondary:hover { background: #4b5563; }
-    #controls button.active { background: #059669; }
-    #controls button.active:hover { background: #047857; }
+
+    .layer-row { margin-bottom: 4px; }
+    .layer-btn {
+      width: 100%; text-align: left; padding: 7px 10px;
+      background: #f8fafc; color: #374151; border: 1px solid #e2e8f0;
+      border-radius: 7px; cursor: pointer; font-size: 13px; font-weight: 500;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .layer-btn:hover:not(.active) { background: #f1f5f9; border-color: #cbd5e1; }
+    .layer-btn.active { background: #2563eb; color: white; border-color: #2563eb; }
+    .layer-btn .btn-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: currentColor; opacity: 0.35; flex-shrink: 0;
+    }
+    .layer-btn.active .btn-dot { opacity: 1; background: rgba(255,255,255,0.8); }
+
+    .iso-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .iso-label { font-size: 12px; color: #64748b; font-weight: 500; min-width: 32px; }
+    .iso-row input[type=range] { flex: 1; accent-color: #2563eb; }
+    .iso-val { font-size: 12px; font-weight: 600; color: #1e293b; min-width: 42px; text-align: right; }
+
+    /* Inline legend bars inside sidebar */
+    .legend-inline {
+      display: none; margin: 2px 10px 6px; padding: 6px 8px;
+      background: #f8fafc; border-radius: 5px; border: 1px solid #f1f5f9;
+    }
+    .legend-inline.visible { display: block; }
+    .legend-inline .bar {
+      height: 7px; border-radius: 2px;
+      background: linear-gradient(to right,#313695,#4575b4,#74add1,#abd9e9,#e0f3f8,#ffffbf,#fee090,#fdae61,#f46d43,#d73027,#a50026);
+      margin-bottom: 3px;
+    }
+    .legend-inline .lbl-row { display: flex; justify-content: space-between; font-size: 10px; color: #94a3b8; }
+
+    /* Filter sub-bars — inline in sidebar */
+    #slotBar {
+      display: flex; flex-direction: column; gap: 7px;
+      padding: 8px 10px 6px; margin: 2px 0 4px;
+      background: #f8fafc; border-radius: 7px; border: 1px solid #e2e8f0;
+    }
+    .filter-group { display: flex; flex-direction: column; gap: 3px; }
+    .filter-label { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+    .filter-pills { display: flex; flex-wrap: wrap; gap: 3px; }
+    #slotBar button {
+      font-size: 11px; padding: 3px 8px; background: #e2e8f0; color: #475569;
+      border: none; border-radius: 4px; cursor: pointer; white-space: nowrap;
+    }
+    #slotBar button.active { background: #2563eb; color: white; }
+    #slotBar button:hover:not(.active) { background: #cbd5e1; }
+
+    #superBar {
+      display: none; flex-direction: column; gap: 4px;
+      padding: 8px 10px 6px; margin: 2px 0 4px;
+      background: #f8fafc; border-radius: 7px; border: 1px solid #e2e8f0;
+    }
+    #superBar.visible { display: flex; }
+    #superBar label { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+    .super-pills { display: flex; flex-wrap: wrap; gap: 3px; }
+    #superBar button.sbrand {
+      font-size: 11px; padding: 3px 8px; background: #e2e8f0; color: #475569;
+      border: none; border-radius: 4px; cursor: pointer; white-space: nowrap;
+      display: flex; align-items: center; gap: 4px;
+    }
+    #superBar button.sbrand.active { background: #1e293b; color: white; }
+    #superBar button.sbrand.active .sdot { border-color: rgba(255,255,255,0.5); }
+    #superBar button.sbrand:hover:not(.active) { background: #cbd5e1; }
+    #superBar .sdot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      border: 1.5px solid rgba(0,0,0,0.2); flex-shrink: 0;
+    }
+
+    #darkBar {
+      display: none; flex-direction: column; gap: 4px;
+      padding: 8px 10px 6px; margin: 2px 0 4px;
+      background: #f8fafc; border-radius: 7px; border: 1px solid #e2e8f0;
+    }
+    #darkBar.visible { display: flex; }
+    #darkBar label { font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
+    #darkBar button.dbrand {
+      font-size: 11px; padding: 3px 8px; background: #e2e8f0; color: #475569;
+      border: none; border-radius: 4px; cursor: pointer; white-space: nowrap;
+      display: flex; align-items: center; gap: 4px;
+    }
+    #darkBar button.dbrand.active { background: #1e293b; color: white; }
+    #darkBar button.dbrand.active .ddot { border-color: rgba(255,255,255,0.5); }
+    #darkBar button.dbrand:hover:not(.active) { background: #cbd5e1; }
+    #darkBar .ddot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 2px;
+      border: 1.5px solid rgba(0,0,0,0.2); flex-shrink: 0;
+    }
+
+    .sb-footer { padding: 12px 14px; margin-top: auto; border-top: 1px solid #f1f5f9; flex-shrink: 0; }
+    .clear-btn {
+      width: 100%; padding: 8px; background: #f1f5f9; color: #64748b;
+      border: 1px solid #e2e8f0; border-radius: 7px; cursor: pointer;
+      font-size: 12px; font-weight: 500;
+    }
+    .clear-btn:hover { background: #fee2e2; color: #dc2626; border-color: #fca5a5; }
 
     #hint {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
-      background: rgba(0,0,0,0.65);
-      color: white;
-      font-size: 12px;
-      padding: 5px 14px;
-      border-radius: 20px;
-      pointer-events: none;
+      position: fixed; bottom: 24px; left: 50%; margin-left: 120px;
+      transform: translateX(-50%); z-index: 1000;
+      background: rgba(15,23,42,0.75); color: white; font-size: 12px;
+      padding: 5px 14px; border-radius: 20px; pointer-events: none;
     }
 
-    #legend {
-      position: absolute;
-      bottom: 60px;
-      right: 12px;
-      z-index: 1000;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-      padding: 10px 14px;
-      display: none;
-      min-width: 160px;
+    /* Floating legends */
+    .fl-legend {
+      position: fixed; right: 12px; z-index: 1000;
+      background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      padding: 10px 12px; display: none; min-width: 150px;
+      border: 1px solid #f1f5f9;
     }
-    #legend.visible { display: block; }
-    #legend h4 { font-size: 12px; font-weight: 700; color: #333; margin-bottom: 8px; }
-    #legend .bar {
-      height: 12px;
-      border-radius: 3px;
-      background: linear-gradient(to right, #313695, #4575b4, #74add1, #abd9e9, #e0f3f8, #ffffbf, #fee090, #fdae61, #f46d43, #d73027, #a50026);
-      margin-bottom: 4px;
+    .fl-legend.visible { display: block; }
+    .fl-legend h4 {
+      font-size: 10px; font-weight: 700; color: #64748b; margin-bottom: 7px;
+      text-transform: uppercase; letter-spacing: 0.07em;
     }
-    #legend .labels { display: flex; justify-content: space-between; font-size: 10px; color: #666; }
+    .fl-legend-row { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #374151; margin-bottom: 3px; }
+    .fl-swatch { display: inline-block; width: 11px; height: 11px; border-radius: 2px; flex-shrink: 0; }
+
+    #legend2 { bottom: 190px; }
+    #legend3 { bottom: 60px; right: 170px; }
+    #legend6 { bottom: 60px; right: 170px; }
+    #legend7 { bottom: 190px; right: 170px; }
+
+    .pulse-ring {
+      position: absolute; inset: -6px; border-radius: 50%;
+      border: 3px solid #7c3aed; animation: pulse-anim 1.5s ease-out infinite;
+    }
+    @keyframes pulse-anim {
+      0%   { opacity: 0.8; transform: scale(1);   }
+      100% { opacity: 0;   transform: scale(1.8); }
+    }
 
     .pop-popup { font-size: 13px; line-height: 1.7; min-width: 320px; }
     .sortido-tooltip { background: #111; color: white; border: none; border-radius: 4px; font-size: 11px; font-weight: 700; padding: 2px 7px; box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
@@ -86,25 +176,275 @@
   </style>
 </head>
 <body>
-<div id="controls">
-  <label>Total delivery:</label>
-  <input type="range" id="totalRange" min="10" max="45" value="30" step="1" style="width:80px" />
-  <span id="totalVal" style="font-size:13px;min-width:36px">30 min</span>
-  <label style="margin-left:8px">Prep:</label>
-  <input type="range" id="prepRange" min="0" max="25" value="10" step="1" style="width:70px" />
-  <span id="prepVal" style="font-size:13px;min-width:36px">10 min</span>
-  <span id="travelLabel" style="font-size:12px;color:#6b7280;min-width:80px">→ 20 min ride</span>
-  <button id="incomeBtn">Income</button>
-  <button id="airbnbBtn">Airbnb</button>
-  <button id="competitorsBtn">Competitors</button>
-  <button id="clearBtn" class="secondary">Clear all</button>
+<div id="sidebar">
+
+  <div class="sb-brand">
+    <span class="sb-logo">Sortido</span>
+    <span class="sb-sub">Análise de Localização · Lisboa</span>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-title">Área de Influência</div>
+    <div class="iso-row">
+      <span class="iso-label">Entrega</span>
+      <input type="range" id="totalRange" min="10" max="45" value="30" step="1" />
+      <span id="totalVal" class="iso-val">30 min</span>
+    </div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-title">Contexto Urbano</div>
+    <div class="layer-row">
+      <button id="incomeBtn" class="layer-btn"><span class="btn-dot"></span>Rendimento</button>
+    </div>
+    <div class="legend-inline" id="legend">
+      <div class="bar"></div>
+      <div class="lbl-row"><span id="legendMin"></span><span id="legendMax"></span></div>
+    </div>
+    <div class="layer-row">
+      <button id="popBtn" class="layer-btn"><span class="btn-dot"></span>População</button>
+    </div>
+    <div class="legend-inline" id="legend5">
+      <div style="height:7px;border-radius:2px;background:linear-gradient(to right,#f0f9e8,#bae4bc,#7bccc4,#43a2ca,#0868ac);margin-bottom:3px"></div>
+      <div class="lbl-row"><span>baixa</span><span>alta</span></div>
+    </div>
+    <div class="layer-row">
+      <button id="airbnbBtn" class="layer-btn"><span class="btn-dot"></span>Airbnb AL</button>
+    </div>
+    <div class="layer-row">
+      <button id="rentBtn" class="layer-btn"><span class="btn-dot"></span>Rendas Lojas</button>
+    </div>
+    <div class="legend-inline" id="legendRent">
+      <div style="height:6px;border-radius:2px;background:linear-gradient(to right,#22c55e,#eab308,#ef4444);margin-bottom:2px"></div>
+      <div class="lbl-row"><span>barato</span><span>caro</span></div>
+    </div>
+    <div class="layer-row">
+      <button id="uncapturedBtn" class="layer-btn"><span class="btn-dot"></span>Procura Potencial</button>
+    </div>
+    <div class="legend-inline" id="legendUncaptured">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+        <svg width="32" height="12"><defs><radialGradient id="rg"><stop offset="0%" stop-color="rgba(168,85,247,0.7)"/><stop offset="100%" stop-color="rgba(168,85,247,0)"/></radialGradient></defs><circle cx="6" cy="6" r="5" fill="rgba(168,85,247,0.15)"/><circle cx="20" cy="6" r="5" fill="rgba(168,85,247,0.45)"/><circle cx="6" cy="6" r="5" stroke="rgba(168,85,247,0.4)" stroke-width="1" fill="none"/><circle cx="20" cy="6" r="5" stroke="rgba(168,85,247,0.8)" stroke-width="1" fill="none"/></svg>
+        <span style="font-size:10px;color:#64748b">menos → mais procura</span>
+      </div>
+      <div style="font-size:10px;color:#475569;line-height:1.5">
+        <b>Score = residentes × índice de rendimento</b> (INE)<br>
+        Mostra zonas <b>fora</b> do alcance actual do Sortido.<br>
+        Pontos mais opacos = mais potencial não capturado.
+      </div>
+    </div>
+
+  <div class="sb-section">
+    <div class="sb-section-title">Competidores</div>
+    <div class="layer-row">
+      <button id="supermercadosBtn" class="layer-btn"><span class="btn-dot"></span>Supermercados</button>
+    </div>
+    <div id="superBar">
+      <label>Marca</label>
+      <div class="super-pills">
+        <button class="sbrand active" data-brand="all">Todas</button>
+      </div>
+    </div>
+    <div class="layer-row">
+      <button id="darkstoresBtn" class="layer-btn"><span class="btn-dot"></span>Dark Stores</button>
+    </div>
+    <div id="darkBar">
+      <label>Marca</label>
+      <div style="display:flex;flex-wrap:wrap;gap:3px">
+        <button class="dbrand active" data-brand="all">Todas</button>
+      </div>
+    </div>
+    <div class="layer-row">
+      <button id="competitorsBtn" class="layer-btn"><span class="btn-dot"></span>Outros (Pizzarias)</button>
+    </div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-title">As Minhas Entregas</div>
+    <div class="layer-row">
+      <button id="deliveriesBtn" class="layer-btn"><span class="btn-dot"></span>Entregas</button>
+    </div>
+    <div class="layer-row">
+      <button id="timingBtn" class="layer-btn"><span class="btn-dot"></span>Timing (grelha)</button>
+    </div>
+    <div class="layer-row">
+      <button id="receitaBtn" class="layer-btn"><span class="btn-dot"></span>Receita</button>
+    </div>
+    <div class="layer-row">
+      <button id="coberturaBtn" class="layer-btn"><span class="btn-dot"></span>Cobertura</button>
+    </div>
+    <div class="layer-row">
+      <button id="loyalBtn" class="layer-btn"><span class="btn-dot"></span>Clientes Fiéis</button>
+    </div>
+    <div class="legend-inline" id="legendLoyal">
+      <div style="display:flex;flex-direction:column;gap:3px;font-size:10px">
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:50%;background:#cbd5e1;border:1px solid #94a3b8;flex-shrink:0;display:inline-block"></span>1 ordem (único)</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:50%;background:#6ee7b7;border:1px solid #059669;flex-shrink:0;display:inline-block"></span>2–3 ordens</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:50%;background:#0d9488;border:1px solid #0f766e;flex-shrink:0;display:inline-block"></span>4–6 ordens (regular)</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:11px;height:11px;border-radius:50%;background:#2563eb;border:1px solid #1d4ed8;flex-shrink:0;display:inline-block"></span>7–9 ordens (fiel)</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:12px;height:12px;border-radius:50%;background:#7c3aed;border:1px solid #5b21b6;flex-shrink:0;display:inline-block"></span>10+ ordens (VIP)</div>
+      </div>
+      <div style="font-size:10px;color:#94a3b8;margin-top:4px">Tamanho proporcional ao nº de ordens</div>
+    </div>
+    <div class="layer-row">
+      <button id="picoZonaBtn" class="layer-btn"><span class="btn-dot"></span>Horário por Zona</button>
+    </div>
+    <div class="legend-inline" id="legendPicoZona">
+      <div style="display:flex;flex-direction:column;gap:3px;font-size:10px">
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#22c55e;flex-shrink:0;display:inline-block"></span>Almoço (11h–15h)</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#f59e0b;flex-shrink:0;display:inline-block"></span>Tarde (15h–18h)</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#ef4444;flex-shrink:0;display:inline-block"></span>Jantar (18h–23h)</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#6366f1;flex-shrink:0;display:inline-block"></span>Late (23h–4h)</div>
+      </div>
+      <div style="font-size:10px;color:#94a3b8;margin-top:4px">Células com ≥2 ordens. Cor = período dominante.</div>
+    </div>
+    <div class="layer-row">
+      <button id="ticketZonaBtn" class="layer-btn"><span class="btn-dot"></span>Ticket Médio</button>
+    </div>
+    <div class="legend-inline" id="legendTicketZona">
+      <div style="height:6px;border-radius:2px;background:linear-gradient(to right,#3b82f6,#14b8a6,#fbbf24,#7c3aed);margin-bottom:3px"></div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:#94a3b8"><span>€5</span><span>€15</span><span>€25</span><span>€40+</span></div>
+      <div style="font-size:10px;color:#94a3b8;margin-top:3px">Ticket médio por célula (≥2 ordens)</div>
+    </div>
+    <div class="layer-row">
+      <button id="diaSemanaBtn" class="layer-btn"><span class="btn-dot"></span>Dia Dominante</button>
+    </div>
+    <div class="legend-inline" id="legendDiaSemana">
+      <div style="display:flex;flex-direction:column;gap:3px;font-size:10px">
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:rgb(59,130,246);flex-shrink:0;display:inline-block"></span>2ª–5ª feira (semana)</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:rgb(245,158,11);flex-shrink:0;display:inline-block"></span>6ª feira</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:rgb(239,68,68);flex-shrink:0;display:inline-block"></span>Sábado</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:rgb(124,58,237);flex-shrink:0;display:inline-block"></span>Domingo</div>
+      </div>
+      <div style="font-size:10px;color:#94a3b8;margin-top:3px">Cor = dia com mais ordens. Opacidade = quão dominante (zoom 14+ mostra %).</div>
+    </div>
+    <div class="layer-row">
+      <button id="zonasMortasBtn" class="layer-btn"><span class="btn-dot"></span>Zonas Mortas</button>
+    </div>
+    <div class="legend-inline" id="legendZonasMortas">
+      <div style="display:flex;flex-direction:column;gap:3px;font-size:10px">
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;border:1.5px solid rgba(37,99,235,0.8);background:rgba(37,99,235,0.12);flex-shrink:0;display:inline-block"></span>0 ordens (sem cobertura)</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:rgba(96,165,250,0.15);flex-shrink:0;display:inline-block"></span>1–4 ordens (fraco)</div>
+      </div>
+      <div style="font-size:10px;color:#94a3b8;margin-top:4px">Dentro do raio actual. Células ≥5 ordens são transparentes.</div>
+    </div>
+    <div id="slotBar">
+      <div class="filter-group">
+        <div class="filter-label">Período</div>
+        <div class="filter-pills">
+          <button class="slot active" data-slot="all">Todos</button>
+          <button class="slot" data-slot="almoco">Almoço</button>
+          <button class="slot" data-slot="tarde">Tarde</button>
+          <button class="slot" data-slot="jantar">Jantar</button>
+          <button class="slot" data-slot="late">Late</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-label">Tipo</div>
+        <div class="filter-pills">
+          <button class="atype active" data-type="all">Todos</button>
+          <button class="atype" data-type="al">AL 🏨</button>
+          <button class="atype" data-type="res">Residência</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="filter-label">Dia</div>
+        <div class="filter-pills">
+          <button class="dow active" data-dow="all">Todos</button>
+          <button class="dow" data-dow="sem">Semana</button>
+          <button class="dow" data-dow="fds">FdS</button>
+          <button class="dow" data-dow="4">Sex</button>
+          <button class="dow" data-dow="5">Sáb</button>
+          <button class="dow" data-dow="6">Dom</button>
+          <button class="dow" data-dow="0">Seg</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-title">Análise</div>
+    <div class="layer-row">
+      <button id="tendenciaBtn" class="layer-btn"><span class="btn-dot"></span>Tendência</button>
+    </div>
+    <div id="tendenciaPanel" style="display:none;margin-top:6px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0"></div>
+    <div class="layer-row">
+      <button id="segundaBtn" class="layer-btn"><span class="btn-dot"></span>2ª Localização</button>
+    </div>
+    <div id="segundaInfo" style="display:none;margin-top:6px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0;font-size:12px;line-height:1.6">
+      <div style="font-weight:700;color:#7c3aed;margin-bottom:6px">Candidato óptimo</div>
+      <div id="segundaCoords" style="font-size:11px;color:#64748b;margin-bottom:8px"></div>
+      <div id="segundaStats"></div>
+      <div style="margin-top:8px;padding-top:8px;border-top:1px solid #e2e8f0">
+        <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">No mapa</div>
+        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px">
+          <span style="flex-shrink:0;margin-top:2px;width:20px;height:10px;border-radius:10px;background:rgba(124,58,237,0.25);border:2px solid rgba(124,58,237,0.9);display:inline-block"></span>
+          <span style="font-size:11px;color:#374151;line-height:1.4"><b>Mancha roxa</b> — onde estão concentradas as ordens que seriam captadas por esta loja</span>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:8px">
+          <span style="flex-shrink:0;margin-top:2px;width:20px;height:20px;border-radius:50%;background:rgba(124,58,237,0.08);border:2px dashed rgba(124,58,237,0.7);display:inline-block"></span>
+          <span style="font-size:11px;color:#374151;line-height:1.4"><b>Círculo roxo</b> — raio de entrega estimado (distância máxima que a loja consegue servir, baseada nas ordens actuais)</span>
+        </div>
+      </div>
+      <div style="margin-top:8px;padding-top:8px;border-top:1px solid #e2e8f0;font-size:10px;color:#94a3b8;line-height:1.5">
+        O ponto óptimo é calculado automaticamente: o algoritmo encontra a localização que mais reduz os tempos de entrega das ordens actualmente mais lentas.
+      </div>
+      <div id="segundaIsoStats" style="margin-top:8px;padding-top:8px;border-top:1px solid #e2e8f0;display:none"></div>
+    </div>
+  </div>
+
+  <div class="sb-footer">
+    <button id="clearBtn" class="clear-btn">Limpar marcadores</button>
+  </div>
+
 </div>
+
 <div id="map"></div>
-<div id="hint">Click anywhere on the map to place a marker and draw its reach</div>
-<div id="legend">
-  <h4>Median income (€/yr)</h4>
-  <div class="bar"></div>
-  <div class="labels"><span id="legendMin"></span><span id="legendMax"></span></div>
+<div id="hint">Clique no mapa para colocar um marcador e calcular o alcance</div>
+
+<div id="legend2" class="fl-legend">
+  <h4>Tempo de entrega</h4>
+  <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(34,197,94,0.85)"></span>&lt; 20 min</div>
+  <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(255,200,0,0.85)"></span>20 – 27 min</div>
+  <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(249,115,22,0.85)"></span>27 – 35 min</div>
+  <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(239,68,68,0.85)"></span>&gt; 35 min</div>
+</div>
+
+<div id="legend3" class="fl-legend">
+  <h4>Entregas por morada</h4>
+  <div style="display:flex;align-items:flex-end;gap:6px;margin-bottom:6px">
+    <svg width="92" height="34">
+      <circle cx="7"  cy="30" r="4"  fill="rgba(150,150,150,0.45)"/>
+      <circle cx="24" cy="27" r="7"  fill="rgba(150,150,150,0.45)"/>
+      <circle cx="47" cy="22" r="11" fill="rgba(150,150,150,0.45)"/>
+      <circle cx="76" cy="16" r="14" fill="rgba(150,150,150,0.45)" stroke="white" stroke-width="1.5"/>
+      <text x="7"  y="34" text-anchor="middle" font-size="8" fill="#aaa">1</text>
+      <text x="24" y="34" text-anchor="middle" font-size="8" fill="#aaa">4</text>
+      <text x="47" y="34" text-anchor="middle" font-size="8" fill="#aaa">9</text>
+      <text x="76" y="34" text-anchor="middle" font-size="8" fill="#aaa">16+</text>
+    </svg>
+    <span style="font-size:10px;color:#94a3b8;line-height:1.3;padding-bottom:2px">ordens<br>p/ morada</span>
+  </div>
+  <div style="height:6px;border-radius:2px;background:linear-gradient(to right,#32c864,#ffc800,#ff7300,#ff2020);margin-bottom:2px"></div>
+  <div style="display:flex;justify-content:space-between;font-size:10px;color:#94a3b8;margin-bottom:5px"><span>10 min</span><span>45 min</span></div>
+  <div style="display:flex;gap:8px">
+    <div class="fl-legend-row" style="margin:0"><span style="width:8px;height:8px;border-radius:50%;background:rgba(139,92,246,0.85);flex-shrink:0;display:inline-block"></span><span style="font-size:10px">Aloj. Local</span></div>
+    <div class="fl-legend-row" style="margin:0"><span style="width:8px;height:8px;border-radius:50%;background:rgba(34,197,94,0.85);flex-shrink:0;display:inline-block"></span><span style="font-size:10px">Residência</span></div>
+  </div>
+</div>
+
+<div id="legend6" class="fl-legend">
+  <h4>Receita total (€)</h4>
+  <div style="height:7px;border-radius:2px;background:linear-gradient(to right,#fef9c3,#fde68a,#fbbf24,#f59e0b,#b45309);margin-bottom:3px"></div>
+  <div style="display:flex;justify-content:space-between;font-size:10px;color:#94a3b8"><span>€0</span><span>€100</span><span>€200</span><span>€400+</span></div>
+  <div style="font-size:10px;color:#94a3b8;margin-top:4px">Grelha 300m · receita acumulada por célula</div>
+</div>
+
+<div id="legend7" class="fl-legend">
+  <h4>Distância ao Sortido</h4>
+  <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(34,197,94,0.85)"></span>&lt; 1 km</div>
+  <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(250,204,21,0.85)"></span>1 – 2 km</div>
+  <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(249,115,22,0.85)"></span>2 – 3 km</div>
+  <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(239,68,68,0.85)"></span>&gt; 3 km</div>
 </div>
 
 <script>
@@ -125,6 +465,10 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 map.createPane("incomePane");
 map.getPane("incomePane").style.zIndex = 300;
 map.getPane("incomePane").style.pointerEvents = "none";
+
+map.createPane("deliveriesPane");
+map.getPane("deliveriesPane").style.zIndex = 310;
+map.getPane("deliveriesPane").style.pointerEvents = "none";
 
 
 // --- Income choropleth canvas layer ---
@@ -308,6 +652,554 @@ function toggleAirbnbLayer() {
   }
 }
 
+// --- Rent layer (commercial space €/m² by parish) ---
+let rentLayerOn = false;
+let rentMarkers = [];
+let rentData = [];
+let monthlyStats = [];
+
+fetch("rents_by_parish.json").then(r => r.json()).then(d => { rentData = d; }).catch(() => {});
+fetch("orders_by_month.json").then(r => r.json()).then(d => { monthlyStats = d; }).catch(() => {});
+
+function rentColor(eur_m2, min, max) {
+  const t = Math.max(0, Math.min(1, (eur_m2 - min) / (max - min)));
+  if (t < 0.5) {
+    const s = t / 0.5;
+    return `rgb(${Math.round(34+187*s)},${Math.round(197-51*s)},${Math.round(94-94*s)})`;
+  } else {
+    const s = (t - 0.5) / 0.5;
+    return `rgb(${Math.round(221+34*s)},${Math.round(146-146*s)},0)`;
+  }
+}
+
+function toggleRentLayer() {
+  const btn = document.getElementById("rentBtn");
+  const leg = document.getElementById("legendRent");
+  if (rentLayerOn) {
+    rentMarkers.forEach(m => map.removeLayer(m));
+    rentMarkers = [];
+    rentLayerOn = false;
+    btn.classList.remove("active");
+    leg.classList.remove("visible");
+    return;
+  }
+  if (!rentData.length) { hint.textContent = "Dados de rendas não carregados"; return; }
+
+  // Filter to Lisbon metro area only
+  const local = rentData.filter(d => d.lat && d.lon && d.lat > 38.65 && d.lat < 38.82 && d.lon > -9.25 && d.lon < -9.08);
+  const vals  = local.map(d => d.median_eur_m2);
+  const minV  = Math.min(...vals), maxV = Math.max(...vals);
+
+  for (const d of local) {
+    const color = rentColor(d.median_eur_m2, minV, maxV);
+    const r     = 6 + (d.count / 10);
+    const m = L.circleMarker([d.lat, d.lon], {
+      radius: Math.min(r, 18), color: "#fff", weight: 1.5,
+      fillColor: color, fillOpacity: 0.85,
+    }).bindPopup(`
+      <div class="pop-popup">
+        <b>${d.parish}</b><br>
+        <span style="color:#666;font-size:11px">${d.count} lojas analisadas</span>
+        <hr style="margin:5px 0;border-color:#eee"/>
+        <div class="row"><span>Mediana</span><span style="font-weight:700;color:${color}">${d.median_eur_m2} €/m²/mês</span></div>
+        <div class="row"><span>Média</span><span>${d.mean_eur_m2} €/m²/mês</span></div>
+      </div>
+    `).on("click", e => L.DomEvent.stopPropagation(e)).addTo(map);
+    rentMarkers.push(m);
+  }
+  rentLayerOn = true;
+  btn.classList.add("active");
+  leg.classList.add("visible");
+}
+
+// --- Uncaptured demand layer (population × income outside S1 zone) ---
+let uncapturedLayerOn = false;
+let uncapturedLayer   = null;
+
+const UncapturedLayer = L.Layer.extend({
+  onAdd(map)    { map.on("moveend zoomend", this._draw, this); this._draw(); },
+  onRemove(map) { map.off("moveend zoomend", this._draw, this);
+                  if (this._canvas) { map.getPanes().overlayPane.removeChild(this._canvas); this._canvas = null; } },
+  _draw() {
+    if (!popGrid) return;
+    const size = map.getSize();
+    if (!this._canvas) {
+      this._canvas = L.DomUtil.create("canvas");
+      this._canvas.style.cssText = "position:absolute;top:0;left:0;pointer-events:none;opacity:0.75";
+      map.getPanes().overlayPane.appendChild(this._canvas);
+    }
+    const cv = this._canvas;
+    cv.width = size.x; cv.height = size.y;
+    const ctx = cv.getContext("2d");
+    const origin = map.containerPointToLayerPoint([0, 0]);
+    L.DomUtil.setPosition(cv, origin);
+
+    const s1Radius = sortidoCoverageLayer ? deliveryRadiusKm(SORTIDO_LAT, SORTIDO_LNG) : 5;
+    const cosLat   = Math.cos(SORTIDO_LAT * Math.PI / 180);
+
+    for (const row of popGrid.rows) {
+      const [clat, clon, pop, , , , incomeIdx] = row;
+      if (!pop || pop < 10) continue;
+
+      // Skip cells inside S1's delivery zone
+      const dy = (clat - SORTIDO_LAT) * 111.32;
+      const dx = (clon - SORTIDO_LNG) * 111.32 * cosLat;
+      if (Math.sqrt(dy*dy + dx*dx) < s1Radius) continue;
+
+      const score = pop * (incomeIdx || 1.0);
+
+      const pt = map.latLngToContainerPoint([clat, clon]);
+      const alpha = Math.min(0.7, score / 3000);
+      if (alpha < 0.05) continue;
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, 5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(168,85,247,${alpha.toFixed(2)})`;
+      ctx.fill();
+    }
+  }
+});
+
+function toggleUncapturedLayer() {
+  const btn = document.getElementById("uncapturedBtn");
+  const leg = document.getElementById("legendUncaptured");
+  if (uncapturedLayerOn) {
+    if (uncapturedLayer) map.removeLayer(uncapturedLayer);
+    uncapturedLayerOn = false;
+    btn.classList.remove("active");
+    leg.classList.remove("visible");
+  } else {
+    if (!popGrid) { hint.textContent = "A carregar dados de população…"; return; }
+    uncapturedLayer   = new UncapturedLayer();
+    map.addLayer(uncapturedLayer);
+    uncapturedLayerOn = true;
+    btn.classList.add("active");
+    leg.classList.add("visible");
+  }
+}
+
+function loyalColor(n) {
+  if (n >= 10) return { fill: '#7c3aed', stroke: '#5b21b6' };
+  if (n >= 7)  return { fill: '#2563eb', stroke: '#1d4ed8' };
+  if (n >= 4)  return { fill: '#0d9488', stroke: '#0f766e' };
+  if (n >= 2)  return { fill: '#6ee7b7', stroke: '#059669' };
+  return               { fill: '#cbd5e1', stroke: '#94a3b8' };
+}
+
+let loyalLayer = null, loyalOn = false;
+function toggleLoyalLayer() {
+  const btn = document.getElementById("loyalBtn");
+  const leg = document.getElementById("legendLoyal");
+  if (loyalOn) {
+    if (loyalLayer) map.removeLayer(loyalLayer);
+    loyalLayer = null; loyalOn = false;
+    btn.classList.remove("active");
+    leg.classList.remove("visible");
+    return;
+  }
+  if (!ordersData || !ordersData.length) { hint.textContent = "Carrega os dados de entregas primeiro"; return; }
+
+  const addrCnt = {};
+  for (const [lat, lng, , , , price] of ordersData) {
+    const key = `${lat.toFixed(3)},${lng.toFixed(3)}`;
+    if (!addrCnt[key]) addrCnt[key] = { lat, lng, n: 0, rev: 0 };
+    addrCnt[key].n++;
+    addrCnt[key].rev += price || 0;
+  }
+
+  loyalLayer = L.layerGroup();
+  const counts = { 1: 0, '2-3': 0, '4-6': 0, '7-9': 0, '10+': 0 };
+  for (const { lat, lng, n, rev } of Object.values(addrCnt)) {
+    const { fill, stroke } = loyalColor(n);
+    const radius = n === 1 ? 3 : Math.min(4 + Math.sqrt(n) * 1.5, 11);
+    L.circleMarker([lat, lng], {
+      radius, color: stroke, fillColor: fill,
+      fillOpacity: n === 1 ? 0.45 : 0.8, weight: 1.2, opacity: 0.9,
+    }).bindPopup(`<b>${n} ordem${n>1?'s':''}</b><br>Receita total: €${Math.round(rev)}<br><span style="font-size:11px;color:#666">${lat.toFixed(4)}, ${lng.toFixed(4)}</span>`)
+      .addTo(loyalLayer);
+    if (n >= 10) counts['10+']++;
+    else if (n >= 7) counts['7-9']++;
+    else if (n >= 4) counts['4-6']++;
+    else if (n >= 2) counts['2-3']++;
+    else counts[1]++;
+  }
+  map.addLayer(loyalLayer);
+  loyalOn = true;
+  btn.classList.add("active");
+  leg.classList.add("visible");
+  hint.textContent = `Clientes: ${counts[1]} únicos · ${counts['2-3']} ocasionais · ${counts['4-6']} regulares · ${counts['7-9']+counts['10+']} fiéis`;
+}
+
+// --- Tendência temporal ---
+function toggleTendenciaPanel() {
+  const btn   = document.getElementById("tendenciaBtn");
+  const panel = document.getElementById("tendenciaPanel");
+  if (panel.style.display !== "none") {
+    panel.style.display = "none";
+    btn.classList.remove("active");
+    return;
+  }
+  if (!monthlyStats.length) { hint.textContent = "Dados mensais não carregados"; return; }
+
+  const counts  = monthlyStats.map(m => m.count);
+  const revs    = monthlyStats.map(m => m.revenue);
+  const maxC    = Math.max(...counts);
+  const maxR    = Math.max(...revs);
+  const MONTHS_PT = { "01":"Jan","02":"Fev","03":"Mar","04":"Abr","05":"Mai","06":"Jun",
+                      "07":"Jul","08":"Ago","09":"Set","10":"Out","11":"Nov","12":"Dez" };
+
+  const bars = monthlyStats.map((m, i) => {
+    const [, mo] = m.month.split("-");
+    const label  = MONTHS_PT[mo] || mo;
+    const hC     = Math.round((m.count / maxC) * 60);
+    const hR     = Math.round((m.revenue / maxR) * 60);
+    const prev   = i > 0 ? monthlyStats[i-1] : null;
+    const growthC = prev ? Math.round((m.count - prev.count) / prev.count * 100) : null;
+    const partialNote = m.partial ? '<span style="color:#f59e0b"> *</span>' : '';
+    const growthHtml  = growthC != null
+      ? `<div style="font-size:9px;color:${growthC >= 0 ? '#059669' : '#ef4444'};font-weight:700">${growthC >= 0 ? '+' : ''}${growthC}%</div>`
+      : '';
+    return `<div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex:1">
+      ${growthHtml}
+      <div style="display:flex;align-items:flex-end;gap:2px;height:64px">
+        <div title="Ordens: ${m.count}" style="width:12px;background:#7c3aed;border-radius:2px 2px 0 0;height:${hC}px;opacity:0.85"></div>
+        <div title="Receita: €${Math.round(m.revenue).toLocaleString('pt-PT')}" style="width:12px;background:#059669;border-radius:2px 2px 0 0;height:${hR}px;opacity:0.8"></div>
+      </div>
+      <div style="font-size:9px;color:#64748b;text-align:center">${label}${partialNote}</div>
+      <div style="font-size:9px;color:#374151;font-weight:600">${m.count}</div>
+      <div style="font-size:9px;color:#059669">€${Math.round(m.revenue / 1000)}k</div>
+    </div>`;
+  }).join("");
+
+  const totalOrders  = counts.reduce((a,b) => a+b, 0);
+  const totalRevenue = revs.reduce((a,b) => a+b, 0);
+  const lastFull = monthlyStats.filter(m => !m.partial);
+  const avgTicketAll = monthlyStats.reduce((s, m) => s + m.revenue, 0) / totalOrders;
+
+  panel.innerHTML = `
+    <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Evolução mensal</div>
+    <div style="display:flex;gap:4px;align-items:flex-end;margin-bottom:10px">${bars}</div>
+    <div style="display:flex;gap:2px;font-size:9px;color:#64748b;margin-bottom:8px">
+      <span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:#7c3aed;border-radius:1px;display:inline-block"></span>Ordens</span>
+      <span style="margin:0 4px">·</span>
+      <span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:#059669;border-radius:1px;display:inline-block"></span>Receita</span>
+      <span style="margin:0 4px">·</span>
+      <span style="color:#f59e0b">* mês incompleto</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:3px;font-size:11px;border-top:1px solid #e2e8f0;padding-top:7px">
+      <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Total ordens</span><span style="font-weight:700">${totalOrders.toLocaleString('pt-PT')}</span></div>
+      <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Receita total</span><span style="font-weight:700">€${Math.round(totalRevenue).toLocaleString('pt-PT')}</span></div>
+      <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Ticket médio</span><span style="font-weight:700">€${avgTicketAll.toFixed(2)}</span></div>
+    </div>`;
+  panel.style.display = "block";
+  btn.classList.add("active");
+}
+
+// --- Horário por Zona (canvas layer) ---
+const SLOT_COLORS = [
+  { label: "Almoço",  hours: h => h >= 11 && h < 15, color: [34, 197, 94] },
+  { label: "Tarde",   hours: h => h >= 15 && h < 18, color: [245, 158, 11] },
+  { label: "Jantar",  hours: h => h >= 18 && h < 23, color: [239, 68, 68] },
+  { label: "Late",    hours: h => h >= 23 || h < 4,  color: [99, 102, 241] },
+];
+const CELL_DEG = 0.004; // ~400m
+
+let picoZonaLayerObj = null, picoZonaOn = false;
+
+const PicoZonaLayer = L.Layer.extend({
+  onAdd(map)    { map.on("moveend zoomend", this._draw, this); this._draw(); },
+  onRemove(map) { map.off("moveend zoomend", this._draw, this);
+                  if (this._canvas) { map.getPanes().overlayPane.removeChild(this._canvas); this._canvas = null; } },
+  _draw() {
+    if (!ordersData || !ordersData.length) return;
+    const size = map.getSize();
+    if (!this._canvas) {
+      this._canvas = L.DomUtil.create("canvas");
+      this._canvas.style.cssText = "position:absolute;top:0;left:0;pointer-events:none;opacity:0.8";
+      map.getPanes().overlayPane.appendChild(this._canvas);
+    }
+    const cv = this._canvas; cv.width = size.x; cv.height = size.y;
+    const ctx = cv.getContext("2d");
+    L.DomUtil.setPosition(cv, map.containerPointToLayerPoint([0, 0]));
+
+    // Build cell → slot counts
+    const cells = {};
+    for (const [lat, lng, , hour] of ordersData) {
+      const ck = `${Math.round(lat / CELL_DEG)},${Math.round(lng / CELL_DEG)}`;
+      if (!cells[ck]) cells[ck] = { lat: Math.round(lat / CELL_DEG) * CELL_DEG, lng: Math.round(lng / CELL_DEG) * CELL_DEG, slots: [0,0,0,0] };
+      for (let s = 0; s < SLOT_COLORS.length; s++) {
+        if (SLOT_COLORS[s].hours(hour)) { cells[ck].slots[s]++; break; }
+      }
+    }
+
+    const bounds = map.getBounds();
+    for (const { lat, lng, slots } of Object.values(cells)) {
+      if (!bounds.contains([lat, lng])) continue;
+      const total = slots.reduce((a,b) => a+b, 0);
+      if (total < 2) continue;
+      const dominant = slots.indexOf(Math.max(...slots));
+      const [r,g,b] = SLOT_COLORS[dominant].color;
+      const alpha = Math.min(0.75, 0.3 + total / 30);
+
+      const tl = map.latLngToContainerPoint([lat + CELL_DEG/2, lng - CELL_DEG/2]);
+      const br = map.latLngToContainerPoint([lat - CELL_DEG/2, lng + CELL_DEG/2]);
+      ctx.fillStyle = `rgba(${r},${g},${b},${alpha.toFixed(2)})`;
+      ctx.fillRect(tl.x, tl.y, br.x - tl.x, br.y - tl.y);
+    }
+  }
+});
+
+function togglePicoZonaLayer() {
+  const btn = document.getElementById("picoZonaBtn");
+  const leg = document.getElementById("legendPicoZona");
+  if (picoZonaOn) {
+    if (picoZonaLayerObj) map.removeLayer(picoZonaLayerObj);
+    picoZonaLayerObj = null; picoZonaOn = false;
+    btn.classList.remove("active"); leg.classList.remove("visible");
+  } else {
+    if (!ordersData || !ordersData.length) { hint.textContent = "Carrega os dados de entregas primeiro"; return; }
+    picoZonaLayerObj = new PicoZonaLayer();
+    map.addLayer(picoZonaLayerObj);
+    picoZonaOn = true;
+    btn.classList.add("active"); leg.classList.add("visible");
+  }
+}
+
+// --- Zonas Mortas (canvas layer) ---
+let zonasMortasLayerObj = null, zonasMortasOn = false;
+
+const DEAD_CELL = 0.003; // ~300m cells for dead zones
+const ZonasMortasLayer = L.Layer.extend({
+  onAdd(map)    { map.on("moveend zoomend", this._draw, this); this._draw(); },
+  onRemove(map) { map.off("moveend zoomend", this._draw, this);
+                  if (this._canvas) { map.getPanes().overlayPane.removeChild(this._canvas); this._canvas = null; } },
+  _draw() {
+    if (!ordersData || !ordersData.length) return;
+    const size = map.getSize();
+    if (!this._canvas) {
+      this._canvas = L.DomUtil.create("canvas");
+      this._canvas.style.cssText = "position:absolute;top:0;left:0;pointer-events:none";
+      map.getPanes().overlayPane.appendChild(this._canvas);
+    }
+    const cv = this._canvas; cv.width = size.x; cv.height = size.y;
+    const ctx = cv.getContext("2d");
+    L.DomUtil.setPosition(cv, map.containerPointToLayerPoint([0, 0]));
+
+    const radius = deliveryRadiusKm(SORTIDO_LAT, SORTIDO_LNG);
+    const cosLat = Math.cos(SORTIDO_LAT * Math.PI / 180);
+
+    // Count orders per cell
+    const orderCells = {};
+    for (const [lat, lng] of ordersData) {
+      const ck = `${Math.round(lat / DEAD_CELL)},${Math.round(lng / DEAD_CELL)}`;
+      orderCells[ck] = (orderCells[ck] || 0) + 1;
+    }
+
+    const bounds = map.getBounds();
+    const latMin = Math.max(SORTIDO_LAT - radius / 111, bounds.getSouth());
+    const latMax = Math.min(SORTIDO_LAT + radius / 111, bounds.getNorth());
+    const lngMin = Math.max(SORTIDO_LNG - radius / (111 * cosLat), bounds.getWest());
+    const lngMax = Math.min(SORTIDO_LNG + radius / (111 * cosLat), bounds.getEast());
+
+    for (let lat = Math.floor(latMin / DEAD_CELL) * DEAD_CELL; lat <= latMax; lat += DEAD_CELL) {
+      for (let lng = Math.floor(lngMin / DEAD_CELL) * DEAD_CELL; lng <= lngMax; lng += DEAD_CELL) {
+        const dy = (lat - SORTIDO_LAT) * 111;
+        const dx = (lng - SORTIDO_LNG) * 111 * cosLat;
+        if (Math.sqrt(dy*dy + dx*dx) > radius) continue;
+
+        const ck = `${Math.round(lat / DEAD_CELL)},${Math.round(lng / DEAD_CELL)}`;
+        const n = orderCells[ck] || 0;
+        if (n >= 5) continue; // well-served
+
+        const tl = map.latLngToContainerPoint([lat + DEAD_CELL/2, lng - DEAD_CELL/2]);
+        const br = map.latLngToContainerPoint([lat - DEAD_CELL/2, lng + DEAD_CELL/2]);
+        const w = br.x - tl.x, h = br.y - tl.y;
+
+        if (n === 0) {
+          // Blue outline + light fill — contrasts with orange KDE
+          ctx.strokeStyle = "rgba(37,99,235,0.8)";
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(tl.x + 0.5, tl.y + 0.5, w - 1, h - 1);
+          ctx.fillStyle = "rgba(37,99,235,0.12)";
+          ctx.fillRect(tl.x, tl.y, w, h);
+        } else {
+          // 1–4 orders: subtle blue tint
+          const alpha = 0.04 + (1 - n / 5) * 0.1;
+          ctx.fillStyle = `rgba(96,165,250,${alpha.toFixed(2)})`;
+          ctx.fillRect(tl.x, tl.y, w, h);
+        }
+      }
+    }
+  }
+});
+
+function toggleZonasMortasLayer() {
+  const btn = document.getElementById("zonasMortasBtn");
+  const leg = document.getElementById("legendZonasMortas");
+  if (zonasMortasOn) {
+    if (zonasMortasLayerObj) map.removeLayer(zonasMortasLayerObj);
+    zonasMortasLayerObj = null; zonasMortasOn = false;
+    btn.classList.remove("active"); leg.classList.remove("visible");
+  } else {
+    if (!ordersData || !ordersData.length) { hint.textContent = "Carrega os dados de entregas primeiro"; return; }
+    zonasMortasLayerObj = new ZonasMortasLayer();
+    map.addLayer(zonasMortasLayerObj);
+    zonasMortasOn = true;
+    btn.classList.add("active"); leg.classList.add("visible");
+  }
+}
+
+// --- Ticket Médio por Zona ---
+let ticketZonaLayerObj = null, ticketZonaOn = false;
+
+const TicketZonaLayer = L.Layer.extend({
+  onAdd(map)    { map.on("moveend zoomend", this._draw, this); this._draw(); },
+  onRemove(map) { map.off("moveend zoomend", this._draw, this);
+                  if (this._canvas) { map.getPanes().overlayPane.removeChild(this._canvas); this._canvas = null; } },
+  _draw() {
+    if (!ordersData || !ordersData.length) return;
+    const size = map.getSize();
+    if (!this._canvas) {
+      this._canvas = L.DomUtil.create("canvas");
+      this._canvas.style.cssText = "position:absolute;top:0;left:0;pointer-events:none";
+      map.getPanes().overlayPane.appendChild(this._canvas);
+    }
+    const cv = this._canvas; cv.width = size.x; cv.height = size.y;
+    const ctx = cv.getContext("2d");
+    L.DomUtil.setPosition(cv, map.containerPointToLayerPoint([0, 0]));
+
+    const CELL = CELL_DEG;
+    const grid = {};
+    for (const [lat, lng, , , , price] of ordersData) {
+      if (!price || price <= 0) continue;
+      const ck = `${Math.round(lat/CELL)},${Math.round(lng/CELL)}`;
+      if (!grid[ck]) grid[ck] = { lat: Math.round(lat/CELL)*CELL, lng: Math.round(lng/CELL)*CELL, sum: 0, cnt: 0 };
+      grid[ck].sum += price; grid[ck].cnt++;
+    }
+
+    const bounds = map.getBounds();
+    // Color: low ticket = cool blue, high ticket = warm purple
+    // Scale: €0–10 = blue, €10–20 = teal, €20–30 = amber, €30+ = purple
+    const stops = [[59,130,246],[20,184,166],[251,191,36],[124,58,237]];
+    function ticketColor(avg) {
+      const t = Math.min(1, Math.max(0, (avg - 5) / 35)); // €5 → €40
+      const pos = t * (stops.length - 1);
+      const lo = Math.floor(pos), hi = Math.min(stops.length-1, lo+1);
+      const f = pos - lo;
+      return stops[lo].map((c,i) => Math.round(c + f*(stops[hi][i]-c)));
+    }
+
+    for (const { lat, lng, sum, cnt } of Object.values(grid)) {
+      if (cnt < 2) continue;
+      if (!bounds.contains([lat, lng])) continue;
+      const avg = sum / cnt;
+      const [r,g,b] = ticketColor(avg);
+      const tl = map.latLngToContainerPoint([lat+CELL/2, lng-CELL/2]);
+      const br = map.latLngToContainerPoint([lat-CELL/2, lng+CELL/2]);
+      const x = tl.x, y = tl.y, w = br.x-tl.x, h = br.y-tl.y;
+      ctx.fillStyle = `rgba(${r},${g},${b},0.78)`;
+      ctx.fillRect(x, y, w, h);
+      if (map.getZoom() >= 14 && w > 22) {
+        ctx.fillStyle = "rgba(0,0,0,0.75)"; ctx.font = "bold 9px sans-serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        ctx.fillText(`€${Math.round(avg)}`, Math.round(x+w/2), Math.round(y+h/2));
+      }
+    }
+  }
+});
+
+function toggleTicketZonaLayer() {
+  const btn = document.getElementById("ticketZonaBtn");
+  const leg = document.getElementById("legendTicketZona");
+  if (ticketZonaOn) {
+    if (ticketZonaLayerObj) map.removeLayer(ticketZonaLayerObj);
+    ticketZonaLayerObj = null; ticketZonaOn = false;
+    btn.classList.remove("active"); leg.classList.remove("visible");
+  } else {
+    if (!ordersData || !ordersData.length) { hint.textContent = "Carrega os dados de entregas primeiro"; return; }
+    ticketZonaLayerObj = new TicketZonaLayer();
+    map.addLayer(ticketZonaLayerObj);
+    ticketZonaOn = true;
+    btn.classList.add("active"); leg.classList.add("visible");
+  }
+}
+
+// --- Dia Dominante por Zona ---
+let diaSemanaLayerObj = null, diaSemanaOn = false;
+
+// dow: 0=Mon … 4=Fri = semana, 5=Sat 6=Sun = fds
+const DIA_GROUPS = [
+  { label: "2ª–5ª",  test: d => d >= 0 && d <= 3, color: [59,130,246]  },
+  { label: "6ª",     test: d => d === 4,            color: [245,158,11] },
+  { label: "Sábado", test: d => d === 5,            color: [239,68,68]  },
+  { label: "Domingo",test: d => d === 6,            color: [124,58,237] },
+];
+
+const DiaSemanaLayer = L.Layer.extend({
+  onAdd(map)    { map.on("moveend zoomend", this._draw, this); this._draw(); },
+  onRemove(map) { map.off("moveend zoomend", this._draw, this);
+                  if (this._canvas) { map.getPanes().overlayPane.removeChild(this._canvas); this._canvas = null; } },
+  _draw() {
+    if (!ordersData || !ordersData.length) return;
+    const size = map.getSize();
+    if (!this._canvas) {
+      this._canvas = L.DomUtil.create("canvas");
+      this._canvas.style.cssText = "position:absolute;top:0;left:0;pointer-events:none";
+      map.getPanes().overlayPane.appendChild(this._canvas);
+    }
+    const cv = this._canvas; cv.width = size.x; cv.height = size.y;
+    const ctx = cv.getContext("2d");
+    L.DomUtil.setPosition(cv, map.containerPointToLayerPoint([0, 0]));
+
+    const CELL = CELL_DEG;
+    const grid = {};
+    for (const [lat, lng, , , , , dow] of ordersData) {
+      if (dow == null) continue;
+      const ck = `${Math.round(lat/CELL)},${Math.round(lng/CELL)}`;
+      if (!grid[ck]) grid[ck] = { lat: Math.round(lat/CELL)*CELL, lng: Math.round(lng/CELL)*CELL, counts: [0,0,0,0] };
+      for (let i = 0; i < DIA_GROUPS.length; i++) {
+        if (DIA_GROUPS[i].test(dow)) { grid[ck].counts[i]++; break; }
+      }
+    }
+
+    const bounds = map.getBounds();
+    for (const { lat, lng, counts } of Object.values(grid)) {
+      const total = counts.reduce((a,b)=>a+b,0);
+      if (total < 3) continue;
+      if (!bounds.contains([lat, lng])) continue;
+      const dominant = counts.indexOf(Math.max(...counts));
+      const pct = Math.round(counts[dominant] / total * 100);
+      const [r,g,b] = DIA_GROUPS[dominant].color;
+      const alpha = 0.3 + (pct - 25) / 75 * 0.5; // more dominant = more opaque
+      const tl = map.latLngToContainerPoint([lat+CELL/2, lng-CELL/2]);
+      const br = map.latLngToContainerPoint([lat-CELL/2, lng+CELL/2]);
+      const x = tl.x, y = tl.y, w = br.x-tl.x, h = br.y-tl.y;
+      ctx.fillStyle = `rgba(${r},${g},${b},${Math.min(0.8,alpha).toFixed(2)})`;
+      ctx.fillRect(x, y, w, h);
+      if (map.getZoom() >= 14 && w > 22) {
+        ctx.fillStyle = "rgba(255,255,255,0.9)"; ctx.font = "bold 9px sans-serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        ctx.fillText(`${pct}%`, Math.round(x+w/2), Math.round(y+h/2));
+      }
+    }
+  }
+});
+
+function toggleDiaSemanaLayer() {
+  const btn = document.getElementById("diaSemanaBtn");
+  const leg = document.getElementById("legendDiaSemana");
+  if (diaSemanaOn) {
+    if (diaSemanaLayerObj) map.removeLayer(diaSemanaLayerObj);
+    diaSemanaLayerObj = null; diaSemanaOn = false;
+    btn.classList.remove("active"); leg.classList.remove("visible");
+  } else {
+    if (!ordersData || !ordersData.length) { hint.textContent = "Carrega os dados de entregas primeiro"; return; }
+    diaSemanaLayerObj = new DiaSemanaLayer();
+    map.addLayer(diaSemanaLayerObj);
+    diaSemanaOn = true;
+    btn.classList.add("active"); leg.classList.add("visible");
+  }
+}
+
 // Ray-casting point-in-polygon (GeoJSON coords are [lon, lat])
 function pointInRing(lon, lat, ring) {
   let inside = false;
@@ -319,6 +1211,27 @@ function pointInRing(lon, lat, ring) {
     }
   }
   return inside;
+}
+
+// Pre-compute which GEO grid cells fall inside a GeoJSON isochrone polygon.
+// Returns a Uint8Array mask (1 = inside). Used to exclude S1's delivery zone
+// from the second-location search — same grid as computeGeoKDE.
+function buildIsoMask(geoJSON) {
+  const { lat0, lat1, lon0, lon1, ROWS, COLS } = GEO;
+  const CELL_LAT = (lat1 - lat0) / (ROWS - 1);
+  const CELL_LON = (lon1 - lon0) / (COLS - 1);
+  const mask = new Uint8Array(ROWS * COLS);
+  const geometries = geoJSON.features.map(f => f.geometry);
+  for (let r = 0; r < ROWS; r++) {
+    const lat = lat1 - r * CELL_LAT;
+    for (let c = 0; c < COLS; c++) {
+      const lng = lon0 + c * CELL_LON;
+      for (const geom of geometries) {
+        if (pointInPolygon(lng, lat, geom)) { mask[r * COLS + c] = 1; break; }
+      }
+    }
+  }
+  return mask;
 }
 
 function pointInPolygon(lon, lat, geometry) {
@@ -400,26 +1313,24 @@ function fmt(n) { return n.toLocaleString("pt-PT"); }
 
 const totalRange  = document.getElementById("totalRange");
 const totalVal    = document.getElementById("totalVal");
-const prepRange   = document.getElementById("prepRange");
-const prepVal     = document.getElementById("prepVal");
-const travelLabel = document.getElementById("travelLabel");
-const clearBtn    = document.getElementById("clearBtn");
-const hint        = document.getElementById("hint");
-
-function getTravelMins() {
-  return Math.max(1, parseInt(totalRange.value) - parseInt(prepRange.value));
-}
+const clearBtn = document.getElementById("clearBtn");
+const hint     = document.getElementById("hint");
 
 function updateLabels() {
   totalVal.textContent = totalRange.value + " min";
-  prepVal.textContent  = prepRange.value + " min";
-  travelLabel.textContent = "→ " + getTravelMins() + " min ride";
 }
 
-totalRange.addEventListener("input", updateLabels);
-prepRange.addEventListener("input", updateLabels);
+totalRange.addEventListener("input", () => { updateLabels(); drawSortidoCoverage(); });
 document.getElementById("incomeBtn").addEventListener("click", toggleIncomeLayer);
 document.getElementById("airbnbBtn").addEventListener("click", toggleAirbnbLayer);
+document.getElementById("rentBtn").addEventListener("click", toggleRentLayer);
+document.getElementById("uncapturedBtn").addEventListener("click", toggleUncapturedLayer);
+document.getElementById("loyalBtn").addEventListener("click", toggleLoyalLayer);
+document.getElementById("picoZonaBtn").addEventListener("click", togglePicoZonaLayer);
+document.getElementById("zonasMortasBtn").addEventListener("click", toggleZonasMortasLayer);
+document.getElementById("ticketZonaBtn").addEventListener("click", toggleTicketZonaLayer);
+document.getElementById("diaSemanaBtn").addEventListener("click", toggleDiaSemanaLayer);
+document.getElementById("tendenciaBtn").addEventListener("click", toggleTendenciaPanel);
 document.getElementById("competitorsBtn").addEventListener("click", toggleCompetitors);
 
 // --- Competitors layer (Google Places) ---
@@ -496,13 +1407,212 @@ async function toggleCompetitors() {
   }
 }
 
+// --- Supermarkets layer (OSM Overpass) ---
+let superOn = false;
+let superEntries = []; // {marker, name, color}
+let superLoaded = false;
+let activeBrand = "all";
+
+async function loadSupermercados() {
+  if (superLoaded) return;
+  hint.textContent = "Loading supermarkets…";
+  const data = await fetch("competitors_supermarkets.json").then(r => r.json());
+  const counts = {}, colorMap = {};
+  for (const s of data) {
+    counts[s.name] = (counts[s.name] || 0) + 1;
+    colorMap[s.name] = s.color;
+  }
+
+  for (const s of data) {
+    const icon = L.divIcon({
+      className: "",
+      html: `<div style="width:10px;height:10px;border-radius:50%;background:${s.color};border:1.5px solid rgba(0,0,0,0.25);box-shadow:0 1px 3px rgba(0,0,0,0.35)"></div>`,
+      iconSize: [10, 10],
+      iconAnchor: [5, 5],
+    });
+    const m = L.marker([s.lat, s.lon], { icon })
+      .bindPopup(`<b style="color:${s.color}">${s.name}</b><br><span style="font-size:11px;color:#666">${s.label}</span>`);
+    superEntries.push({ marker: m, name: s.name, color: s.color });
+  }
+
+  // Build brand sub-bar buttons
+  const bar = document.getElementById("superBar");
+  const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  for (const [name, n] of sorted) {
+    const btn = document.createElement("button");
+    btn.className = "sbrand";
+    btn.dataset.brand = name;
+    btn.innerHTML = `<span class="sdot" style="background:${colorMap[name]}"></span>${name} <span style="opacity:.55;font-size:10px">${n}</span>`;
+    btn.addEventListener("click", () => applySuperFilter(name));
+    bar.appendChild(btn);
+  }
+
+  superLoaded = true;
+  hint.textContent = `${superEntries.length} supermarkets loaded`;
+}
+
+function applySuperFilter(brand) {
+  activeBrand = brand;
+  document.querySelectorAll("#superBar .sbrand").forEach(b => {
+    b.classList.toggle("active", b.dataset.brand === brand);
+  });
+  for (const { marker, name } of superEntries) {
+    if (brand === "all" || name === brand) {
+      marker.addTo(map);
+    } else {
+      map.removeLayer(marker);
+    }
+  }
+}
+
+function toggleSupermercados() {
+  const btn = document.getElementById("supermercadosBtn");
+  const bar = document.getElementById("superBar");
+  if (superOn) {
+    superEntries.forEach(({ marker }) => map.removeLayer(marker));
+    superOn = false;
+    btn.classList.remove("active");
+    bar.classList.remove("visible");
+  } else {
+    loadSupermercados().then(() => {
+      activeBrand = "all";
+      document.querySelectorAll("#superBar .sbrand").forEach(b => {
+        b.classList.toggle("active", b.dataset.brand === "all");
+      });
+      superEntries.forEach(({ marker }) => marker.addTo(map));
+      superOn = true;
+      btn.classList.add("active");
+      bar.classList.add("visible");
+    });
+  }
+}
+
+document.getElementById("supermercadosBtn").addEventListener("click", toggleSupermercados);
+document.querySelector("#superBar .sbrand[data-brand='all']").addEventListener("click", () => applySuperFilter("all"));
+
+// --- Dark stores layer (Glovo Market, Bolt Market, Getir) ---
+let darkOn = false;
+let darkEntries = [];
+let darkLoaded = false;
+let activeDark = "all";
+let darkStoresRaw = [];
+fetch("darkstores.json").then(r => r.json()).then(d => { darkStoresRaw = d; }).catch(() => {});
+
+async function loadDarkStores() {
+  if (darkLoaded) return;
+  hint.textContent = "Loading dark stores…";
+  const data = await fetch("darkstores.json").then(r => r.json());
+  const counts = {}, colorMap = {};
+  for (const s of data) {
+    counts[s.name] = (counts[s.name] || 0) + 1;
+    colorMap[s.name] = s.color;
+  }
+
+  for (const s of data) {
+    const icon = L.divIcon({
+      className: "",
+      html: `<div style="width:13px;height:13px;border-radius:3px;background:${s.color};border:2px solid rgba(0,0,0,0.3);box-shadow:0 1px 4px rgba(0,0,0,0.4)"></div>`,
+      iconSize: [13, 13],
+      iconAnchor: [6, 6],
+    });
+    const m = L.marker([s.lat, s.lon], { icon })
+      .bindPopup(`<b style="color:${s.color}">${s.name}</b><br><span style="font-size:11px;color:#666">${s.label}</span>`);
+    darkEntries.push({ marker: m, name: s.name, color: s.color });
+  }
+
+  const bar = document.getElementById("darkBar");
+  const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  for (const [name, n] of sorted) {
+    const btn = document.createElement("button");
+    btn.className = "dbrand";
+    btn.dataset.brand = name;
+    btn.innerHTML = `<span class="ddot" style="background:${colorMap[name]}"></span>${name} <span style="opacity:.55;font-size:10px">${n}</span>`;
+    btn.addEventListener("click", () => applyDarkFilter(name));
+    bar.appendChild(btn);
+  }
+
+  darkLoaded = true;
+  hint.textContent = `${darkEntries.length} dark stores loaded`;
+}
+
+function applyDarkFilter(brand) {
+  activeDark = brand;
+  document.querySelectorAll("#darkBar .dbrand").forEach(b => {
+    b.classList.toggle("active", b.dataset.brand === brand);
+  });
+  for (const { marker, name } of darkEntries) {
+    if (brand === "all" || name === brand) {
+      marker.addTo(map);
+    } else {
+      map.removeLayer(marker);
+    }
+  }
+}
+
+function toggleDarkStores() {
+  const btn = document.getElementById("darkstoresBtn");
+  const bar = document.getElementById("darkBar");
+  if (darkOn) {
+    darkEntries.forEach(({ marker }) => map.removeLayer(marker));
+    darkOn = false;
+    btn.classList.remove("active");
+    bar.classList.remove("visible");
+  } else {
+    loadDarkStores().then(() => {
+      activeDark = "all";
+      document.querySelectorAll("#darkBar .dbrand").forEach(b => {
+        b.classList.toggle("active", b.dataset.brand === "all");
+      });
+      darkEntries.forEach(({ marker }) => marker.addTo(map));
+      darkOn = true;
+      btn.classList.add("active");
+      bar.classList.add("visible");
+    });
+  }
+}
+
+document.getElementById("darkstoresBtn").addEventListener("click", toggleDarkStores);
+document.querySelector("#darkBar .dbrand[data-brand='all']").addEventListener("click", () => applyDarkFilter("all"));
+
 // --- Existing Sortido store anchor ---
 const SORTIDO_LAT = 38.7255;
 const SORTIDO_LNG = -9.1480;
 
-async function drawSortidoAnchor() {
-  const travelMins = getTravelMins();
+// Uber Eats / Glovo use straight-line distance for delivery zones, not road routing.
+// Radius = 95th percentile of actual delivery distances from a given point.
+let sortidoCoverageLayer = null;
 
+function deliveryRadiusKm(fromLat, fromLng, slot = currentSlot, dow = currentDow) {
+  if (!ordersData || ordersData.length === 0) return 5;
+  const testSlot = SLOTS[slot]  || SLOTS.all;
+  const testDow  = DOW_GROUPS[dow] || DOW_GROUPS.all;
+  const maxMins  = parseInt(totalRange.value);
+  const timed = ordersData.filter(o => o[2] != null && testSlot(o[3]) && testDow(o[6]));
+  const pts   = timed.filter(o => o[2] <= maxMins);
+  const src   = pts.length >= 10 ? pts : timed.length >= 10 ? timed : ordersData;
+  if (src.length === 0) return 0.5;
+  const cosLat = Math.cos(fromLat * Math.PI / 180);
+  const dists = src.map(([lat, lng]) => {
+    const dy = (lat - fromLat) * 111.32;
+    const dx = (lng - fromLng) * 111.32 * cosLat;
+    return Math.sqrt(dx * dx + dy * dy);
+  }).sort((a, b) => a - b);
+  return dists[Math.floor(dists.length * 0.95)]; // P95 — max is always a geocoding outlier (15.79 km in <10 min)
+}
+
+// GeoJSON polygon approximating a circle — used for mask + stat computations.
+function circleGeoJSON(lat, lng, radiusKm) {
+  const R = 6371, pts = 64;
+  const coords = Array.from({ length: pts + 1 }, (_, i) => {
+    const a = (i * 2 * Math.PI) / pts;
+    const dlat = (radiusKm / R) * (180 / Math.PI);
+    const dlng = dlat / Math.cos(lat * Math.PI / 180);
+    return [lng + dlng * Math.sin(a), lat + dlat * Math.cos(a)];
+  });
+  return { type: "FeatureCollection", features: [{ type: "Feature", geometry: { type: "Polygon", coordinates: [coords] }, properties: {} }] };
+}
+
+function drawSortidoAnchor() {
   const anchorIcon = L.divIcon({
     className: "",
     html: `<div style="width:18px;height:18px;border-radius:50%;background:#111;border:3px solid white;box-shadow:0 1px 6px rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center">
@@ -511,115 +1621,984 @@ async function drawSortidoAnchor() {
     iconSize: [18, 18],
     iconAnchor: [9, 9],
   });
-
-  const marker = L.marker([SORTIDO_LAT, SORTIDO_LNG], { icon: anchorIcon })
+  L.marker([SORTIDO_LAT, SORTIDO_LNG], { icon: anchorIcon })
     .bindTooltip("Sortido (atual)", { permanent: true, direction: "right", className: "sortido-tooltip" })
     .addTo(map);
-
-  const { time: timeGeo, dist: distGeo } = await orsIsochrone(SORTIDO_LAT, SORTIDO_LNG, travelMins);
-  L.geoJSON(timeGeo, {
-    style: { color: "#ff6600", fillColor: "#ff6600", fillOpacity: 0.15, weight: 3, opacity: 1 },
-  }).addTo(map);
-  L.geoJSON(distGeo, {
-    style: { color: "#9333ea", fillColor: "none", fillOpacity: 0, weight: 3, opacity: 1, dashArray: "8 4" },
-  }).addTo(map);
 }
 
-drawSortidoAnchor().catch(e => console.error("Anchor failed:", e));
+const SLOT_LABELS = { all: 'Todos os horários', almoco: 'Almoço (12–15h)', tarde: 'Tarde (15–19h)', jantar: 'Jantar (19–23h)', late: 'Late night (23–2h)' };
+const DOW_LABELS  = { all: 'Todos os dias', fds: 'Fim de semana', sem: 'Semana', '0':'Dom','1':'Seg','2':'Ter','3':'Qua','4':'Qui','5':'Sex','6':'Sáb' };
 
-async function osrmSpokeTime(lat, lng, travelMins) {
-  const OSRM = "https://router.project-osrm.org/table/v1/driving";
-  const budget = travelMins * 60;
-  const ANGLES = 48, R = 6371000;
-  const DISTS = [400,800,1200,1700,2200,2800,3500,4500,6000];
-  const spokes = [];
-  for (let a = 0; a < ANGLES; a++) {
-    const angle = (a * 360 / ANGLES) * Math.PI / 180;
-    for (const d of DISTS) {
-      spokes.push({ a, d,
-        lat: lat + (d * Math.cos(angle)) / R * (180 / Math.PI),
-        lon: lng + (d * Math.sin(angle)) / R * (180 / Math.PI) / Math.cos(lat * Math.PI / 180)
-      });
+function drawSortidoCoverage() {
+  if (sortidoCoverageLayer) { map.removeLayer(sortidoCoverageLayer); sortidoCoverageLayer = null; }
+  if (!ordersData) return;
+  const r = deliveryRadiusKm(SORTIDO_LAT, SORTIDO_LNG);
+  const testSlot = SLOTS[currentSlot] || SLOTS.all;
+  const testDow  = DOW_GROUPS[currentDow] || DOW_GROUPS.all;
+  const n = ordersData.filter(o => testSlot(o[3]) && testDow(o[6])).length || ordersData.length;
+  const slotLabel = SLOT_LABELS[currentSlot] || currentSlot;
+  const dowLabel  = DOW_LABELS[currentDow]   || currentDow;
+
+  sortidoCoverageLayer = L.circle([SORTIDO_LAT, SORTIDO_LNG], {
+    radius: r * 1000,
+    color: "#ff6600", fillColor: "#ff6600", fillOpacity: 0.12, weight: 2.5, opacity: 0.9,
+  }).bindPopup(`
+    <div class="pop-popup">
+      <b style="color:#e85000">Zona de Entrega — Sortido</b><br>
+      <span style="color:#666;font-size:11px">${slotLabel} · ${dowLabel} · ≤${parseInt(totalRange.value)} min · ${r.toFixed(2)} km</span>
+      <hr style="margin:6px 0;border-color:#eee"/>
+      <div style="font-size:12px;line-height:1.65;color:#374151">
+        <b>Como é calculado:</b><br>
+        A Uber Eats define zonas por raio em <b>linha reta</b> (crow-flies).
+        Este círculo representa o raio máximo atingido pelas entregas reais
+        no filtro activo — a zona efectiva varia com hora, tráfego e
+        disponibilidade de estafetas.
+      </div>
+      <hr style="margin:6px 0;border-color:#eee"/>
+      <div style="font-size:11px;color:#94a3b8">${n} entregas no filtro activo</div>
+    </div>
+  `).addTo(map);
+  sortidoCoverageLayer.on("click", e => L.DomEvent.stopPropagation(e));
+}
+
+drawSortidoAnchor();
+
+
+// --- Deliveries (sized circles + KDE contour) + Timing choropleth ---
+let ordersData   = null;  // [lat, lng, mins, hour, is_al, order_value, dow]  from orders_geocoded.json
+let addrData     = null;  // [lat, lng, cnt, avg_mins, is_al, total_rev, avg_val]  built per filter
+let delivLayerOn  = false;
+let delivLayer    = null;
+let timingLayerOn = false;
+let timingLayer   = null;
+let currentSlot   = 'all';
+let currentType   = 'all';
+let currentDow    = 'all';
+
+const SLOTS = {
+  all:    () => true,
+  almoco: h => h >= 12 && h < 15,
+  tarde:  h => h >= 15 && h < 19,
+  jantar: h => h >= 19 && h < 23,
+  late:   h => h >= 23 || h < 2,
+};
+
+const DOW_GROUPS = {
+  all: () => true,
+  fds: d => d === 5 || d === 6,
+  sem: d => d >= 0 && d <= 4,
+  '0': d => d === 0, '1': d => d === 1, '2': d => d === 2,
+  '3': d => d === 3, '4': d => d === 4, '5': d => d === 5, '6': d => d === 6,
+};
+
+// [lat, lng, mins, hour, is_al, order_value, dow]
+function buildAddrData(slot, type, dow) {
+  if (!ordersData) return null;
+  const testSlot = SLOTS[slot] || SLOTS.all;
+  const testDow  = DOW_GROUPS[dow] || DOW_GROUPS.all;
+  const testType = type === 'al'  ? is_al => is_al === 1
+                 : type === 'res' ? is_al => is_al === 0
+                 : () => true;
+  const agg = {};
+  for (const order of ordersData) {
+    const [lat, lng, mins, hour, is_al, order_value, d_ow] = order;
+    if (!testSlot(hour) || !testType(is_al) || !testDow(d_ow)) continue;
+    const key = `${lat.toFixed(5)},${lng.toFixed(5)}`;
+    if (!agg[key]) agg[key] = { lat, lng, cnt: 0, mSum: 0, mCnt: 0, is_al, revSum: 0, revCnt: 0 };
+    agg[key].cnt++;
+    if (mins != null) { agg[key].mSum += mins; agg[key].mCnt++; }
+    if (order_value != null) { agg[key].revSum += order_value; agg[key].revCnt++; }
+  }
+  return Object.values(agg)
+    .map(v => [
+      v.lat, v.lng, v.cnt,
+      v.mCnt > 0 ? v.mSum / v.mCnt : null,
+      v.is_al,
+      v.revCnt > 0 ? v.revSum : null,
+      v.revCnt > 0 ? v.revSum / v.revCnt : null,
+    ])
+    .sort((a, b) => b[2] - a[2]);
+}
+
+// green → yellow → orange → red  (mins 10–45)
+function timingColorRgb(mins) {
+  const t = Math.max(0, Math.min(1, (mins - 10) / 35));
+  let r, g, b;
+  if (t < 0.33)      { const s = t/0.33;      r = Math.round(50+205*s); g = Math.round(200-50*s); b = 50; }
+  else if (t < 0.66) { const s = (t-0.33)/0.33; r = 255; g = Math.round(150-100*s); b = 0; }
+  else               { const s = (t-0.66)/0.34; r = 255; g = Math.round(50-50*s); b = 0; }
+  return [r, g, b];
+}
+
+let kdeGlobalMax  = null; // shared normalisation max — DelivLayer → SegundaKDELayer
+let kdeGlobalData = null; // full KDE object — used by findSecondLocation to exclude S1 zone
+
+// KDE computed in fixed geographic lat/lon space — shape is independent of zoom level.
+const GEO = {
+  lat0: 38.640, lat1: 38.830,
+  lon0: -9.320, lon1: -9.050,
+  ROWS: 100, COLS: 130,
+  SIGMA: 3.2  // grid cells (~300 m bandwidth)
+};
+
+function computeGeoKDE(points) {
+  if (!points || points.length < 10) return null;
+  const { lat0, lat1, lon0, lon1, ROWS, COLS, SIGMA } = GEO;
+  const grid = new Float32Array(ROWS * COLS);
+  const KR = Math.ceil(SIGMA * 3);
+  for (const [lat, lng] of points) {
+    const c0 = Math.round((lng - lon0) / (lon1 - lon0) * (COLS - 1));
+    const r0 = Math.round((lat1 - lat) / (lat1 - lat0) * (ROWS - 1));
+    for (let dr = -KR; dr <= KR; dr++) {
+      for (let dc = -KR; dc <= KR; dc++) {
+        const r = r0 + dr, c = c0 + dc;
+        if (r < 0 || r >= ROWS || c < 0 || c >= COLS) continue;
+        grid[r * COLS + c] += Math.exp(-(dr*dr + dc*dc) / (2*SIGMA*SIGMA));
+      }
     }
   }
-  const CHUNK = 90;
-  const durs = new Array(spokes.length).fill(Infinity);
-  for (let i = 0; i < spokes.length; i += CHUNK) {
-    const chunk = spokes.slice(i, i + CHUNK);
-    const coords = `${lng},${lat};` + chunk.map(p => `${p.lon},${p.lat}`).join(";");
-    const r = await fetch(`${OSRM}/${coords}?sources=0&annotations=duration`);
-    if (!r.ok) throw new Error(`OSRM ${r.status}`);
-    const row = (await r.json()).durations[0];
-    chunk.forEach((_, j) => { durs[i + j] = row[j + 1] ?? Infinity; });
-  }
-  const boundary = [];
-  for (let a = 0; a < ANGLES; a++) {
-    const pts = spokes.map((p, i) => ({ ...p, dur: durs[i] })).filter(p => p.a === a).sort((x, y) => x.d - y.d);
-    let best = pts[0];
-    for (const p of pts) { if (p.dur <= budget) best = p; else break; }
-    boundary.push([best.lon, best.lat]);
-  }
-  boundary.push(boundary[0]);
-  return { type: "FeatureCollection", features: [{ type: "Feature", geometry: { type: "Polygon", coordinates: [boundary] }, properties: {} }] };
+  let localMax = 1e-10;
+  for (let i = 0; i < grid.length; i++) if (grid[i] > localMax) localMax = grid[i];
+  return { grid, localMax };
 }
 
-async function osrmSpokeDist(lat, lng, distanceM) {
-  const ANGLES = 48, R = 6371000;
-  const TOLERANCE = 80; // metres
+// Render a pre-computed geographic KDE to canvas. Called on every zoom/pan — only projects to screen, never recomputes density.
+function drawGeoKDE(ctx, kdeData, map, threshold = 0.13,
+    fillRgba = "rgba(37,99,235,0.08)", strokeRgba = "rgba(37,99,235,0.85)", normMax = null) {
+  if (!kdeData) return;
+  const { grid, localMax } = kdeData;
+  const { lat0, lat1, lon0, lon1, ROWS, COLS } = GEO;
+  const scale = normMax && normMax > 0 ? normMax : localMax;
+  const norm = new Float32Array(ROWS * COLS);
+  for (let i = 0; i < grid.length; i++) norm[i] = grid[i] / scale;
+  const v = (r, c) => norm[r * COLS + c];
 
-  function spokePoint(angle, d) {
-    return [
-      lng + (d * Math.sin(angle)) / R * (180 / Math.PI) / Math.cos(lat * Math.PI / 180),
-      lat + (d * Math.cos(angle)) / R * (180 / Math.PI),
-    ];
+  // Precompute screen positions of all grid vertices once per draw call
+  const scx = new Float32Array(ROWS * COLS);
+  const scy = new Float32Array(ROWS * COLS);
+  for (let r = 0; r < ROWS; r++) {
+    const lat = lat1 - r / (ROWS - 1) * (lat1 - lat0);
+    for (let c = 0; c < COLS; c++) {
+      const lng = lon0 + c / (COLS - 1) * (lon1 - lon0);
+      const pt = map.latLngToContainerPoint([lat, lng]);
+      scx[r * COLS + c] = pt.x;
+      scy[r * COLS + c] = pt.y;
+    }
   }
 
-  async function roadDist(plon, plat) {
-    const r = await fetch(`https://router.project-osrm.org/route/v1/driving/${lng},${lat};${plon},${plat}?overview=false`);
-    if (!r.ok) return Infinity;
-    const d = await r.json();
-    return d.routes?.[0]?.distance ?? Infinity;
+  ctx.save();
+
+  // Fill cells above threshold
+  ctx.fillStyle = fillRgba;
+  for (let r = 0; r < ROWS - 1; r++) {
+    for (let c = 0; c < COLS - 1; c++) {
+      if (v(r, c) < threshold) continue;
+      const x0 = scx[r * COLS + c],         y0 = scy[r * COLS + c];
+      const x1 = scx[(r+1) * COLS + c + 1], y1 = scy[(r+1) * COLS + c + 1];
+      ctx.fillRect(Math.round(x0), Math.round(y0), Math.ceil(x1 - x0) + 1, Math.ceil(y1 - y0) + 1);
+    }
   }
 
-  const promises = [];
-  for (let a = 0; a < ANGLES; a++) {
-    const angle = (a * 360 / ANGLES) * Math.PI / 180;
-    promises.push((async () => {
-      let lo = 100, hi = 10000;
-      let best = spokePoint(angle, lo);
-      // binary search
-      for (let i = 0; i < 10; i++) {
-        const mid = (lo + hi) / 2;
-        const [plon, plat] = spokePoint(angle, mid);
-        const rd = await roadDist(plon, plat);
-        if (rd <= distanceM) { best = [plon, plat]; lo = mid; }
-        else hi = mid;
-        if (hi - lo < 50) break;
+  // Marching squares boundary
+  ctx.strokeStyle = strokeRgba;
+  ctx.lineWidth = 2;
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  for (let r = 0; r < ROWS - 1; r++) {
+    for (let c = 0; c < COLS - 1; c++) {
+      const v00=v(r,c), v01=v(r,c+1), v10=v(r+1,c), v11=v(r+1,c+1);
+      const x00=scx[r*COLS+c],       y00=scy[r*COLS+c];
+      const x01=scx[r*COLS+c+1],     y01=scy[r*COLS+c+1];
+      const x10=scx[(r+1)*COLS+c],   y10=scy[(r+1)*COLS+c];
+      const x11=scx[(r+1)*COLS+c+1], y11=scy[(r+1)*COLS+c+1];
+      const edges = [];
+      if ((v00>threshold) !== (v01>threshold)) {
+        const t=(threshold-v00)/(v01-v00);
+        edges.push([x00+t*(x01-x00), y00+t*(y01-y00)]);
       }
-      return best;
-    })());
+      if ((v01>threshold) !== (v11>threshold)) {
+        const t=(threshold-v01)/(v11-v01);
+        edges.push([x01+t*(x11-x01), y01+t*(y11-y01)]);
+      }
+      if ((v10>threshold) !== (v11>threshold)) {
+        const t=(threshold-v10)/(v11-v10);
+        edges.push([x10+t*(x11-x10), y10+t*(y11-y10)]);
+      }
+      if ((v00>threshold) !== (v10>threshold)) {
+        const t=(threshold-v00)/(v10-v00);
+        edges.push([x00+t*(x10-x00), y00+t*(y10-y00)]);
+      }
+      if (edges.length === 2) {
+        ctx.moveTo(edges[0][0], edges[0][1]);
+        ctx.lineTo(edges[1][0], edges[1][1]);
+      } else if (edges.length === 4) {
+        ctx.moveTo(edges[0][0], edges[0][1]); ctx.lineTo(edges[1][0], edges[1][1]);
+        ctx.moveTo(edges[2][0], edges[2][1]); ctx.lineTo(edges[3][0], edges[3][1]);
+      }
+    }
+  }
+  ctx.stroke();
+  ctx.restore();
+}
+
+const DelivLayer = L.Layer.extend({
+  onAdd(map) {
+    this._map = map;
+    this._canvas = document.createElement("canvas");
+    this._canvas.style.position = "absolute";
+    this._canvas.style.pointerEvents = "none";
+    map.getPane("deliveriesPane").appendChild(this._canvas);
+    map.on("moveend zoomend", this._draw, this);
+    this._draw();
+  },
+  onRemove(map) {
+    map.off("moveend zoomend", this._draw, this);
+    this._canvas.remove();
+  },
+  _draw() {
+    if (!addrData) return;
+    const map = this._map;
+    const { x: w, y: h } = map.getSize();
+    const canvas = this._canvas;
+    canvas.width = w; canvas.height = h;
+    L.DomUtil.setPosition(canvas, map.containerPointToLayerPoint([0, 0]));
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, w, h);
+
+    // 1. KDE contour — recompute only when filter changes, not on every zoom/pan
+    const kdeKey = `${currentSlot}|${currentDow}`;
+    if (this._kdeKey !== kdeKey || !this._kdeData) {
+      const testSlotKDE = SLOTS[currentSlot] || SLOTS.all;
+      const testDowKDE  = DOW_GROUPS[currentDow] || DOW_GROUPS.all;
+      const filtered = ordersData
+        ? ordersData.filter(o => testSlotKDE(o[3]) && testDowKDE(o[6]))
+        : addrData.map(([lat, lng]) => [lat, lng]);
+      this._kdeData = computeGeoKDE(filtered);
+      this._kdeKey  = kdeKey;
+      kdeGlobalMax  = this._kdeData ? this._kdeData.localMax : null;
+      kdeGlobalData = this._kdeData;
+      if (segundaKDELayer) segundaKDELayer._invalidateKDE();
+    }
+    drawGeoKDE(ctx, this._kdeData, map);
+    if (segundaKDELayer) segundaKDELayer._draw();
+
+    // 2. Sized circles per address
+    const zoom  = map.getZoom();
+    const scale = Math.max(0.5, (zoom - 10) * 0.5);
+    for (const [lat, lng, count, avgMins, is_al] of addrData) {
+      const { x, y } = map.latLngToContainerPoint([lat, lng]);
+      const r = Math.max(2, Math.sqrt(count) * 3.5 * scale);
+      if (x+r < 0 || y+r < 0 || x-r > w || y-r > h) continue;
+
+      const alpha = Math.min(0.85, 0.3 + count * 0.04);
+      let red, grn, blu;
+      if (is_al === 1) {
+        // AL: purple
+        [red, grn, blu] = [139, 92, 246];
+      } else {
+        // Residência: green→red by delivery time
+        [red, grn, blu] = avgMins != null ? timingColorRgb(avgMins) : [120,120,120];
+      }
+
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${red},${grn},${blu},${alpha.toFixed(2)})`;
+      ctx.fill();
+
+      if (count >= 10) {
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2);
+        ctx.strokeStyle = "rgba(255,255,255,0.9)"; ctx.lineWidth = 1.5; ctx.stroke();
+        if (zoom >= 13 && r > 8) {
+          ctx.fillStyle = "rgba(0,0,0,0.85)";
+          ctx.font = `bold ${Math.round(Math.min(r*0.9,13))}px sans-serif`;
+          ctx.textAlign = "center"; ctx.textBaseline = "middle";
+          ctx.fillText(count, x, y);
+        }
+      }
+    }
+  }
+});
+
+const TimingLayer = L.Layer.extend({
+  onAdd(map) {
+    this._map = map;
+    this._canvas = document.createElement("canvas");
+    this._canvas.style.position = "absolute";
+    this._canvas.style.pointerEvents = "none";
+    map.getPane("deliveriesPane").appendChild(this._canvas);
+    map.on("moveend zoomend", this._draw, this);
+    this._draw();
+  },
+  onRemove(map) {
+    map.off("moveend zoomend", this._draw, this);
+    this._canvas.remove();
+  },
+  _draw() {
+    if (!ordersData) return;
+    const map = this._map;
+    const { x: w, y: h } = map.getSize();
+    const canvas = this._canvas;
+    canvas.width = w; canvas.height = h;
+    L.DomUtil.setPosition(canvas, map.containerPointToLayerPoint([0, 0]));
+    const CELL = 0.003, grid = {};
+    for (const [lat, lng, mins] of ordersData) {
+      if (mins == null) continue;
+      const row = Math.floor(lat/CELL), col = Math.floor(lng/CELL);
+      const key = `${row},${col}`;
+      if (!grid[key]) grid[key] = { sum:0, cnt:0, lat:(row+0.5)*CELL, lng:(col+0.5)*CELL };
+      grid[key].sum += mins; grid[key].cnt++;
+    }
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, w, h);
+    for (const cell of Object.values(grid)) {
+      if (cell.cnt < 2) continue;
+      const avg = cell.sum / cell.cnt;
+      const [r,g,b] = timingColorRgb(avg);
+      const p1 = map.latLngToContainerPoint([cell.lat-CELL/2, cell.lng-CELL/2]);
+      const p2 = map.latLngToContainerPoint([cell.lat+CELL/2, cell.lng+CELL/2]);
+      const x = Math.min(p1.x,p2.x), y = Math.min(p1.y,p2.y);
+      const cw = Math.abs(p2.x-p1.x), ch = Math.abs(p2.y-p1.y);
+      if (x+cw < 0 || y+ch < 0 || x > w || y > h) continue;
+      ctx.fillStyle = `rgba(${r},${g},${b},0.72)`;
+      ctx.fillRect(Math.round(x), Math.round(y), Math.ceil(cw), Math.ceil(ch));
+      if (map.getZoom() >= 14 && cw > 20) {
+        ctx.fillStyle = "rgba(0,0,0,0.8)"; ctx.font = "bold 9px sans-serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        ctx.fillText(`${Math.round(avg)}m·${cell.cnt}`, Math.round(x+cw/2), Math.round(y+ch/2));
+      }
+    }
+  }
+});
+
+function toggleDelivLayer() {
+  const btn = document.getElementById("deliveriesBtn");
+  const leg = document.getElementById("legend3");
+  if (delivLayerOn) {
+    if (delivLayer) map.removeLayer(delivLayer);
+    delivLayerOn = false; btn.classList.remove("active");
+    leg.classList.remove("visible");
+  } else {
+    if (!delivLayer) delivLayer = new DelivLayer();
+    map.addLayer(delivLayer); delivLayerOn = true; btn.classList.add("active");
+    leg.classList.add("visible");
+  }
+}
+
+function toggleTimingLayer() {
+  const btn = document.getElementById("timingBtn");
+  const legend2 = document.getElementById("legend2");
+  if (timingLayerOn) {
+    if (timingLayer) map.removeLayer(timingLayer);
+    timingLayerOn = false; btn.classList.remove("active"); legend2.classList.remove("visible");
+  } else {
+    if (!timingLayer) timingLayer = new TimingLayer();
+    map.addLayer(timingLayer); timingLayerOn = true; btn.classList.add("active"); legend2.classList.add("visible");
+  }
+}
+
+fetch("orders_geocoded.json")
+  .then(r => r.json())
+  .then(d => {
+    ordersData = d;
+    addrData = buildAddrData(currentSlot, currentType, currentDow);
+    drawSortidoCoverage();
+    if (delivLayerOn && delivLayer) delivLayer._draw();
+    if (timingLayerOn && timingLayer) timingLayer._draw();
+    if (receitaLayerOn && receitaLayer) receitaLayer._draw();
+    if (coberturaLayerOn && coberturaLayer) coberturaLayer._draw();
+  })
+  .catch(() => {});
+
+document.getElementById("deliveriesBtn").addEventListener("click", toggleDelivLayer);
+document.getElementById("timingBtn").addEventListener("click", toggleTimingLayer);
+
+document.querySelectorAll("#slotBar .slot").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentSlot = btn.dataset.slot;
+    document.querySelectorAll("#slotBar .slot").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    addrData = buildAddrData(currentSlot, currentType, currentDow);
+    drawSortidoCoverage();
+    if (delivLayer) delivLayer._draw();
+    if (receitaLayerOn && receitaLayer) receitaLayer._draw();
+    if (coberturaLayerOn && coberturaLayer) coberturaLayer._draw();
+  });
+});
+
+document.querySelectorAll("#slotBar .atype").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentType = btn.dataset.type;
+    document.querySelectorAll("#slotBar .atype").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    addrData = buildAddrData(currentSlot, currentType, currentDow);
+    if (delivLayer) delivLayer._draw();
+    if (receitaLayerOn && receitaLayer) receitaLayer._draw();
+    if (coberturaLayerOn && coberturaLayer) coberturaLayer._draw();
+  });
+});
+
+document.querySelectorAll("#slotBar .dow").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentDow = btn.dataset.dow;
+    document.querySelectorAll("#slotBar .dow").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    addrData = buildAddrData(currentSlot, currentType, currentDow);
+    drawSortidoCoverage();
+    if (delivLayer) delivLayer._draw();
+    if (receitaLayerOn && receitaLayer) receitaLayer._draw();
+    if (coberturaLayerOn && coberturaLayer) coberturaLayer._draw();
+  });
+});
+
+// --- Population density layer ---
+let popGridCPE    = null;
+let popLayerOn    = false;
+let popLayer      = null;
+
+function popDensColor(pop) {
+  const t = Math.max(0, Math.min(1, pop / 2000));
+  const stops = [[240,249,232],[186,228,188],[123,204,196],[67,162,202],[8,104,172]];
+  const pos = t * (stops.length - 1);
+  const lo = Math.floor(pos), hi = Math.min(stops.length - 1, lo + 1);
+  const f = pos - lo;
+  const r = Math.round(stops[lo][0] + f*(stops[hi][0]-stops[lo][0]));
+  const g = Math.round(stops[lo][1] + f*(stops[hi][1]-stops[lo][1]));
+  const b = Math.round(stops[lo][2] + f*(stops[hi][2]-stops[lo][2]));
+  return `rgba(${r},${g},${b},0.65)`;
+}
+
+const PopLayer = L.Layer.extend({
+  onAdd(map) {
+    this._map = map;
+    const pane = map.getPane("incomePane");
+    this._canvas = document.createElement("canvas");
+    this._canvas.style.position = "absolute";
+    this._canvas.style.pointerEvents = "none";
+    pane.appendChild(this._canvas);
+    map.on("moveend zoomend", this._draw, this);
+    this._draw();
+  },
+  onRemove(map) {
+    map.off("moveend zoomend", this._draw, this);
+    this._canvas.remove();
+  },
+  _draw() {
+    if (!popGridCPE) return;
+    const map = this._map;
+    const size = map.getSize();
+    const canvas = this._canvas;
+    canvas.width = size.x; canvas.height = size.y;
+    L.DomUtil.setPosition(canvas, map.containerPointToLayerPoint([0, 0]));
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cols = popGridCPE.cols;
+    const li = cols.indexOf("lat"), loi = cols.indexOf("lon"), pi = cols.indexOf("pop");
+    const origin = map.latLngToContainerPoint([38.75, -9.18]);
+    const offset = map.latLngToContainerPoint([38.75 + 250/111320, -9.18]);
+    const pxPerCell = Math.max(2, Math.abs(offset.y - origin.y));
+    for (const row of popGridCPE.rows) {
+      const pt = map.latLngToContainerPoint([row[li], row[loi]]);
+      const x = pt.x - pxPerCell/2, y = pt.y - pxPerCell/2;
+      if (x+pxPerCell<0||y+pxPerCell<0||x>canvas.width||y>canvas.height) continue;
+      ctx.fillStyle = popDensColor(row[pi]);
+      ctx.fillRect(Math.round(x), Math.round(y), Math.ceil(pxPerCell), Math.ceil(pxPerCell));
+    }
+  }
+});
+
+function togglePopLayer() {
+  const btn = document.getElementById("popBtn");
+  const leg = document.getElementById("legend5");
+  if (popLayerOn) {
+    if (popLayer) map.removeLayer(popLayer);
+    popLayerOn = false; btn.classList.remove("active"); leg.classList.remove("visible");
+  } else {
+    if (!popLayer) popLayer = new PopLayer();
+    if (!popGridCPE) {
+      fetch("pop_grid_2025_cpe.json").then(r=>r.json()).then(d=>{
+        popGridCPE = d;
+        if (popLayerOn && popLayer) popLayer._draw();
+      });
+    }
+    map.addLayer(popLayer); popLayerOn = true; btn.classList.add("active"); leg.classList.add("visible");
+  }
+}
+document.getElementById("popBtn").addEventListener("click", togglePopLayer);
+
+// --- Revenue density layer ---
+let receitaLayerOn = false;
+let receitaLayer   = null;
+
+function revenueColor(rev) {
+  const t = Math.max(0, Math.min(1, rev / 400));
+  const stops = [[254,249,195],[253,230,138],[251,191,36],[245,158,11],[180,83,9]];
+  const pos = t * (stops.length - 1);
+  const lo = Math.floor(pos), hi = Math.min(stops.length-1, lo+1);
+  const f = pos - lo;
+  const r = Math.round(stops[lo][0]+f*(stops[hi][0]-stops[lo][0]));
+  const g = Math.round(stops[lo][1]+f*(stops[hi][1]-stops[lo][1]));
+  const b = Math.round(stops[lo][2]+f*(stops[hi][2]-stops[lo][2]));
+  return [r, g, b];
+}
+
+const ReceitaLayer = L.Layer.extend({
+  onAdd(map) {
+    this._map = map;
+    this._canvas = document.createElement("canvas");
+    this._canvas.style.cssText = "position:absolute;pointer-events:none";
+    map.getPane("deliveriesPane").appendChild(this._canvas);
+    map.on("moveend zoomend", this._draw, this);
+    this._draw();
+  },
+  onRemove(map) {
+    map.off("moveend zoomend", this._draw, this);
+    this._canvas.remove();
+  },
+  _draw() {
+    if (!ordersData) return;
+    const map = this._map;
+    const { x: w, y: h } = map.getSize();
+    const canvas = this._canvas;
+    canvas.width = w; canvas.height = h;
+    L.DomUtil.setPosition(canvas, map.containerPointToLayerPoint([0, 0]));
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, w, h);
+
+    const CELL = 0.003;
+    const grid = {};
+    for (const [lat, lng, , , , price] of ordersData) {
+      if (!price || price <= 0) continue;
+      const ck = `${Math.floor(lat/CELL)},${Math.floor(lng/CELL)}`;
+      if (!grid[ck]) grid[ck] = { lat: (Math.floor(lat/CELL)+0.5)*CELL, lng: (Math.floor(lng/CELL)+0.5)*CELL, rev: 0, cnt: 0 };
+      grid[ck].rev += price;
+      grid[ck].cnt++;
+    }
+
+    for (const { lat, lng, rev, cnt } of Object.values(grid)) {
+      if (cnt < 1) continue;
+      const [r,g,b] = revenueColor(rev);
+      const p1 = map.latLngToContainerPoint([lat - CELL/2, lng - CELL/2]);
+      const p2 = map.latLngToContainerPoint([lat + CELL/2, lng + CELL/2]);
+      const x = Math.min(p1.x,p2.x), y = Math.min(p1.y,p2.y);
+      const cw = Math.abs(p2.x-p1.x), ch = Math.abs(p2.y-p1.y);
+      if (x+cw<0||y+ch<0||x>w||y>h) continue;
+      ctx.fillStyle = `rgba(${r},${g},${b},0.82)`;
+      ctx.fillRect(Math.round(x), Math.round(y), Math.ceil(cw), Math.ceil(ch));
+      if (map.getZoom() >= 14 && cw > 22) {
+        ctx.fillStyle = "rgba(0,0,0,0.75)";
+        ctx.font = "bold 9px sans-serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "middle";
+        ctx.fillText(`€${Math.round(rev)}`, Math.round(x+cw/2), Math.round(y+ch/2));
+      }
+    }
+  }
+});
+
+function toggleReceitaLayer() {
+  const btn = document.getElementById("receitaBtn");
+  const leg = document.getElementById("legend6");
+  if (receitaLayerOn) {
+    if (receitaLayer) map.removeLayer(receitaLayer);
+    receitaLayerOn = false; btn.classList.remove("active"); leg.classList.remove("visible");
+  } else {
+    if (!receitaLayer) receitaLayer = new ReceitaLayer();
+    map.addLayer(receitaLayer); receitaLayerOn = true; btn.classList.add("active"); leg.classList.add("visible");
+  }
+}
+document.getElementById("receitaBtn").addEventListener("click", toggleReceitaLayer);
+
+// --- Coverage gaps layer ---
+let coberturaLayerOn = false;
+let coberturaLayer   = null;
+
+function distKm(lat, lng) {
+  const R = 6371;
+  const dlat = (lat - 38.7255) * Math.PI/180;
+  const dlon = (lng - (-9.1480)) * Math.PI/180;
+  const a = Math.sin(dlat/2)**2 + Math.cos(38.7255*Math.PI/180)*Math.cos(lat*Math.PI/180)*Math.sin(dlon/2)**2;
+  return R * 2 * Math.asin(Math.sqrt(a));
+}
+
+function coverageColor(km) {
+  if (km < 1)  return [34,197,94];
+  if (km < 2)  return [250,204,21];
+  if (km < 3)  return [249,115,22];
+  return [239,68,68];
+}
+
+const CoberturaLayer = L.Layer.extend({
+  onAdd(map) {
+    this._map = map;
+    this._canvas = document.createElement("canvas");
+    this._canvas.style.position = "absolute";
+    this._canvas.style.pointerEvents = "none";
+    map.getPane("deliveriesPane").appendChild(this._canvas);
+    map.on("moveend zoomend", this._draw, this);
+    this._draw();
+  },
+  onRemove(map) {
+    map.off("moveend zoomend", this._draw, this);
+    this._canvas.remove();
+  },
+  _draw() {
+    if (!addrData) return;
+    const map = this._map;
+    const { x: w, y: h } = map.getSize();
+    const canvas = this._canvas;
+    canvas.width = w; canvas.height = h;
+    L.DomUtil.setPosition(canvas, map.containerPointToLayerPoint([0, 0]));
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, w, h);
+    const zoom = map.getZoom();
+    const scale = Math.max(0.5, (zoom - 10) * 0.5);
+    for (const [lat, lng, cnt] of addrData) {
+      const { x, y } = map.latLngToContainerPoint([lat, lng]);
+      const r = Math.max(4, Math.sqrt(cnt) * 4 * scale);
+      if (x+r<0||y+r<0||x-r>w||y-r>h) continue;
+      const [red,grn,blu] = coverageColor(distKm(lat, lng));
+      ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(${red},${grn},${blu},0.75)`;
+      ctx.fill();
+    }
+  }
+});
+
+function toggleCoberturaLayer() {
+  const btn = document.getElementById("coberturaBtn");
+  const leg = document.getElementById("legend7");
+  if (coberturaLayerOn) {
+    if (coberturaLayer) map.removeLayer(coberturaLayer);
+    coberturaLayerOn = false; btn.classList.remove("active"); leg.classList.remove("visible");
+  } else {
+    if (!coberturaLayer) coberturaLayer = new CoberturaLayer();
+    map.addLayer(coberturaLayer); coberturaLayerOn = true; btn.classList.add("active"); leg.classList.add("visible");
+  }
+}
+document.getElementById("coberturaBtn").addEventListener("click", toggleCoberturaLayer);
+
+// --- Second location finder ---
+let segundaMarker  = null;
+let segundaIsoLayer = null;
+let segundaKDELayer = null;
+let s1IsoSegunda   = null;  // Store 1's isochrone shown during 2ª Loja analysis
+let segundaC2 = null;
+let segundaOn = false;
+
+const SegundaKDELayer = L.Layer.extend({
+  onAdd(map) {
+    this._map = map;
+    this._canvas = document.createElement("canvas");
+    this._canvas.style.position = "absolute";
+    this._canvas.style.pointerEvents = "none";
+    map.getPane("deliveriesPane").appendChild(this._canvas);
+    map.on("moveend zoomend", this._draw, this);
+    this._draw();
+  },
+  onRemove(map) {
+    map.off("moveend zoomend", this._draw, this);
+    this._canvas.remove();
+  },
+  _invalidateKDE() { this._kdeData = null; },
+  _draw() {
+    if (!ordersData || !segundaC2) return;
+    const map = this._map;
+    const { x: w, y: h } = map.getSize();
+    const canvas = this._canvas;
+    canvas.width = w; canvas.height = h;
+    L.DomUtil.setPosition(canvas, map.containerPointToLayerPoint([0, 0]));
+    const ctx = canvas.getContext("2d");
+    ctx.clearRect(0, 0, w, h);
+    if (!this._kdeData) {
+      const { lat: c2lat, lng: c2lng } = segundaC2;
+      const SLAT = 38.7255, SLNG = -9.1480;
+      const pts = ordersData.filter(([lat, lng]) => {
+        const d1 = (lat-SLAT)**2 + (lng-SLNG)**2;
+        const d2 = (lat-c2lat)**2 + (lng-c2lng)**2;
+        return d2 < d1;
+      });
+      this._kdeData = computeGeoKDE(pts);
+    }
+    drawGeoKDE(ctx, this._kdeData, map, 0.13, "rgba(124,58,237,0.09)", "rgba(124,58,237,0.85)", kdeGlobalMax);
+  }
+});
+
+function findSecondLocation(orders, s1Mask = null, darkStores = [], rentData = []) {
+  // Scoring = 65% dark-store proximity (proven quick-commerce demand in the area)
+  //         + 35% slow-order relief (existing S1 customers underserved, guaranteed revenue)
+  // Both components are normalised to [0,1] before weighting.
+  const SLAT = 38.7255, SLNG = -9.1480;
+  const { lat0, lat1, lon0, lon1, ROWS, COLS } = GEO;
+  const CELL_LAT = (lat1 - lat0) / (ROWS - 1);
+  const CELL_LON = (lon1 - lon0) / (COLS - 1);
+
+  // --- Component 1: slow-order relief (35%) ---
+  const minsArr = orders.map(o => o[2]).filter(m => m != null).sort((a, b) => a - b);
+  const TARGET  = minsArr.length ? minsArr[Math.floor(minsArr.length / 2)] : 25;
+  const MIN_DIST_SQ = (4.5 / 111) ** 2;
+
+  const slowScore = new Float32Array(ROWS * COLS);
+  const cellCnt  = new Int32Array(ROWS * COLS);
+
+  for (const [lat, lng, mins, , , val] of orders) {
+    if (mins == null) continue;
+    const excess = mins - TARGET;
+    if (excess <= 0) continue;
+    const oVal = val || 12;
+    const d1sq = (lat - SLAT) ** 2 + (lng - SLNG) ** 2;
+    if (d1sq === 0) continue;
+    const d1 = Math.sqrt(d1sq);
+    const r0 = Math.round((lat1 - lat) / CELL_LAT);
+    const c0 = Math.round((lng - lon0) / CELL_LON);
+    const rR = Math.ceil(d1 / CELL_LAT) + 1;
+    const cR = Math.ceil(d1 / CELL_LON) + 1;
+    for (let dr = -rR; dr <= rR; dr++) {
+      const r = r0 + dr;
+      if (r < 0 || r >= ROWS) continue;
+      const clat   = lat1 - r * CELL_LAT;
+      const dlatSq = (lat - clat) ** 2;
+      if (dlatSq >= d1sq) continue;
+      for (let dc = -cR; dc <= cR; dc++) {
+        const c = c0 + dc;
+        if (c < 0 || c >= COLS) continue;
+        const clng = lon0 + c * CELL_LON;
+        const d2sq = dlatSq + (lng - clng) ** 2;
+        if (d2sq < d1sq) {
+          const idx = r * COLS + c;
+          slowScore[idx] += oVal * excess * (1 - Math.sqrt(d2sq) / d1);
+          cellCnt[idx]++;
+        }
+      }
+    }
   }
 
-  const pts = await Promise.all(promises);
-  pts.push(pts[0]);
-  return { type: "FeatureCollection", features: [{ type: "Feature", geometry: { type: "Polygon", coordinates: [pts] }, properties: {} }] };
+  // --- Component 2: dark-store proximity (65%) ---
+  // Each dark store contributes a proximity bonus that peaks at the store location
+  // and falls to 0 at the delivery radius. Multiple dark stores accumulate.
+  const dsRadius = deliveryRadiusKm(SLAT, SLNG); // same platform delivery radius
+  const dsRadDeg = dsRadius / 111;
+  const darkScore = new Float32Array(ROWS * COLS);
+
+  for (const ds of darkStores) {
+    const dr0 = Math.round((lat1 - ds.lat) / CELL_LAT);
+    const dc0 = Math.round((ds.lon - lon0) / CELL_LON);
+    const rR  = Math.ceil(dsRadDeg / CELL_LAT) + 1;
+    const cR  = Math.ceil(dsRadDeg / CELL_LON) + 1;
+    for (let dr = -rR; dr <= rR; dr++) {
+      const r = dr0 + dr;
+      if (r < 0 || r >= ROWS) continue;
+      const clat = lat1 - r * CELL_LAT;
+      for (let dc = -cR; dc <= cR; dc++) {
+        const c = dc0 + dc;
+        if (c < 0 || c >= COLS) continue;
+        const clng = lon0 + c * CELL_LON;
+        const dLat = (clat - ds.lat) * 111.32;
+        const dLng = (clng - ds.lon) * 111.32 * Math.cos(clat * Math.PI / 180);
+        const dist = Math.sqrt(dLat * dLat + dLng * dLng);
+        if (dist < dsRadius) {
+          darkScore[r * COLS + c] += 1 - dist / dsRadius;
+        }
+      }
+    }
+  }
+
+  // --- Component 3: rent affordability per cell (inverted — cheaper = better) ---
+  // For each cell find the nearest parish with rent data; normalise inversely.
+  const rentScore = new Float32Array(ROWS * COLS);
+  const localRents = rentData.filter(d => d.lat && d.lon);
+  if (localRents.length > 0) {
+    for (let r = 0; r < ROWS; r++) {
+      const clat = lat1 - r * CELL_LAT;
+      for (let c = 0; c < COLS; c++) {
+        const clng = lon0 + c * CELL_LON;
+        let minDist = Infinity, nearestRent = null;
+        for (const d of localRents) {
+          const dd = (clat - d.lat) ** 2 + (clng - d.lon) ** 2;
+          if (dd < minDist) { minDist = dd; nearestRent = d.median_eur_m2; }
+        }
+        rentScore[r * COLS + c] = nearestRent || 15;
+      }
+    }
+  }
+  const rentMin = localRents.length ? Math.min(...localRents.map(d => d.median_eur_m2)) : 1;
+  const rentMax = localRents.length ? Math.max(...localRents.map(d => d.median_eur_m2)) : 1;
+  const rentRange = rentMax - rentMin || 1;
+
+  // Normalise slow + dark to [0,1]; rent is already in €/m² (inverted below)
+  let slowMax = 0, darkMax = 0;
+  for (let i = 0; i < ROWS * COLS; i++) {
+    if (slowScore[i] > slowMax) slowMax = slowScore[i];
+    if (darkScore[i] > darkMax) darkMax = darkScore[i];
+  }
+  const slowNorm = slowMax > 0 ? 1 / slowMax : 0;
+  const darkNorm = darkMax > 0 ? 1 / darkMax : 0;
+
+  // Weights: 50% dark proximity, 30% slow relief, 20% rent affordability
+  let bestIdx = -1, bestScore = -Infinity;
+  for (let r = 0; r < ROWS; r++) {
+    const clat = lat1 - r * CELL_LAT;
+    for (let c = 0; c < COLS; c++) {
+      const idx = r * COLS + c;
+      if (cellCnt[idx] < 3) continue;
+      const clng   = lon0 + c * CELL_LON;
+      const distSq = (clat - SLAT) ** 2 + (clng - SLNG) ** 2;
+      if (distSq < MIN_DIST_SQ) continue;
+      if (s1Mask && s1Mask[idx]) continue;
+      const affordability = 1 - (rentScore[idx] - rentMin) / rentRange; // 1=cheap, 0=expensive
+      const combined = 0.50 * darkScore[idx] * darkNorm
+                     + 0.30 * slowScore[idx] * slowNorm
+                     + 0.20 * affordability;
+      if (combined > bestScore) { bestScore = combined; bestIdx = idx; }
+    }
+  }
+
+  if (bestIdx < 0) return null;
+
+  const br    = Math.floor(bestIdx / COLS);
+  const bc    = bestIdx % COLS;
+  const c2lat = lat1 - br * CELL_LAT;
+  const c2lng = lon0 + bc * CELL_LON;
+
+  // Stats from orders assigned to this location (Voronoi partition)
+  const assigned = orders.filter(([lat, lng]) => {
+    const d1sq = (lat - SLAT)  ** 2 + (lng - SLNG)  ** 2;
+    const d2sq = (lat - c2lat) ** 2 + (lng - c2lng) ** 2;
+    return d2sq < d1sq;
+  });
+  const pct = Math.round(assigned.length / orders.length * 100);
+  const rev = assigned.reduce((s, o) => s + (o[5] || 0), 0);
+
+  // Loyalty: addresses with 2+ orders in the assigned set
+  const addrCnt = {};
+  for (const [lat, lng] of assigned) {
+    const key = `${lat.toFixed(3)},${lng.toFixed(3)}`;
+    addrCnt[key] = (addrCnt[key] || 0) + 1;
+  }
+  const loyalOrders = assigned.filter(([lat, lng]) => addrCnt[`${lat.toFixed(3)},${lng.toFixed(3)}`] > 1);
+  const pctLoyal = assigned.length ? Math.round(loyalOrders.length / assigned.length * 100) : 0;
+
+  // AL vs Residência stability
+  const alOrders  = assigned.filter(o => o[4] === 1);
+  const pctAL     = assigned.length ? Math.round(alOrders.length / assigned.length * 100) : 0;
+  const pctRes    = 100 - pctAL;
+
+  // Avg ticket
+  const ticketed   = assigned.filter(o => o[5] > 0);
+  const avgTicket  = ticketed.length ? Math.round(ticketed.reduce((s, o) => s + o[5], 0) / ticketed.length) : null;
+
+  const withMins = assigned.filter(o => o[2] != null);
+  let avgMinsNow = null, timeSaved = null;
+  if (withMins.length) {
+    avgMinsNow = withMins.reduce((s, o) => s + o[2], 0) / withMins.length;
+    const ratioSum = withMins.reduce((s, [lat, lng]) => {
+      const d1 = Math.sqrt((lat - SLAT)  ** 2 + (lng - SLNG)  ** 2);
+      const d2 = Math.sqrt((lat - c2lat) ** 2 + (lng - c2lng) ** 2);
+      return s + (d1 > 0 ? d2 / d1 : 1);
+    }, 0);
+    const avgMinsNew = avgMinsNow * (ratioSum / withMins.length);
+    timeSaved  = Math.round(avgMinsNow - avgMinsNew);
+    avgMinsNow = Math.round(avgMinsNow);
+  }
+
+  const distKm = Math.round(Math.sqrt((c2lat - SLAT) ** 2 + (c2lng - SLNG) ** 2) * 111);
+  return { lat: c2lat, lng: c2lng, pct, cnt: assigned.length, rev: Math.round(rev),
+           pctLoyal, pctAL, pctRes, avgTicket, distKm, avgMinsNow, timeSaved, target: Math.round(TARGET) };
 }
 
-async function orsIsochrone(lat, lng, travelMins) {
-  const GEO_KEY = "e59009f17fe243c5a2793450af18aa16";
-  const time = await osrmSpokeTime(lat, lng, travelMins);
-  const dist = await osrmSpokeDist(lat, lng, 3000);
+async function toggleSegundaLoja() {
+  const btn = document.getElementById("segundaBtn");
+  const info = document.getElementById("segundaInfo");
+  if (segundaOn) {
+    if (segundaMarker)  { map.removeLayer(segundaMarker);  segundaMarker=null; }
+    if (segundaIsoLayer){ map.removeLayer(segundaIsoLayer); segundaIsoLayer=null; }
+    if (segundaKDELayer){ map.removeLayer(segundaKDELayer); segundaKDELayer=null; }
+    if (s1IsoSegunda)   { map.removeLayer(s1IsoSegunda);   s1IsoSegunda=null; }
+    segundaC2 = null;
+    info.style.display = "none";
+    segundaOn=false; btn.classList.remove("active");
+    return;
+  }
+  if (!ordersData) { hint.textContent="Activa 'Entregas' primeiro para carregar os dados."; return; }
 
-  return { time, dist };
+  // Step 1: Build Store 1's straight-line delivery zone (same method as Uber Eats / Glovo).
+  hint.textContent = "A calcular cobertura da loja actual…";
+  const SLAT = 38.7255, SLNG = -9.1480;
+  const s1Radius = deliveryRadiusKm(SLAT, SLNG);
+  const s1CircleGeo = circleGeoJSON(SLAT, SLNG, s1Radius);
+  s1IsoSegunda = L.circle([SLAT, SLNG], {
+    radius: s1Radius * 1000,
+    color: '#2563eb', fillColor: '#2563eb', fillOpacity: 0.06, weight: 2.5, opacity: 0.75, dashArray: '7 4'
+  }).addTo(map);
+  const s1Mask = buildIsoMask(s1CircleGeo);
+
+  // Step 2: Find the optimal second location outside S1's zone
+  const result = findSecondLocation(ordersData, s1Mask, darkStoresRaw, rentData);
+  if (!result) { hint.textContent = "Dados insuficientes para calcular 2ª localização."; return; }
+  const { lat, lng, pct, rev, distKm, cnt, avgMinsNow, timeSaved, target, pctLoyal, pctAL, pctRes, avgTicket } = result;
+  segundaC2 = { lat, lng };
+
+  // KDE contour for the orders assigned to this location
+  segundaKDELayer = new SegundaKDELayer();
+  map.addLayer(segundaKDELayer);
+
+  // Marker
+  const icon = L.divIcon({
+    className:"",
+    html:`<div style="position:relative;width:24px;height:24px"><div style="position:absolute;inset:0;border-radius:50%;background:#7c3aed;border:3px solid white;box-shadow:0 0 12px rgba(124,58,237,0.6)"></div><div class="pulse-ring"></div></div>`,
+    iconSize:[24,24], iconAnchor:[12,12],
+  });
+  segundaMarker = L.marker([lat,lng],{icon})
+    .bindPopup(`<b style="color:#7c3aed">2ª Loja — candidato óptimo</b><br><span style="font-size:11px;color:#666">${lat.toFixed(5)}, ${lng.toFixed(5)}</span><br><b>${pct}%</b> das ordens · <b>€${rev.toLocaleString('pt-PT')}</b> receita · <b>${distKm} km</b> da loja actual`)
+    .addTo(map).openPopup();
+
+  // Populate sidebar panel
+  document.getElementById("segundaCoords").textContent = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+  document.getElementById("segundaStats").innerHTML = `
+    <div style="display:flex;flex-direction:column;gap:4px;font-size:12px">
+      <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Ordens captadas</span><span style="font-weight:700;color:#7c3aed">${pct}% (${cnt.toLocaleString('pt-PT')})</span></div>
+      <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Receita estimada</span><span style="font-weight:700">€${rev.toLocaleString('pt-PT')}</span></div>
+      ${avgTicket != null ? `<div style="display:flex;justify-content:space-between"><span style="color:#64748b">Ticket médio</span><span style="font-weight:700">€${avgTicket}</span></div>` : ''}
+      ${target != null ? `<div style="display:flex;justify-content:space-between"><span style="color:#64748b">Limiar de subserviço</span><span style="font-weight:700">&gt;${target} min</span></div>` : ''}
+      ${avgMinsNow != null ? `<div style="display:flex;justify-content:space-between"><span style="color:#64748b">Tempo médio actual</span><span style="font-weight:700">${avgMinsNow} min</span></div>` : ''}
+      ${timeSaved != null ? `<div style="display:flex;justify-content:space-between"><span style="color:#64748b">Redução estimada</span><span style="font-weight:700;color:#059669">−${timeSaved} min</span></div>` : ''}
+      <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Distância à loja actual</span><span style="font-weight:700">~${distKm} km</span></div>
+      <div style="margin-top:4px;padding-top:4px;border-top:1px solid #e2e8f0;display:flex;flex-direction:column;gap:3px">
+        <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1px">Perfil de clientes</div>
+        <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Clientes fiéis (2+ ordens)</span><span style="font-weight:700;color:${pctLoyal >= 30 ? '#059669' : '#64748b'}">${pctLoyal}%</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Residência / AL</span><span style="font-weight:700">${pctRes}% / ${pctAL}%</span></div>
+      </div>
+    </div>`;
+  info.style.display = "block";
+
+  // Isochrone
+  const s2Radius = deliveryRadiusKm(SLAT, SLNG); // same platform radius as S1
+  segundaIsoLayer = L.circle([lat, lng], {
+    radius: s2Radius * 1000,
+    color: '#7c3aed', fillColor: '#7c3aed', fillOpacity: 0.12, weight: 2.5, opacity: 0.85,
+  }).addTo(map);
+
+  const stats = sumPopulation(circleGeoJSON(lat, lng, s2Radius));
+  if (stats) {
+    const isoDiv = document.getElementById("segundaIsoStats");
+    isoDiv.style.display = "block";
+    isoDiv.innerHTML = `
+      <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Área de influência (${s2Radius.toFixed(1)} km raio)</div>
+      <div style="display:flex;flex-direction:column;gap:3px;font-size:11px">
+        <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Residentes</span><span style="font-weight:600">${fmt(stats.pop)}</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Rendimento médio</span><span style="font-weight:600">${fmt(Math.round(stats.spendPop/stats.pop*12316))} €/ano</span></div>
+        <div style="display:flex;justify-content:space-between"><span style="color:#64748b">25–64 anos</span><span style="font-weight:600">${fmt(stats.age2564)}</span></div>
+      </div>`;
+  }
+  hint.textContent = `2ª Loja: ${pct}% das ordens · €${rev.toLocaleString('pt-PT')} receita${timeSaved != null ? ` · −${timeSaved} min entrega` : ''}`;
+
+  segundaOn=true; btn.classList.add("active");
 }
+document.getElementById("segundaBtn").addEventListener("click", toggleSegundaLoja);
 
 const placed = [];
 
 map.on("click", async (e) => {
   const { lat, lng } = e.latlng;
-  const travelMins = getTravelMins();
   const totalMins  = parseInt(totalRange.value);
-  const prepMins   = parseInt(prepRange.value);
   const color = COLORS[colorIdx % COLORS.length];
   colorIdx++;
 
@@ -631,54 +2610,32 @@ map.on("click", async (e) => {
   });
 
   const marker = L.marker([lat, lng], { icon }).addTo(map);
-  hint.textContent = "Fetching isochrone…";
+  hint.textContent = "A calcular zona de entrega…";
 
   try {
-    const { time: timeGeo, dist: distGeo } = await orsIsochrone(lat, lng, travelMins);
+    const radius = deliveryRadiusKm(SORTIDO_LAT, SORTIDO_LNG);
+    const circleGeo = circleGeoJSON(lat, lng, radius);
+    const isoLayer = L.circle([lat, lng], {
+      radius: radius * 1000,
+      color, fillColor: color, fillOpacity: 0.15, weight: 2, opacity: 0.8,
+    }).addTo(map);
 
-    const isoLayer = L.layerGroup([
-      L.geoJSON(timeGeo, {
-        style: { color, fillColor: color, fillOpacity: 0.15, weight: 2, opacity: 0.8 },
-      }),
-      L.geoJSON(distGeo, {
-        style: { color, fillColor: "none", fillOpacity: 0, weight: 2, opacity: 0.6, dashArray: "6 4" },
-      }),
-    ]).addTo(map);
-
-    hint.textContent = "Counting population…";
-    const statsTime = sumPopulation(timeGeo);
-    const statsDist = sumPopulation(distGeo);
-    const airbnbTime = countAirbnb(timeGeo);
-    const airbnbDist = countAirbnb(distGeo);
-    const compTime = countCompetitors(timeGeo);
-    const compDist = countCompetitors(distGeo);
-
-    function statsRows(s, ab, comp) {
-      if (!s) return "";
-      return `
-        <div class="row"><span>Residents</span><span>${fmt(s.pop)}</span></div>
-        <div class="row"><span>Median income</span><span>${fmt(Math.round(s.spendPop / s.pop * 12316))} €/yr</span></div>
-        <div class="row"><span>Age 15–24</span><span>${fmt(s.age1524)}</span></div>
-        <div class="row"><span>Age 25–64</span><span>${fmt(s.age2564)}</span></div>
-        <div class="row"><span>Rented homes</span><span>${fmt(s.rented)}</span></div>
-        ${ab !== null ? `<div class="row"><span>Airbnb listings</span><span>${fmt(ab)}</span></div>` : ""}
-        ${comp !== null ? `<div class="row"><span>Competitors</span><span>${fmt(comp)}</span></div>` : ""}`;
-    }
+    hint.textContent = "A contar população…";
+    const stats = sumPopulation(circleGeo);
+    const airbnbCount = countAirbnb(circleGeo);
+    const compCount = countCompetitors(circleGeo);
 
     let popHtml = "";
-    if (statsTime || statsDist) {
+    if (stats) {
       popHtml = `
         <hr style="margin:6px 0;border-color:#eee"/>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 12px">
-          <div>
-            <div style="font-size:11px;font-weight:700;color:#2563eb;margin-bottom:2px">● ${travelMins} min ride</div>
-            ${statsRows(statsTime, airbnbTime, compTime)}
-          </div>
-          <div>
-            <div style="font-size:11px;font-weight:700;color:#6b7280;margin-bottom:2px">╌ 3 km road</div>
-            ${statsRows(statsDist, airbnbDist, compDist)}
-          </div>
-        </div>`;
+        <div class="row"><span>Residents</span><span>${fmt(stats.pop)}</span></div>
+        <div class="row"><span>Median income</span><span>${fmt(Math.round(stats.spendPop / stats.pop * 12316))} €/yr</span></div>
+        <div class="row"><span>Age 15–24</span><span>${fmt(stats.age1524)}</span></div>
+        <div class="row"><span>Age 25–64</span><span>${fmt(stats.age2564)}</span></div>
+        <div class="row"><span>Rented homes</span><span>${fmt(stats.rented)}</span></div>
+        ${airbnbCount !== null ? `<div class="row"><span>Airbnb listings</span><span>${fmt(airbnbCount)}</span></div>` : ""}
+        ${compCount !== null ? `<div class="row"><span>Competitors</span><span>${fmt(compCount)}</span></div>` : ""}`;
     }
 
     const delta = 0.004; // ~450m bounding box
@@ -691,8 +2648,8 @@ map.on("click", async (e) => {
 
     marker.bindPopup(`
       <div class="pop-popup">
-        <b>${totalMins} min delivery · ${prepMins} min prep · ${travelMins} min ride</b><br>
-        <span style="color:#666;font-size:11px">${lat.toFixed(4)}, ${lng.toFixed(4)} · dashed = 3 km road</span>
+        <b>${radius.toFixed(1)} km raio · ${totalMins} min entrega total</b><br>
+        <span style="color:#666;font-size:11px">${lat.toFixed(4)}, ${lng.toFixed(4)}</span>
         ${popHtml}
         <hr style="margin:6px 0;border-color:#eee"/>
         <a href="${imoUrl}" target="_blank" style="display:block;text-align:center;background:#e8520a;color:white;border-radius:4px;padding:5px 0;font-weight:600;font-size:12px;text-decoration:none;">
@@ -718,6 +2675,75 @@ clearBtn.addEventListener("click", () => {
   placed.length = 0;
   colorIdx = 0;
   hint.textContent = "Click anywhere on the map to place a marker and draw its reach";
+  if (superOn) {
+    superEntries.forEach(({ marker }) => map.removeLayer(marker));
+    superOn = false;
+    document.getElementById("supermercadosBtn").classList.remove("active");
+    document.getElementById("superBar").classList.remove("visible");
+  }
+  if (darkOn) {
+    darkEntries.forEach(({ marker }) => map.removeLayer(marker));
+    darkOn = false;
+    document.getElementById("darkstoresBtn").classList.remove("active");
+    document.getElementById("darkBar").classList.remove("visible");
+  }
+  if (receitaLayerOn) {
+    if (receitaLayer) map.removeLayer(receitaLayer);
+    receitaLayerOn = false;
+    document.getElementById("receitaBtn").classList.remove("active");
+    document.getElementById("legend6").classList.remove("visible");
+  }
+  if (coberturaLayerOn) {
+    if (coberturaLayer) map.removeLayer(coberturaLayer);
+    coberturaLayerOn = false;
+    document.getElementById("coberturaBtn").classList.remove("active");
+    document.getElementById("legend7").classList.remove("visible");
+  }
+  if (segundaOn) {
+    if (segundaMarker){map.removeLayer(segundaMarker);segundaMarker=null;}
+    if (segundaIsoLayer){map.removeLayer(segundaIsoLayer);segundaIsoLayer=null;}
+    if (segundaKDELayer){map.removeLayer(segundaKDELayer);segundaKDELayer=null;}
+    segundaC2 = null;
+    segundaOn = false;
+    document.getElementById("segundaBtn").classList.remove("active");
+    document.getElementById("segundaInfo").style.display = "none";
+  }
+  if (loyalOn) {
+    if (loyalLayer) map.removeLayer(loyalLayer);
+    loyalLayer = null; loyalOn = false;
+    document.getElementById("loyalBtn").classList.remove("active");
+    document.getElementById("legendLoyal").classList.remove("visible");
+  }
+  if (uncapturedLayerOn) {
+    if (uncapturedLayer) map.removeLayer(uncapturedLayer);
+    uncapturedLayerOn = false;
+    document.getElementById("uncapturedBtn").classList.remove("active");
+    document.getElementById("legendUncaptured").classList.remove("visible");
+  }
+  if (picoZonaOn) {
+    if (picoZonaLayerObj) map.removeLayer(picoZonaLayerObj);
+    picoZonaLayerObj = null; picoZonaOn = false;
+    document.getElementById("picoZonaBtn").classList.remove("active");
+    document.getElementById("legendPicoZona").classList.remove("visible");
+  }
+  if (zonasMortasOn) {
+    if (zonasMortasLayerObj) map.removeLayer(zonasMortasLayerObj);
+    zonasMortasLayerObj = null; zonasMortasOn = false;
+    document.getElementById("zonasMortasBtn").classList.remove("active");
+    document.getElementById("legendZonasMortas").classList.remove("visible");
+  }
+  if (ticketZonaOn) {
+    if (ticketZonaLayerObj) map.removeLayer(ticketZonaLayerObj);
+    ticketZonaLayerObj = null; ticketZonaOn = false;
+    document.getElementById("ticketZonaBtn").classList.remove("active");
+    document.getElementById("legendTicketZona").classList.remove("visible");
+  }
+  if (diaSemanaOn) {
+    if (diaSemanaLayerObj) map.removeLayer(diaSemanaLayerObj);
+    diaSemanaLayerObj = null; diaSemanaOn = false;
+    document.getElementById("diaSemanaBtn").classList.remove("active");
+    document.getElementById("legendDiaSemana").classList.remove("visible");
+  }
 });
 </script>
 </body>
