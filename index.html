@@ -247,6 +247,10 @@
     <div class="layer-row">
       <button id="darkstoresBtn" class="layer-btn"><span class="btn-dot"></span>Dark Stores</button>
     </div>
+    <div class="layer-row">
+      <button id="priceCompBtn" class="layer-btn"><span class="btn-dot"></span>Comparação de Preços</button>
+    </div>
+    <div id="priceCompPanel" style="display:none;margin-top:4px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0;font-size:11px"></div>
     <div id="darkBar">
       <label>Marca</label>
       <div style="display:flex;flex-wrap:wrap;gap:3px">
@@ -368,6 +372,14 @@
     </div>
     <div id="tendenciaPanel" style="display:none;margin-top:6px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0"></div>
     <div class="layer-row">
+      <button id="categoriasBtn" class="layer-btn"><span class="btn-dot"></span>O que vendemos</button>
+    </div>
+    <div id="categoriasPanel" style="display:none;margin-top:6px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0"></div>
+    <div class="layer-row">
+      <button id="concorrentesBtn" class="layer-btn"><span class="btn-dot"></span>Análise competitiva</button>
+    </div>
+    <div id="concorrentesPanel" style="display:none;margin-top:6px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0"></div>
+    <div class="layer-row">
       <button id="segundaBtn" class="layer-btn"><span class="btn-dot"></span>2ª Localização</button>
     </div>
     <div id="segundaInfo" style="display:none;margin-top:6px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0;font-size:12px;line-height:1.6">
@@ -456,8 +468,8 @@ let incomeCanvas = null;
 
 const map = L.map("map", { zoomControl: true }).setView([38.737, -9.178], 12);
 
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+L.tileLayer("https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png", {
+  attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   maxZoom: 19,
 }).addTo(map);
 
@@ -657,9 +669,14 @@ let rentLayerOn = false;
 let rentMarkers = [];
 let rentData = [];
 let monthlyStats = [];
+let itemCategories = [];
+let priceCompData = [];
+let priceCompOn = false;
 
 fetch("rents_by_parish.json").then(r => r.json()).then(d => { rentData = d; }).catch(() => {});
 fetch("orders_by_month.json").then(r => r.json()).then(d => { monthlyStats = d; }).catch(() => {});
+fetch("item_categories.json").then(r => r.json()).then(d => { itemCategories = d; }).catch(() => {});
+fetch("price_comparison.json").then(r => r.json()).then(d => { priceCompData = d; }).catch(() => {});
 
 function rentColor(eur_m2, min, max) {
   const t = Math.max(0, Math.min(1, (eur_m2 - min) / (max - min)));
@@ -892,6 +909,88 @@ function toggleTendenciaPanel() {
     </div>`;
   panel.style.display = "block";
   btn.classList.add("active");
+}
+
+// --- O que vendemos (item categories panel) ---
+let categoriasMode = "items"; // "items" or "revenue"
+
+function toggleCategoriasPanel() {
+  const btn   = document.getElementById("categoriasBtn");
+  const panel = document.getElementById("categoriasPanel");
+  if (panel.style.display !== "none") {
+    panel.style.display = "none";
+    btn.classList.remove("active");
+    return;
+  }
+  if (!itemCategories.length) { hint.textContent = "Dados de categorias não carregados"; return; }
+  renderCategoriasPanel();
+  panel.style.display = "block";
+  btn.classList.add("active");
+}
+
+function renderCategoriasPanel() {
+  const panel = document.getElementById("categoriasPanel");
+
+  // Compute totals
+  const totalItems = itemCategories.reduce((s, c) => s + c.count, 0);
+  const totalRev   = itemCategories.reduce((s, c) => s + c.revenue, 0);
+
+  // Group alcohol
+  const alcCats = ["Álcool — Cerveja","Álcool — Vinho","Álcool — Spirits","Álcool — Licores"];
+  const alcItems = itemCategories.filter(c => alcCats.includes(c.category));
+  const alcCount = alcItems.reduce((s, c) => s + c.count, 0);
+  const alcRev   = alcItems.reduce((s, c) => s + c.revenue, 0);
+
+  // Category colors
+  const CAT_COLORS = {
+    "Álcool — Cerveja":   "#f59e0b",
+    "Álcool — Vinho":     "#b45309",
+    "Álcool — Spirits":   "#7c3aed",
+    "Álcool — Licores":   "#a78bfa",
+    "Bebidas s/ álcool":  "#3b82f6",
+    "Sobremesas / Doces": "#ec4899",
+    "Fruta & Legumes":    "#10b981",
+    "Mercearia":          "#64748b",
+    "Snacks / Salgados":  "#f97316",
+    "Higiene / Beleza":   "#e879f9",
+    "Casa / Limpeza":     "#06b6d4",
+    "Mercearia & Outros": "#94a3b8",
+  };
+
+  const isRev = categoriasMode === "revenue";
+  const bars = itemCategories.map(c => {
+    const val  = isRev ? c.revenue : c.count;
+    const tot  = isRev ? totalRev : totalItems;
+    const pct  = (val / tot * 100).toFixed(1);
+    const col  = CAT_COLORS[c.category] || "#94a3b8";
+    const disp = isRev ? `€${Math.round(c.revenue).toLocaleString("pt-PT")}` : `${c.count}`;
+    return `<div style="margin-bottom:5px">
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:#374151;margin-bottom:2px">
+        <span style="font-weight:500;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.category}</span>
+        <span style="font-weight:700;color:${col};flex-shrink:0">${pct}%</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:4px">
+        <div style="flex:1;height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden">
+          <div style="height:100%;width:${pct}%;background:${col};border-radius:3px;transition:width .3s"></div>
+        </div>
+        <span style="font-size:9px;color:#64748b;flex-shrink:0;min-width:40px;text-align:right">${disp}</span>
+      </div>
+    </div>`;
+  }).join("");
+
+  panel.innerHTML = `
+    <div style="display:flex;gap:4px;margin-bottom:8px">
+      <button onclick="categoriasMode='items';renderCategoriasPanel()" style="flex:1;font-size:10px;padding:3px;border-radius:4px;border:1px solid #e2e8f0;background:${!isRev?'#2563eb':'#f8fafc'};color:${!isRev?'white':'#374151'};cursor:pointer;font-weight:600">Por itens</button>
+      <button onclick="categoriasMode='revenue';renderCategoriasPanel()" style="flex:1;font-size:10px;padding:3px;border-radius:4px;border:1px solid #e2e8f0;background:${isRev?'#2563eb':'#f8fafc'};color:${isRev?'white':'#374151'};cursor:pointer;font-weight:600">Por receita</button>
+    </div>
+    ${bars}
+    <div style="margin-top:8px;padding-top:7px;border-top:1px solid #e2e8f0;font-size:10px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:2px">
+        <span style="color:#64748b">Álcool (total)</span>
+        <span style="font-weight:700;color:#b45309">${isRev ? (alcRev/totalRev*100).toFixed(0) : (alcCount/totalItems*100).toFixed(0)}%</span>
+      </div>
+      <div style="font-size:9px;color:#94a3b8">Base: ${totalItems} itens de 496 ordens</div>
+    </div>`;
 }
 
 // --- Horário por Zona (canvas layer) ---
@@ -1331,6 +1430,9 @@ document.getElementById("zonasMortasBtn").addEventListener("click", toggleZonasM
 document.getElementById("ticketZonaBtn").addEventListener("click", toggleTicketZonaLayer);
 document.getElementById("diaSemanaBtn").addEventListener("click", toggleDiaSemanaLayer);
 document.getElementById("tendenciaBtn").addEventListener("click", toggleTendenciaPanel);
+document.getElementById("categoriasBtn").addEventListener("click", toggleCategoriasPanel);
+document.getElementById("concorrentesBtn").addEventListener("click", toggleConcorrentesPanel);
+document.getElementById("priceCompBtn").addEventListener("click", togglePriceComp);
 document.getElementById("competitorsBtn").addEventListener("click", toggleCompetitors);
 
 // --- Competitors layer (Google Places) ---
@@ -1347,7 +1449,7 @@ let competitorsLoaded = false;
 
 const compIcon = L.divIcon({
   className: "",
-  html: `<div style="width:10px;height:10px;border-radius:50%;background:#ef4444;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,0.4)"></div>`,
+  html: `<div style="width:10px;height:10px;border-radius:50%;background:#374151;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,0.35)"></div>`,
   iconSize: [10, 10],
   iconAnchor: [5, 5],
 });
@@ -1426,7 +1528,7 @@ async function loadSupermercados() {
   for (const s of data) {
     const icon = L.divIcon({
       className: "",
-      html: `<div style="width:10px;height:10px;border-radius:50%;background:${s.color};border:1.5px solid rgba(0,0,0,0.25);box-shadow:0 1px 3px rgba(0,0,0,0.35)"></div>`,
+      html: `<div style="width:10px;height:10px;border-radius:50%;background:#6b7280;border:1.5px solid rgba(255,255,255,0.8);box-shadow:0 1px 3px rgba(0,0,0,0.25)"></div>`,
       iconSize: [10, 10],
       iconAnchor: [5, 5],
     });
@@ -1442,7 +1544,7 @@ async function loadSupermercados() {
     const btn = document.createElement("button");
     btn.className = "sbrand";
     btn.dataset.brand = name;
-    btn.innerHTML = `<span class="sdot" style="background:${colorMap[name]}"></span>${name} <span style="opacity:.55;font-size:10px">${n}</span>`;
+    btn.innerHTML = `<span class="sdot" style="background:#6b7280"></span>${name} <span style="opacity:.55;font-size:10px">${n}</span>`;
     btn.addEventListener("click", () => applySuperFilter(name));
     bar.appendChild(btn);
   }
@@ -1490,6 +1592,219 @@ function toggleSupermercados() {
 document.getElementById("supermercadosBtn").addEventListener("click", toggleSupermercados);
 document.querySelector("#superBar .sbrand[data-brand='all']").addEventListener("click", () => applySuperFilter("all"));
 
+// --- Análise Competitiva panel ---
+function toggleConcorrentesPanel() {
+  const btn   = document.getElementById("concorrentesBtn");
+  const panel = document.getElementById("concorrentesPanel");
+  if (panel.style.display !== "none") {
+    panel.style.display = "none";
+    btn.classList.remove("active");
+    return;
+  }
+
+  const COMPETITORS = [
+    {
+      name: "Glovo Express",
+      color: "#ffc244",
+      emoji: "🟡",
+      stores: 4,
+      rating: 3.0,
+      reviews: 69,
+      catalog: "Full supermarket (~2000+ SKUs)",
+      fee: "0,19 € serviço + entrega variável",
+      prices: "Preços de loja",
+      focus: "Groceries completo, household, fruta",
+      proximity: "Campo Ourique (0,3 km)",
+    },
+    {
+      name: "Bolt Market",
+      color: "#34d186",
+      emoji: "🟢",
+      stores: 5,
+      rating: 3.9,
+      reviews: 114,
+      catalog: "Supermercado (~1500+ SKUs)",
+      fee: "Variável por distância",
+      prices: "Preços de supermercado",
+      focus: "Groceries, snacks, household",
+      proximity: "Arroios (1,5 km) · Avs. Novas (2 km)",
+    },
+    {
+      name: "Getir",
+      color: "#5c16c5",
+      emoji: "🟣",
+      stores: 2,
+      rating: 2.8,
+      reviews: 4,
+      catalog: "Conveniência (~1000 SKUs)",
+      fee: "Variável",
+      prices: "Premium convenience",
+      focus: "Snacks, bebidas, essenciais",
+      proximity: "Parque Nações (7 km) · Avs Novas (2 km)",
+    },
+    {
+      name: "Sortido (nós)",
+      color: "#2563eb",
+      emoji: "🔵",
+      stores: 1,
+      rating: null,
+      reviews: null,
+      catalog: "Curada (~400 SKUs foco bebidas)",
+      fee: "Plataforma (UberEats / Glovo)",
+      prices: "Premium especialista",
+      focus: "Álcool 30% itens / 58% receita • Água e bebidas",
+      proximity: "Campo Ourique",
+    },
+  ];
+
+  const rows = COMPETITORS.map(c => {
+    const ratingBar = c.rating
+      ? `<div style="display:flex;align-items:center;gap:3px">
+          <span style="font-size:11px;color:#f59e0b;font-weight:700">★ ${c.rating}</span>
+          <div style="flex:1;height:5px;background:#e2e8f0;border-radius:3px;overflow:hidden;max-width:40px">
+            <div style="height:100%;width:${(c.rating/5*100).toFixed(0)}%;background:${c.rating>=4?'#10b981':c.rating>=3?'#f59e0b':'#ef4444'};border-radius:3px"></div>
+          </div>
+          ${c.reviews ? `<span style="font-size:9px;color:#94a3b8">(${c.reviews})</span>` : ''}
+        </div>`
+      : `<span style="font-size:10px;color:#94a3b8">sem dados</span>`;
+
+    return `
+    <div style="padding:8px 0;border-bottom:1px solid #f1f5f9">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+        <div style="width:10px;height:10px;border-radius:2px;background:${c.color};flex-shrink:0"></div>
+        <span style="font-size:12px;font-weight:700;color:#0f172a">${c.name}</span>
+        <span style="font-size:10px;color:#94a3b8;margin-left:auto">${c.stores} loja${c.stores>1?'s':''}</span>
+      </div>
+      <div style="margin-left:16px">
+        <div style="margin-bottom:2px">${ratingBar}</div>
+        <div style="font-size:10px;color:#64748b;margin-bottom:1px">📦 ${c.catalog}</div>
+        <div style="font-size:10px;color:#64748b;margin-bottom:1px">💶 ${c.fee}</div>
+        <div style="font-size:10px;color:#374151;font-style:italic">${c.focus}</div>
+      </div>
+    </div>`;
+  }).join("");
+
+  panel.innerHTML = `
+    <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Dark stores em Lisboa</div>
+    ${rows}
+    <div style="margin-top:8px;padding:6px;background:#eff6ff;border-radius:5px;border:1px solid #bfdbfe">
+      <div style="font-size:10px;font-weight:700;color:#1d4ed8;margin-bottom:3px">Diferencial Sortido</div>
+      <div style="font-size:10px;color:#1e40af;line-height:1.5">
+        Especialista em bebidas/álcool com catálogo curado.<br>
+        Glovo Express é o rival mais próximo — catálogo 5× maior mas focado em groceries. Getir tem pior rating.
+      </div>
+    </div>
+    <div style="margin-top:4px;font-size:9px;color:#94a3b8">Ratings: Google Places · Catálogo: dados reais Glovo · Bolt/Getir estimativa pública</div>`;
+
+  panel.style.display = "block";
+  btn.classList.add("active");
+}
+
+// --- Comparação de Preços ---
+function haversineDist(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+
+function togglePriceComp() {
+  const btn   = document.getElementById("priceCompBtn");
+  const panel = document.getElementById("priceCompPanel");
+  if (priceCompOn) {
+    priceCompOn = false;
+    btn.classList.remove("active");
+    panel.style.display = "none";
+    return;
+  }
+  priceCompOn = true;
+  btn.classList.add("active");
+  panel.style.display = "block";
+  panel.innerHTML = '<div style="color:#64748b;font-style:italic;">Clica no mapa para ver o concorrente mais próximo e comparar preços</div>';
+}
+
+map.on("click", function(e) {
+  if (!priceCompOn) return;
+  if (!darkStoresRaw.length) return;
+  const { lat, lng } = e.latlng;
+
+  // Find nearest store per brand
+  const brands = {};
+  for (const s of darkStoresRaw) {
+    const d = haversineDist(lat, lng, s.lat, s.lon);
+    if (!brands[s.name] || d < brands[s.name].dist) {
+      brands[s.name] = { store: s, dist: d };
+    }
+  }
+
+  const panel = document.getElementById("priceCompPanel");
+
+  // Brand header pills
+  const BRAND_ORDER = ["Glovo Market", "Bolt Market", "Getir"];
+  const brandMeta = {
+    "Glovo Market": { short: "Glovo", hasPrice: true },
+    "Bolt Market":  { short: "Bolt",  hasPrice: false },
+    "Getir":        { short: "Getir", hasPrice: false },
+  };
+
+  let pills = "";
+  for (const bname of BRAND_ORDER) {
+    if (!brands[bname]) continue;
+    const { store, dist } = brands[bname];
+    const distStr = dist < 1 ? `${Math.round(dist*1000)} m` : `${dist.toFixed(1)} km`;
+    pills += `<span style="display:inline-flex;align-items:center;gap:4px;background:#f1f5f9;border-radius:5px;padding:3px 7px;margin-right:4px;margin-bottom:4px;">
+      <span style="width:7px;height:7px;border-radius:50%;background:${store.color};display:inline-block;"></span>
+      <span style="font-weight:600;font-size:11px;">${brandMeta[bname].short}</span>
+      <span style="color:#94a3b8;font-size:10px;">${distStr}</span>
+    </span>`;
+  }
+
+  // Price table — one column per brand with price data, rest show "—"
+  const activeBrands = BRAND_ORDER.filter(b => brands[b]);
+  let thCols = activeBrands.map(b => {
+    const meta = brandMeta[b];
+    const color = brands[b].store.color;
+    return `<th style="text-align:right;padding:3px 5px;color:${color};font-weight:700;">${meta.short}</th>`;
+  }).join("");
+
+  let rows = "";
+  for (const item of priceCompData) {
+    let tdCols = "";
+    for (const bname of activeBrands) {
+      const meta = brandMeta[bname];
+      if (meta.hasPrice && item.glovo_price != null) {
+        const diff = item.diff_pct;
+        const color = diff > 0 ? "#dc2626" : "#16a34a";
+        const arrow = diff > 0 ? "▲" : "▼";
+        tdCols += `<td style="text-align:right;padding:4px 5px;">€${item.glovo_price.toFixed(2)} <span style="font-weight:700;color:${color};font-size:10px;">${arrow}${Math.abs(diff).toFixed(0)}%</span></td>`;
+      } else {
+        tdCols += `<td style="text-align:right;padding:4px 5px;color:#cbd5e1;">—</td>`;
+      }
+    }
+    rows += `<tr style="border-bottom:1px solid #f1f5f9;">
+      <td style="padding:4px 6px 4px 0;color:#374151;">${item.label}</td>
+      <td style="padding:4px 5px;text-align:right;font-weight:600;">€${item.sortido_price.toFixed(2)}</td>
+      ${tdCols}
+    </tr>`;
+  }
+
+  panel.innerHTML = `
+    <div style="margin-bottom:8px;display:flex;flex-wrap:wrap;">${pills}</div>
+    <table style="width:100%;border-collapse:collapse;font-size:11px;">
+      <thead>
+        <tr style="color:#94a3b8;font-size:10px;text-transform:uppercase;border-bottom:1px solid #e2e8f0;">
+          <th style="text-align:left;padding:3px 6px 3px 0;">Produto</th>
+          <th style="text-align:right;padding:3px 5px;">Sortido</th>
+          ${thCols}
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div style="margin-top:6px;font-size:10px;color:#94a3b8;">% vs Sortido · Bolt/Getir sem dados de preço (bloqueiam scraping)</div>
+  `;
+});
+
 // --- Dark stores layer (Glovo Market, Bolt Market, Getir) ---
 let darkOn = false;
 let darkEntries = [];
@@ -1511,12 +1826,15 @@ async function loadDarkStores() {
   for (const s of data) {
     const icon = L.divIcon({
       className: "",
-      html: `<div style="width:13px;height:13px;border-radius:3px;background:${s.color};border:2px solid rgba(0,0,0,0.3);box-shadow:0 1px 4px rgba(0,0,0,0.4)"></div>`,
+      html: `<div style="width:13px;height:13px;border-radius:3px;background:#1f2937;border:2px solid rgba(255,255,255,0.7);box-shadow:0 1px 4px rgba(0,0,0,0.35)"></div>`,
       iconSize: [13, 13],
       iconAnchor: [6, 6],
     });
+    const ratingHtml = s.rating
+      ? `<br><span style="font-size:11px;color:#f59e0b">★ ${s.rating}</span><span style="font-size:10px;color:#94a3b8">${s.reviews ? ` (${s.reviews})` : ""}</span>`
+      : "";
     const m = L.marker([s.lat, s.lon], { icon })
-      .bindPopup(`<b style="color:${s.color}">${s.name}</b><br><span style="font-size:11px;color:#666">${s.label}</span>`);
+      .bindPopup(`<b style="color:${s.color}">${s.name}</b><br><span style="font-size:11px;color:#666">${s.label}</span>${ratingHtml}`);
     darkEntries.push({ marker: m, name: s.name, color: s.color });
   }
 
@@ -1526,7 +1844,7 @@ async function loadDarkStores() {
     const btn = document.createElement("button");
     btn.className = "dbrand";
     btn.dataset.brand = name;
-    btn.innerHTML = `<span class="ddot" style="background:${colorMap[name]}"></span>${name} <span style="opacity:.55;font-size:10px">${n}</span>`;
+    btn.innerHTML = `<span class="ddot" style="background:#1f2937"></span>${name} <span style="opacity:.55;font-size:10px">${n}</span>`;
     btn.addEventListener("click", () => applyDarkFilter(name));
     bar.appendChild(btn);
   }
@@ -2743,6 +3061,21 @@ clearBtn.addEventListener("click", () => {
     diaSemanaLayerObj = null; diaSemanaOn = false;
     document.getElementById("diaSemanaBtn").classList.remove("active");
     document.getElementById("legendDiaSemana").classList.remove("visible");
+  }
+  const catPanel = document.getElementById("categoriasPanel");
+  if (catPanel && catPanel.style.display !== "none") {
+    catPanel.style.display = "none";
+    document.getElementById("categoriasBtn").classList.remove("active");
+  }
+  const concPanel = document.getElementById("concorrentesPanel");
+  if (concPanel && concPanel.style.display !== "none") {
+    concPanel.style.display = "none";
+    document.getElementById("concorrentesBtn").classList.remove("active");
+  }
+  if (priceCompOn) {
+    priceCompOn = false;
+    document.getElementById("priceCompBtn").classList.remove("active");
+    document.getElementById("priceCompPanel").style.display = "none";
   }
 });
 </script>
