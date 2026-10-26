@@ -1,0 +1,26 @@
+[
+  {
+    "month": "2026-07",
+    "count": 12,
+    "revenue": 383.46,
+    "partial": false
+  },
+  {
+    "month": "2026-08",
+    "count": 1714,
+    "revenue": 32985.88,
+    "partial": false
+  },
+  {
+    "month": "2026-09",
+    "count": 1827,
+    "revenue": 33209.88,
+    "partial": false
+  },
+  {
+    "month": "2026-10",
+    "count": 1227,
+    "revenue": 20483.16,
+    "partial": true
+  }
+]

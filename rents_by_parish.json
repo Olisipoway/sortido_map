@@ -1,0 +1,210 @@
+[
+  {
+    "parish": "Santa Maria Maior",
+    "lat": 38.7122372,
+    "lon": -9.135738,
+    "median_eur_m2": 39.4,
+    "mean_eur_m2": 37.6,
+    "count": 100
+  },
+  {
+    "parish": "Arroios",
+    "lat": 38.7312586,
+    "lon": -9.1394358,
+    "median_eur_m2": 10.9,
+    "mean_eur_m2": 9.3,
+    "count": 75
+  },
+  {
+    "parish": "Alverca do Ribatejo e Sobralinho",
+    "lat": 38.9048341,
+    "lon": -9.0417269,
+    "median_eur_m2": 13.5,
+    "mean_eur_m2": 13.5,
+    "count": 50
+  },
+  {
+    "parish": "São Domingos de Benfica",
+    "lat": 38.7466028,
+    "lon": -9.1765868,
+    "median_eur_m2": 13.2,
+    "mean_eur_m2": 13.2,
+    "count": 50
+  },
+  {
+    "parish": "Algés, Linda-a-Velha e Cruz Quebrada-Dafundo",
+    "lat": 38.6983796,
+    "lon": -9.2293871,
+    "median_eur_m2": 17.7,
+    "mean_eur_m2": 17.7,
+    "count": 50
+  },
+  {
+    "parish": "Campo de Ourique",
+    "lat": 38.7153262,
+    "lon": -9.1679353,
+    "median_eur_m2": 16.4,
+    "mean_eur_m2": 16.4,
+    "count": 50
+  },
+  {
+    "parish": "Santa Maria, São Pedro e Matacães",
+    "lat": 39.0941821,
+    "lon": -9.2613717,
+    "median_eur_m2": 14.2,
+    "mean_eur_m2": 14.2,
+    "count": 50
+  },
+  {
+    "parish": "Massamá e Monte Abraão",
+    "lat": 38.7576614,
+    "lon": -9.2728188,
+    "median_eur_m2": 7.9,
+    "mean_eur_m2": 7.9,
+    "count": 25
+  },
+  {
+    "parish": "Marvila",
+    "lat": 38.7460112,
+    "lon": -9.1056191,
+    "median_eur_m2": 12.9,
+    "mean_eur_m2": 12.9,
+    "count": 25
+  },
+  {
+    "parish": "Carcavelos e Parede",
+    "lat": 38.6921555,
+    "lon": -9.3478806,
+    "median_eur_m2": 14.1,
+    "mean_eur_m2": 14.1,
+    "count": 25
+  },
+  {
+    "parish": "Porto Salvo",
+    "lat": 38.7293968,
+    "lon": -9.3036149,
+    "median_eur_m2": 16.7,
+    "mean_eur_m2": 16.7,
+    "count": 25
+  },
+  {
+    "parish": "Campolide",
+    "lat": 38.727895,
+    "lon": -9.1646135,
+    "median_eur_m2": 23.0,
+    "mean_eur_m2": 23.0,
+    "count": 25
+  },
+  {
+    "parish": "Alvalade",
+    "lat": 38.7473212,
+    "lon": -9.1395885,
+    "median_eur_m2": 33.3,
+    "mean_eur_m2": 33.3,
+    "count": 25
+  },
+  {
+    "parish": "Cascais e Estoril",
+    "lat": 38.7150322,
+    "lon": -9.4567672,
+    "median_eur_m2": 50.0,
+    "mean_eur_m2": 50.0,
+    "count": 25
+  },
+  {
+    "parish": "Odivelas",
+    "lat": 38.7904338,
+    "lon": -9.1792617,
+    "median_eur_m2": 9.4,
+    "mean_eur_m2": 9.4,
+    "count": 25
+  },
+  {
+    "parish": "São João das Lampas e Terrugem",
+    "lat": 38.8787383,
+    "lon": -9.3868846,
+    "median_eur_m2": 10.0,
+    "mean_eur_m2": 10.0,
+    "count": 25
+  },
+  {
+    "parish": "Cacém e São Marcos",
+    "lat": 38.7644569,
+    "lon": -9.3077281,
+    "median_eur_m2": 20.0,
+    "mean_eur_m2": 20.0,
+    "count": 25
+  },
+  {
+    "parish": "Agualva e Mira-Sintra",
+    "lat": 38.7738757,
+    "lon": -9.2952352,
+    "median_eur_m2": 13.8,
+    "mean_eur_m2": 13.8,
+    "count": 25
+  },
+  {
+    "parish": "S. Maria, S. Miguel, S. Martinho e S. Pedro de Penaferrim",
+    "lat": 38.793819,
+    "lon": -9.3848049,
+    "median_eur_m2": 14.2,
+    "mean_eur_m2": 14.2,
+    "count": 25
+  },
+  {
+    "parish": "Lumiar",
+    "lat": 38.7685509,
+    "lon": -9.1624841,
+    "median_eur_m2": 9.4,
+    "mean_eur_m2": 9.4,
+    "count": 25
+  },
+  {
+    "parish": "Santo António",
+    "lat": 38.7220648,
+    "lon": -9.1514289,
+    "median_eur_m2": 18.5,
+    "mean_eur_m2": 18.5,
+    "count": 25
+  },
+  {
+    "parish": "Arruda dos Vinhos",
+    "lat": 38.98303,
+    "lon": -9.07763,
+    "median_eur_m2": 8.3,
+    "mean_eur_m2": 8.3,
+    "count": 25
+  },
+  {
+    "parish": "Areeiro",
+    "lat": 38.7413849,
+    "lon": -9.1321846,
+    "median_eur_m2": 16.7,
+    "mean_eur_m2": 16.7,
+    "count": 25
+  },
+  {
+    "parish": "Belém",
+    "lat": 38.7055415,
+    "lon": -9.2132265,
+    "median_eur_m2": 24.8,
+    "mean_eur_m2": 24.8,
+    "count": 25
+  },
+  {
+    "parish": "Oeiras e S. Julião da Barra, Paço de Arcos e Caxias",
+    "lat": 38.6932546,
+    "lon": -9.3144433,
+    "median_eur_m2": 19.5,
+    "mean_eur_m2": 19.5,
+    "count": 25
+  },
+  {
+    "parish": "São Domingos de Rana",
+    "lat": 38.7015666,
+    "lon": -9.3417434,
+    "median_eur_m2": 16.0,
+    "mean_eur_m2": 16.0,
+    "count": 25
+  }
+]
