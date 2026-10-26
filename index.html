@@ -11,6 +11,7 @@
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
 
     #map { position: fixed; left: 240px; top: 0; right: 0; bottom: 0; cursor: crosshair; }
+    #map .leaflet-tile-pane { filter: grayscale(1) brightness(1.08) contrast(0.85); }
 
     #sidebar {
       position: fixed; left: 0; top: 0; bottom: 0; width: 240px; z-index: 1000;
@@ -468,8 +469,8 @@ let incomeCanvas = null;
 
 const map = L.map("map", { zoomControl: true }).setView([38.737, -9.178], 12);
 
-L.tileLayer("https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png", {
-  attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   maxZoom: 19,
 }).addTo(map);
 
