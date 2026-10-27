@@ -778,6 +778,8 @@ let priceCompData = [];
 let priceCompOn = false;
 
 fetch("rents_by_parish.json").then(r => r.json()).then(d => { rentData = d; }).catch(() => {});
+let noGoMask = null;
+fetch("no_go_mask.json").then(r => r.json()).then(d => { noGoMask = d; }).catch(() => {});
 fetch("orders_by_month.json").then(r => r.json()).then(d => { monthlyStats = d; }).catch(() => {});
 fetch("item_categories.json").then(r => r.json()).then(d => { itemCategories = d; }).catch(() => {});
 fetch("matched_prices.json").then(r => r.json()).then(d => { priceCompData = d; }).catch(() => {});
@@ -2795,6 +2797,7 @@ function findSecondLocation(orders, s1Mask = null, darkStores = [], rentData = [
         const distSq = (clat - SLAT) ** 2 + (clng - SLNG) ** 2;
         if (distSq < MIN_DIST_SQ) continue;
         if (s1Mask && s1Mask[idx]) continue;
+        if (noGoMask && noGoMask.data[idx]) continue;
         if (slowScore[idx] === 0 && popDemand[idx] === 0) continue;
         const affordability = 1 - (rentScore[idx] - rentMin) / rentRange;
         const compFraction  = compCoverage[idx] * compNorm;
