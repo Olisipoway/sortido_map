@@ -1,0 +1,68 @@
+[
+  {
+    "category": "Mercearia & Outros",
+    "count": 419,
+    "revenue": 2486.23,
+    "pct": 25.4
+  },
+  {
+    "category": "Bebidas s/ álcool",
+    "count": 378,
+    "revenue": 1946.18,
+    "pct": 23.0
+  },
+  {
+    "category": "Álcool — Cerveja",
+    "count": 291,
+    "revenue": 4348.87,
+    "pct": 17.7
+  },
+  {
+    "category": "Álcool — Vinho",
+    "count": 138,
+    "revenue": 1530.58,
+    "pct": 8.4
+  },
+  {
+    "category": "Sobremesas / Doces",
+    "count": 107,
+    "revenue": 699.78,
+    "pct": 6.5
+  },
+  {
+    "category": "Fruta & Legumes",
+    "count": 101,
+    "revenue": 513.5,
+    "pct": 6.1
+  },
+  {
+    "category": "Mercearia",
+    "count": 90,
+    "revenue": 560.34,
+    "pct": 5.5
+  },
+  {
+    "category": "Álcool — Spirits",
+    "count": 59,
+    "revenue": 3116.8,
+    "pct": 3.6
+  },
+  {
+    "category": "Snacks / Salgados",
+    "count": 42,
+    "revenue": 190.86,
+    "pct": 2.6
+  },
+  {
+    "category": "Higiene / Beleza",
+    "count": 19,
+    "revenue": 117.68,
+    "pct": 1.2
+  },
+  {
+    "category": "Álcool — Licores",
+    "count": 3,
+    "revenue": 98.94,
+    "pct": 0.2
+  }
+]

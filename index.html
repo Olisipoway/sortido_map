@@ -124,6 +124,86 @@
       border: 1.5px solid rgba(0,0,0,0.2); flex-shrink: 0;
     }
 
+    /* Price comparison floating panel */
+    #priceCompFloat {
+      display: none;
+      position: fixed;
+      bottom: 24px; right: 24px;
+      width: 560px; max-width: calc(100vw - 264px);
+      max-height: calc(100vh - 60px);
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.10);
+      z-index: 900;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #priceCompFloat.visible { display: flex; }
+    #priceCompFloat .pcf-header {
+      padding: 14px 16px 10px;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0;
+    }
+    #priceCompFloat .pcf-title {
+      font-size: 13px; font-weight: 700; color: #0f172a;
+    }
+    #priceCompFloat .pcf-close {
+      width: 24px; height: 24px; border-radius: 50%; border: none;
+      background: #f1f5f9; color: #64748b; cursor: pointer;
+      font-size: 14px; display: flex; align-items: center; justify-content: center;
+    }
+    #priceCompFloat .pcf-close:hover { background: #e2e8f0; }
+    #priceCompFloat .pcf-pills {
+      padding: 10px 16px 6px;
+      display: flex; flex-wrap: wrap; gap: 6px;
+      flex-shrink: 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    #priceCompFloat .pcf-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #f8fafc; border: 1px solid #e2e8f0;
+      border-radius: 6px; padding: 4px 10px;
+      font-size: 12px;
+    }
+    #priceCompFloat .pcf-pill .dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+    }
+    #priceCompFloat .pcf-pill strong { font-weight: 600; color: #0f172a; }
+    #priceCompFloat .pcf-pill span { color: #94a3b8; font-size: 11px; }
+    #priceCompFloat .pcf-table-wrap {
+      overflow-y: auto; flex: 1;
+      padding: 0 16px 16px;
+    }
+    #priceCompFloat table {
+      width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px;
+    }
+    #priceCompFloat thead th {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.05em; color: #94a3b8;
+      padding: 6px 8px; border-bottom: 2px solid #f1f5f9;
+      white-space: nowrap;
+    }
+    #priceCompFloat thead th:first-child { text-align: left; }
+    #priceCompFloat thead th:not(:first-child) { text-align: right; }
+    #priceCompFloat tbody tr { border-bottom: 1px solid #f8fafc; }
+    #priceCompFloat tbody tr:hover { background: #f8fafc; }
+    #priceCompFloat tbody td { padding: 7px 8px; vertical-align: middle; }
+    #priceCompFloat tbody td:first-child { color: #374151; }
+    #priceCompFloat tbody td:not(:first-child) { text-align: right; white-space: nowrap; }
+    #priceCompFloat .price-val { font-weight: 600; color: #0f172a; }
+    #priceCompFloat .diff-up { color: #dc2626; font-size: 10px; font-weight: 700; }
+    #priceCompFloat .diff-dn { color: #16a34a; font-size: 10px; font-weight: 700; }
+    #priceCompFloat .no-data { color: #cbd5e1; }
+    #priceCompFloat .pcf-hint {
+      padding: 10px 16px; font-size: 11px; color: #94a3b8;
+      flex-shrink: 0; border-top: 1px solid #f1f5f9;
+    }
+    #priceCompFloat .pcf-prompt {
+      padding: 32px 16px; text-align: center; color: #94a3b8; font-size: 13px;
+    }
+
     .sb-footer { padding: 12px 14px; margin-top: auto; border-top: 1px solid #f1f5f9; flex-shrink: 0; }
     .clear-btn {
       width: 100%; padding: 8px; background: #f1f5f9; color: #64748b;
@@ -251,7 +331,6 @@
     <div class="layer-row">
       <button id="priceCompBtn" class="layer-btn"><span class="btn-dot"></span>Comparação de Preços</button>
     </div>
-    <div id="priceCompPanel" style="display:none;margin-top:4px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0;font-size:11px"></div>
     <div id="darkBar">
       <label>Marca</label>
       <div style="display:flex;flex-wrap:wrap;gap:3px">
@@ -369,18 +448,6 @@
   <div class="sb-section">
     <div class="sb-section-title">Análise</div>
     <div class="layer-row">
-      <button id="tendenciaBtn" class="layer-btn"><span class="btn-dot"></span>Tendência</button>
-    </div>
-    <div id="tendenciaPanel" style="display:none;margin-top:6px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0"></div>
-    <div class="layer-row">
-      <button id="categoriasBtn" class="layer-btn"><span class="btn-dot"></span>O que vendemos</button>
-    </div>
-    <div id="categoriasPanel" style="display:none;margin-top:6px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0"></div>
-    <div class="layer-row">
-      <button id="concorrentesBtn" class="layer-btn"><span class="btn-dot"></span>Análise competitiva</button>
-    </div>
-    <div id="concorrentesPanel" style="display:none;margin-top:6px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0"></div>
-    <div class="layer-row">
       <button id="segundaBtn" class="layer-btn"><span class="btn-dot"></span>2ª Localização</button>
     </div>
     <div id="segundaInfo" style="display:none;margin-top:6px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0;font-size:12px;line-height:1.6">
@@ -458,6 +525,18 @@
   <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(250,204,21,0.85)"></span>1 – 2 km</div>
   <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(249,115,22,0.85)"></span>2 – 3 km</div>
   <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(239,68,68,0.85)"></span>&gt; 3 km</div>
+</div>
+
+<div id="priceCompFloat">
+  <div class="pcf-header">
+    <span class="pcf-title">Comparação de Preços</span>
+    <button class="pcf-close" id="priceCompClose">✕</button>
+  </div>
+  <div class="pcf-pills" id="priceCompPills"></div>
+  <div class="pcf-table-wrap" id="priceCompTableWrap">
+    <div class="pcf-prompt">Clica no mapa para ver os preços dos concorrentes mais próximos</div>
+  </div>
+  <div class="pcf-hint" id="priceCompHint" style="display:none;">% vs Sortido · preços por unidade · fonte: Continente e Auchan online</div>
 </div>
 
 <script>
@@ -677,7 +756,7 @@ let priceCompOn = false;
 fetch("rents_by_parish.json").then(r => r.json()).then(d => { rentData = d; }).catch(() => {});
 fetch("orders_by_month.json").then(r => r.json()).then(d => { monthlyStats = d; }).catch(() => {});
 fetch("item_categories.json").then(r => r.json()).then(d => { itemCategories = d; }).catch(() => {});
-fetch("price_comparison.json").then(r => r.json()).then(d => { priceCompData = d; }).catch(() => {});
+fetch("matched_prices.json").then(r => r.json()).then(d => { priceCompData = d; }).catch(() => {});
 
 function rentColor(eur_m2, min, max) {
   const t = Math.max(0, Math.min(1, (eur_m2 - min) / (max - min)));
@@ -845,153 +924,6 @@ function toggleLoyalLayer() {
   btn.classList.add("active");
   leg.classList.add("visible");
   hint.textContent = `Clientes: ${counts[1]} únicos · ${counts['2-3']} ocasionais · ${counts['4-6']} regulares · ${counts['7-9']+counts['10+']} fiéis`;
-}
-
-// --- Tendência temporal ---
-function toggleTendenciaPanel() {
-  const btn   = document.getElementById("tendenciaBtn");
-  const panel = document.getElementById("tendenciaPanel");
-  if (panel.style.display !== "none") {
-    panel.style.display = "none";
-    btn.classList.remove("active");
-    return;
-  }
-  if (!monthlyStats.length) { hint.textContent = "Dados mensais não carregados"; return; }
-
-  const counts  = monthlyStats.map(m => m.count);
-  const revs    = monthlyStats.map(m => m.revenue);
-  const maxC    = Math.max(...counts);
-  const maxR    = Math.max(...revs);
-  const MONTHS_PT = { "01":"Jan","02":"Fev","03":"Mar","04":"Abr","05":"Mai","06":"Jun",
-                      "07":"Jul","08":"Ago","09":"Set","10":"Out","11":"Nov","12":"Dez" };
-
-  const bars = monthlyStats.map((m, i) => {
-    const [, mo] = m.month.split("-");
-    const label  = MONTHS_PT[mo] || mo;
-    const hC     = Math.round((m.count / maxC) * 60);
-    const hR     = Math.round((m.revenue / maxR) * 60);
-    const prev   = i > 0 ? monthlyStats[i-1] : null;
-    const growthC = prev ? Math.round((m.count - prev.count) / prev.count * 100) : null;
-    const partialNote = m.partial ? '<span style="color:#f59e0b"> *</span>' : '';
-    const growthHtml  = growthC != null
-      ? `<div style="font-size:9px;color:${growthC >= 0 ? '#059669' : '#ef4444'};font-weight:700">${growthC >= 0 ? '+' : ''}${growthC}%</div>`
-      : '';
-    return `<div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex:1">
-      ${growthHtml}
-      <div style="display:flex;align-items:flex-end;gap:2px;height:64px">
-        <div title="Ordens: ${m.count}" style="width:12px;background:#7c3aed;border-radius:2px 2px 0 0;height:${hC}px;opacity:0.85"></div>
-        <div title="Receita: €${Math.round(m.revenue).toLocaleString('pt-PT')}" style="width:12px;background:#059669;border-radius:2px 2px 0 0;height:${hR}px;opacity:0.8"></div>
-      </div>
-      <div style="font-size:9px;color:#64748b;text-align:center">${label}${partialNote}</div>
-      <div style="font-size:9px;color:#374151;font-weight:600">${m.count}</div>
-      <div style="font-size:9px;color:#059669">€${Math.round(m.revenue / 1000)}k</div>
-    </div>`;
-  }).join("");
-
-  const totalOrders  = counts.reduce((a,b) => a+b, 0);
-  const totalRevenue = revs.reduce((a,b) => a+b, 0);
-  const lastFull = monthlyStats.filter(m => !m.partial);
-  const avgTicketAll = monthlyStats.reduce((s, m) => s + m.revenue, 0) / totalOrders;
-
-  panel.innerHTML = `
-    <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Evolução mensal</div>
-    <div style="display:flex;gap:4px;align-items:flex-end;margin-bottom:10px">${bars}</div>
-    <div style="display:flex;gap:2px;font-size:9px;color:#64748b;margin-bottom:8px">
-      <span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:#7c3aed;border-radius:1px;display:inline-block"></span>Ordens</span>
-      <span style="margin:0 4px">·</span>
-      <span style="display:inline-flex;align-items:center;gap:3px"><span style="width:8px;height:8px;background:#059669;border-radius:1px;display:inline-block"></span>Receita</span>
-      <span style="margin:0 4px">·</span>
-      <span style="color:#f59e0b">* mês incompleto</span>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:3px;font-size:11px;border-top:1px solid #e2e8f0;padding-top:7px">
-      <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Total ordens</span><span style="font-weight:700">${totalOrders.toLocaleString('pt-PT')}</span></div>
-      <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Receita total</span><span style="font-weight:700">€${Math.round(totalRevenue).toLocaleString('pt-PT')}</span></div>
-      <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Ticket médio</span><span style="font-weight:700">€${avgTicketAll.toFixed(2)}</span></div>
-    </div>`;
-  panel.style.display = "block";
-  btn.classList.add("active");
-}
-
-// --- O que vendemos (item categories panel) ---
-let categoriasMode = "items"; // "items" or "revenue"
-
-function toggleCategoriasPanel() {
-  const btn   = document.getElementById("categoriasBtn");
-  const panel = document.getElementById("categoriasPanel");
-  if (panel.style.display !== "none") {
-    panel.style.display = "none";
-    btn.classList.remove("active");
-    return;
-  }
-  if (!itemCategories.length) { hint.textContent = "Dados de categorias não carregados"; return; }
-  renderCategoriasPanel();
-  panel.style.display = "block";
-  btn.classList.add("active");
-}
-
-function renderCategoriasPanel() {
-  const panel = document.getElementById("categoriasPanel");
-
-  // Compute totals
-  const totalItems = itemCategories.reduce((s, c) => s + c.count, 0);
-  const totalRev   = itemCategories.reduce((s, c) => s + c.revenue, 0);
-
-  // Group alcohol
-  const alcCats = ["Álcool — Cerveja","Álcool — Vinho","Álcool — Spirits","Álcool — Licores"];
-  const alcItems = itemCategories.filter(c => alcCats.includes(c.category));
-  const alcCount = alcItems.reduce((s, c) => s + c.count, 0);
-  const alcRev   = alcItems.reduce((s, c) => s + c.revenue, 0);
-
-  // Category colors
-  const CAT_COLORS = {
-    "Álcool — Cerveja":   "#f59e0b",
-    "Álcool — Vinho":     "#b45309",
-    "Álcool — Spirits":   "#7c3aed",
-    "Álcool — Licores":   "#a78bfa",
-    "Bebidas s/ álcool":  "#3b82f6",
-    "Sobremesas / Doces": "#ec4899",
-    "Fruta & Legumes":    "#10b981",
-    "Mercearia":          "#64748b",
-    "Snacks / Salgados":  "#f97316",
-    "Higiene / Beleza":   "#e879f9",
-    "Casa / Limpeza":     "#06b6d4",
-    "Mercearia & Outros": "#94a3b8",
-  };
-
-  const isRev = categoriasMode === "revenue";
-  const bars = itemCategories.map(c => {
-    const val  = isRev ? c.revenue : c.count;
-    const tot  = isRev ? totalRev : totalItems;
-    const pct  = (val / tot * 100).toFixed(1);
-    const col  = CAT_COLORS[c.category] || "#94a3b8";
-    const disp = isRev ? `€${Math.round(c.revenue).toLocaleString("pt-PT")}` : `${c.count}`;
-    return `<div style="margin-bottom:5px">
-      <div style="display:flex;justify-content:space-between;font-size:10px;color:#374151;margin-bottom:2px">
-        <span style="font-weight:500;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.category}</span>
-        <span style="font-weight:700;color:${col};flex-shrink:0">${pct}%</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:4px">
-        <div style="flex:1;height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden">
-          <div style="height:100%;width:${pct}%;background:${col};border-radius:3px;transition:width .3s"></div>
-        </div>
-        <span style="font-size:9px;color:#64748b;flex-shrink:0;min-width:40px;text-align:right">${disp}</span>
-      </div>
-    </div>`;
-  }).join("");
-
-  panel.innerHTML = `
-    <div style="display:flex;gap:4px;margin-bottom:8px">
-      <button onclick="categoriasMode='items';renderCategoriasPanel()" style="flex:1;font-size:10px;padding:3px;border-radius:4px;border:1px solid #e2e8f0;background:${!isRev?'#2563eb':'#f8fafc'};color:${!isRev?'white':'#374151'};cursor:pointer;font-weight:600">Por itens</button>
-      <button onclick="categoriasMode='revenue';renderCategoriasPanel()" style="flex:1;font-size:10px;padding:3px;border-radius:4px;border:1px solid #e2e8f0;background:${isRev?'#2563eb':'#f8fafc'};color:${isRev?'white':'#374151'};cursor:pointer;font-weight:600">Por receita</button>
-    </div>
-    ${bars}
-    <div style="margin-top:8px;padding-top:7px;border-top:1px solid #e2e8f0;font-size:10px">
-      <div style="display:flex;justify-content:space-between;margin-bottom:2px">
-        <span style="color:#64748b">Álcool (total)</span>
-        <span style="font-weight:700;color:#b45309">${isRev ? (alcRev/totalRev*100).toFixed(0) : (alcCount/totalItems*100).toFixed(0)}%</span>
-      </div>
-      <div style="font-size:9px;color:#94a3b8">Base: ${totalItems} itens de 496 ordens</div>
-    </div>`;
 }
 
 // --- Horário por Zona (canvas layer) ---
@@ -1430,9 +1362,6 @@ document.getElementById("picoZonaBtn").addEventListener("click", togglePicoZonaL
 document.getElementById("zonasMortasBtn").addEventListener("click", toggleZonasMortasLayer);
 document.getElementById("ticketZonaBtn").addEventListener("click", toggleTicketZonaLayer);
 document.getElementById("diaSemanaBtn").addEventListener("click", toggleDiaSemanaLayer);
-document.getElementById("tendenciaBtn").addEventListener("click", toggleTendenciaPanel);
-document.getElementById("categoriasBtn").addEventListener("click", toggleCategoriasPanel);
-document.getElementById("concorrentesBtn").addEventListener("click", toggleConcorrentesPanel);
 document.getElementById("priceCompBtn").addEventListener("click", togglePriceComp);
 document.getElementById("competitorsBtn").addEventListener("click", toggleCompetitors);
 
@@ -1593,114 +1522,6 @@ function toggleSupermercados() {
 document.getElementById("supermercadosBtn").addEventListener("click", toggleSupermercados);
 document.querySelector("#superBar .sbrand[data-brand='all']").addEventListener("click", () => applySuperFilter("all"));
 
-// --- Análise Competitiva panel ---
-function toggleConcorrentesPanel() {
-  const btn   = document.getElementById("concorrentesBtn");
-  const panel = document.getElementById("concorrentesPanel");
-  if (panel.style.display !== "none") {
-    panel.style.display = "none";
-    btn.classList.remove("active");
-    return;
-  }
-
-  const COMPETITORS = [
-    {
-      name: "Glovo Express",
-      color: "#ffc244",
-      emoji: "🟡",
-      stores: 4,
-      rating: 3.0,
-      reviews: 69,
-      catalog: "Full supermarket (~2000+ SKUs)",
-      fee: "0,19 € serviço + entrega variável",
-      prices: "Preços de loja",
-      focus: "Groceries completo, household, fruta",
-      proximity: "Campo Ourique (0,3 km)",
-    },
-    {
-      name: "Bolt Market",
-      color: "#34d186",
-      emoji: "🟢",
-      stores: 5,
-      rating: 3.9,
-      reviews: 114,
-      catalog: "Supermercado (~1500+ SKUs)",
-      fee: "Variável por distância",
-      prices: "Preços de supermercado",
-      focus: "Groceries, snacks, household",
-      proximity: "Arroios (1,5 km) · Avs. Novas (2 km)",
-    },
-    {
-      name: "Getir",
-      color: "#5c16c5",
-      emoji: "🟣",
-      stores: 2,
-      rating: 2.8,
-      reviews: 4,
-      catalog: "Conveniência (~1000 SKUs)",
-      fee: "Variável",
-      prices: "Premium convenience",
-      focus: "Snacks, bebidas, essenciais",
-      proximity: "Parque Nações (7 km) · Avs Novas (2 km)",
-    },
-    {
-      name: "Sortido (nós)",
-      color: "#2563eb",
-      emoji: "🔵",
-      stores: 1,
-      rating: null,
-      reviews: null,
-      catalog: "Curada (~400 SKUs foco bebidas)",
-      fee: "Plataforma (UberEats / Glovo)",
-      prices: "Premium especialista",
-      focus: "Álcool 30% itens / 58% receita • Água e bebidas",
-      proximity: "Campo Ourique",
-    },
-  ];
-
-  const rows = COMPETITORS.map(c => {
-    const ratingBar = c.rating
-      ? `<div style="display:flex;align-items:center;gap:3px">
-          <span style="font-size:11px;color:#f59e0b;font-weight:700">★ ${c.rating}</span>
-          <div style="flex:1;height:5px;background:#e2e8f0;border-radius:3px;overflow:hidden;max-width:40px">
-            <div style="height:100%;width:${(c.rating/5*100).toFixed(0)}%;background:${c.rating>=4?'#10b981':c.rating>=3?'#f59e0b':'#ef4444'};border-radius:3px"></div>
-          </div>
-          ${c.reviews ? `<span style="font-size:9px;color:#94a3b8">(${c.reviews})</span>` : ''}
-        </div>`
-      : `<span style="font-size:10px;color:#94a3b8">sem dados</span>`;
-
-    return `
-    <div style="padding:8px 0;border-bottom:1px solid #f1f5f9">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
-        <div style="width:10px;height:10px;border-radius:2px;background:${c.color};flex-shrink:0"></div>
-        <span style="font-size:12px;font-weight:700;color:#0f172a">${c.name}</span>
-        <span style="font-size:10px;color:#94a3b8;margin-left:auto">${c.stores} loja${c.stores>1?'s':''}</span>
-      </div>
-      <div style="margin-left:16px">
-        <div style="margin-bottom:2px">${ratingBar}</div>
-        <div style="font-size:10px;color:#64748b;margin-bottom:1px">📦 ${c.catalog}</div>
-        <div style="font-size:10px;color:#64748b;margin-bottom:1px">💶 ${c.fee}</div>
-        <div style="font-size:10px;color:#374151;font-style:italic">${c.focus}</div>
-      </div>
-    </div>`;
-  }).join("");
-
-  panel.innerHTML = `
-    <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Dark stores em Lisboa</div>
-    ${rows}
-    <div style="margin-top:8px;padding:6px;background:#eff6ff;border-radius:5px;border:1px solid #bfdbfe">
-      <div style="font-size:10px;font-weight:700;color:#1d4ed8;margin-bottom:3px">Diferencial Sortido</div>
-      <div style="font-size:10px;color:#1e40af;line-height:1.5">
-        Especialista em bebidas/álcool com catálogo curado.<br>
-        Glovo Express é o rival mais próximo — catálogo 5× maior mas focado em groceries. Getir tem pior rating.
-      </div>
-    </div>
-    <div style="margin-top:4px;font-size:9px;color:#94a3b8">Ratings: Google Places · Catálogo: dados reais Glovo · Bolt/Getir estimativa pública</div>`;
-
-  panel.style.display = "block";
-  btn.classList.add("active");
-}
-
 // --- Comparação de Preços ---
 function haversineDist(lat1, lon1, lat2, lon2) {
   const R = 6371;
@@ -1712,98 +1533,94 @@ function haversineDist(lat1, lon1, lat2, lon2) {
 
 function togglePriceComp() {
   const btn   = document.getElementById("priceCompBtn");
-  const panel = document.getElementById("priceCompPanel");
+  const float = document.getElementById("priceCompFloat");
   if (priceCompOn) {
     priceCompOn = false;
     btn.classList.remove("active");
-    panel.style.display = "none";
+    float.classList.remove("visible");
     return;
   }
   priceCompOn = true;
   btn.classList.add("active");
-  panel.style.display = "block";
-  panel.innerHTML = '<div style="color:#64748b;font-style:italic;">Clica no mapa para ver o concorrente mais próximo e comparar preços</div>';
+  float.classList.add("visible");
 }
+
+document.getElementById("priceCompClose").addEventListener("click", () => {
+  priceCompOn = false;
+  document.getElementById("priceCompBtn").classList.remove("active");
+  document.getElementById("priceCompFloat").classList.remove("visible");
+});
 
 map.on("click", function(e) {
   if (!priceCompOn) return;
-  if (!darkStoresRaw.length) return;
+  if (!darkStoresRaw.length || !priceCompData.length) return;
   const { lat, lng } = e.latlng;
 
-  // Find nearest store per brand
-  const brands = {};
+  // Find nearest darkstore per brand (for distance pills)
+  const nearestDark = {};
   for (const s of darkStoresRaw) {
     const d = haversineDist(lat, lng, s.lat, s.lon);
-    if (!brands[s.name] || d < brands[s.name].dist) {
-      brands[s.name] = { store: s, dist: d };
+    if (!nearestDark[s.name] || d < nearestDark[s.name].dist) {
+      nearestDark[s.name] = { store: s, dist: d };
     }
   }
 
-  const panel = document.getElementById("priceCompPanel");
+  const pillsEl   = document.getElementById("priceCompPills");
+  const tableWrap = document.getElementById("priceCompTableWrap");
+  const hintEl    = document.getElementById("priceCompHint");
 
-  // Brand header pills
-  const BRAND_ORDER = ["Glovo Market", "Bolt Market", "Getir"];
-  const brandMeta = {
-    "Glovo Market": { short: "Glovo", hasPrice: true },
-    "Bolt Market":  { short: "Bolt",  hasPrice: false },
-    "Getir":        { short: "Getir", hasPrice: false },
-  };
-
-  let pills = "";
-  for (const bname of BRAND_ORDER) {
-    if (!brands[bname]) continue;
-    const { store, dist } = brands[bname];
+  // Darkstore distance pills
+  const DARK_ORDER  = ["Glovo Market", "Bolt Market", "Getir"];
+  const DARK_LABELS = { "Glovo Market": "Glovo Express", "Bolt Market": "Bolt Market", "Getir": "Getir" };
+  const DARK_COLORS = { "Glovo Market": "#ffc244", "Bolt Market": "#34d186", "Getir": "#5c16c5" };
+  pillsEl.innerHTML = "";
+  for (const bname of DARK_ORDER) {
+    if (!nearestDark[bname]) continue;
+    const { store, dist } = nearestDark[bname];
     const distStr = dist < 1 ? `${Math.round(dist*1000)} m` : `${dist.toFixed(1)} km`;
-    pills += `<span style="display:inline-flex;align-items:center;gap:4px;background:#f1f5f9;border-radius:5px;padding:3px 7px;margin-right:4px;margin-bottom:4px;">
-      <span style="width:7px;height:7px;border-radius:50%;background:${store.color};display:inline-block;"></span>
-      <span style="font-weight:600;font-size:11px;">${brandMeta[bname].short}</span>
-      <span style="color:#94a3b8;font-size:10px;">${distStr}</span>
-    </span>`;
+    const pill = document.createElement("div");
+    pill.className = "pcf-pill";
+    pill.innerHTML = `<span class="dot" style="background:${DARK_COLORS[bname]}"></span><strong>${DARK_LABELS[bname]}</strong><span>${distStr}</span>`;
+    pillsEl.appendChild(pill);
+  }
+  for (const [label, color] of [["Continente", "#e63312"], ["Auchan", "#e97926"]]) {
+    const pill = document.createElement("div");
+    pill.className = "pcf-pill";
+    pill.innerHTML = `<span class="dot" style="background:${color}"></span><strong>${label}</strong><span>online</span>`;
+    pillsEl.appendChild(pill);
   }
 
-  // Price table — one column per brand with price data, rest show "—"
-  const activeBrands = BRAND_ORDER.filter(b => brands[b]);
-  let thCols = activeBrands.map(b => {
-    const meta = brandMeta[b];
-    const color = brands[b].store.color;
-    return `<th style="text-align:right;padding:3px 5px;color:${color};font-weight:700;">${meta.short}</th>`;
-  }).join("");
+  function diffCell(sortido, comp) {
+    if (comp == null) return `<td class="no-data">—</td>`;
+    const diff = Math.round((sortido - comp) / comp * 100);
+    const cls  = diff > 0 ? "diff-up" : "diff-dn";
+    const arrow = diff > 0 ? "▲" : "▼";
+    return `<td><span class="price-val">€${comp.toFixed(2)}</span><br><span class="${cls}">${arrow}${Math.abs(diff)}%</span></td>`;
+  }
 
   let rows = "";
   for (const item of priceCompData) {
-    let tdCols = "";
-    for (const bname of activeBrands) {
-      const meta = brandMeta[bname];
-      if (meta.hasPrice && item.glovo_price != null) {
-        const diff = item.diff_pct;
-        const color = diff > 0 ? "#dc2626" : "#16a34a";
-        const arrow = diff > 0 ? "▲" : "▼";
-        tdCols += `<td style="text-align:right;padding:4px 5px;">€${item.glovo_price.toFixed(2)} <span style="font-weight:700;color:${color};font-size:10px;">${arrow}${Math.abs(diff).toFixed(0)}%</span></td>`;
-      } else {
-        tdCols += `<td style="text-align:right;padding:4px 5px;color:#cbd5e1;">—</td>`;
-      }
-    }
-    rows += `<tr style="border-bottom:1px solid #f1f5f9;">
-      <td style="padding:4px 6px 4px 0;color:#374151;">${item.label}</td>
-      <td style="padding:4px 5px;text-align:right;font-weight:600;">€${item.sortido_price.toFixed(2)}</td>
-      ${tdCols}
+    if (!item.sortido) continue;
+    rows += `<tr>
+      <td>${item.name}</td>
+      <td><span class="price-val">€${item.sortido.toFixed(2)}</span></td>
+      ${diffCell(item.sortido, item.glovo)}
+      ${diffCell(item.sortido, item.continente)}
+      ${diffCell(item.sortido, item.auchan)}
     </tr>`;
   }
 
-  panel.innerHTML = `
-    <div style="margin-bottom:8px;display:flex;flex-wrap:wrap;">${pills}</div>
-    <table style="width:100%;border-collapse:collapse;font-size:11px;">
-      <thead>
-        <tr style="color:#94a3b8;font-size:10px;text-transform:uppercase;border-bottom:1px solid #e2e8f0;">
-          <th style="text-align:left;padding:3px 6px 3px 0;">Produto</th>
-          <th style="text-align:right;padding:3px 5px;">Sortido</th>
-          ${thCols}
-        </tr>
-      </thead>
-      <tbody>${rows}</tbody>
-    </table>
-    <div style="margin-top:6px;font-size:10px;color:#94a3b8;">% vs Sortido · Bolt/Getir sem dados de preço (bloqueiam scraping)</div>
-  `;
+  tableWrap.innerHTML = `<table>
+    <thead><tr>
+      <th>Produto</th>
+      <th>Sortido</th>
+      <th style="color:#ffc244;">Glovo</th>
+      <th style="color:#e63312;">Cont.</th>
+      <th style="color:#e97926;">Auchan</th>
+    </tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+  hintEl.style.display = "";
 });
 
 // --- Dark stores layer (Glovo Market, Bolt Market, Getir) ---
@@ -3063,20 +2880,10 @@ clearBtn.addEventListener("click", () => {
     document.getElementById("diaSemanaBtn").classList.remove("active");
     document.getElementById("legendDiaSemana").classList.remove("visible");
   }
-  const catPanel = document.getElementById("categoriasPanel");
-  if (catPanel && catPanel.style.display !== "none") {
-    catPanel.style.display = "none";
-    document.getElementById("categoriasBtn").classList.remove("active");
-  }
-  const concPanel = document.getElementById("concorrentesPanel");
-  if (concPanel && concPanel.style.display !== "none") {
-    concPanel.style.display = "none";
-    document.getElementById("concorrentesBtn").classList.remove("active");
-  }
   if (priceCompOn) {
     priceCompOn = false;
     document.getElementById("priceCompBtn").classList.remove("active");
-    document.getElementById("priceCompPanel").style.display = "none";
+    document.getElementById("priceCompFloat").classList.remove("visible");
   }
 });
 </script>
