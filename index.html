@@ -53,6 +53,8 @@
     .iso-label { font-size: 12px; color: #64748b; font-weight: 500; min-width: 32px; }
     .iso-row input[type=range] { flex: 1; accent-color: #2563eb; }
     .iso-val { font-size: 12px; font-weight: 600; color: #1e293b; min-width: 42px; text-align: right; }
+    #tRangeMin::-webkit-slider-thumb, #tRangeMax::-webkit-slider-thumb { pointer-events: all; width: 14px; height: 14px; border-radius: 50%; background: #2563eb; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.3); cursor: pointer; -webkit-appearance: none; appearance: none; }
+    #tRangeMin::-moz-range-thumb, #tRangeMax::-moz-range-thumb { pointer-events: all; width: 12px; height: 12px; border-radius: 50%; background: #2563eb; border: 2px solid white; cursor: pointer; }
 
     /* Inline legend bars inside sidebar */
     .legend-inline {
@@ -129,7 +131,7 @@
       display: none;
       position: fixed;
       bottom: 24px; right: 24px;
-      width: 560px; max-width: calc(100vw - 264px);
+      width: 640px; max-width: calc(100vw - 264px);
       max-height: calc(100vh - 60px);
       background: #fff;
       border-radius: 12px;
@@ -451,22 +453,19 @@
       <button id="segundaBtn" class="layer-btn"><span class="btn-dot"></span>2ª Localização</button>
     </div>
     <div id="segundaInfo" style="display:none;margin-top:6px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0;font-size:12px;line-height:1.6">
-      <div style="font-weight:700;color:#7c3aed;margin-bottom:6px">Candidato óptimo</div>
-      <div id="segundaCoords" style="font-size:11px;color:#64748b;margin-bottom:8px"></div>
-      <div id="segundaStats"></div>
+      <div style="font-weight:700;color:#7c3aed;margin-bottom:2px">Top 3 candidatos</div>
+      <div style="font-size:10px;color:#94a3b8;margin-bottom:8px">Ordenados por procura não coberta × rendimento, penalizada por concorrência</div>
+      <div id="segundaList"></div>
       <div style="margin-top:8px;padding-top:8px;border-top:1px solid #e2e8f0">
         <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">No mapa</div>
         <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px">
           <span style="flex-shrink:0;margin-top:2px;width:20px;height:10px;border-radius:10px;background:rgba(124,58,237,0.25);border:2px solid rgba(124,58,237,0.9);display:inline-block"></span>
-          <span style="font-size:11px;color:#374151;line-height:1.4"><b>Mancha roxa</b> — onde estão concentradas as ordens que seriam captadas por esta loja</span>
+          <span style="font-size:11px;color:#374151;line-height:1.4"><b>Mancha roxa</b> — ordens que seriam captadas pelo candidato #1</span>
         </div>
         <div style="display:flex;align-items:flex-start;gap:8px">
           <span style="flex-shrink:0;margin-top:2px;width:20px;height:20px;border-radius:50%;background:rgba(124,58,237,0.08);border:2px dashed rgba(124,58,237,0.7);display:inline-block"></span>
-          <span style="font-size:11px;color:#374151;line-height:1.4"><b>Círculo roxo</b> — raio de entrega estimado (distância máxima que a loja consegue servir, baseada nas ordens actuais)</span>
+          <span style="font-size:11px;color:#374151;line-height:1.4"><b>Círculo roxo</b> sólido = #1, tracejado = #2 e #3</span>
         </div>
-      </div>
-      <div style="margin-top:8px;padding-top:8px;border-top:1px solid #e2e8f0;font-size:10px;color:#94a3b8;line-height:1.5">
-        O ponto óptimo é calculado automaticamente: o algoritmo encontra a localização que mais reduz os tempos de entrega das ordens actualmente mais lentas.
       </div>
       <div id="segundaIsoStats" style="margin-top:8px;padding-top:8px;border-top:1px solid #e2e8f0;display:none"></div>
     </div>
@@ -482,11 +481,36 @@
 <div id="hint">Clique no mapa para colocar um marcador e calcular o alcance</div>
 
 <div id="legend2" class="fl-legend">
-  <h4>Tempo de entrega</h4>
-  <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(34,197,94,0.85)"></span>&lt; 20 min</div>
-  <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(255,200,0,0.85)"></span>20 – 27 min</div>
-  <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(249,115,22,0.85)"></span>27 – 35 min</div>
-  <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(239,68,68,0.85)"></span>&gt; 35 min</div>
+  <h4>Timing</h4>
+  <div style="display:flex;gap:3px;margin-bottom:8px">
+    <button class="tmode-btn" data-mode="total" style="flex:1;font-size:9px;padding:3px 2px;border:1px solid #1e293b;border-radius:3px;background:#1e293b;cursor:pointer;font-weight:700;color:#f8fafc">Total</button>
+    <button class="tmode-btn" data-mode="prep"  style="flex:1;font-size:9px;padding:3px 2px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;cursor:pointer;font-weight:700;color:#6366f1">Prep</button>
+    <button class="tmode-btn" data-mode="wait"  style="flex:1;font-size:9px;padding:3px 2px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;cursor:pointer;font-weight:700;color:#d97706">Espera</button>
+    <button class="tmode-btn" data-mode="ride"  style="flex:1;font-size:9px;padding:3px 2px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;cursor:pointer;font-weight:700;color:#dc2626">Viagem</button>
+  </div>
+  <div style="margin-bottom:8px">
+    <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:#1e293b;margin-bottom:4px">
+      <span id="tRangeMinLbl">—</span>
+      <span style="color:#94a3b8;font-weight:400;font-size:9px">filtrar por intervalo</span>
+      <span id="tRangeMaxLbl">—</span>
+    </div>
+    <div style="position:relative;height:20px">
+      <div id="tRangeTrack" style="position:absolute;top:8px;left:0;right:0;height:4px;border-radius:2px;background:#e2e8f0"></div>
+      <div id="tRangeFill"  style="position:absolute;top:8px;height:4px;border-radius:2px;background:linear-gradient(to right,#22c55e,#f59e0b,#ef4444)"></div>
+      <input type="range" id="tRangeMin" min="0" max="60" value="0"  step="1"
+             style="position:absolute;width:100%;top:0;appearance:none;background:transparent;pointer-events:none;accent-color:#2563eb">
+      <input type="range" id="tRangeMax" min="0" max="60" value="60" step="1"
+             style="position:absolute;width:100%;top:0;appearance:none;background:transparent;pointer-events:none;accent-color:#2563eb">
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:9px;color:#94a3b8;margin-top:2px"><span id="tRangeAbsMin">0</span><span id="tRangeAbsMax">60 min</span></div>
+  </div>
+  <div id="tLegendRows">
+    <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(34,197,94,0.85)"></span><span id="tleg0"></span></div>
+    <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(255,200,0,0.85)"></span><span id="tleg1"></span></div>
+    <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(249,115,22,0.85)"></span><span id="tleg2"></span></div>
+    <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(239,68,68,0.85)"></span><span id="tleg3"></span></div>
+  </div>
+  <div id="timingSplit" style="margin-top:8px;font-size:10px;color:#64748b;line-height:1.6;border-top:1px solid #f1f5f9;padding-top:7px"></div>
 </div>
 
 <div id="legend3" class="fl-legend">
@@ -536,7 +560,7 @@
   <div class="pcf-table-wrap" id="priceCompTableWrap">
     <div class="pcf-prompt">Clica no mapa para ver os preços dos concorrentes mais próximos</div>
   </div>
-  <div class="pcf-hint" id="priceCompHint" style="display:none;">% vs Sortido · preços por unidade · fonte: Continente e Auchan online</div>
+  <div class="pcf-hint" id="priceCompHint" style="display:none;">% vs Sortido · preços por unidade · fonte: Glovo, Bolt Market, Continente, Auchan</div>
 </div>
 
 <script>
@@ -1458,7 +1482,7 @@ async function loadSupermercados() {
   for (const s of data) {
     const icon = L.divIcon({
       className: "",
-      html: `<div style="width:10px;height:10px;border-radius:50%;background:#6b7280;border:1.5px solid rgba(255,255,255,0.8);box-shadow:0 1px 3px rgba(0,0,0,0.25)"></div>`,
+      html: `<div style="width:10px;height:10px;border-radius:50%;background:${s.color};border:1.5px solid rgba(255,255,255,0.8);box-shadow:0 1px 3px rgba(0,0,0,0.25)"></div>`,
       iconSize: [10, 10],
       iconAnchor: [5, 5],
     });
@@ -1474,7 +1498,7 @@ async function loadSupermercados() {
     const btn = document.createElement("button");
     btn.className = "sbrand";
     btn.dataset.brand = name;
-    btn.innerHTML = `<span class="sdot" style="background:#6b7280"></span>${name} <span style="opacity:.55;font-size:10px">${n}</span>`;
+    btn.innerHTML = `<span class="sdot" style="background:${colorMap[name] || '#6b7280'}"></span>${name} <span style="opacity:.55;font-size:10px">${n}</span>`;
     btn.addEventListener("click", () => applySuperFilter(name));
     bar.appendChild(btn);
   }
@@ -1590,12 +1614,13 @@ map.on("click", function(e) {
     pillsEl.appendChild(pill);
   }
 
-  function diffCell(sortido, comp) {
+  function diffCell(sortido, comp, matchedName) {
     if (comp == null) return `<td class="no-data">—</td>`;
     const diff = Math.round((sortido - comp) / comp * 100);
     const cls  = diff > 0 ? "diff-up" : "diff-dn";
     const arrow = diff > 0 ? "▲" : "▼";
-    return `<td><span class="price-val">€${comp.toFixed(2)}</span><br><span class="${cls}">${arrow}${Math.abs(diff)}%</span></td>`;
+    const title = matchedName ? ` title="${matchedName.replace(/"/g,'&quot;')}"` : "";
+    return `<td${title}><span class="price-val">€${comp.toFixed(2)}</span><br><span class="${cls}">${arrow}${Math.abs(diff)}%</span></td>`;
   }
 
   let rows = "";
@@ -1604,9 +1629,10 @@ map.on("click", function(e) {
     rows += `<tr>
       <td>${item.name}</td>
       <td><span class="price-val">€${item.sortido.toFixed(2)}</span></td>
-      ${diffCell(item.sortido, item.glovo)}
-      ${diffCell(item.sortido, item.continente)}
-      ${diffCell(item.sortido, item.auchan)}
+      ${diffCell(item.sortido, item.glovo, item.glovo_name)}
+      ${diffCell(item.sortido, item.bolt, item.bolt_name)}
+      ${diffCell(item.sortido, item.continente, item.continente_name)}
+      ${diffCell(item.sortido, item.auchan, item.auchan_name)}
     </tr>`;
   }
 
@@ -1615,6 +1641,7 @@ map.on("click", function(e) {
       <th>Produto</th>
       <th>Sortido</th>
       <th style="color:#ffc244;">Glovo</th>
+      <th style="color:#34d186;">Bolt</th>
       <th style="color:#e63312;">Cont.</th>
       <th style="color:#e97926;">Auchan</th>
     </tr></thead>
@@ -1644,7 +1671,7 @@ async function loadDarkStores() {
   for (const s of data) {
     const icon = L.divIcon({
       className: "",
-      html: `<div style="width:13px;height:13px;border-radius:3px;background:#1f2937;border:2px solid rgba(255,255,255,0.7);box-shadow:0 1px 4px rgba(0,0,0,0.35)"></div>`,
+      html: `<div style="width:13px;height:13px;border-radius:3px;background:${s.color};border:2px solid rgba(255,255,255,0.7);box-shadow:0 1px 4px rgba(0,0,0,0.35)"></div>`,
       iconSize: [13, 13],
       iconAnchor: [6, 6],
     });
@@ -1662,7 +1689,7 @@ async function loadDarkStores() {
     const btn = document.createElement("button");
     btn.className = "dbrand";
     btn.dataset.brand = name;
-    btn.innerHTML = `<span class="ddot" style="background:#1f2937"></span>${name} <span style="opacity:.55;font-size:10px">${n}</span>`;
+    btn.innerHTML = `<span class="ddot" style="background:${colorMap[name] || '#1f2937'}"></span>${name} <span style="opacity:.55;font-size:10px">${n}</span>`;
     btn.addEventListener("click", () => applyDarkFilter(name));
     bar.appendChild(btn);
   }
@@ -1801,8 +1828,8 @@ drawSortidoAnchor();
 
 
 // --- Deliveries (sized circles + KDE contour) + Timing choropleth ---
-let ordersData   = null;  // [lat, lng, mins, hour, is_al, order_value, dow]  from orders_geocoded.json
-let addrData     = null;  // [lat, lng, cnt, avg_mins, is_al, total_rev, avg_val]  built per filter
+let ordersData   = null;  // [lat, lng, total_mins, hour, is_al, order_value, dow, prep_mins, wait_mins, ride_mins]
+let addrData     = null;  // [lat, lng, cnt, avg_mins, is_al, total_rev, avg_val, avg_prep, avg_wait, avg_ride]  built per filter
 let delivLayerOn  = false;
 let delivLayer    = null;
 let timingLayerOn = false;
@@ -1827,7 +1854,7 @@ const DOW_GROUPS = {
   '3': d => d === 3, '4': d => d === 4, '5': d => d === 5, '6': d => d === 6,
 };
 
-// [lat, lng, mins, hour, is_al, order_value, dow]
+// [lat, lng, total_mins, hour, is_al, order_value, dow, prep_mins, wait_mins, ride_mins]
 function buildAddrData(slot, type, dow) {
   if (!ordersData) return null;
   const testSlot = SLOTS[slot] || SLOTS.all;
@@ -1837,13 +1864,16 @@ function buildAddrData(slot, type, dow) {
                  : () => true;
   const agg = {};
   for (const order of ordersData) {
-    const [lat, lng, mins, hour, is_al, order_value, d_ow] = order;
+    const [lat, lng, mins, hour, is_al, order_value, d_ow, prep, wait, ride] = order;
     if (!testSlot(hour) || !testType(is_al) || !testDow(d_ow)) continue;
     const key = `${lat.toFixed(5)},${lng.toFixed(5)}`;
-    if (!agg[key]) agg[key] = { lat, lng, cnt: 0, mSum: 0, mCnt: 0, is_al, revSum: 0, revCnt: 0 };
+    if (!agg[key]) agg[key] = { lat, lng, cnt: 0, mSum: 0, mCnt: 0, is_al, revSum: 0, revCnt: 0, prepSum: 0, waitSum: 0, rideSum: 0, splitCnt: 0 };
     agg[key].cnt++;
     if (mins != null) { agg[key].mSum += mins; agg[key].mCnt++; }
     if (order_value != null) { agg[key].revSum += order_value; agg[key].revCnt++; }
+    if (prep != null && wait != null && ride != null) {
+      agg[key].prepSum += prep; agg[key].waitSum += wait; agg[key].rideSum += ride; agg[key].splitCnt++;
+    }
   }
   return Object.values(agg)
     .map(v => [
@@ -1852,15 +1882,17 @@ function buildAddrData(slot, type, dow) {
       v.is_al,
       v.revCnt > 0 ? v.revSum : null,
       v.revCnt > 0 ? v.revSum / v.revCnt : null,
+      v.splitCnt > 0 ? v.prepSum / v.splitCnt : null,
+      v.splitCnt > 0 ? v.waitSum / v.splitCnt : null,
+      v.splitCnt > 0 ? v.rideSum / v.splitCnt : null,
     ])
     .sort((a, b) => b[2] - a[2]);
 }
 
-// green → yellow → orange → red  (mins 10–45)
-function timingColorRgb(mins) {
-  const t = Math.max(0, Math.min(1, (mins - 10) / 35));
+// green → yellow → orange → red  (t = 0..1)
+function timingColorRgb(t) {
   let r, g, b;
-  if (t < 0.33)      { const s = t/0.33;      r = Math.round(50+205*s); g = Math.round(200-50*s); b = 50; }
+  if (t < 0.33)      { const s = t/0.33;        r = Math.round(50+205*s); g = Math.round(200-50*s); b = 50; }
   else if (t < 0.66) { const s = (t-0.33)/0.33; r = 255; g = Math.round(150-100*s); b = 0; }
   else               { const s = (t-0.66)/0.34; r = 255; g = Math.round(50-50*s); b = 0; }
   return [r, g, b];
@@ -2033,7 +2065,7 @@ const DelivLayer = L.Layer.extend({
         [red, grn, blu] = [139, 92, 246];
       } else {
         // Residência: green→red by delivery time
-        [red, grn, blu] = avgMins != null ? timingColorRgb(avgMins) : [120,120,120];
+        [red, grn, blu] = avgMins != null ? timingColorRgb(Math.max(0, Math.min(1, (avgMins - 10) / 35))) : [120,120,120];
       }
 
       ctx.beginPath();
@@ -2077,19 +2109,27 @@ const TimingLayer = L.Layer.extend({
     canvas.width = w; canvas.height = h;
     L.DomUtil.setPosition(canvas, map.containerPointToLayerPoint([0, 0]));
     const CELL = 0.003, grid = {};
-    for (const [lat, lng, mins] of ordersData) {
+    for (const [lat, lng, mins, , , , , prep, wait, ride] of ordersData) {
       if (mins == null) continue;
       const row = Math.floor(lat/CELL), col = Math.floor(lng/CELL);
       const key = `${row},${col}`;
-      if (!grid[key]) grid[key] = { sum:0, cnt:0, lat:(row+0.5)*CELL, lng:(col+0.5)*CELL };
+      if (!grid[key]) grid[key] = { sum:0, cnt:0, lat:(row+0.5)*CELL, lng:(col+0.5)*CELL, prepSum:0, waitSum:0, rideSum:0, splitCnt:0 };
       grid[key].sum += mins; grid[key].cnt++;
+      if (prep != null && wait != null && ride != null) {
+        grid[key].prepSum += prep; grid[key].waitSum += wait; grid[key].rideSum += ride; grid[key].splitCnt++;
+      }
     }
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, w, h);
+    const mode = currentTimingMode;
+    const cfg  = TIMING_MODE_CFG[mode];
     for (const cell of Object.values(grid)) {
       if (cell.cnt < 2) continue;
-      const avg = cell.sum / cell.cnt;
-      const [r,g,b] = timingColorRgb(avg);
+      const val = timingCellValue(cell, mode);
+      if (val == null) continue;
+      if (val < timingMinFilter || val > timingMaxFilter) continue;
+      const t = Math.max(0, Math.min(1, (val - cfg.lo) / (cfg.hi - cfg.lo)));
+      const [r,g,b] = timingColorRgb(t);
       const p1 = map.latLngToContainerPoint([cell.lat-CELL/2, cell.lng-CELL/2]);
       const p2 = map.latLngToContainerPoint([cell.lat+CELL/2, cell.lng+CELL/2]);
       const x = Math.min(p1.x,p2.x), y = Math.min(p1.y,p2.y);
@@ -2100,7 +2140,10 @@ const TimingLayer = L.Layer.extend({
       if (map.getZoom() >= 14 && cw > 20) {
         ctx.fillStyle = "rgba(0,0,0,0.8)"; ctx.font = "bold 9px sans-serif";
         ctx.textAlign = "center"; ctx.textBaseline = "middle";
-        ctx.fillText(`${Math.round(avg)}m·${cell.cnt}`, Math.round(x+cw/2), Math.round(y+ch/2));
+        const label = mode === 'total' && cell.splitCnt >= 2
+          ? `${Math.round(cell.prepSum/cell.splitCnt)}+${Math.round(cell.waitSum/cell.splitCnt)}+${Math.round(cell.rideSum/cell.splitCnt)}`
+          : `${Math.round(val)}m`;
+        ctx.fillText(label, Math.round(x+cw/2), Math.round(y+ch/2));
       }
     }
   }
@@ -2120,6 +2163,127 @@ function toggleDelivLayer() {
   }
 }
 
+function updateTimingSplit() {
+  const el = document.getElementById("timingSplit");
+  if (!el || !ordersData) return;
+  const testSlot = SLOTS[currentSlot] || SLOTS.all;
+  const testDow  = DOW_GROUPS[currentDow] || DOW_GROUPS.all;
+  let prepS = 0, waitS = 0, rideS = 0, n = 0;
+  for (const o of ordersData) {
+    const [,,mins,hour,,,dow,prep,wait,ride] = o;
+    if (!testSlot(hour) || !testDow(dow)) continue;
+    const filterVal = orderTimingValue(o, currentTimingMode);
+    if (filterVal == null || filterVal < timingMinFilter || filterVal > timingMaxFilter) continue;
+    if (prep != null && wait != null && ride != null) {
+      prepS += prep; waitS += wait; rideS += ride; n++;
+    }
+  }
+  if (n < 5) { el.innerHTML = ''; return; }
+  const avgPrep = Math.round(prepS/n), avgWait = Math.round(waitS/n), avgRide = Math.round(rideS/n);
+  const total = avgPrep + avgWait + avgRide;
+  const pPrep = Math.round(avgPrep/total*100), pWait = Math.round(avgWait/total*100), pRide = 100-pPrep-pWait;
+  el.innerHTML =
+    `<div style="margin-bottom:4px;font-size:10px;color:#94a3b8">${n} ordens · decomposição média</div>` +
+    `<div style="height:8px;border-radius:4px;overflow:hidden;display:flex;margin-bottom:6px">` +
+      `<div style="width:${pPrep}%;background:#6366f1" title="Prep ${avgPrep}m"></div>` +
+      `<div style="width:${pWait}%;background:#f59e0b" title="Espera ${avgWait}m"></div>` +
+      `<div style="width:${pRide}%;background:#ef4444" title="Viagem ${avgRide}m"></div>` +
+    `</div>` +
+    `<div><span style="color:#6366f1">■</span> Prep: <b>${avgPrep} min</b> <span style="color:#94a3b8">(${pPrep}%)</span></div>` +
+    `<div><span style="color:#f59e0b">■</span> Espera estafeta: <b>${avgWait} min</b> <span style="color:#94a3b8">(${pWait}%)</span></div>` +
+    `<div><span style="color:#ef4444">■</span> Viagem: <b>${avgRide} min</b> <span style="color:#94a3b8">(${pRide}%)</span></div>`;
+}
+
+// --- Timing mode + range filter ---
+let currentTimingMode = 'total';
+let timingMinFilter = 0, timingMaxFilter = 60;
+
+const TIMING_MODE_CFG = {
+  total: { lo: 0,  hi: 60, label: 'Tempo total' },
+  prep:  { lo: 0,  hi: 20, label: 'Prep' },
+  wait:  { lo: 0,  hi: 15, label: 'Espera estafeta' },
+  ride:  { lo: 0,  hi: 40, label: 'Viagem' },
+};
+
+function timingCellValue(cell, mode) {
+  if (mode === 'prep')  return cell.splitCnt >= 2 ? cell.prepSum / cell.splitCnt : null;
+  if (mode === 'wait')  return cell.splitCnt >= 2 ? cell.waitSum / cell.splitCnt : null;
+  if (mode === 'ride')  return cell.splitCnt >= 2 ? cell.rideSum / cell.splitCnt : null;
+  return cell.cnt >= 2 ? cell.sum / cell.cnt : null;
+}
+
+function orderTimingValue(o, mode) {
+  // o = [lat,lng,total,hour,is_al,val,dow,prep,wait,ride]
+  if (mode === 'prep')  return o[7];
+  if (mode === 'wait')  return o[8];
+  if (mode === 'ride')  return o[9];
+  return o[2];
+}
+
+function updateTimingRangeUI() {
+  const cfg = TIMING_MODE_CFG[currentTimingMode];
+  const span = cfg.hi - cfg.lo;
+  const lo = timingMinFilter, hi = timingMaxFilter;
+  document.getElementById("tRangeMinLbl").textContent = lo + " min";
+  document.getElementById("tRangeMaxLbl").textContent = hi + " min";
+  document.getElementById("tRangeAbsMin").textContent = cfg.lo;
+  document.getElementById("tRangeAbsMax").textContent = cfg.hi + " min";
+  const pctLo = ((lo - cfg.lo) / span * 100).toFixed(1) + '%';
+  const pctW  = ((hi - lo)     / span * 100).toFixed(1) + '%';
+  document.getElementById("tRangeFill").style.left  = pctLo;
+  document.getElementById("tRangeFill").style.width = pctW;
+  // legend breakpoint labels
+  const b1 = Math.round(cfg.lo + (cfg.hi - cfg.lo) * 0.33);
+  const b2 = Math.round(cfg.lo + (cfg.hi - cfg.lo) * 0.66);
+  const lbls = [`< ${b1} min`, `${b1} – ${b2} min`, `${b2} – ${cfg.hi} min`, `> ${cfg.hi} min`];
+  lbls.forEach((t, i) => { const el = document.getElementById(`tleg${i}`); if (el) el.textContent = t; });
+}
+
+function setTimingMode(mode) {
+  currentTimingMode = mode;
+  const cfg = TIMING_MODE_CFG[mode];
+  // reset range to full for this mode
+  timingMinFilter = cfg.lo;
+  timingMaxFilter = cfg.hi;
+  const rMin = document.getElementById("tRangeMin");
+  const rMax = document.getElementById("tRangeMax");
+  rMin.min = cfg.lo; rMin.max = cfg.hi; rMin.value = cfg.lo;
+  rMax.min = cfg.lo; rMax.max = cfg.hi; rMax.value = cfg.hi;
+  // button styles
+  document.querySelectorAll(".tmode-btn").forEach(b => {
+    const isActive = b.dataset.mode === mode;
+    b.style.background   = isActive ? "#1e293b" : "#f8fafc";
+    b.style.borderColor  = isActive ? "#1e293b" : "#cbd5e1";
+    b.style.color        = isActive ? "#f8fafc"
+      : b.dataset.mode === 'prep' ? "#6366f1"
+      : b.dataset.mode === 'wait' ? "#d97706"
+      : b.dataset.mode === 'ride' ? "#dc2626"
+      : "#334155";
+  });
+  updateTimingRangeUI();
+  if (timingLayerOn) { updateTimingSplit(); if (timingLayer) timingLayer._draw(); }
+}
+
+(function wireTimingControls() {
+  document.querySelectorAll(".tmode-btn").forEach(btn => {
+    btn.addEventListener("click", () => setTimingMode(btn.dataset.mode));
+  });
+  const rMin = document.getElementById("tRangeMin");
+  const rMax = document.getElementById("tRangeMax");
+  if (!rMin || !rMax) return;
+  function syncRange() {
+    let lo = parseInt(rMin.value), hi = parseInt(rMax.value);
+    if (lo > hi - 1) { lo = hi - 1; rMin.value = lo; }
+    if (hi < lo + 1) { hi = lo + 1; rMax.value = hi; }
+    timingMinFilter = lo; timingMaxFilter = hi;
+    updateTimingRangeUI();
+    if (timingLayer) timingLayer._draw();
+    if (timingLayerOn) updateTimingSplit();
+  }
+  rMin.addEventListener("input", syncRange);
+  rMax.addEventListener("input", syncRange);
+})();
+
 function toggleTimingLayer() {
   const btn = document.getElementById("timingBtn");
   const legend2 = document.getElementById("legend2");
@@ -2129,6 +2293,8 @@ function toggleTimingLayer() {
   } else {
     if (!timingLayer) timingLayer = new TimingLayer();
     map.addLayer(timingLayer); timingLayerOn = true; btn.classList.add("active"); legend2.classList.add("visible");
+    setTimingMode(currentTimingMode);
+    updateTimingSplit();
   }
 }
 
@@ -2158,6 +2324,7 @@ document.querySelectorAll("#slotBar .slot").forEach(btn => {
     if (delivLayer) delivLayer._draw();
     if (receitaLayerOn && receitaLayer) receitaLayer._draw();
     if (coberturaLayerOn && coberturaLayer) coberturaLayer._draw();
+    if (timingLayerOn) updateTimingSplit();
   });
 });
 
@@ -2183,6 +2350,7 @@ document.querySelectorAll("#slotBar .dow").forEach(btn => {
     if (delivLayer) delivLayer._draw();
     if (receitaLayerOn && receitaLayer) receitaLayer._draw();
     if (coberturaLayerOn && coberturaLayer) coberturaLayer._draw();
+    if (timingLayerOn) updateTimingSplit();
   });
 });
 
@@ -2413,12 +2581,12 @@ function toggleCoberturaLayer() {
 document.getElementById("coberturaBtn").addEventListener("click", toggleCoberturaLayer);
 
 // --- Second location finder ---
-let segundaMarker  = null;
-let segundaIsoLayer = null;
-let segundaKDELayer = null;
-let s1IsoSegunda   = null;  // Store 1's isochrone shown during 2ª Loja analysis
-let segundaC2 = null;
-let segundaOn = false;
+let segundaMarkers   = [];
+let segundaIsoLayers = [];
+let segundaKDELayer  = null;
+let s1IsoSegunda     = null;
+let segundaC2        = null;
+let segundaOn        = false;
 
 const SegundaKDELayer = L.Layer.extend({
   onAdd(map) {
@@ -2459,15 +2627,17 @@ const SegundaKDELayer = L.Layer.extend({
 });
 
 function findSecondLocation(orders, s1Mask = null, darkStores = [], rentData = []) {
-  // Scoring = 65% dark-store proximity (proven quick-commerce demand in the area)
-  //         + 35% slow-order relief (existing S1 customers underserved, guaranteed revenue)
-  // Both components are normalised to [0,1] before weighting.
+  // Scoring = 50% gap demand  (population × income within delivery reach, discounted by
+  //                            competitor coverage — finds underserved high-value areas)
+  //         + 30% slow relief (existing S1 customers getting slow delivery — certain revenue)
+  //         + 20% rent        (operational cost; cheaper = better)
+  // All components normalised to [0,1] before weighting.
   const SLAT = 38.7255, SLNG = -9.1480;
   const { lat0, lat1, lon0, lon1, ROWS, COLS } = GEO;
   const CELL_LAT = (lat1 - lat0) / (ROWS - 1);
   const CELL_LON = (lon1 - lon0) / (COLS - 1);
 
-  // --- Component 1: slow-order relief (35%) ---
+  // --- Component 1: slow-order relief (30%) ---
   const minsArr = orders.map(o => o[2]).filter(m => m != null).sort((a, b) => a - b);
   const TARGET  = minsArr.length ? minsArr[Math.floor(minsArr.length / 2)] : 25;
   const MIN_DIST_SQ = (4.5 / 111) ** 2;
@@ -2507,12 +2677,12 @@ function findSecondLocation(orders, s1Mask = null, darkStores = [], rentData = [
     }
   }
 
-  // --- Component 2: dark-store proximity (65%) ---
-  // Each dark store contributes a proximity bonus that peaks at the store location
-  // and falls to 0 at the delivery radius. Multiple dark stores accumulate.
-  const dsRadius = deliveryRadiusKm(SLAT, SLNG); // same platform delivery radius
+  // --- Component 2: competitor coverage map (used as penalty) ---
+  // Measures how much of each cell's delivery catchment is already contested by competitors.
+  // High coverage = bad (we'd be fighting for the same customers they already have).
+  const dsRadius = deliveryRadiusKm(SLAT, SLNG);
   const dsRadDeg = dsRadius / 111;
-  const darkScore = new Float32Array(ROWS * COLS);
+  const compCoverage = new Float32Array(ROWS * COLS);
 
   for (const ds of darkStores) {
     const dr0 = Math.round((lat1 - ds.lat) / CELL_LAT);
@@ -2531,14 +2701,48 @@ function findSecondLocation(orders, s1Mask = null, darkStores = [], rentData = [
         const dLng = (clng - ds.lon) * 111.32 * Math.cos(clat * Math.PI / 180);
         const dist = Math.sqrt(dLat * dLat + dLng * dLng);
         if (dist < dsRadius) {
-          darkScore[r * COLS + c] += 1 - dist / dsRadius;
+          compCoverage[r * COLS + c] += 1 - dist / dsRadius;
+        }
+      }
+    }
+  }
+
+  // --- Component 2b: population × income demand per cell ---
+  // Total addressable spending power reachable from each candidate cell.
+  const popDemand = new Float32Array(ROWS * COLS);
+  if (popGrid) {
+    const piLat = popGrid.cols.indexOf("lat");
+    const piLon = popGrid.cols.indexOf("lon");
+    const piPop = popGrid.cols.indexOf("pop");
+    const piInc = popGrid.cols.indexOf("income_idx");
+    for (const row of popGrid.rows) {
+      const rlat = row[piLat], rlon = row[piLon];
+      const pop  = row[piPop];
+      if (!pop) continue;
+      const inc  = row[piInc] || 1.0;
+      const dr0  = Math.round((lat1 - rlat) / CELL_LAT);
+      const dc0  = Math.round((rlon  - lon0) / CELL_LON);
+      const rR   = Math.ceil(dsRadDeg / CELL_LAT) + 1;
+      const cR   = Math.ceil(dsRadDeg / CELL_LON) + 1;
+      for (let dr = -rR; dr <= rR; dr++) {
+        const r = dr0 + dr;
+        if (r < 0 || r >= ROWS) continue;
+        const clat = lat1 - r * CELL_LAT;
+        for (let dc = -cR; dc <= cR; dc++) {
+          const c = dc0 + dc;
+          if (c < 0 || c >= COLS) continue;
+          const clng = lon0 + c * CELL_LON;
+          const dLat = (clat - rlat) * 111.32;
+          const dLng = (clng - rlon) * 111.32 * Math.cos(clat * Math.PI / 180);
+          if (Math.sqrt(dLat * dLat + dLng * dLng) < dsRadius) {
+            popDemand[r * COLS + c] += pop * inc;
+          }
         }
       }
     }
   }
 
   // --- Component 3: rent affordability per cell (inverted — cheaper = better) ---
-  // For each cell find the nearest parish with rent data; normalise inversely.
   const rentScore = new Float32Array(ROWS * COLS);
   const localRents = rentData.filter(d => d.lat && d.lon);
   if (localRents.length > 0) {
@@ -2559,103 +2763,132 @@ function findSecondLocation(orders, s1Mask = null, darkStores = [], rentData = [
   const rentMax = localRents.length ? Math.max(...localRents.map(d => d.median_eur_m2)) : 1;
   const rentRange = rentMax - rentMin || 1;
 
-  // Normalise slow + dark to [0,1]; rent is already in €/m² (inverted below)
-  let slowMax = 0, darkMax = 0;
+  // Normalise all components to [0,1]
+  let slowMax = 0, compMax = 0, popMax = 0;
   for (let i = 0; i < ROWS * COLS; i++) {
-    if (slowScore[i] > slowMax) slowMax = slowScore[i];
-    if (darkScore[i] > darkMax) darkMax = darkScore[i];
+    if (slowScore[i]    > slowMax) slowMax = slowScore[i];
+    if (compCoverage[i] > compMax) compMax = compCoverage[i];
+    if (popDemand[i]    > popMax)  popMax  = popDemand[i];
   }
   const slowNorm = slowMax > 0 ? 1 / slowMax : 0;
-  const darkNorm = darkMax > 0 ? 1 / darkMax : 0;
+  const compNorm = compMax > 0 ? 1 / compMax : 0;
+  const popNorm  = popMax  > 0 ? 1 / popMax  : 0;
+  const hasPopData = popMax > 0;
 
-  // Weights: 50% dark proximity, 30% slow relief, 20% rent affordability
-  let bestIdx = -1, bestScore = -Infinity;
-  for (let r = 0; r < ROWS; r++) {
-    const clat = lat1 - r * CELL_LAT;
-    for (let c = 0; c < COLS; c++) {
-      const idx = r * COLS + c;
-      if (cellCnt[idx] < 3) continue;
-      const clng   = lon0 + c * CELL_LON;
-      const distSq = (clat - SLAT) ** 2 + (clng - SLNG) ** 2;
-      if (distSq < MIN_DIST_SQ) continue;
-      if (s1Mask && s1Mask[idx]) continue;
-      const affordability = 1 - (rentScore[idx] - rentMin) / rentRange; // 1=cheap, 0=expensive
-      const combined = 0.50 * darkScore[idx] * darkNorm
-                     + 0.30 * slowScore[idx] * slowNorm
-                     + 0.20 * affordability;
-      if (combined > bestScore) { bestScore = combined; bestIdx = idx; }
+  // Weights: 50% gap demand (pop × income, penalised by competitor coverage)
+  //        + 30% slow-order relief
+  //        + 20% rent affordability
+  // Pick top 3 candidates with min 5 km separation (greedy suppression).
+  const N_CANDIDATES = 3;
+  const MIN_SEP_DEG_SQ = (5.0 / 111) ** 2;
+  const suppressed = new Uint8Array(ROWS * COLS);
+  const results = [];
+
+  for (let k = 0; k < N_CANDIDATES; k++) {
+    let bestIdx = -1, bestScore = -Infinity;
+    for (let r = 0; r < ROWS; r++) {
+      const clat = lat1 - r * CELL_LAT;
+      for (let c = 0; c < COLS; c++) {
+        const idx    = r * COLS + c;
+        if (suppressed[idx]) continue;
+        const clng   = lon0 + c * CELL_LON;
+        const distSq = (clat - SLAT) ** 2 + (clng - SLNG) ** 2;
+        if (distSq < MIN_DIST_SQ) continue;
+        if (s1Mask && s1Mask[idx]) continue;
+        if (slowScore[idx] === 0 && popDemand[idx] === 0) continue;
+        const affordability = 1 - (rentScore[idx] - rentMin) / rentRange;
+        const compFraction  = compCoverage[idx] * compNorm;
+        const gapScore      = hasPopData
+          ? popDemand[idx] * popNorm * (1 - compFraction)
+          : (1 - compFraction);
+        const combined = 0.50 * gapScore
+                       + 0.30 * slowScore[idx] * slowNorm
+                       + 0.20 * affordability;
+        if (combined > bestScore) { bestScore = combined; bestIdx = idx; }
+      }
     }
+    if (bestIdx < 0) break;
+
+    const br    = Math.floor(bestIdx / COLS);
+    const bc    = bestIdx % COLS;
+    const c2lat = lat1 - br * CELL_LAT;
+    const c2lng = lon0 + bc * CELL_LON;
+
+    // Suppress all cells within MIN_SEP of this candidate
+    for (let r = 0; r < ROWS; r++) {
+      const clat = lat1 - r * CELL_LAT;
+      for (let c = 0; c < COLS; c++) {
+        const clng = lon0 + c * CELL_LON;
+        if ((clat - c2lat) ** 2 + (clng - c2lng) ** 2 < MIN_SEP_DEG_SQ)
+          suppressed[r * COLS + c] = 1;
+      }
+    }
+
+    // Stats: orders this candidate would capture vs S1 alone (Voronoi S1 vs S2)
+    const assigned = orders.filter(([lat, lng]) => {
+      const d1sq = (lat - SLAT)  ** 2 + (lng - SLNG)  ** 2;
+      const d2sq = (lat - c2lat) ** 2 + (lng - c2lng) ** 2;
+      return d2sq < d1sq;
+    });
+    const pct = Math.round(assigned.length / orders.length * 100);
+    const rev = assigned.reduce((s, o) => s + (o[5] || 0), 0);
+
+    const addrCnt = {};
+    for (const [lat, lng] of assigned) {
+      const key = `${lat.toFixed(3)},${lng.toFixed(3)}`;
+      addrCnt[key] = (addrCnt[key] || 0) + 1;
+    }
+    const loyalOrders = assigned.filter(([lat, lng]) => addrCnt[`${lat.toFixed(3)},${lng.toFixed(3)}`] > 1);
+    const pctLoyal = assigned.length ? Math.round(loyalOrders.length / assigned.length * 100) : 0;
+
+    const alOrders = assigned.filter(o => o[4] === 1);
+    const pctAL    = assigned.length ? Math.round(alOrders.length / assigned.length * 100) : 0;
+    const pctRes   = 100 - pctAL;
+
+    const ticketed  = assigned.filter(o => o[5] > 0);
+    const avgTicket = ticketed.length ? Math.round(ticketed.reduce((s, o) => s + o[5], 0) / ticketed.length) : null;
+
+    const withMins = assigned.filter(o => o[2] != null);
+    let avgMinsNow = null, timeSaved = null;
+    if (withMins.length) {
+      avgMinsNow = withMins.reduce((s, o) => s + o[2], 0) / withMins.length;
+      const ratioSum = withMins.reduce((s, [lat, lng]) => {
+        const d1 = Math.sqrt((lat - SLAT)  ** 2 + (lng - SLNG)  ** 2);
+        const d2 = Math.sqrt((lat - c2lat) ** 2 + (lng - c2lng) ** 2);
+        return s + (d1 > 0 ? d2 / d1 : 1);
+      }, 0);
+      const avgMinsNew = avgMinsNow * (ratioSum / withMins.length);
+      timeSaved  = Math.round(avgMinsNow - avgMinsNew);
+      avgMinsNow = Math.round(avgMinsNow);
+    }
+
+    const distKm = Math.round(Math.sqrt((c2lat - SLAT) ** 2 + (c2lng - SLNG) ** 2) * 111);
+    results.push({ lat: c2lat, lng: c2lng, rank: k + 1, score: bestScore,
+                   pct, cnt: assigned.length, rev: Math.round(rev),
+                   pctLoyal, pctAL, pctRes, avgTicket, distKm, avgMinsNow, timeSaved,
+                   target: Math.round(TARGET) });
   }
 
-  if (bestIdx < 0) return null;
-
-  const br    = Math.floor(bestIdx / COLS);
-  const bc    = bestIdx % COLS;
-  const c2lat = lat1 - br * CELL_LAT;
-  const c2lng = lon0 + bc * CELL_LON;
-
-  // Stats from orders assigned to this location (Voronoi partition)
-  const assigned = orders.filter(([lat, lng]) => {
-    const d1sq = (lat - SLAT)  ** 2 + (lng - SLNG)  ** 2;
-    const d2sq = (lat - c2lat) ** 2 + (lng - c2lng) ** 2;
-    return d2sq < d1sq;
-  });
-  const pct = Math.round(assigned.length / orders.length * 100);
-  const rev = assigned.reduce((s, o) => s + (o[5] || 0), 0);
-
-  // Loyalty: addresses with 2+ orders in the assigned set
-  const addrCnt = {};
-  for (const [lat, lng] of assigned) {
-    const key = `${lat.toFixed(3)},${lng.toFixed(3)}`;
-    addrCnt[key] = (addrCnt[key] || 0) + 1;
-  }
-  const loyalOrders = assigned.filter(([lat, lng]) => addrCnt[`${lat.toFixed(3)},${lng.toFixed(3)}`] > 1);
-  const pctLoyal = assigned.length ? Math.round(loyalOrders.length / assigned.length * 100) : 0;
-
-  // AL vs Residência stability
-  const alOrders  = assigned.filter(o => o[4] === 1);
-  const pctAL     = assigned.length ? Math.round(alOrders.length / assigned.length * 100) : 0;
-  const pctRes    = 100 - pctAL;
-
-  // Avg ticket
-  const ticketed   = assigned.filter(o => o[5] > 0);
-  const avgTicket  = ticketed.length ? Math.round(ticketed.reduce((s, o) => s + o[5], 0) / ticketed.length) : null;
-
-  const withMins = assigned.filter(o => o[2] != null);
-  let avgMinsNow = null, timeSaved = null;
-  if (withMins.length) {
-    avgMinsNow = withMins.reduce((s, o) => s + o[2], 0) / withMins.length;
-    const ratioSum = withMins.reduce((s, [lat, lng]) => {
-      const d1 = Math.sqrt((lat - SLAT)  ** 2 + (lng - SLNG)  ** 2);
-      const d2 = Math.sqrt((lat - c2lat) ** 2 + (lng - c2lng) ** 2);
-      return s + (d1 > 0 ? d2 / d1 : 1);
-    }, 0);
-    const avgMinsNew = avgMinsNow * (ratioSum / withMins.length);
-    timeSaved  = Math.round(avgMinsNow - avgMinsNew);
-    avgMinsNow = Math.round(avgMinsNow);
-  }
-
-  const distKm = Math.round(Math.sqrt((c2lat - SLAT) ** 2 + (c2lng - SLNG) ** 2) * 111);
-  return { lat: c2lat, lng: c2lng, pct, cnt: assigned.length, rev: Math.round(rev),
-           pctLoyal, pctAL, pctRes, avgTicket, distKm, avgMinsNow, timeSaved, target: Math.round(TARGET) };
+  return results.length > 0 ? results : null;
 }
+
+const SEGUNDA_COLORS = ['#7c3aed', '#a855f7', '#c084fc'];
 
 async function toggleSegundaLoja() {
   const btn = document.getElementById("segundaBtn");
   const info = document.getElementById("segundaInfo");
   if (segundaOn) {
-    if (segundaMarker)  { map.removeLayer(segundaMarker);  segundaMarker=null; }
-    if (segundaIsoLayer){ map.removeLayer(segundaIsoLayer); segundaIsoLayer=null; }
-    if (segundaKDELayer){ map.removeLayer(segundaKDELayer); segundaKDELayer=null; }
-    if (s1IsoSegunda)   { map.removeLayer(s1IsoSegunda);   s1IsoSegunda=null; }
+    segundaMarkers.forEach(m => map.removeLayer(m));   segundaMarkers = [];
+    segundaIsoLayers.forEach(l => map.removeLayer(l)); segundaIsoLayers = [];
+    if (segundaKDELayer) { map.removeLayer(segundaKDELayer); segundaKDELayer = null; }
+    if (s1IsoSegunda)   { map.removeLayer(s1IsoSegunda);    s1IsoSegunda = null; }
     segundaC2 = null;
     info.style.display = "none";
-    segundaOn=false; btn.classList.remove("active");
+    segundaOn = false; btn.classList.remove("active");
     return;
   }
-  if (!ordersData) { hint.textContent="Activa 'Entregas' primeiro para carregar os dados."; return; }
+  if (!ordersData) { hint.textContent = "Activa 'Entregas' primeiro para carregar os dados."; return; }
 
-  // Step 1: Build Store 1's straight-line delivery zone (same method as Uber Eats / Glovo).
   hint.textContent = "A calcular cobertura da loja actual…";
   const SLAT = 38.7255, SLNG = -9.1480;
   const s1Radius = deliveryRadiusKm(SLAT, SLNG);
@@ -2666,67 +2899,87 @@ async function toggleSegundaLoja() {
   }).addTo(map);
   const s1Mask = buildIsoMask(s1CircleGeo);
 
-  // Step 2: Find the optimal second location outside S1's zone
-  const result = findSecondLocation(ordersData, s1Mask, darkStoresRaw, rentData);
-  if (!result) { hint.textContent = "Dados insuficientes para calcular 2ª localização."; return; }
-  const { lat, lng, pct, rev, distKm, cnt, avgMinsNow, timeSaved, target, pctLoyal, pctAL, pctRes, avgTicket } = result;
-  segundaC2 = { lat, lng };
+  const results = findSecondLocation(ordersData, s1Mask, darkStoresRaw, rentData);
+  if (!results) { hint.textContent = "Dados insuficientes para calcular 2ª localização."; return; }
 
-  // KDE contour for the orders assigned to this location
+  // KDE for top candidate
+  segundaC2 = { lat: results[0].lat, lng: results[0].lng };
   segundaKDELayer = new SegundaKDELayer();
   map.addLayer(segundaKDELayer);
 
-  // Marker
-  const icon = L.divIcon({
-    className:"",
-    html:`<div style="position:relative;width:24px;height:24px"><div style="position:absolute;inset:0;border-radius:50%;background:#7c3aed;border:3px solid white;box-shadow:0 0 12px rgba(124,58,237,0.6)"></div><div class="pulse-ring"></div></div>`,
-    iconSize:[24,24], iconAnchor:[12,12],
+  const s2Radius = deliveryRadiusKm(SLAT, SLNG);
+
+  results.forEach(({ lat, lng, rank, pct, cnt, rev, distKm, pctLoyal, pctAL, pctRes, avgTicket, avgMinsNow, timeSaved }) => {
+    const color = SEGUNDA_COLORS[rank - 1] || SEGUNDA_COLORS[2];
+    const pulse = rank === 1 ? `<div class="pulse-ring" style="border-color:${color}"></div>` : '';
+    const icon = L.divIcon({
+      className: "",
+      html: `<div style="position:relative;width:26px;height:26px">
+               <div style="position:absolute;inset:0;border-radius:50%;background:${color};border:2.5px solid white;box-shadow:0 0 10px ${color}88;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;line-height:1">${rank}</div>
+               ${pulse}
+             </div>`,
+      iconSize: [26, 26], iconAnchor: [13, 13],
+    });
+    const m = L.marker([lat, lng], { icon })
+      .bindPopup(`<b style="color:${color}">#${rank} — candidato</b><br>
+                  <span style="font-size:11px;color:#666">${lat.toFixed(5)}, ${lng.toFixed(5)}</span><br>
+                  <b>${pct}%</b> das ordens · <b>€${rev.toLocaleString('pt-PT')}</b> receita · <b>${distKm} km</b> da loja actual`)
+      .addTo(map);
+    if (rank === 1) m.openPopup();
+    segundaMarkers.push(m);
+
+    const iso = L.circle([lat, lng], {
+      radius: s2Radius * 1000,
+      color, fillColor: color,
+      fillOpacity: rank === 1 ? 0.10 : 0.05,
+      weight: rank === 1 ? 2.5 : 1.5,
+      opacity: rank === 1 ? 0.85 : 0.5,
+      dashArray: rank === 1 ? null : '6 4',
+    }).addTo(map);
+    segundaIsoLayers.push(iso);
   });
-  segundaMarker = L.marker([lat,lng],{icon})
-    .bindPopup(`<b style="color:#7c3aed">2ª Loja — candidato óptimo</b><br><span style="font-size:11px;color:#666">${lat.toFixed(5)}, ${lng.toFixed(5)}</span><br><b>${pct}%</b> das ordens · <b>€${rev.toLocaleString('pt-PT')}</b> receita · <b>${distKm} km</b> da loja actual`)
-    .addTo(map).openPopup();
 
-  // Populate sidebar panel
-  document.getElementById("segundaCoords").textContent = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
-  document.getElementById("segundaStats").innerHTML = `
-    <div style="display:flex;flex-direction:column;gap:4px;font-size:12px">
-      <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Ordens captadas</span><span style="font-weight:700;color:#7c3aed">${pct}% (${cnt.toLocaleString('pt-PT')})</span></div>
-      <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Receita estimada</span><span style="font-weight:700">€${rev.toLocaleString('pt-PT')}</span></div>
-      ${avgTicket != null ? `<div style="display:flex;justify-content:space-between"><span style="color:#64748b">Ticket médio</span><span style="font-weight:700">€${avgTicket}</span></div>` : ''}
-      ${target != null ? `<div style="display:flex;justify-content:space-between"><span style="color:#64748b">Limiar de subserviço</span><span style="font-weight:700">&gt;${target} min</span></div>` : ''}
-      ${avgMinsNow != null ? `<div style="display:flex;justify-content:space-between"><span style="color:#64748b">Tempo médio actual</span><span style="font-weight:700">${avgMinsNow} min</span></div>` : ''}
-      ${timeSaved != null ? `<div style="display:flex;justify-content:space-between"><span style="color:#64748b">Redução estimada</span><span style="font-weight:700;color:#059669">−${timeSaved} min</span></div>` : ''}
-      <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Distância à loja actual</span><span style="font-weight:700">~${distKm} km</span></div>
-      <div style="margin-top:4px;padding-top:4px;border-top:1px solid #e2e8f0;display:flex;flex-direction:column;gap:3px">
-        <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1px">Perfil de clientes</div>
-        <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Clientes fiéis (2+ ordens)</span><span style="font-weight:700;color:${pctLoyal >= 30 ? '#059669' : '#64748b'}">${pctLoyal}%</span></div>
-        <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Residência / AL</span><span style="font-weight:700">${pctRes}% / ${pctAL}%</span></div>
-      </div>
-    </div>`;
-  info.style.display = "block";
+  // Sidebar list
+  const top = results[0];
+  document.getElementById("segundaList").innerHTML = results.map(
+    ({ lat, lng, rank, pct, cnt, rev, distKm, pctLoyal, pctAL, pctRes, avgTicket, avgMinsNow, timeSaved }) => {
+      const color = SEGUNDA_COLORS[rank - 1] || SEGUNDA_COLORS[2];
+      const row = (label, val) => `<div style="display:flex;justify-content:space-between"><span style="color:#64748b">${label}</span><span style="font-weight:600">${val}</span></div>`;
+      return `
+        <div style="padding:8px 0;${rank < results.length ? 'border-bottom:1px solid #f1f5f9;' : ''}">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+            <span style="font-size:11px;font-weight:800;color:white;background:${color};border-radius:4px;padding:1px 6px;line-height:1.6">#${rank}</span>
+            <span style="font-size:10px;color:#94a3b8">${lat.toFixed(4)}, ${lng.toFixed(4)}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px;font-size:11px">
+            ${row('Ordens captadas', `<span style="color:${color};font-weight:700">${pct}% (${cnt.toLocaleString('pt-PT')})</span>`)}
+            ${row('Receita estimada', `€${rev.toLocaleString('pt-PT')}`)}
+            ${avgTicket != null ? row('Ticket médio', `€${avgTicket}`) : ''}
+            ${timeSaved != null ? row('Redução entrega', `<span style="color:#059669">−${timeSaved} min</span>`) : ''}
+            ${row('Distância à S1', `~${distKm} km`)}
+            ${row('Clientes fiéis', `${pctLoyal}%`)}
+            ${row('Residência / AL', `${pctRes}% / ${pctAL}%`)}
+          </div>
+        </div>`;
+    }
+  ).join('');
 
-  // Isochrone
-  const s2Radius = deliveryRadiusKm(SLAT, SLNG); // same platform radius as S1
-  segundaIsoLayer = L.circle([lat, lng], {
-    radius: s2Radius * 1000,
-    color: '#7c3aed', fillColor: '#7c3aed', fillOpacity: 0.12, weight: 2.5, opacity: 0.85,
-  }).addTo(map);
-
-  const stats = sumPopulation(circleGeoJSON(lat, lng, s2Radius));
+  const isoDiv = document.getElementById("segundaIsoStats");
+  const stats = sumPopulation(circleGeoJSON(top.lat, top.lng, s2Radius));
   if (stats) {
-    const isoDiv = document.getElementById("segundaIsoStats");
     isoDiv.style.display = "block";
     isoDiv.innerHTML = `
-      <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Área de influência (${s2Radius.toFixed(1)} km raio)</div>
+      <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Área de influência #1 (${s2Radius.toFixed(1)} km)</div>
       <div style="display:flex;flex-direction:column;gap:3px;font-size:11px">
         <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Residentes</span><span style="font-weight:600">${fmt(stats.pop)}</span></div>
         <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Rendimento médio</span><span style="font-weight:600">${fmt(Math.round(stats.spendPop/stats.pop*12316))} €/ano</span></div>
         <div style="display:flex;justify-content:space-between"><span style="color:#64748b">25–64 anos</span><span style="font-weight:600">${fmt(stats.age2564)}</span></div>
       </div>`;
-  }
-  hint.textContent = `2ª Loja: ${pct}% das ordens · €${rev.toLocaleString('pt-PT')} receita${timeSaved != null ? ` · −${timeSaved} min entrega` : ''}`;
+  } else { isoDiv.style.display = "none"; }
 
-  segundaOn=true; btn.classList.add("active");
+  hint.textContent = `Top 3 candidatos · #1: ${top.pct}% das ordens · €${top.rev.toLocaleString('pt-PT')} receita`;
+  info.style.display = "block";
+  segundaOn = true; btn.classList.add("active");
 }
 document.getElementById("segundaBtn").addEventListener("click", toggleSegundaLoja);
 
@@ -2836,8 +3089,8 @@ clearBtn.addEventListener("click", () => {
     document.getElementById("legend7").classList.remove("visible");
   }
   if (segundaOn) {
-    if (segundaMarker){map.removeLayer(segundaMarker);segundaMarker=null;}
-    if (segundaIsoLayer){map.removeLayer(segundaIsoLayer);segundaIsoLayer=null;}
+    segundaMarkers.forEach(m => map.removeLayer(m));   segundaMarkers = [];
+    segundaIsoLayers.forEach(l => map.removeLayer(l)); segundaIsoLayers = [];
     if (segundaKDELayer){map.removeLayer(segundaKDELayer);segundaKDELayer=null;}
     segundaC2 = null;
     segundaOn = false;

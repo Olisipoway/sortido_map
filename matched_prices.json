@@ -4,24 +4,26 @@
     "category": "Bebidas s/ álcool",
     "orders": 58,
     "sortido": 1.0,
-    "continente": 4.19,
+    "continente": null,
     "auchan": 0.67,
     "glovo": 0.99,
-    "continente_name": "Água sem Gás Caixa Luso",
+    "bolt": 0.83,
     "auchan_name": "Água Mineral Luso 1.5l (Sdr)",
-    "glovo_name": "Luso Água 1.5L"
+    "glovo_name": "Luso Água 1.5L",
+    "bolt_name": "Água Luso 6 x 1,5 lt"
   },
   {
     "name": "Cerveja com Álcool Super Bock 1 L",
     "category": "Álcool — Cerveja",
     "orders": 50,
     "sortido": 2.96,
-    "continente": 3.49,
-    "auchan": 0.75,
-    "glovo": 0.66,
-    "continente_name": "Cerveja com Álcool Coruja India Pale Ale Super Bock Coruja",
-    "auchan_name": "Cerveja Sem Álcool Super Bock Pilsener 0.0% 6x033l",
-    "glovo_name": "Super Bock Cerveja sem Álcool 0.0% 6x20cl"
+    "continente": 4.89,
+    "auchan": 1.89,
+    "glovo": null,
+    "bolt": 2.29,
+    "continente_name": "Cerveja com Álcool Super Bock",
+    "auchan_name": "Cerveja Super Bock Com Álcool Tp 1l",
+    "bolt_name": "❄️ Cerveja Super Bock 1 lt"
   },
   {
     "name": "Cerveja com Álcool Lata Super Bock 33cl",
@@ -29,11 +31,13 @@
     "orders": 22,
     "sortido": 1.1,
     "continente": 0.89,
-    "auchan": 0.59,
-    "glovo": 1.49,
-    "continente_name": "Cerveja com Álcool em Lata Coruja IPA India Pale Ale Super Bock Coruja",
-    "auchan_name": "Cerveja Branca Super Bock Sky Lata 0.33l (Sdr)",
-    "glovo_name": "Super Bock Cerveja 0.0% sem Álcool Lata 33cl"
+    "auchan": 0.75,
+    "glovo": 1.29,
+    "bolt": 1.35,
+    "continente_name": "Cerveja com Álcool em Lata Super Bock",
+    "auchan_name": "Cerveja Super Bock Com Álcool Green Tara Perdida 6x0.33l",
+    "glovo_name": "Super Bock Cerveja Original Lata 33cl",
+    "bolt_name": "❄️ Cerveja Super Bock Original 33 cl"
   },
   {
     "name": "Água com Gás San Pellegrino 75 cl tp",
@@ -43,7 +47,9 @@
     "continente": null,
     "auchan": 2.49,
     "glovo": null,
-    "auchan_name": "Água San Pellegrino Gaseificada 0.75l"
+    "bolt": 2.75,
+    "auchan_name": "Água San Pellegrino Gaseificada 0.75l",
+    "bolt_name": "Água Com Gás San Pellegrino 75 cl"
   },
   {
     "name": "Cerveja com Álcool Sagres 1 L",
@@ -51,11 +57,13 @@
     "orders": 15,
     "sortido": 2.79,
     "continente": 4.99,
-    "auchan": 0.85,
-    "glovo": 1.29,
-    "continente_name": "Cerveja com Álcool Bohemia Original Sagres Bohemia",
-    "auchan_name": "Cerveja Sagres Com Álcool Lata 0.50l (Sdr)",
-    "glovo_name": "Sagres Cerveja com Álcool Lata 50cl"
+    "auchan": 1.89,
+    "glovo": 2.09,
+    "bolt": 2.29,
+    "continente_name": "Cerveja com Álcool Sagres",
+    "auchan_name": "Cerveja Sagres Garrafa 1l",
+    "glovo_name": "Sagres Cerveja com Álcool 1L",
+    "bolt_name": "❄️ Cerveja Sagres 1 lt"
   },
   {
     "name": "Vinho Branco Douro Planalto 75 cl",
@@ -65,32 +73,25 @@
     "continente": 5.99,
     "auchan": 5.99,
     "glovo": 5.99,
+    "bolt": 6.79,
     "continente_name": "Planalto Reserva Douro Vinho Branco",
     "auchan_name": "Vinho Branco Planalto Douro 0.75l",
-    "glovo_name": "Planalto Vinho Branco Reserva 750 mL"
+    "glovo_name": "Planalto Vinho Branco Reserva 750 mL",
+    "bolt_name": "❄️ Planalto Vinho Branco Reserva 75 cl"
   },
   {
     "name": "Cerveja Heineken 6 x 25 cl",
     "category": "Álcool — Cerveja",
     "orders": 14,
     "sortido": 8.19,
-    "continente": 18.98,
-    "auchan": 0.77,
-    "glovo": 1.06,
-    "continente_name": "Cerveja com Álcool Barril Heineken",
-    "auchan_name": "Cerveja Heineken 0.0% 6x0.25l",
-    "glovo_name": "Pack Heineken Cerveja 12x25cl"
-  },
-  {
-    "name": "Refrigerante com Gás Coca-Cola Original 1 lt",
-    "category": "Bebidas s/ álcool",
-    "orders": 11,
-    "sortido": 2.67,
-    "continente": null,
-    "auchan": 2.39,
-    "glovo": 3.59,
-    "auchan_name": "Refrigerante Com Gás Coca-Cola Original 1.75l (Sdr)",
-    "glovo_name": "Coca-Cola Original 1.75L"
+    "continente": 14.99,
+    "auchan": 4.59,
+    "glovo": 6.39,
+    "bolt": 5.69,
+    "continente_name": "Cerveja com Álcool Heineken",
+    "auchan_name": "Cerveja Heineken Com Álcool Tara Perdida 6x0.25l",
+    "glovo_name": "Pack Heineken Cerveja 12x25cl",
+    "bolt_name": "❄️ Cerveja Heineken 6 x 25 cl"
   },
   {
     "name": "Preservativo Sensitivo Contacto Total Durex 6 un",
@@ -98,10 +99,13 @@
     "orders": 10,
     "sortido": 9.69,
     "continente": 5.08,
-    "auchan": 1.46,
-    "glovo": null,
+    "auchan": 5.08,
+    "glovo": 7.24,
+    "bolt": 6.59,
     "continente_name": "Preservativos Sensitivo Contacto Total Durex",
-    "auchan_name": "Preservativos Durex Conexão Total 10 Un"
+    "auchan_name": "Preservativos Durex Contacto Total 6un",
+    "glovo_name": "Durex Preservativos Sensitivo Super Fino 6un",
+    "bolt_name": "Preservativos Sensitivo Contato Total Durex 6 un"
   },
   {
     "name": "Cerveja Corona 6 x 35,5cl",
@@ -109,22 +113,25 @@
     "orders": 10,
     "sortido": 16.33,
     "continente": 8.99,
-    "auchan": 1.49,
-    "glovo": 1.67,
+    "auchan": 8.99,
+    "glovo": 10.0,
+    "bolt": 10.99,
     "continente_name": "Cerveja com Álcool Corona",
-    "auchan_name": "Cerveja Corona México 0.355l",
-    "glovo_name": "Pack Corona Cerveja 12x35.5cl"
+    "auchan_name": "Cerveja Corona México 6x0.355l",
+    "glovo_name": "Pack Corona Cerveja 12x35.5cl",
+    "bolt_name": "❄️ Cerveja Corona 6 x 35,5 cl"
   },
   {
     "name": "Água Mineral Monchique 1,5 lt",
     "category": "Bebidas s/ álcool",
     "orders": 9,
     "sortido": 1.3,
-    "continente": 3.99,
+    "continente": null,
     "auchan": 0.7,
     "glovo": null,
-    "continente_name": "Água sem Gás Alcalina pH 9,5 Eco Pack Monchique",
-    "auchan_name": "Água Mineral Natural Monchique 1.5l (Sdr)"
+    "bolt": 0.99,
+    "auchan_name": "Água Mineral Natural Monchique 1.5l (Sdr)",
+    "bolt_name": "Água Monchique 1,5 lt"
   },
   {
     "name": "Cerveja Heineken Lata 33 cl",
@@ -133,10 +140,11 @@
     "sortido": 1.51,
     "continente": 1.39,
     "auchan": 0.99,
-    "glovo": 1.35,
+    "glovo": null,
+    "bolt": 1.25,
     "continente_name": "Cerveja com Álcool em Lata Heineken",
     "auchan_name": "Cerveja Heineken Lata 0.33l (Sdr)",
-    "glovo_name": "Pack Heineken Cerveja Lata 4x33ml"
+    "bolt_name": "❄️ Cerveja Heineken  33 cl"
   },
   {
     "name": "Néctar Maracujá Compal Clássico 1 lt",
@@ -144,33 +152,26 @@
     "orders": 9,
     "sortido": 3.99,
     "continente": 1.99,
-    "auchan": 0.74,
+    "auchan": 1.94,
     "glovo": null,
+    "bolt": 2.09,
     "continente_name": "Néctar Maracujá Compal Clássico",
-    "auchan_name": "Néctar Compal Clássico Maracujá 0.30l"
-  },
-  {
-    "name": "Refrigerante com Gás Coca-Cola Original Lata 33 cl",
-    "category": "Bebidas s/ álcool",
-    "orders": 9,
-    "sortido": 1.6,
-    "continente": null,
-    "auchan": 0.9,
-    "glovo": 1.39,
-    "auchan_name": "Refrigerante Com Gás Coca-Cola Original Lata 6x0.33l (Sdr)",
-    "glovo_name": "Coca-Cola Original Lata 33cl"
+    "auchan_name": "Néctar Compal Clássico Maracujá 1l",
+    "bolt_name": "Compal Clássico Néctar Maracuja 1 lt"
   },
   {
     "name": "Água das Pedras Salgadas 1 lt",
     "category": "Bebidas s/ álcool",
     "orders": 9,
     "sortido": 1.78,
-    "continente": 1.59,
+    "continente": 2.95,
     "auchan": 0.89,
-    "glovo": 0.67,
-    "continente_name": "Água com Gás Ananás Pedras Salgadas",
+    "glovo": 1.8,
+    "bolt": 1.59,
+    "continente_name": "Água com Gás Pedras Salgadas",
     "auchan_name": "Água Com Gas Pedras Salgadas Pet 1l (Sdr)",
-    "glovo_name": "Pedras Salgadas Água com Gás 6x25cl"
+    "glovo_name": "Pack Pedras Salgadas Água com Gás 4x1L",
+    "bolt_name": "Água Com Gás Pedras Salgadas 1 lt"
   },
   {
     "name": "Preservativos Durex Natural Comfort 6 Un",
@@ -178,35 +179,40 @@
     "orders": 8,
     "sortido": 7.53,
     "continente": 3.91,
-    "auchan": 1.46,
-    "glovo": 1.0,
+    "auchan": 3.89,
+    "glovo": 5.99,
+    "bolt": 4.99,
     "continente_name": "Preservativos Natural Comfort Durex",
-    "auchan_name": "Preservativos Durex Conexão Total 10 Un",
-    "glovo_name": "Durex Preservativos Natural Comfort 6un"
+    "auchan_name": "Preservativos Durex Natural 6un",
+    "glovo_name": "Durex Preservativos Natural Comfort 6un",
+    "bolt_name": "Preservativos Natural Comfort Durex 6 un"
   },
   {
     "name": "Cerveja com Álcool Super Bock 6x33cl",
     "category": "Álcool — Cerveja",
     "orders": 8,
     "sortido": 9.6,
-    "continente": 3.49,
-    "auchan": 0.75,
-    "glovo": 1.0,
-    "continente_name": "Cerveja com Álcool Coruja India Pale Ale Super Bock Coruja",
-    "auchan_name": "Cerveja Super Bock Abadia Com Álcool Tara Perdida 6x0.33l",
-    "glovo_name": "Super Bock Cerveja Sem Álcool 0.0% Tropical 6x33cl"
+    "continente": 4.89,
+    "auchan": 4.49,
+    "glovo": 5.49,
+    "bolt": 5.99,
+    "continente_name": "Cerveja com Álcool Super Bock",
+    "auchan_name": "Cerveja Super Bock Com Álcool Green Tara Perdida 6x0.33l",
+    "glovo_name": "Super Bock Cerveja Original 6x33cl",
+    "bolt_name": "❄️ Cerveja Super Bock Original 6 x 33 cl"
   },
   {
     "name": "Água Mineral Luso 50 cl",
     "category": "Bebidas s/ álcool",
     "orders": 8,
     "sortido": 0.78,
-    "continente": 4.19,
+    "continente": null,
     "auchan": 0.5,
     "glovo": 0.79,
-    "continente_name": "Água sem Gás Caixa Luso",
+    "bolt": 0.6,
     "auchan_name": "Água Mineral Luso 0.50l (Sdr)",
-    "glovo_name": "Luso Água sem Gás 50cl"
+    "glovo_name": "Luso Água sem Gás 50cl",
+    "bolt_name": "Água Luso 6 x 50 cl"
   },
   {
     "name": "Vinho Tinto Alentejo Monte Velho 75cl",
@@ -215,21 +221,33 @@
     "sortido": 6.67,
     "continente": 5.99,
     "auchan": 3.99,
-    "glovo": 6.29,
+    "glovo": null,
+    "bolt": 6.49,
     "continente_name": "Monte Velho Alentejano Vinho Tinto",
     "auchan_name": "Vinho Tinto Monte Velho Alentejo 0.75l",
-    "glovo_name": "Monte Velho Vinho Branco 75cl"
+    "bolt_name": "Vinho Alentejo Monte Velho Tinto 75 cl"
+  },
+  {
+    "name": "Gelado Pint Double Salted Caramel Magnum 440 ml",
+    "category": "Sobremesas / Doces",
+    "orders": 7,
+    "sortido": 10.23,
+    "continente": null,
+    "auchan": null,
+    "glovo": null,
+    "bolt": 7.12,
+    "bolt_name": "Gelado Pint Double Gold Caramel Magnum 440 ml"
   },
   {
     "name": "Papel Higiénico Compacto Folha Dupla Renova Super Branco 4 = 12 Rolos",
     "category": "Higiene / Beleza",
     "orders": 7,
     "sortido": 4.29,
-    "continente": 9.49,
-    "auchan": 12.65,
+    "continente": null,
+    "auchan": null,
     "glovo": null,
-    "continente_name": "Papel Higiénico 2 Folhas Super Renova",
-    "auchan_name": "Papel Higiénico Renova Grand Super 24=48r"
+    "bolt": 3.29,
+    "bolt_name": "Papel Higiénico Super Renova 4R"
   },
   {
     "name": "Cerveja com Álcool Lata Super Bock 50 cl",
@@ -237,11 +255,13 @@
     "orders": 7,
     "sortido": 1.76,
     "continente": 0.89,
-    "auchan": 0.99,
+    "auchan": 0.89,
     "glovo": 1.33,
-    "continente_name": "Cerveja com Álcool em Lata Coruja IPA India Pale Ale Super Bock Coruja",
-    "auchan_name": "Cerveja Preta Super Bock Stout Lata 0.5l (Sdr)",
-    "glovo_name": "Super Bock Cerveja Original Lata 50cl"
+    "bolt": 1.75,
+    "continente_name": "Cerveja com Álcool em Lata Super Bock",
+    "auchan_name": "Cerveja Super Bock Lata 0.50l (Sdr)",
+    "glovo_name": "Super Bock Cerveja Original Lata 50cl",
+    "bolt_name": "❄️ Cerveja Super Bock  50 cl"
   },
   {
     "name": "Água Mineral  Evian 1,5 lt",
@@ -251,6 +271,7 @@
     "continente": 2.74,
     "auchan": 2.14,
     "glovo": null,
+    "bolt": null,
     "continente_name": "Água sem Gás Evian",
     "auchan_name": "Água Mineral Natural Evian Pet 1.5l (Sdr)"
   },
@@ -262,9 +283,11 @@
     "continente": 1.74,
     "auchan": 1.74,
     "glovo": 2.15,
+    "bolt": 2.19,
     "continente_name": "Bebida Energética em Lata Energy Green Monster",
     "auchan_name": "Bebida Energética Monster Energy Green 0.5l (Sdr)",
-    "glovo_name": "Pack Bebida Energética Monster Green 4x50cl"
+    "glovo_name": "Pack Bebida Energética Monster Green 4x50cl",
+    "bolt_name": "Monster Energy Ultra Fiesta 50 cl"
   },
   {
     "name": "Gelado Magnum Sandwich Amêndoas 140ml",
@@ -274,7 +297,20 @@
     "continente": null,
     "auchan": null,
     "glovo": 1.69,
-    "glovo_name": "Pack Magnum Gelado Sandwich 2un"
+    "bolt": 2.0,
+    "glovo_name": "Pack Magnum Gelado Sandwich 2un",
+    "bolt_name": "Gelado Magnum Sandwich 140 ml"
+  },
+  {
+    "name": "Água com Gás Castello TP 6 x 25 cl",
+    "category": "Bebidas s/ álcool",
+    "orders": 6,
+    "sortido": 4.77,
+    "continente": null,
+    "auchan": null,
+    "glovo": null,
+    "bolt": 3.85,
+    "bolt_name": "Água Com Gás Castello 6 x 25 cl"
   },
   {
     "name": "Vodka Absolut 70 cl",
@@ -282,11 +318,12 @@
     "orders": 6,
     "sortido": 33.25,
     "continente": 21.49,
-    "auchan": 7.99,
-    "glovo": 17.59,
+    "auchan": 21.49,
+    "glovo": null,
+    "bolt": 23.99,
     "continente_name": "Absolut Vodka",
-    "auchan_name": "Vodka Trofeu Silver 70 Cl",
-    "glovo_name": "Koskenkorva Vodka 70cl"
+    "auchan_name": "Vodka Absolut Blue 0.70l",
+    "bolt_name": "Vodka Absolut Blue 70 cl"
   },
   {
     "name": "Vodka Smirnoff 70 cl",
@@ -294,11 +331,12 @@
     "orders": 6,
     "sortido": 23.99,
     "continente": 13.39,
-    "auchan": 7.99,
-    "glovo": 17.59,
+    "auchan": 15.79,
+    "glovo": null,
+    "bolt": 16.99,
     "continente_name": "Smirnoff Red Vodka",
-    "auchan_name": "Vodka Trofeu Silver 70 Cl",
-    "glovo_name": "Koskenkorva Vodka 70cl"
+    "auchan_name": "Vodka Smirnoff 0.70l",
+    "bolt_name": "Vodka Smirnoff Red 70 cl"
   },
   {
     "name": "Bebida Energética Monster Mango Loco 50 cl",
@@ -308,9 +346,11 @@
     "continente": 1.74,
     "auchan": 1.74,
     "glovo": 1.98,
+    "bolt": 2.19,
     "continente_name": "Bebida Energética em Lata Mango Loco Monster",
     "auchan_name": "Bebida Energética Monster Energy 4x0.5l (Sdr)",
-    "glovo_name": "Pack Bebida Energética Monster Mango Loco 4x50cl"
+    "glovo_name": "Pack Bebida Energética Monster Mango Loco 4x50cl",
+    "bolt_name": "❄️ Monster Juiced Mango Loco 50 cl"
   },
   {
     "name": "Cerveja com Álcool Lata Sagres 33 cl",
@@ -319,10 +359,12 @@
     "sortido": 1.18,
     "continente": 0.64,
     "auchan": 0.64,
-    "glovo": 0.97,
-    "continente_name": "Cerveja com Álcool em Lata Preta Sagres",
+    "glovo": 1.09,
+    "bolt": 1.18,
+    "continente_name": "Cerveja com Álcool em Lata Sagres",
     "auchan_name": "Cerveja Branca Sagres Branca Lata 24x0.33l (Sdr)",
-    "glovo_name": "Sagres Cerveja Preta Lata 33cl"
+    "glovo_name": "Sagres Cerveja Branca Lata 33cl",
+    "bolt_name": "Cerveja Sagres 6 x 33 cl"
   },
   {
     "name": "Rolo Cozinha Maxi Absorption XXL Renova 2un",
@@ -332,7 +374,9 @@
     "continente": null,
     "auchan": 2.6,
     "glovo": null,
-    "auchan_name": "Rolo Renova Cozinha Máxima Absorção 2 Unidades Em Embalagem De Papel"
+    "bolt": 2.69,
+    "auchan_name": "Rolo Renova Cozinha Máxima Absorção 2 Unidades Em Embalagem De Papel",
+    "bolt_name": "Rolo Cozinha Renova Extra XXL 2 un"
   },
   {
     "name": "Sumo 100% Fruta Laranja Compal 1 lt",
@@ -340,46 +384,37 @@
     "orders": 5,
     "sortido": 3.77,
     "continente": 1.59,
-    "auchan": 0.74,
+    "auchan": 2.29,
     "glovo": null,
+    "bolt": 2.39,
     "continente_name": "Sumo 100% Fruta Laranja do Algarve Compal Fresco",
-    "auchan_name": "Sumo Compal 100% Laranja 0.30l"
+    "auchan_name": "Sumo Compal 100% Laranja 1l",
+    "bolt_name": "Compal 100% Laranja 1 lt"
   },
   {
     "name": "Cerveja com Álcool Mini Sagres 6 x 25 cl",
     "category": "Álcool — Cerveja",
     "orders": 5,
     "sortido": 6.35,
-    "continente": 3.74,
-    "auchan": 0.62,
-    "glovo": 0.62,
-    "continente_name": "Cerveja com Álcool Bohemia Original Sagres Mini Bohemia",
-    "auchan_name": "Cerveja Preta Sagres Mini 6x0.25l",
-    "glovo_name": "Sagres Cerveja Preta Mini 6x25cl"
-  },
-  {
-    "name": "Whisky Grants 700 ml",
-    "category": "Álcool — Spirits",
-    "orders": 5,
-    "sortido": 22.33,
-    "continente": 24.0,
-    "auchan": 26.69,
-    "glovo": 13.19,
-    "continente_name": "Grants 12 Anos Triple Wood Whisky Scotch",
-    "auchan_name": "Licor De Whisky Baileys Strawberry & Cream 0.70l",
-    "glovo_name": "Duck Tale Whisky Scotch (garrafa 70 cl)"
+    "continente": null,
+    "auchan": 3.74,
+    "glovo": null,
+    "bolt": 4.49,
+    "auchan_name": "Cerveja Sagres Branca Mini 6x0.25l",
+    "bolt_name": "Cerveja Sagres 6 x 25 cl"
   },
   {
     "name": "Bebida Energética Gaseificada Red Bull 25 cl",
     "category": "Bebidas s/ álcool",
     "orders": 5,
     "sortido": 2.63,
-    "continente": 1.59,
+    "continente": null,
     "auchan": 1.59,
     "glovo": 1.62,
-    "continente_name": "Bebida Energética em Lata Gaseificada Açaí Red Bull",
+    "bolt": 2.2,
     "auchan_name": "Bebida Energética Red Bull Cherry Sakura 0.25l (Sdr)",
-    "glovo_name": "Pack Bebida Energética Red Bull 6x25cl"
+    "glovo_name": "Pack Bebida Energética Red Bull 6x25cl",
+    "bolt_name": "Red Bull 4 x 25 cl"
   },
   {
     "name": "Vinho Branco Alentejo Monte Velho 75cl",
@@ -389,21 +424,24 @@
     "continente": 7.49,
     "auchan": 3.99,
     "glovo": 6.29,
+    "bolt": 10.99,
     "continente_name": "Monte Velho Biológico Alentejo Vinho Branco",
     "auchan_name": "Vinho Branco Monte Velho Alentejo 0.75l",
-    "glovo_name": "Monte Velho Vinho Branco 75cl"
+    "glovo_name": "Monte Velho Vinho Branco 75cl",
+    "bolt_name": "❄️ Vinho Alentejo Monte Velho Branco 75 cl"
   },
   {
     "name": "Bebida Energética Monster Ultra White 50 cl",
     "category": "Bebidas s/ álcool",
     "orders": 4,
     "sortido": 1.96,
-    "continente": 6.96,
+    "continente": null,
     "auchan": 1.74,
     "glovo": 2.15,
-    "continente_name": "Bebida Energética em Lata Ultra White Monster",
+    "bolt": 2.19,
     "auchan_name": "Bebida Energética Monster Ultra Strawberry Dreams 0.5l(Sdr)",
-    "glovo_name": "Pack Bebida Energética Monster Ultra White 4x50cl"
+    "glovo_name": "Pack Bebida Energética Monster Ultra White 4x50cl",
+    "bolt_name": "❄️ Monster Energy Ultra White 50 cl"
   },
   {
     "name": "Sidra Maça Bandida do Pomar  Lata 50 cl",
@@ -412,57 +450,24 @@
     "sortido": 1.98,
     "continente": null,
     "auchan": 1.24,
-    "glovo": 30.68,
+    "glovo": null,
+    "bolt": 1.74,
     "auchan_name": "Sidra Bandida Frutos Verm. Lata 0.50l (Sdr)",
-    "glovo_name": "Pack Jack Daniel's Apple + Bandida do Pomar Maça"
-  },
-  {
-    "name": "Lata Lipton Ice Tea Pêssego 33 cl",
-    "category": "Bebidas s/ álcool",
-    "orders": 4,
-    "sortido": 1.44,
-    "continente": 5.34,
-    "auchan": 0.9,
-    "glovo": 1.17,
-    "continente_name": "Ice Tea em Lata Pêssego Lipton",
-    "auchan_name": "Ice Tea Fuze Tea Pêssego-Hibisco 0.33l (Sdr)",
-    "glovo_name": "Pack Lipton Ice Tea Manga 2x33cl"
-  },
-  {
-    "name": "Vodka Eristoff 70 cl",
-    "category": "Álcool — Spirits",
-    "orders": 4,
-    "sortido": 23.18,
-    "continente": 15.69,
-    "auchan": 11.75,
-    "glovo": 17.59,
-    "continente_name": "Eristoff Vodka",
-    "auchan_name": "Vodka Eristoff Pink 0.70 L",
-    "glovo_name": "Koskenkorva Vodka 70cl"
+    "bolt_name": "❄️ Sidra Maça Bandida Do Pomar 50 cl"
   },
   {
     "name": "Água com Gás Pedras Salgadas 6 x 25 cl",
     "category": "Bebidas s/ álcool",
     "orders": 4,
     "sortido": 6.05,
-    "continente": 1.59,
-    "auchan": 0.5,
-    "glovo": 0.67,
-    "continente_name": "Água com Gás Ananás Pedras Salgadas",
+    "continente": 2.95,
+    "auchan": 2.98,
+    "glovo": 3.99,
+    "bolt": 3.85,
+    "continente_name": "Água com Gás Pedras Salgadas",
     "auchan_name": "Água Com Gás Pedras Salgadas Tp 4x25cl",
-    "glovo_name": "Pedras Salgadas Água com Gás 6x25cl"
-  },
-  {
-    "name": "Iogurte Grego Natural Oikos Danone 900G",
-    "category": "Laticínios & Ovos",
-    "orders": 4,
-    "sortido": 7.25,
-    "continente": 2.59,
-    "auchan": 2.59,
-    "glovo": 3.29,
-    "continente_name": "Iogurte Grego Natural Açúcarado Oikos Danone",
-    "auchan_name": "Iogurte Oîkos Danone Grego Natural 4x110g",
-    "glovo_name": "Danone Oikos Iogurte Grego Natural 4x110g"
+    "glovo_name": "Pedras Salgadas Água com Gás 6x25cl",
+    "bolt_name": "Água Com Gás Pedras Salgadas 6 x 25 cl"
   },
   {
     "name": "Água Mineral Garrafão Luso 5,4 lt",
@@ -470,10 +475,11 @@
     "orders": 4,
     "sortido": 3.29,
     "continente": 1.79,
-    "auchan": 1.99,
+    "auchan": null,
     "glovo": null,
+    "bolt": 2.35,
     "continente_name": "Água sem Gás Garrafão Luso",
-    "auchan_name": "água mineral luso garrafão 7l"
+    "bolt_name": "Água Luso 5,4 lt"
   },
   {
     "name": "Vinho Branco Douro Planalto 37,5cl",
@@ -481,11 +487,12 @@
     "orders": 4,
     "sortido": 6.06,
     "continente": 5.99,
-    "auchan": 5.99,
+    "auchan": null,
     "glovo": 3.89,
+    "bolt": 3.79,
     "continente_name": "Planalto Reserva Douro Vinho Branco",
-    "auchan_name": "Vinho Branco Planalto Douro 0.75l",
-    "glovo_name": "Planalto Vinho Branco Reserva 375 mL"
+    "glovo_name": "Planalto Vinho Branco Reserva 375 mL",
+    "bolt_name": "Planalto Vinho Branco Reserva 37,5 cl"
   },
   {
     "name": "Snack de Chocolate de Leite KitKat Nestlé 41,5g",
@@ -493,34 +500,36 @@
     "orders": 4,
     "sortido": 1.18,
     "continente": 1.99,
-    "auchan": 0.67,
+    "auchan": 1.35,
     "glovo": null,
+    "bolt": null,
     "continente_name": "Snack Barrinhas Chocolate de Leite Extrafino Nestlé",
-    "auchan_name": "Barras Nestlé Fitness Cereais Chocolate Leite 135g 6un"
+    "auchan_name": "Tablete Nestlé Extrafino Chocolate De Leite 50 G"
   },
   {
     "name": "Cerveja com Álcool  Super Bock Mini 6 x 20 cl TP",
     "category": "Álcool — Cerveja",
     "orders": 3,
     "sortido": 5.27,
-    "continente": 10.99,
-    "auchan": 0.49,
-    "glovo": 0.65,
-    "continente_name": "Cerveja com Álcool Mini com Balde Super Bock",
-    "auchan_name": "Cerveja Super Bock Mini 15x0.20l",
-    "glovo_name": "Super Bock Mini Cerveja com Álcool 24x20cl"
+    "continente": null,
+    "auchan": 3.29,
+    "glovo": 3.79,
+    "bolt": 3.65,
+    "auchan_name": "Cerveja Super Bock Mini 6x0.20l",
+    "glovo_name": "Super Bock Mini Cerveja 6x20cl",
+    "bolt_name": "❄️ Cerveja Super Bock Original 6 x 20 cl"
   },
   {
     "name": "Refrigerante com Gás Fanta Laranja Lata 33cl",
     "category": "Bebidas s/ álcool",
     "orders": 3,
     "sortido": 1.3,
-    "continente": 4.32,
+    "continente": null,
     "auchan": 0.8,
-    "glovo": 1.09,
-    "continente_name": "Refrigerante com Gás em Lata Laranja Fanta",
-    "auchan_name": "Refrigerante C/Gás Fanta Uva Lata 6x0.33l (Sdr)",
-    "glovo_name": "Fanta Guaraná Lata 6x330ml"
+    "glovo": null,
+    "bolt": 0.99,
+    "auchan_name": "Refrigerante Com Gás Fanta Laranja 0.33l (Sdr)",
+    "bolt_name": "Fanta Laranja 33 cl"
   },
   {
     "name": "Água com Gás San Pellegrino 1 lt",
@@ -528,9 +537,10 @@
     "orders": 3,
     "sortido": 3.65,
     "continente": null,
-    "auchan": 2.49,
+    "auchan": 1.99,
     "glovo": null,
-    "auchan_name": "Água San Pellegrino Gaseificada 0.75l"
+    "bolt": null,
+    "auchan_name": "Agua C/Gas San Pellegrino S/Sabor Pet 1l (Sdr)"
   },
   {
     "name": "Vinho Alentejo Mateus Rosé 75 cl",
@@ -540,7 +550,9 @@
     "continente": null,
     "auchan": 4.99,
     "glovo": null,
-    "auchan_name": "Vinho Rosé Mateus 0.75l"
+    "bolt": 4.99,
+    "auchan_name": "Vinho Rosé Mateus 0.75l",
+    "bolt_name": "Mateus Rosé Medium Sweet 75 cl"
   },
   {
     "name": "Néctar Ananás Compal Clássico 1 lt",
@@ -549,10 +561,11 @@
     "sortido": 2.87,
     "continente": 1.35,
     "auchan": 1.35,
-    "glovo": 1.89,
+    "glovo": null,
+    "bolt": 1.89,
     "continente_name": "Néctar Ananás Compal Clássico",
     "auchan_name": "Néctar Compal Clássico Ananás 1l",
-    "glovo_name": "Compal Vital Equilíbrio Ananás e Côco 1L"
+    "bolt_name": "Compal Clássico Néctar Ananás 1 lt"
   },
   {
     "name": "Vinho Verde Branco Aveleda Loureiro 75cl",
@@ -562,9 +575,11 @@
     "continente": 5.59,
     "auchan": 4.99,
     "glovo": 4.94,
+    "bolt": 5.15,
     "continente_name": "Aveleda Loureiro Colheita Selecionada Vinho Verde Branco",
     "auchan_name": "Vinho Branco Aveleda Vinho Verde 0.75l",
-    "glovo_name": "Pack Muralhas de Monção Vinho Verde 2x75cl"
+    "glovo_name": "Pack Muralhas de Monção Vinho Verde 2x75cl",
+    "bolt_name": "Vinho Verde Aveleda Fonte Branco 75 cl"
   },
   {
     "name": "Ice Tea Pêssego Lipton 1,5 lt",
@@ -572,11 +587,10 @@
     "orders": 3,
     "sortido": 3.23,
     "continente": 2.04,
-    "auchan": 1.39,
-    "glovo": 1.14,
-    "continente_name": "Ice Tea Pêssego Lipton",
-    "auchan_name": "Ice Tea Fuze Tea Pêssego-Hibisco 1.5l (Sdr)",
-    "glovo_name": "Lipton Ice Tea Pêssego 50cl"
+    "auchan": null,
+    "glovo": null,
+    "bolt": null,
+    "continente_name": "Ice Tea Pêssego Lipton"
   },
   {
     "name": "Água Tónica Schweppes 1 lt",
@@ -584,33 +598,39 @@
     "orders": 3,
     "sortido": 3.1,
     "continente": 2.15,
-    "auchan": 1.79,
+    "auchan": 1.69,
     "glovo": 2.43,
-    "continente_name": "Água Tónica Limão Schweppes",
-    "auchan_name": "Água Schweppes Tónica Premium & Toque De Lima 0.20l",
-    "glovo_name": "Pack Schweppes Água Tónica 2x1L"
+    "bolt": 2.19,
+    "continente_name": "Água Tónica Schweppes",
+    "auchan_name": "Água Tónica Schweppes 1l (Sdr)",
+    "glovo_name": "Pack Schweppes Água Tónica 2x1L",
+    "bolt_name": "Água Tónica Schweppes 1 lt"
   },
   {
     "name": "Cerveja Estrella Damm garrafa 6 x 25 cl",
     "category": "Álcool — Cerveja",
     "orders": 3,
     "sortido": 7.79,
-    "continente": 8.99,
-    "auchan": 0.81,
+    "continente": 4.99,
+    "auchan": 4.98,
     "glovo": null,
-    "continente_name": "Cerveja com Álcool Daura sem Glúten Estrella Damm",
-    "auchan_name": "Cerveja Estrella Damm 12x0.25l"
+    "bolt": 5.1,
+    "continente_name": "Cerveja com Álcool Estrella Damm",
+    "auchan_name": "Cerveja Estrella Damm Espanha 6x0.25l",
+    "bolt_name": "Cerveja Estrella Damm 25 cl"
   },
   {
     "name": "Água Mineral Monchique 5 lt",
     "category": "Bebidas s/ álcool",
     "orders": 3,
     "sortido": 2.68,
-    "continente": 3.99,
+    "continente": 1.65,
     "auchan": 1.65,
     "glovo": null,
-    "continente_name": "Água sem Gás Alcalina pH 9,5 Eco Pack Monchique",
-    "auchan_name": "Água Mineral Monchique Garrafão 5l"
+    "bolt": 1.99,
+    "continente_name": "Água sem Gás Alcalina pH 9,5 Garrafão Monchique",
+    "auchan_name": "Água Mineral Monchique Garrafão 5l",
+    "bolt_name": "Água Monchique 5 lt"
   },
   {
     "name": "Gel Lubrificante Durex Play 50 Ml",
@@ -619,7 +639,20 @@
     "sortido": 13.99,
     "continente": null,
     "auchan": null,
-    "glovo": 10.29,
-    "glovo_name": "Durex Gel Lubrificante Play Morango 50ml"
+    "glovo": 10.69,
+    "bolt": 11.72,
+    "glovo_name": "Durex Gel Lubrificante Play Original 50ml",
+    "bolt_name": "Lubrificante Original Durex 50 ml"
+  },
+  {
+    "name": "Gelado  Cheesecake de Morango Häagen-Dazs 460 Ml",
+    "category": "Fruta & Legumes",
+    "orders": 3,
+    "sortido": 11.6,
+    "continente": null,
+    "auchan": null,
+    "glovo": null,
+    "bolt": 8.99,
+    "bolt_name": "Gelado Pint Strawberry Cheesecake Häagen-Dazs 460 ml"
   }
 ]
