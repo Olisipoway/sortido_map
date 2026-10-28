@@ -15,6 +15,10 @@ Output per order: [lat, lng, total_mins, hour, is_al, order_value, dow, prep_min
 import csv, json, time, os, re, math, urllib.request, urllib.parse
 from datetime import datetime, timezone
 
+GMAPS_KEY = "AIzaSyCaizcuV7Mg7_-6rtS86vnHoShZUdi8Px8"
+
+GMAPS_KEY = "AIzaSyCaizcuV7Mg7_-6rtS86vnHoShZUdi8Px8"
+
 INPUT_CSV   = "ubereats_orders_with_addresses.csv"
 CACHE_FILE  = "geocache.json"
 AIRBNB_FILE = "airbnb_lisbon.json"
@@ -49,16 +53,20 @@ def nominatim_geocode(address, cache):
     if address in cache:
         return cache[address]
     query = f"{address}, Lisboa, Portugal"
-    url = "https://nominatim.openstreetmap.org/search?" + urllib.parse.urlencode({
-        "q": query, "format": "json", "limit": 1, "countrycodes": "pt",
-        "viewbox": "-9.30,38.65,-9.05,38.82", "bounded": 1,
+    url = "https://maps.googleapis.com/maps/api/geocode/json?" + urllib.parse.urlencode({
+        "address": query,
+        "key": GMAPS_KEY,
+        "region": "pt",
+        "bounds": "38.65,-9.30|38.82,-9.06",
     })
-    req = urllib.request.Request(url, headers={"User-Agent": "Sortido-analysis/1.0 vasco@olisipoway.com"})
     try:
-        with urllib.request.urlopen(req, timeout=10) as r:
-            results = json.loads(r.read())
-        cache[address] = [float(results[0]["lat"]), float(results[0]["lon"])] if results else None
-        time.sleep(1.1)
+        with urllib.request.urlopen(url, timeout=10) as r:
+            data = json.loads(r.read())
+        if data.get("results"):
+            loc = data["results"][0]["geometry"]["location"]
+            cache[address] = [loc["lat"], loc["lng"]]
+        else:
+            cache[address] = None
     except Exception as e:
         log(f"  geocode error: {e}")
         cache[address] = None

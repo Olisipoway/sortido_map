@@ -53,8 +53,10 @@
     .iso-label { font-size: 12px; color: #64748b; font-weight: 500; min-width: 32px; }
     .iso-row input[type=range] { flex: 1; accent-color: #2563eb; }
     .iso-val { font-size: 12px; font-weight: 600; color: #1e293b; min-width: 42px; text-align: right; }
-    #tRangeMin::-webkit-slider-thumb, #tRangeMax::-webkit-slider-thumb { pointer-events: all; width: 14px; height: 14px; border-radius: 50%; background: #2563eb; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.3); cursor: pointer; -webkit-appearance: none; appearance: none; }
-    #tRangeMin::-moz-range-thumb, #tRangeMax::-moz-range-thumb { pointer-events: all; width: 12px; height: 12px; border-radius: 50%; background: #2563eb; border: 2px solid white; cursor: pointer; }
+    #tRangeMin::-webkit-slider-thumb, #tRangeMax::-webkit-slider-thumb,
+    #areaRangeMin::-webkit-slider-thumb, #areaRangeMax::-webkit-slider-thumb { pointer-events: all; width: 14px; height: 14px; border-radius: 50%; background: #2563eb; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.3); cursor: pointer; -webkit-appearance: none; appearance: none; }
+    #tRangeMin::-moz-range-thumb, #tRangeMax::-moz-range-thumb,
+    #areaRangeMin::-moz-range-thumb, #areaRangeMax::-moz-range-thumb { pointer-events: all; width: 12px; height: 12px; border-radius: 50%; background: #2563eb; border: 2px solid white; cursor: pointer; }
 
     /* Inline legend bars inside sidebar */
     .legend-inline {
@@ -240,6 +242,7 @@
     #legend3 { bottom: 60px; right: 170px; }
     #legend6 { bottom: 60px; right: 170px; }
     #legend7 { bottom: 190px; right: 170px; }
+    #legendCoverage { bottom: 12px; right: 12px; display: block; }
 
     .pulse-ring {
       position: absolute; inset: -6px; border-radius: 50%;
@@ -268,10 +271,23 @@
 
   <div class="sb-section">
     <div class="sb-section-title">Área de Influência</div>
-    <div class="iso-row">
-      <span class="iso-label">Entrega</span>
-      <input type="range" id="totalRange" min="10" max="45" value="30" step="1" />
-      <span id="totalVal" class="iso-val">30 min</span>
+    <div id="areaTimingModeBar" style="display:flex;gap:3px;margin-bottom:6px">
+      <button class="atmode-btn" data-mode="total" style="flex:1;font-size:9px;padding:3px 2px;border:1px solid #1e293b;border-radius:3px;background:#1e293b;cursor:pointer;font-weight:700;color:#f8fafc">Total</button>
+      <button class="atmode-btn" data-mode="prep"  style="flex:1;font-size:9px;padding:3px 2px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;cursor:pointer;font-weight:700;color:#6366f1">Prep</button>
+      <button class="atmode-btn" data-mode="wait"  style="flex:1;font-size:9px;padding:3px 2px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;cursor:pointer;font-weight:700;color:#d97706">Espera</button>
+      <button class="atmode-btn" data-mode="ride"  style="flex:1;font-size:9px;padding:3px 2px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;cursor:pointer;font-weight:700;color:#dc2626">Viagem</button>
+    </div>
+    <div style="position:relative;height:20px;margin-bottom:2px">
+      <div style="position:absolute;top:8px;left:0;right:0;height:4px;border-radius:2px;background:#e2e8f0"></div>
+      <div id="areaRangeFill" style="position:absolute;top:8px;height:4px;border-radius:2px;background:linear-gradient(to right,#22c55e,#f59e0b,#ef4444)"></div>
+      <input type="range" id="areaRangeMin" min="0" max="60" value="0"  step="1"
+             style="position:absolute;width:100%;top:0;appearance:none;background:transparent;pointer-events:none;accent-color:#2563eb">
+      <input type="range" id="areaRangeMax" min="0" max="60" value="45" step="1"
+             style="position:absolute;width:100%;top:0;appearance:none;background:transparent;pointer-events:none;accent-color:#2563eb">
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:10px;font-weight:600;color:#1e293b;margin-top:3px">
+      <span id="areaRangeMinLbl">0 min</span>
+      <span id="areaRangeMaxLbl">45 min</span>
     </div>
   </div>
 
@@ -549,6 +565,22 @@
   <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(250,204,21,0.85)"></span>1 – 2 km</div>
   <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(249,115,22,0.85)"></span>2 – 3 km</div>
   <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(239,68,68,0.85)"></span>&gt; 3 km</div>
+</div>
+
+<div id="legendCoverage" class="fl-legend">
+  <h4>Zona de Entrega</h4>
+  <div class="fl-legend-row" style="align-items:center;gap:8px">
+    <span style="display:inline-block;width:22px;height:3px;background:#ff6600;border-radius:1px;flex-shrink:0"></span>
+    <span>P90 — concentração das entregas</span>
+  </div>
+  <div class="fl-legend-row" style="align-items:center;gap:8px">
+    <span style="display:inline-block;width:22px;height:0;border-top:2.5px dashed #2563eb;flex-shrink:0"></span>
+    <span>P95 — alcance habitual máximo</span>
+  </div>
+  <div class="fl-legend-row" style="align-items:center;gap:8px">
+    <span style="display:inline-block;width:22px;height:0;border-top:2px dashed #dc2626;flex-shrink:0"></span>
+    <span>Total — entrega mais distante</span>
+  </div>
 </div>
 
 <div id="priceCompFloat">
@@ -1369,16 +1401,70 @@ function sumPopulation(geojson) {
 
 function fmt(n) { return n.toLocaleString("pt-PT"); }
 
-const totalRange  = document.getElementById("totalRange");
-const totalVal    = document.getElementById("totalVal");
+// totalRange is a virtual proxy — actual UI is the area dual-range slider
+const totalRange = { value: "45", _listeners: [], addEventListener(ev, fn) { this._listeners.push(fn); } };
+const totalVal   = { textContent: "" };
 const clearBtn = document.getElementById("clearBtn");
 const hint     = document.getElementById("hint");
 
-function updateLabels() {
-  totalVal.textContent = totalRange.value + " min";
+let areaTimingMode = 'total';
+let areaMinMins = 0, areaMaxMins = 45;
+
+function updateAreaRangeUI() {
+  const cfg = TIMING_MODE_CFG[areaTimingMode] || TIMING_MODE_CFG.total;
+  const span = cfg.hi - cfg.lo || 1;
+  const pctLo = ((areaMinMins - cfg.lo) / span * 100).toFixed(1) + '%';
+  const pctW  = ((areaMaxMins - areaMinMins) / span * 100).toFixed(1) + '%';
+  const fill = document.getElementById("areaRangeFill");
+  if (fill) { fill.style.left = pctLo; fill.style.width = pctW; }
+  const minLbl = document.getElementById("areaRangeMinLbl");
+  const maxLbl = document.getElementById("areaRangeMaxLbl");
+  if (minLbl) minLbl.textContent = areaMinMins + " min";
+  if (maxLbl) maxLbl.textContent = areaMaxMins + " min";
+  totalRange.value = areaMaxMins; // keep compat for deliveryRadiusKm
 }
 
-totalRange.addEventListener("input", () => { updateLabels(); drawSortidoCoverage(); });
+function setAreaTimingMode(mode) {
+  areaTimingMode = mode;
+  const cfg = TIMING_MODE_CFG[mode] || TIMING_MODE_CFG.total;
+  areaMinMins = cfg.lo; areaMaxMins = cfg.hi;
+  const rMin = document.getElementById("areaRangeMin");
+  const rMax = document.getElementById("areaRangeMax");
+  if (rMin) { rMin.min = cfg.lo; rMin.max = cfg.hi; rMin.value = cfg.lo; }
+  if (rMax) { rMax.min = cfg.lo; rMax.max = cfg.hi; rMax.value = cfg.hi; }
+  document.querySelectorAll(".atmode-btn").forEach(b => {
+    const active = b.dataset.mode === mode;
+    b.style.background  = active ? "#1e293b" : "#f8fafc";
+    b.style.borderColor = active ? "#1e293b" : "#cbd5e1";
+    b.style.color = active ? "#f8fafc"
+      : b.dataset.mode === 'prep' ? "#6366f1"
+      : b.dataset.mode === 'wait' ? "#d97706"
+      : b.dataset.mode === 'ride' ? "#dc2626" : "#334155";
+  });
+  updateAreaRangeUI();
+  drawSortidoCoverage();
+}
+
+(function wireAreaRange() {
+  document.querySelectorAll(".atmode-btn").forEach(btn => {
+    btn.addEventListener("click", () => setAreaTimingMode(btn.dataset.mode));
+  });
+  const rMin = document.getElementById("areaRangeMin");
+  const rMax = document.getElementById("areaRangeMax");
+  if (!rMin || !rMax) return;
+  function sync() {
+    let lo = parseInt(rMin.value), hi = parseInt(rMax.value);
+    if (lo > hi - 1) { lo = hi - 1; rMin.value = lo; }
+    if (hi < lo + 1) { hi = lo + 1; rMax.value = hi; }
+    areaMinMins = lo; areaMaxMins = hi;
+    updateAreaRangeUI();
+    drawSortidoCoverage();
+  }
+  rMin.addEventListener("input", sync);
+  rMax.addEventListener("input", sync);
+})();
+
+function updateLabels() {} // no-op, kept for compat
 document.getElementById("incomeBtn").addEventListener("click", toggleIncomeLayer);
 document.getElementById("airbnbBtn").addEventListener("click", toggleAirbnbLayer);
 document.getElementById("rentBtn").addEventListener("click", toggleRentLayer);
@@ -1746,14 +1832,18 @@ const SORTIDO_LNG = -9.1480;
 // Uber Eats / Glovo use straight-line distance for delivery zones, not road routing.
 // Radius = 95th percentile of actual delivery distances from a given point.
 let sortidoCoverageLayer = null;
+let sortidoP95Circle = null;
+let sortidoMaxCircle = null;
 
 function deliveryRadiusKm(fromLat, fromLng, slot = currentSlot, dow = currentDow) {
   if (!ordersData || ordersData.length === 0) return 5;
   const testSlot = SLOTS[slot]  || SLOTS.all;
   const testDow  = DOW_GROUPS[dow] || DOW_GROUPS.all;
-  const maxMins  = parseInt(totalRange.value);
   const timed = ordersData.filter(o => o[2] != null && testSlot(o[3]) && testDow(o[6]));
-  const pts   = timed.filter(o => o[2] <= maxMins);
+  const pts   = timed.filter(o => {
+    const v = orderTimingValue(o, areaTimingMode);
+    return v != null && v >= areaMinMins && v <= areaMaxMins;
+  });
   const src   = pts.length >= 10 ? pts : timed.length >= 10 ? timed : ordersData;
   if (src.length === 0) return 0.5;
   const cosLat = Math.cos(fromLat * Math.PI / 180);
@@ -1794,30 +1884,151 @@ function drawSortidoAnchor() {
 const SLOT_LABELS = { all: 'Todos os horários', almoco: 'Almoço (12–15h)', tarde: 'Tarde (15–19h)', jantar: 'Jantar (19–23h)', late: 'Late night (23–2h)' };
 const DOW_LABELS  = { all: 'Todos os dias', fds: 'Fim de semana', sem: 'Semana', '0':'Dom','1':'Seg','2':'Ter','3':'Qua','4':'Qui','5':'Sex','6':'Sáb' };
 
+function buildDirectionalReach(fromLat, fromLng, pct = 0.90, drawAt = null) {
+  if (!ordersData || ordersData.length === 0) return null;
+  const testSlot = SLOTS[currentSlot] || SLOTS.all;
+  const testDow  = DOW_GROUPS[currentDow] || DOW_GROUPS.all;
+  let pts = ordersData.filter(o => {
+    if (!testSlot(o[3]) || !testDow(o[6])) return false;
+    const v = orderTimingValue(o, areaTimingMode);
+    return v != null ? (v >= areaMinMins && v <= areaMaxMins) : true;
+  });
+  if (pts.length < 10) pts = ordersData;
+
+  const cosLat = Math.cos(fromLat * Math.PI / 180);
+  const SECTORS = 36, DEG = 360 / SECTORS;
+  const buckets = Array.from({length: SECTORS}, () => []);
+
+  for (const [lat, lng] of pts) {
+    const dy = (lat - fromLat) * 111.32;
+    const dx = (lng - fromLng) * 111.32 * cosLat;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < 0.05) continue;
+    const bearing = ((Math.atan2(dx, dy) * 180 / Math.PI) + 360) % 360;
+    buckets[Math.floor(bearing / DEG) % SECTORS].push(dist);
+  }
+
+  const fallback = deliveryRadiusKm(fromLat, fromLng);
+  const PCT = pct;
+
+  // Per-sector P90, null where fewer than 3 points
+  const raw = buckets.map(d => {
+    if (d.length < 3) return null;
+    const s = d.slice().sort((a, b) => a - b);
+    return s[Math.floor(s.length * PCT)];
+  });
+
+  // Fill null sectors by linear interpolation between nearest non-null neighbours
+  const filled = raw.map((r, i) => {
+    if (r !== null) return r;
+    let L = null, R = null;
+    for (let d = 1; d < SECTORS; d++) {
+      if (L === null && raw[(i - d + SECTORS) % SECTORS] !== null) L = {v: raw[(i - d + SECTORS) % SECTORS], d};
+      if (R === null && raw[(i + d) % SECTORS] !== null) R = {v: raw[(i + d) % SECTORS], d};
+      if (L && R) break;
+    }
+    if (!L && !R) return fallback * 0.7;
+    if (!L) return R.v;
+    if (!R) return L.v;
+    return (L.v * R.d + R.v * L.d) / (L.d + R.d);
+  });
+
+  // Gaussian smooth (3-tap) twice for a cleaner outline
+  function smooth(arr) {
+    return arr.map((v, i) => arr[(i-1+SECTORS)%SECTORS]*0.25 + v*0.5 + arr[(i+1)%SECTORS]*0.25);
+  }
+  const radii = smooth(smooth(filled)).map(r => Math.min(r, fallback * 1.6));
+
+  // Build Leaflet LatLng ring — optionally centered at a different location
+  const [cLat, cLng] = drawAt || [fromLat, fromLng];
+  const cCosLat = Math.cos(cLat * Math.PI / 180);
+  const ring = radii.map((r, i) => {
+    const a = i * DEG * Math.PI / 180;
+    return [cLat + r * Math.cos(a) / 111.32,
+            cLng + r * Math.sin(a) / (111.32 * cCosLat)];
+  });
+  return ring;
+}
+
+function getSortidoRadii() {
+  if (!ordersData || ordersData.length === 0) return { p90km: 3, p95km: 4.7, maxKm: 6.7 };
+  const testSlot = SLOTS[currentSlot] || SLOTS.all;
+  const testDow  = DOW_GROUPS[currentDow] || DOW_GROUPS.all;
+  let pts = ordersData.filter(o => {
+    if (!testSlot(o[3]) || !testDow(o[6])) return false;
+    const v = orderTimingValue(o, areaTimingMode);
+    return v != null ? (v >= areaMinMins && v <= areaMaxMins) : true;
+  });
+  if (pts.length < 10) pts = ordersData;
+  const cosLat = Math.cos(SORTIDO_LAT * Math.PI / 180);
+  const dists = pts.map(([lat, lng]) => {
+    const dy = (lat - SORTIDO_LAT) * 111.32;
+    const dx = (lng - SORTIDO_LNG) * 111.32 * cosLat;
+    return Math.sqrt(dx * dx + dy * dy);
+  }).sort((a, b) => a - b);
+  return {
+    p90km: dists[Math.floor(dists.length * 0.90)],
+    p95km: dists[Math.floor(dists.length * 0.95)],
+    maxKm: dists.filter(d => d <= 15).at(-1) ?? dists[Math.floor(dists.length * 0.99)],
+  };
+}
+
 function drawSortidoCoverage() {
   if (sortidoCoverageLayer) { map.removeLayer(sortidoCoverageLayer); sortidoCoverageLayer = null; }
+  if (sortidoP95Circle)    { map.removeLayer(sortidoP95Circle);    sortidoP95Circle = null; }
+  if (sortidoMaxCircle)    { map.removeLayer(sortidoMaxCircle);    sortidoMaxCircle = null; }
   if (!ordersData) return;
-  const r = deliveryRadiusKm(SORTIDO_LAT, SORTIDO_LNG);
   const testSlot = SLOTS[currentSlot] || SLOTS.all;
   const testDow  = DOW_GROUPS[currentDow] || DOW_GROUPS.all;
   const n = ordersData.filter(o => testSlot(o[3]) && testDow(o[6])).length || ordersData.length;
   const slotLabel = SLOT_LABELS[currentSlot] || currentSlot;
   const dowLabel  = DOW_LABELS[currentDow]   || currentDow;
+  const r = deliveryRadiusKm(SORTIDO_LAT, SORTIDO_LNG);
 
-  sortidoCoverageLayer = L.circle([SORTIDO_LAT, SORTIDO_LNG], {
-    radius: r * 1000,
+  const cosLat = Math.cos(SORTIDO_LAT * Math.PI / 180);
+  let filteredPts = ordersData.filter(o => {
+    if (!testSlot(o[3]) || !testDow(o[6])) return false;
+    const v = orderTimingValue(o, areaTimingMode);
+    return v != null ? (v >= areaMinMins && v <= areaMaxMins) : true;
+  });
+  if (filteredPts.length < 10) filteredPts = ordersData;
+  const allDists = filteredPts.map(([lat, lng]) => {
+    const dy = (lat - SORTIDO_LAT) * 111.32;
+    const dx = (lng - SORTIDO_LNG) * 111.32 * cosLat;
+    return Math.sqrt(dx * dx + dy * dy);
+  }).sort((a, b) => a - b);
+  const maxReach = allDists[Math.floor(allDists.length * 0.99)];
+
+  // P99 circle — red
+  sortidoMaxCircle = L.circle([SORTIDO_LAT, SORTIDO_LNG], {
+    radius: maxReach * 1000,
+    color: "#dc2626", fillColor: "transparent", fillOpacity: 0,
+    weight: 2, opacity: 0.65, dashArray: "4 6",
+  }).addTo(map);
+
+  const ring95 = buildDirectionalReach(SORTIDO_LAT, SORTIDO_LNG, 0.95);
+  if (ring95) {
+    sortidoP95Circle = L.polygon(ring95, {
+      color: "#2563eb", fillColor: "#2563eb", fillOpacity: 0.06, weight: 2, opacity: 0.75, dashArray: "6 4",
+    }).addTo(map);
+  }
+
+  const ring = buildDirectionalReach(SORTIDO_LAT, SORTIDO_LNG, 0.90);
+  if (!ring) return;
+
+  sortidoCoverageLayer = L.polygon(ring, {
     color: "#ff6600", fillColor: "#ff6600", fillOpacity: 0.12, weight: 2.5, opacity: 0.9,
   }).bindPopup(`
     <div class="pop-popup">
       <b style="color:#e85000">Zona de Entrega — Sortido</b><br>
-      <span style="color:#666;font-size:11px">${slotLabel} · ${dowLabel} · ≤${parseInt(totalRange.value)} min · ${r.toFixed(2)} km</span>
+      <span style="color:#666;font-size:11px">${slotLabel} · ${dowLabel} · ${areaTimingMode} ${areaMinMins}–${areaMaxMins} min · ~${r.toFixed(2)} km</span>
       <hr style="margin:6px 0;border-color:#eee"/>
       <div style="font-size:12px;line-height:1.65;color:#374151">
         <b>Como é calculado:</b><br>
-        A Uber Eats define zonas por raio em <b>linha reta</b> (crow-flies).
-        Este círculo representa o raio máximo atingido pelas entregas reais
-        no filtro activo — a zona efectiva varia com hora, tráfego e
-        disponibilidade de estafetas.
+        Polígono direccional P90 — para cada um dos 36 sectores de 10°,
+        calcula a distância P90 das entregas reais nesse sector.
+        A forma muda por hora e dia: alarga onde há mais cobertura,
+        contrai onde há menos.
       </div>
       <hr style="margin:6px 0;border-color:#eee"/>
       <div style="font-size:11px;color:#94a3b8">${n} entregas no filtro activo</div>
@@ -2910,7 +3121,7 @@ async function toggleSegundaLoja() {
   segundaKDELayer = new SegundaKDELayer();
   map.addLayer(segundaKDELayer);
 
-  const s2Radius = deliveryRadiusKm(SLAT, SLNG);
+  const { p90km: s2p90, p95km: s2p95, maxKm: s2max } = getSortidoRadii();
 
   results.forEach(({ lat, lng, rank, pct, cnt, rev, distKm, pctLoyal, pctAL, pctRes, avgTicket, avgMinsNow, timeSaved }) => {
     const color = SEGUNDA_COLORS[rank - 1] || SEGUNDA_COLORS[2];
@@ -2931,13 +3142,13 @@ async function toggleSegundaLoja() {
     if (rank === 1) m.openPopup();
     segundaMarkers.push(m);
 
+    const avgR = (s2p90 + s2p95 + s2max) / 3;
     const iso = L.circle([lat, lng], {
-      radius: s2Radius * 1000,
+      radius: avgR * 1000,
       color, fillColor: color,
       fillOpacity: rank === 1 ? 0.10 : 0.05,
       weight: rank === 1 ? 2.5 : 1.5,
       opacity: rank === 1 ? 0.85 : 0.5,
-      dashArray: rank === 1 ? null : '6 4',
     }).addTo(map);
     segundaIsoLayers.push(iso);
   });
@@ -2990,7 +3201,7 @@ const placed = [];
 
 map.on("click", async (e) => {
   const { lat, lng } = e.latlng;
-  const totalMins  = parseInt(totalRange.value);
+  const totalMins  = areaMaxMins;
   const color = COLORS[colorIdx % COLORS.length];
   colorIdx++;
 
@@ -3005,12 +3216,15 @@ map.on("click", async (e) => {
   hint.textContent = "A calcular zona de entrega…";
 
   try {
-    const radius = deliveryRadiusKm(SORTIDO_LAT, SORTIDO_LNG);
-    const circleGeo = circleGeoJSON(lat, lng, radius);
+    const { p90km, p95km, maxKm } = getSortidoRadii();
+    const avgRadius = (p90km + p95km + maxKm) / 3;
+    const circleGeo = circleGeoJSON(lat, lng, avgRadius);
     const isoLayer = L.circle([lat, lng], {
-      radius: radius * 1000,
-      color, fillColor: color, fillOpacity: 0.15, weight: 2, opacity: 0.8,
+      radius: avgRadius * 1000,
+      color, fillColor: color, fillOpacity: 0.10, weight: 2.5, opacity: 0.8,
     }).addTo(map);
+    const dirLayer = isoLayer;
+    const maxLayer = null;
 
     hint.textContent = "A contar população…";
     const stats = sumPopulation(circleGeo);
@@ -3050,7 +3264,7 @@ map.on("click", async (e) => {
       </div>
     `).openPopup();
 
-    placed.push({ marker, isoLayer });
+    placed.push({ marker, isoLayer, maxLayer, dirLayer });
     hint.textContent = "Click anywhere to add another marker";
   } catch (err) {
     hint.textContent = "Error: " + err.message;
@@ -3060,9 +3274,11 @@ map.on("click", async (e) => {
 });
 
 clearBtn.addEventListener("click", () => {
-  placed.forEach(({ marker, isoLayer }) => {
+  placed.forEach(({ marker, isoLayer, maxLayer, dirLayer }) => {
     map.removeLayer(marker);
     map.removeLayer(isoLayer);
+    if (maxLayer) map.removeLayer(maxLayer);
+    if (dirLayer) map.removeLayer(dirLayer);
   });
   placed.length = 0;
   colorIdx = 0;
