@@ -3201,84 +3201,88 @@ const placed = [];
 
 map.on("click", async (e) => {
   const { lat, lng } = e.latlng;
-  const totalMins  = areaMaxMins;
+  const num   = placed.length + 1;
   const color = COLORS[colorIdx % COLORS.length];
   colorIdx++;
 
   const icon = L.divIcon({
     className: "",
-    html: `<div style="width:14px;height:14px;border-radius:50%;background:${color};border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.4)"></div>`,
-    iconSize: [14, 14],
-    iconAnchor: [7, 7],
+    html: `<div style="width:24px;height:24px;border-radius:50%;background:${color};border:2px solid white;box-shadow:0 1px 6px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white;line-height:1">${num}</div>`,
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
   });
 
   const marker = L.marker([lat, lng], { icon }).addTo(map);
   hint.textContent = "A calcular zona de entrega…";
 
-  try {
-    const { p90km, p95km, maxKm } = getSortidoRadii();
-    const avgRadius = (p90km + p95km + maxKm) / 3;
-    const circleGeo = circleGeoJSON(lat, lng, avgRadius);
-    const isoLayer = L.circle([lat, lng], {
-      radius: avgRadius * 1000,
-      color, fillColor: color, fillOpacity: 0.10, weight: 2.5, opacity: 0.8,
-    }).addTo(map);
-    const dirLayer = isoLayer;
-    const maxLayer = null;
+  const { p90km, p95km, maxKm } = getSortidoRadii();
+  const avgRadius = (p90km + p95km + maxKm) / 3;
+  const circleGeo = circleGeoJSON(lat, lng, avgRadius);
+  const isoLayer = L.circle([lat, lng], {
+    radius: avgRadius * 1000,
+    color, fillColor: color, fillOpacity: 0.10, weight: 2.5, opacity: 0.8,
+  }).addTo(map);
 
-    hint.textContent = "A contar população…";
-    const stats = sumPopulation(circleGeo);
-    const airbnbCount = countAirbnb(circleGeo);
-    const compCount = countCompetitors(circleGeo);
+  hint.textContent = "A contar população…";
+  const stats        = sumPopulation(circleGeo);
+  const airbnbCount  = countAirbnb(circleGeo);
+  const compCount    = countCompetitors(circleGeo);
 
-    let popHtml = "";
-    if (stats) {
-      popHtml = `
-        <hr style="margin:6px 0;border-color:#eee"/>
-        <div class="row"><span>Residents</span><span>${fmt(stats.pop)}</span></div>
-        <div class="row"><span>Median income</span><span>${fmt(Math.round(stats.spendPop / stats.pop * 12316))} €/yr</span></div>
-        <div class="row"><span>Age 15–24</span><span>${fmt(stats.age1524)}</span></div>
-        <div class="row"><span>Age 25–64</span><span>${fmt(stats.age2564)}</span></div>
-        <div class="row"><span>Rented homes</span><span>${fmt(stats.rented)}</span></div>
-        ${airbnbCount !== null ? `<div class="row"><span>Airbnb listings</span><span>${fmt(airbnbCount)}</span></div>` : ""}
-        ${compCount !== null ? `<div class="row"><span>Competitors</span><span>${fmt(compCount)}</span></div>` : ""}`;
-    }
-
-    const delta = 0.004; // ~450m bounding box
-    const imoUrl = `https://www.imovirtual.com/arrendar/loja/?`
-      + `search%5Bfilter_float_latitude%3Agte%5D=${(lat - delta).toFixed(5)}`
-      + `&search%5Bfilter_float_latitude%3Alte%5D=${(lat + delta).toFixed(5)}`
-      + `&search%5Bfilter_float_longitude%3Agte%5D=${(lng - delta).toFixed(5)}`
-      + `&search%5Bfilter_float_longitude%3Alte%5D=${(lng + delta).toFixed(5)}`
-      + `&search%5Bdescription%5D=1`;
-
-    marker.bindPopup(`
-      <div class="pop-popup">
-        <b>${radius.toFixed(1)} km raio · ${totalMins} min entrega total</b><br>
-        <span style="color:#666;font-size:11px">${lat.toFixed(4)}, ${lng.toFixed(4)}</span>
-        ${popHtml}
-        <hr style="margin:6px 0;border-color:#eee"/>
-        <a href="${imoUrl}" target="_blank" style="display:block;text-align:center;background:#e8520a;color:white;border-radius:4px;padding:5px 0;font-weight:600;font-size:12px;text-decoration:none;">
-          Lojas para arrendar nearby →
-        </a>
-      </div>
-    `).openPopup();
-
-    placed.push({ marker, isoLayer, maxLayer, dirLayer });
-    hint.textContent = "Click anywhere to add another marker";
-  } catch (err) {
-    hint.textContent = "Error: " + err.message;
-    map.removeLayer(marker);
-    colorIdx--;
+  let popHtml = "";
+  if (stats) {
+    popHtml = `
+      <hr style="margin:6px 0;border-color:#eee"/>
+      <div class="row"><span>Residents</span><span>${fmt(stats.pop)}</span></div>
+      <div class="row"><span>Median income</span><span>${fmt(Math.round(stats.spendPop / stats.pop * 12316))} €/yr</span></div>
+      <div class="row"><span>Age 15–24</span><span>${fmt(stats.age1524)}</span></div>
+      <div class="row"><span>Age 25–64</span><span>${fmt(stats.age2564)}</span></div>
+      <div class="row"><span>Rented homes</span><span>${fmt(stats.rented)}</span></div>
+      ${airbnbCount !== null ? `<div class="row"><span>Airbnb listings</span><span>${fmt(airbnbCount)}</span></div>` : ""}
+      ${compCount !== null ? `<div class="row"><span>Competitors</span><span>${fmt(compCount)}</span></div>` : ""}`;
   }
+
+  const delta = 0.004;
+  const imoUrl = `https://www.imovirtual.com/arrendar/loja/?`
+    + `search%5Bfilter_float_latitude%3Agte%5D=${(lat - delta).toFixed(5)}`
+    + `&search%5Bfilter_float_latitude%3Alte%5D=${(lat + delta).toFixed(5)}`
+    + `&search%5Bfilter_float_longitude%3Agte%5D=${(lng - delta).toFixed(5)}`
+    + `&search%5Bfilter_float_longitude%3Alte%5D=${(lng + delta).toFixed(5)}`
+    + `&search%5Bdescription%5D=1`;
+
+  const entry = { marker, isoLayer };
+  placed.push(entry);
+
+  marker.bindPopup(`
+    <div class="pop-popup">
+      <b>#${num} · ${avgRadius.toFixed(1)} km raio</b><br>
+      <span style="color:#666;font-size:11px">${lat.toFixed(4)}, ${lng.toFixed(4)}</span>
+      ${popHtml}
+      <hr style="margin:6px 0;border-color:#eee"/>
+      <a href="${imoUrl}" target="_blank" style="display:block;text-align:center;background:#e8520a;color:white;border-radius:4px;padding:5px 0;font-weight:600;font-size:12px;text-decoration:none;margin-bottom:6px">
+        Lojas para arrendar nearby →
+      </a>
+      <button onclick="removePlaced(${placed.length - 1})" style="width:100%;padding:4px 0;border:1px solid #e2e8f0;border-radius:4px;background:#f8fafc;cursor:pointer;font-size:11px;color:#64748b">
+        Remover este marcador
+      </button>
+    </div>
+  `).openPopup();
+
+  hint.textContent = "Click anywhere to add another marker";
 });
 
+function removePlaced(idx) {
+  const entry = placed[idx];
+  if (!entry) return;
+  map.removeLayer(entry.marker);
+  map.removeLayer(entry.isoLayer);
+  placed.splice(idx, 1);
+  map.closePopup();
+}
+
 clearBtn.addEventListener("click", () => {
-  placed.forEach(({ marker, isoLayer, maxLayer, dirLayer }) => {
+  placed.forEach(({ marker, isoLayer }) => {
     map.removeLayer(marker);
     map.removeLayer(isoLayer);
-    if (maxLayer) map.removeLayer(maxLayer);
-    if (dirLayer) map.removeLayer(dirLayer);
   });
   placed.length = 0;
   colorIdx = 0;
