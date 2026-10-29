@@ -172,7 +172,7 @@ if __name__ == "__main__":
     log(f"Orders with address: {len(rows)}")
 
     unique_addrs = sorted(set(r["address"] for r in rows))
-    need = [a for a in unique_addrs if a not in cache]
+    need = [a for a in unique_addrs if a not in cache or cache[a] is None]
     log(f"Unique addresses: {len(unique_addrs)}  —  need geocoding: {len(need)}")
 
     for i, addr in enumerate(need):

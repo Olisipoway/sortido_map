@@ -1,5 +1,16 @@
 [
   {
+    "name": "Ovos Nostrum Meia Dúzia L",
+    "category": "Ovos",
+    "orders": 11,
+    "sortido": 3.27,
+    "continente": null,
+    "auchan": 1.73,
+    "glovo": null,
+    "bolt": null,
+    "auchan_name": "Ovos D'avozinha Classe L Meia Dúzia"
+  },
+  {
     "name": "Preservativo Sensitivo Contacto Total Durex 6 un",
     "category": "Saúde Sexual",
     "orders": 10,
@@ -12,6 +23,30 @@
     "auchan_name": "Preservativos Durex Contacto Total 6un",
     "glovo_name": "Durex Preservativos Sensitivo Super Fino 6un",
     "bolt_name": "Preservativos Sensitivo Contato Total Durex 6 un"
+  },
+  {
+    "name": "Queijo Mozzarella Amanhecer Ralado 200 G",
+    "category": "Queijo",
+    "orders": 2,
+    "sortido": 2.93,
+    "continente": null,
+    "auchan": 2.19,
+    "glovo": null,
+    "bolt": 2.09,
+    "auchan_name": "Queijo Da Ilha Auchan Ralado 200g",
+    "bolt_name": "Queijo Mozzarella Amanhecer Ralado 200 gr"
+  },
+  {
+    "name": "Gelo em Cubos IceOlogy 2Kg",
+    "category": "Gelo",
+    "orders": 2,
+    "sortido": 3.4,
+    "continente": null,
+    "auchan": 0.99,
+    "glovo": null,
+    "bolt": 1.99,
+    "auchan_name": "Gelo Auchan Em Cubos 2kg",
+    "bolt_name": "Saco de Gelo Gelito 2 kg"
   },
   {
     "name": "Renova Papel Higiénico 4 Folhas Grand Royal 6 Un",
@@ -48,17 +83,6 @@
     "auchan_name": "Rolo Renova Cozinha Máxima Absorção 2 Unidades Em Embalagem De Papel"
   },
   {
-    "name": "Bebida Pedras Com Gás Maracujá 4X0.25L",
-    "category": "Água Com Gás",
-    "orders": 0,
-    "sortido": 5.1,
-    "continente": null,
-    "auchan": 2.29,
-    "glovo": null,
-    "bolt": null,
-    "auchan_name": "Bebida C/ Gás Frize Laranja 4x0.25l"
-  },
-  {
     "name": "Água Mineral Monchique Garrafão 5l",
     "category": "Água Sem Gás",
     "orders": 0,
@@ -72,6 +96,19 @@
     "bolt_name": "Água Monchique 5 lt"
   },
   {
+    "name": "Água Castello Com Gás 6X0.25L",
+    "category": "Água Com Gás",
+    "orders": 0,
+    "sortido": 4.7,
+    "continente": 3.37,
+    "auchan": null,
+    "glovo": 3.69,
+    "bolt": 3.85,
+    "continente_name": "Água com Gás Castello",
+    "glovo_name": "Castello Água com Gás 6x25cl",
+    "bolt_name": "Água Com Gás Castello 6 x 25 cl"
+  },
+  {
     "name": "Bebida Pedras Com Gás Limão 4X0.25L",
     "category": "Água Com Gás",
     "orders": 0,
@@ -81,17 +118,6 @@
     "glovo": null,
     "bolt": null,
     "auchan_name": "Bebida Pedras Com Gás Limão 4x0.25l"
-  },
-  {
-    "name": "Frize Original 6x25cl",
-    "category": "Água Com Gás",
-    "orders": 0,
-    "sortido": 4.19,
-    "continente": null,
-    "auchan": null,
-    "glovo": 6.54,
-    "bolt": null,
-    "glovo_name": "Pack Burn Original 6x25cl"
   },
   {
     "name": "Bebida Com Gás Frize Limão 4X0.25L",
@@ -128,6 +154,28 @@
     "bolt_name": "Barras Cereais Morango Fitness Nestlé 6 un"
   },
   {
+    "name": "Barras De Cereais Chocapic 6x25g",
+    "category": "Barras de Cereais",
+    "orders": 0,
+    "sortido": 5.1,
+    "continente": null,
+    "auchan": null,
+    "glovo": null,
+    "bolt": 4.25,
+    "bolt_name": "Barra Cereais Chocapic 6 x 25 gr"
+  },
+  {
+    "name": "Tortilla Old El Paso Chips Queijo 185G",
+    "category": "Aperitivos, Snacks e Pipocas",
+    "orders": 0,
+    "sortido": 5.4,
+    "continente": null,
+    "auchan": 2.89,
+    "glovo": null,
+    "bolt": null,
+    "auchan_name": "Tortilla Old El Paso Chips Queijo 185g"
+  },
+  {
     "name": "CERVEJA C/ALC T/P SAGRES 6X33CL",
     "category": "Cerveja Tradicional",
     "orders": 0,
@@ -157,11 +205,10 @@
     "category": "Cerveja Tradicional",
     "orders": 0,
     "sortido": 7.99,
-    "continente": 14.99,
+    "continente": null,
     "auchan": 4.59,
     "glovo": 6.39,
     "bolt": 5.69,
-    "continente_name": "Cerveja com Álcool Heineken",
     "auchan_name": "Cerveja Heineken Com Álcool Tara Perdida 6x0.25l",
     "glovo_name": "Pack Heineken Cerveja 12x25cl",
     "bolt_name": "❄️ Cerveja Heineken 6 x 25 cl"
@@ -265,11 +312,10 @@
     "category": "Cerveja Estrangeira",
     "orders": 0,
     "sortido": 16.33,
-    "continente": 8.99,
+    "continente": null,
     "auchan": 8.99,
     "glovo": 10.0,
     "bolt": 10.99,
-    "continente_name": "Cerveja com Álcool Corona",
     "auchan_name": "Cerveja Corona México 6x0.355l",
     "glovo_name": "Pack Corona Cerveja 12x35.5cl",
     "bolt_name": "❄️ Cerveja Corona 6 x 35,5 cl"
@@ -299,6 +345,17 @@
     "auchan_name": "Cerveja Super Bock Abadia Com Álcool Tara Perdida 6x0.33l",
     "glovo_name": "Super Bock Cerveja Original 6x33cl",
     "bolt_name": "❄️ Cerveja Super Bock Original 6 x 33 cl"
+  },
+  {
+    "name": "Cerveja Desperados França 6x0.33l",
+    "category": "Cerveja Estrangeira",
+    "orders": 0,
+    "sortido": 14.89,
+    "continente": null,
+    "auchan": 9.49,
+    "glovo": null,
+    "bolt": null,
+    "auchan_name": "Cerveja Corona Lata 6x0.33l (Sdr)"
   },
   {
     "name": "Cerveja com Álcool Bud Budweiser (emb. 33 cl)",
@@ -358,10 +415,10 @@
     "continente": null,
     "auchan": 15.36,
     "glovo": 21.96,
-    "bolt": 32.4,
+    "bolt": 23.96,
     "auchan_name": "Cerveja Super Bock Lata 24x0.33l (Sdr)",
     "glovo_name": "Pack Super Bock Cerveja 12x33cl",
-    "bolt_name": "❄️ Cerveja Super Bock Original 33 cl"
+    "bolt_name": "❄️ Cerveja Super Bock Original 6 x 33 cl"
   },
   {
     "name": "Cerveja Carlsberg Com Álcool Pack 6 Garrafas 25cl",
@@ -422,11 +479,10 @@
     "sortido": 29.29,
     "continente": 15.99,
     "auchan": 15.99,
-    "glovo": 19.99,
+    "glovo": null,
     "bolt": 21.99,
     "continente_name": "Johnnie Walker Red Label Whisky Scotch",
     "auchan_name": "Whisky Johnnie Walker Novo Red 0.70l",
-    "glovo_name": "Johnnie Walker Red Soul Whisky 70cl",
     "bolt_name": "Whisky Johnnie Walker Red Label 70 cl"
   },
   {
@@ -435,13 +491,11 @@
     "orders": 0,
     "sortido": 57.67,
     "continente": 32.99,
-    "auchan": 46.99,
-    "glovo": 19.99,
-    "bolt": 21.99,
+    "auchan": 32.69,
+    "glovo": null,
+    "bolt": null,
     "continente_name": "Johnnie Walker Black Label 12 Anos Whisky Scotch",
-    "auchan_name": "Whisky Johnnie Walker Double Black 0.70l",
-    "glovo_name": "Johnnie Walker Red Soul Whisky 70cl",
-    "bolt_name": "Whisky Johnnie Walker Red Label 70 cl"
+    "auchan_name": "Whisky Johnnie Walker Velho Black Label 0.70l"
   },
   {
     "name": "Whisky Malte Glenfiddich 12 Anos com Oferta do Gelo",
@@ -463,10 +517,9 @@
     "continente": 1.49,
     "auchan": 1.49,
     "glovo": null,
-    "bolt": 4.69,
+    "bolt": null,
     "continente_name": "Feijão Manteiga Cozido Compal da Horta",
-    "auchan_name": "Feijao Compal Da Horta Manteiga 410g",
-    "bolt_name": "Compal da Horta Bolonhesa de Lentilhas 360 g"
+    "auchan_name": "Feijao Compal Da Horta Manteiga 410g"
   },
   {
     "name": "Feijão Encarnado Compal Da Horta 410g",
@@ -476,25 +529,23 @@
     "continente": 1.49,
     "auchan": 1.49,
     "glovo": 1.59,
-    "bolt": 4.69,
+    "bolt": null,
     "continente_name": "Feijão Encarnado Cozido Compal da Horta",
     "auchan_name": "Feijão Encarnado Compal Da Horta 410g",
-    "glovo_name": "Pack Compal Feijão Branco Cozido 3un",
-    "bolt_name": "Compal da Horta Chili de Feijão 360 g"
+    "glovo_name": "Pack Compal Feijão Branco Cozido 3un"
   },
   {
     "name": "Grão Compal Da Horta Cozido 410g",
     "category": "Feijão e Grão de Bico",
     "orders": 0,
     "sortido": 2.8,
-    "continente": 2.95,
+    "continente": 1.49,
     "auchan": 1.49,
     "glovo": 1.59,
-    "bolt": 4.69,
-    "continente_name": "Caril de Grão Compal da Horta",
+    "bolt": null,
+    "continente_name": "Feijão Branco Cozido Compal da Horta",
     "auchan_name": "Grão Compal Da Horta Cozido 410g",
-    "glovo_name": "Pack Compal Feijão Branco Cozido 3un",
-    "bolt_name": "Compal da Horta Caril de Grão 360 g"
+    "glovo_name": "Pack Compal Feijão Branco Cozido 3un"
   },
   {
     "name": "Feijão Compal Da Horta Frade 410G",
@@ -504,11 +555,10 @@
     "continente": 1.49,
     "auchan": 1.49,
     "glovo": 1.59,
-    "bolt": 4.69,
+    "bolt": null,
     "continente_name": "Feijão Frade Cozido Compal da Horta",
     "auchan_name": "Feijão Compal Da Horta Frade 410g",
-    "glovo_name": "Pack Compal Feijão Branco Cozido 3un",
-    "bolt_name": "Compal da Horta Chili de Feijão 360 g"
+    "glovo_name": "Pack Compal Feijão Branco Cozido 3un"
   },
   {
     "name": "Feijão Compal Da Horta Preto 410g",
@@ -518,11 +568,10 @@
     "continente": 1.49,
     "auchan": 1.49,
     "glovo": 1.59,
-    "bolt": 4.69,
+    "bolt": null,
     "continente_name": "Feijão Preto Cozido Compal da Horta",
     "auchan_name": "Feijão Compal Da Horta Preto 410g",
-    "glovo_name": "Pack Compal Feijão Branco Cozido 3un",
-    "bolt_name": "Compal da Horta Chili de Feijão 360 g"
+    "glovo_name": "Pack Compal Feijão Branco Cozido 3un"
   },
   {
     "name": "Feijão Compal Da Horta Branco 410g",
@@ -532,11 +581,10 @@
     "continente": 1.49,
     "auchan": 1.49,
     "glovo": 1.59,
-    "bolt": 4.69,
+    "bolt": null,
     "continente_name": "Feijão Branco Cozido Compal da Horta",
     "auchan_name": "Feijão Compal Da Horta Branco 410g",
-    "glovo_name": "Pack Compal Feijão Branco Cozido 3un",
-    "bolt_name": "Compal da Horta Chili de Feijão 360 g"
+    "glovo_name": "Pack Compal Feijão Branco Cozido 3un"
   },
   {
     "name": "Cogumelos Cortados Compal 155G",
@@ -595,12 +643,10 @@
     "sortido": 57.67,
     "continente": 32.99,
     "auchan": 32.69,
-    "glovo": 19.99,
-    "bolt": 21.99,
+    "glovo": null,
+    "bolt": null,
     "continente_name": "Johnnie Walker Black Label 12 Anos Whisky Scotch",
-    "auchan_name": "Whisky Johnnie Walker Velho Black Label 0.70l",
-    "glovo_name": "Johnnie Walker Red Soul Whisky 70cl",
-    "bolt_name": "Whisky Johnnie Walker Red Label 70 cl"
+    "auchan_name": "Whisky Johnnie Walker Velho Black Label 0.70l"
   },
   {
     "name": "Whisky Ballantines Novo Finest 0.70L",
@@ -636,7 +682,7 @@
     "glovo": null,
     "bolt": 26.49,
     "continente_name": "Jack Daniels Gentleman Jack Whisky Bourbon",
-    "auchan_name": "Whisky Jack Daniel's Apple 0.70 L",
+    "auchan_name": "Whisky Jack Daniel's Bourbon 0.70l",
     "bolt_name": "Whisky Jack Daniels  Old Nº7 70 cl"
   },
   {
@@ -656,25 +702,22 @@
     "category": "Whisky",
     "orders": 0,
     "sortido": 29.29,
-    "continente": 15.99,
+    "continente": 32.99,
     "auchan": 15.99,
-    "glovo": 19.99,
-    "bolt": 21.99,
-    "continente_name": "Johnnie Walker Red Label Whisky Scotch",
-    "auchan_name": "Whisky Johnnie Walker Novo Red 0.70l",
-    "glovo_name": "Johnnie Walker Red Soul Whisky 70cl",
-    "bolt_name": "Whisky Johnnie Walker Red Label 70 cl"
+    "glovo": null,
+    "bolt": null,
+    "continente_name": "Johnnie Walker Black Label 12 Anos Whisky Scotch",
+    "auchan_name": "Whisky Johnnie Walker Novo Red 0.70l"
   },
   {
     "name": "Gin Tanqueray London Dry 0.70L",
     "category": "Gin",
     "orders": 0,
     "sortido": 34.89,
-    "continente": 25.59,
+    "continente": null,
     "auchan": 21.49,
     "glovo": null,
     "bolt": 26.99,
-    "continente_name": "Tanqueray Flor de Sevilla Gin",
     "auchan_name": "Gin Tanqueray London Dry 0.70l",
     "bolt_name": "Tanqueray London Dry Gin Inglês 70 cl"
   },
@@ -770,6 +813,51 @@
     "auchan_name": "Rum Havana Club 7 Anos 0.70l"
   },
   {
+    "name": "Snack Chocolate Twix White 46g",
+    "category": "Chocolates",
+    "orders": 0,
+    "sortido": 1.63,
+    "continente": null,
+    "auchan": null,
+    "glovo": 1.65,
+    "bolt": 1.39,
+    "glovo_name": "Pack Twix White 3x46g",
+    "bolt_name": "Chocolate Single Twix Branco 46 gr"
+  },
+  {
+    "name": "Snack Chocolate Twix Biscoito E Caramelo 50g",
+    "category": "Chocolates",
+    "orders": 0,
+    "sortido": 1.63,
+    "continente": null,
+    "auchan": null,
+    "glovo": null,
+    "bolt": 1.49,
+    "bolt_name": "Chocolate Single Twix 50 gr"
+  },
+  {
+    "name": "Chocolate M&M'S Single 45G",
+    "category": "Chocolates",
+    "orders": 0,
+    "sortido": 1.37,
+    "continente": null,
+    "auchan": null,
+    "glovo": null,
+    "bolt": 1.59,
+    "bolt_name": "Chocolate Amendoins M&M'S Emb Single 45 gr"
+  },
+  {
+    "name": "Chocolate Snickers Single 50G",
+    "category": "Chocolates",
+    "orders": 0,
+    "sortido": 1.59,
+    "continente": null,
+    "auchan": null,
+    "glovo": null,
+    "bolt": 1.59,
+    "bolt_name": "Chocolate Single Snickers 50 gr"
+  },
+  {
     "name": "Chocolate Nestlé Crunch Leite Tablete 100G",
     "category": "Chocolates",
     "orders": 0,
@@ -782,6 +870,28 @@
     "auchan_name": "Chocolate Nestlé Crunch Leite Tablete 100g"
   },
   {
+    "name": "Pastilhas De Chocolate M&M'S Chocolate 200 G",
+    "category": "Chocolates",
+    "orders": 0,
+    "sortido": 6.99,
+    "continente": 8.99,
+    "auchan": null,
+    "glovo": null,
+    "bolt": null,
+    "continente_name": "Calendário do Advento de Chocolate M&Ms"
+  },
+  {
+    "name": "Chocolate M&M'S:Amendoim Single 45 G «",
+    "category": "Chocolates",
+    "orders": 0,
+    "sortido": 1.37,
+    "continente": null,
+    "auchan": null,
+    "glovo": null,
+    "bolt": 1.59,
+    "bolt_name": "Chocolate Amendoins M&M'S Emb Single 45 gr"
+  },
+  {
     "name": "Tablete Chocolate Leite Nestlé:Extrafino 125 G",
     "category": "Chocolates",
     "orders": 0,
@@ -792,6 +902,29 @@
     "bolt": null,
     "continente_name": "Tablete de Chocolate de Leite Extrafino Avelãs Inteiras Nestlé",
     "auchan_name": "Tablete Nestlé Extrafino Chocolate De Leite 125g"
+  },
+  {
+    "name": "FELIX Alimento Húmido Gato Tasty Shreds Vaca e Frango 4x80 g",
+    "category": "Ração Húmida de Gato",
+    "orders": 0,
+    "sortido": 4.29,
+    "continente": null,
+    "auchan": null,
+    "glovo": null,
+    "bolt": 3.44,
+    "bolt_name": "Comida Húmida Para Gato Tasty Shreds Seleção do Campo Vaca e Frango Purina Felix 4 x 80 gr"
+  },
+  {
+    "name": "Saco Gelo Cubitos 2kg",
+    "category": "Gelo",
+    "orders": 0,
+    "sortido": 3.4,
+    "continente": null,
+    "auchan": 0.99,
+    "glovo": null,
+    "bolt": 1.99,
+    "auchan_name": "Gelo Auchan Em Cubos 2kg",
+    "bolt_name": "Saco de Gelo Gelito 2 kg"
   },
   {
     "name": "Renova Algodões 70un",
@@ -810,10 +943,48 @@
     "orders": 0,
     "sortido": 2.05,
     "continente": null,
-    "auchan": 1.99,
+    "auchan": 2.6,
     "glovo": null,
     "bolt": null,
-    "auchan_name": "Guardanapos Renova Gold Laranja Pack 40 Unidades"
+    "auchan_name": "Rolo Renova Cozinha Máxima Absorção 2 Unidades Em Embalagem De Papel"
+  },
+  {
+    "name": "Leite Mimosa Uht Meio Gordo Cãlcio 1L",
+    "category": "Leite",
+    "orders": 0,
+    "sortido": 2.15,
+    "continente": 1.0,
+    "auchan": 1.14,
+    "glovo": null,
+    "bolt": 1.59,
+    "continente_name": "Leite UHT Meio Gordo Bem Especial Cálcio Mimosa",
+    "auchan_name": "Leite Mimosa Uht Meio Gordo Cãlcio 1l",
+    "bolt_name": "Leite Uht Meio Gordo 0% Lactose Mimosa 1 lt"
+  },
+  {
+    "name": "Leite Mimosa Uht Inteiro 1l",
+    "category": "Leite",
+    "orders": 0,
+    "sortido": 2.37,
+    "continente": null,
+    "auchan": 1.19,
+    "glovo": null,
+    "bolt": null,
+    "auchan_name": "Leite Mimosa Uht Inteiro 1l"
+  },
+  {
+    "name": "Leite Mimosa Uht Magro Bem Especial 0% Lactose 1L",
+    "category": "Leite",
+    "orders": 0,
+    "sortido": 2.37,
+    "continente": 1.0,
+    "auchan": 1.04,
+    "glovo": 1.29,
+    "bolt": 1.59,
+    "continente_name": "Leite UHT Magro Bem Especial Cálcio Mimosa",
+    "auchan_name": "Leite Mimosa Uht Magro Bem Especial 0% Lactose 1l",
+    "glovo_name": "Mimosa Leite UHT Magro com Cálcio 1L",
+    "bolt_name": "Leite Uht Magro 0% Lactose Mimosa 1 lt"
   },
   {
     "name": "Licor De Whisky Baileys:Original 0.70L",
@@ -861,6 +1032,17 @@
     "continente_name": "Ramos Pinto Vinho do Porto Lágrima Branco"
   },
   {
+    "name": "Sacos para Cubos de Gelo Vileda (emb. 10 un)",
+    "category": "Limpeza Geral",
+    "orders": 0,
+    "sortido": 4.1,
+    "continente": null,
+    "auchan": 1.89,
+    "glovo": null,
+    "bolt": null,
+    "auchan_name": "Sacos Silvex Para Cubos Gelo Com Fecho Automático 10un"
+  },
+  {
     "name": "Rolo Renova Cozinha Absorption Xxl 2=4 Unidades",
     "category": "Limpeza de Cozinha",
     "orders": 0,
@@ -872,37 +1054,14 @@
     "auchan_name": "Rolo Renova Cozinha Máxima Absorção 2 Unidades Em Embalagem De Papel"
   },
   {
-    "name": "Guardanapos Folha Simples Tipo E Renova Amarelo 30X32Cm Pack 70 Unidades",
-    "category": "Produtos de Papel",
-    "orders": 0,
-    "sortido": 1.27,
-    "continente": null,
-    "auchan": 0.79,
-    "glovo": null,
-    "bolt": null,
-    "auchan_name": "Guardanapos Folha Simples Tipo E Renova Laranja 30x32cm Pack 70 Unidades"
-  },
-  {
-    "name": "Renova Guardanapos Folha Simples Branco",
-    "category": "Produtos de Papel",
-    "orders": 0,
-    "sortido": 1.07,
-    "continente": null,
-    "auchan": 0.79,
-    "glovo": null,
-    "bolt": null,
-    "auchan_name": "Guardanapos Folha Simples Tipo E Renova Laranja 30x32cm Pack 70 Unidades"
-  },
-  {
     "name": "Guardanapos Kids Renova (emb. 20 un)",
     "category": "Produtos de Papel",
     "orders": 0,
     "sortido": 0.99,
     "continente": null,
-    "auchan": 0.79,
+    "auchan": null,
     "glovo": null,
     "bolt": 1.06,
-    "auchan_name": "Guardanapos Folha Simples Tipo E Renova Laranja 30x32cm Pack 70 Unidades",
     "bolt_name": "Guardanapos Renova 2 folhas 33 x 33 cm 90 un"
   },
   {
@@ -928,6 +1087,18 @@
     "bolt": null,
     "continente_name": "Polpa de Tomate Compal da Horta",
     "auchan_name": "Polpa Compal Da Horta Tomate 500g"
+  },
+  {
+    "name": "Mini Pizzas Buitoni Piccolinis Queijo E Fiambre 270g",
+    "category": "Pizza",
+    "orders": 0,
+    "sortido": 7.13,
+    "continente": null,
+    "auchan": 3.49,
+    "glovo": null,
+    "bolt": 4.89,
+    "auchan_name": "Mini Pizzas Buitoni Piccolinis Queijo E Fiambre 270g",
+    "bolt_name": "Mini Pizzas Queijo Fiambre Buitoni Piccolinis 270 gr"
   },
   {
     "name": "Gel Durex Lubrificante Play Original 50Ml",
@@ -1085,9 +1256,10 @@
     "orders": 0,
     "sortido": 7.87,
     "continente": null,
-    "auchan": null,
+    "auchan": 3.96,
     "glovo": null,
     "bolt": 6.29,
+    "auchan_name": "refrigerante com gás coca-cola zero açúcar vidro 4x0.20l",
     "bolt_name": "Coca-Cola Zero Pack Vidro 4 x 20 cl"
   },
   {
@@ -1174,10 +1346,10 @@
     "continente": 2.29,
     "auchan": 0.74,
     "glovo": null,
-    "bolt": 0.89,
+    "bolt": 0.85,
     "continente_name": "Néctar Laranja do Algarve Compal Origens",
     "auchan_name": "Nectar Compal Origens Laranja Algarve 0.30l",
-    "bolt_name": "Compal Clássico Néctar Pêra Rocha 30 cl"
+    "bolt_name": "Compal Clássico Néctar Tutti Frutti 30 cl"
   },
   {
     "name": "Néctar Pera Rocha Compal Clássico (emb. 30 cl)",
@@ -1187,10 +1359,10 @@
     "continente": 1.35,
     "auchan": 0.74,
     "glovo": null,
-    "bolt": 0.89,
+    "bolt": 0.85,
     "continente_name": "Néctar Pera Rocha Compal Clássico",
     "auchan_name": "Nectar Compal Clássico Pera 0.30l",
-    "bolt_name": "Compal Clássico Néctar Pêra Rocha 30 cl"
+    "bolt_name": "Compal Clássico Néctar Tutti Frutti 30 cl"
   },
   {
     "name": "Néctar Tutti Frutti Compal Clássico (emb. 30 cl)",
@@ -1213,10 +1385,10 @@
     "continente": 1.59,
     "auchan": 0.74,
     "glovo": null,
-    "bolt": 0.89,
+    "bolt": 0.85,
     "continente_name": "Sumo 100% Fruta Laranja do Algarve Compal Fresco",
     "auchan_name": "Sumo Compal 100% Laranja 0.30l",
-    "bolt_name": "Compal Clássico Néctar Pêra Rocha 30 cl"
+    "bolt_name": "Compal Clássico Néctar Tutti Frutti 30 cl"
   },
   {
     "name": "Nectar Compal Vital Frutos Vermelhos 0.30l",
@@ -1289,10 +1461,9 @@
     "sortido": 20.37,
     "continente": 24.0,
     "auchan": null,
-    "glovo": 8.99,
+    "glovo": null,
     "bolt": null,
-    "continente_name": "Herdade dos Grous Concrete Alentejo Vinho Branco",
-    "glovo_name": "Herdade da Comporta Nativo Vinho Branco 75cl"
+    "continente_name": "Herdade dos Grous Concrete Alentejo Vinho Branco"
   },
   {
     "name": "Vinho Branco Casal Garcia:Vinhos Verdes 0.75 L",
@@ -1301,11 +1472,11 @@
     "sortido": 6.69,
     "continente": 3.99,
     "auchan": 4.79,
-    "glovo": 4.49,
+    "glovo": 4.76,
     "bolt": 4.99,
     "continente_name": "Casal Garcia Loureiro Vinho Verde Branco",
     "auchan_name": "Vinho Branco Casal Garcia Sweet Vinho Verde 0.75l",
-    "glovo_name": "Casal Garcia Vinho Branco 750ml",
+    "glovo_name": "Pack Casal Garcia Vinho Verde Branco 2x75cl",
     "bolt_name": "❄️ Vinho Casal Garcia Verde Branco 75 cl"
   },
   {
@@ -1415,10 +1586,11 @@
     "sortido": 6.5,
     "continente": 3.09,
     "auchan": 5.29,
-    "glovo": null,
+    "glovo": 4.76,
     "bolt": 4.79,
     "continente_name": "Casal Garcia Sangria Branca",
     "auchan_name": "Sangria Casal Garcia Frutos Tropicais 0.75l",
+    "glovo_name": "Pack Casal Garcia Vinho Verde Branco 2x75cl",
     "bolt_name": "❄️ Sangria Casal Garcia Branco 75 cl"
   },
   {
@@ -1428,11 +1600,9 @@
     "sortido": 11.0,
     "continente": null,
     "auchan": 6.99,
-    "glovo": 17.59,
-    "bolt": 16.49,
-    "auchan_name": "Vinho Tinto Herdade Do Peso Trinca Bolotas Alentejo 0.75l",
-    "glovo_name": "Herdade Dos Grous Vinho Tinto 75cl",
-    "bolt_name": "Vinho Alentejo Herdade de Grous Tinto 75 cl"
+    "glovo": null,
+    "bolt": null,
+    "auchan_name": "Vinho Tinto Herdade Do Peso Trinca Bolotas Alentejo 0.75l"
   },
   {
     "name": "Sangria Casal Garcia 0.75L",
@@ -1466,11 +1636,10 @@
     "continente": 27.0,
     "auchan": 11.39,
     "glovo": 17.59,
-    "bolt": 16.49,
+    "bolt": null,
     "continente_name": "Herdade dos Grous Concrete Alentejo Vinho Tinto",
     "auchan_name": "Vinho Tinto Herdade Dos Grous Alentejo 0.75 L",
-    "glovo_name": "Herdade Dos Grous Vinho Tinto 75cl",
-    "bolt_name": "Vinho Alentejo Herdade de Grous Tinto 75 cl"
+    "glovo_name": "Herdade Dos Grous Vinho Tinto 75cl"
   },
   {
     "name": "Vinho Tinto Monte Velho Alentejo 0.75L",
@@ -1525,11 +1694,10 @@
     "orders": 0,
     "sortido": 5.1,
     "continente": 3.49,
-    "auchan": 1.99,
+    "auchan": null,
     "glovo": null,
     "bolt": null,
-    "continente_name": "Bebida Láctea com Sabor a Cereais Junior 1-3A Nestlé Junior",
-    "auchan_name": "Sobremesa Láctea Nestlé Yogolino 0% Açucares Pêssego E Banana 400g"
+    "continente_name": "Bebida Láctea com Sabor a Cereais Junior 1-3A Nestlé Junior"
   },
   {
     "name": "Magnum Gelado Double Gold Caramel Billionaire Copo 440ml",
@@ -1588,6 +1756,17 @@
     "glovo_name": "Ben & Jerry's Gelado Strawberry Cheesecake Copo 465ml"
   },
   {
+    "name": "Twix Gelado Barra ICE 40g",
+    "category": "Mini Bites e Sandwich",
+    "orders": 0,
+    "sortido": 2.83,
+    "continente": null,
+    "auchan": null,
+    "glovo": null,
+    "bolt": 2.19,
+    "bolt_name": "Gelado Twix 40 gr"
+  },
+  {
     "name": "Gelado Ben & Jerry'S Karamel Sutra 465ml",
     "category": "Gelados Americanos",
     "orders": 0,
@@ -1611,6 +1790,18 @@
     "bolt_name": "Gelado Magnum Amendoas 110 ml"
   },
   {
+    "name": "Gelado Snickers Barra 48g",
+    "category": "Mini Bites e Sandwich",
+    "orders": 0,
+    "sortido": 2.83,
+    "continente": null,
+    "auchan": null,
+    "glovo": 2.45,
+    "bolt": 2.19,
+    "glovo_name": "Pack Snickers Gelado 2x48g",
+    "bolt_name": "Gelado Snickers 48 gr"
+  },
+  {
     "name": "Gelado Double Caramelo Salgado Magnum (emb. 440 ml)",
     "category": "Gelados Familiares",
     "orders": 0,
@@ -1622,15 +1813,38 @@
     "bolt_name": "Gelado Pint Double Gold Caramel Magnum 440 ml"
   },
   {
-    "name": "Gelado Cookies com Cookie Dough Vegan sem Lactose Ben & Jerry's (emb. 465 ml)",
-    "category": "Gelados Vegan",
+    "name": "GEL MAGNUM PINT WHITE CHOC COOKIES 440ML",
+    "category": "Gelados Familiares",
     "orders": 0,
-    "sortido": 8.69,
+    "sortido": 8.89,
     "continente": null,
     "auchan": null,
-    "glovo": 5.03,
-    "bolt": null,
-    "glovo_name": "Ben & Jerry's Gelado Strawberry Cheesecake Copo 465ml"
+    "glovo": null,
+    "bolt": 7.02,
+    "bolt_name": "Gelado Pint White Chocolate And Cookies Magnum 440 ml"
+  },
+  {
+    "name": "Saco Gelo Picado Cocktail 2kg",
+    "category": "Gelo",
+    "orders": 0,
+    "sortido": 4.29,
+    "continente": null,
+    "auchan": 0.99,
+    "glovo": null,
+    "bolt": 1.99,
+    "auchan_name": "Gelo Auchan Em Cubos 2kg",
+    "bolt_name": "Saco de Gelo Gelito 2 kg"
+  },
+  {
+    "name": "Gelatina Royal Morango 0% De Açúcar 4X90 G",
+    "category": "Mais Sobremesas",
+    "orders": 0,
+    "sortido": 3.99,
+    "continente": null,
+    "auchan": null,
+    "glovo": null,
+    "bolt": 2.49,
+    "bolt_name": "Gelatina Pronta Morango Royal 4 x 90 gr"
   },
   {
     "name": "Iogurte Nestlé Smarties Baunilha 2X128G",
@@ -1711,8 +1925,71 @@
     "continente": null,
     "auchan": 1.49,
     "glovo": null,
+    "bolt": 2.36,
+    "auchan_name": "Leite Mimosa Com Chocolate 4x200ml",
+    "bolt_name": "Leite Uht Com Chocolate Mimosa 200 ml"
+  },
+  {
+    "name": "Manteiga Matinal Light - 45% Gordura 250g",
+    "category": "Manteiga e Cremes de Barrar",
+    "orders": 0,
+    "sortido": 5.1,
+    "continente": null,
+    "auchan": 2.79,
+    "glovo": null,
     "bolt": null,
-    "auchan_name": "Leite Mimosa Com Chocolate 4x200ml"
+    "auchan_name": "Manteiga Matinal Light - 45% Gordura 250g"
+  },
+  {
+    "name": "Manteiga Mimosa Com Sal 250G",
+    "category": "Manteiga e Cremes de Barrar",
+    "orders": 0,
+    "sortido": 4.53,
+    "continente": 2.24,
+    "auchan": 2.09,
+    "glovo": null,
+    "bolt": 2.69,
+    "continente_name": "Manteiga com Sal Fácil Barrar Mimosa",
+    "auchan_name": "Manteiga Com Sal Auchan À Mesa Em Portugal Açores 250g",
+    "bolt_name": "Manteiga Com Sal Mimosa 250 gr"
+  },
+  {
+    "name": "Manteiga Mimosa Sem Sal 250g",
+    "category": "Manteiga e Cremes de Barrar",
+    "orders": 0,
+    "sortido": 4.39,
+    "continente": 2.09,
+    "auchan": 2.44,
+    "glovo": null,
+    "bolt": 2.85,
+    "continente_name": "Manteiga sem Sal Mimosa",
+    "auchan_name": "Manteiga Primor Sem Sal 250g",
+    "bolt_name": "Manteiga Sem Sal Mimosa 250 gr"
+  },
+  {
+    "name": "Natas Mimosa Uht 200ml",
+    "category": "Manteiga e Cremes de Barrar",
+    "orders": 0,
+    "sortido": 1.79,
+    "continente": 1.09,
+    "auchan": 0.89,
+    "glovo": 1.07,
+    "bolt": 1.19,
+    "continente_name": "Natas Cogumelos e Trufa Mimosa",
+    "auchan_name": "Natas Mimosa Uht Culinária 200ml",
+    "glovo_name": "Mimosa Nata Culinária 200ml",
+    "bolt_name": "Natas Uht Ligeira Culinária Mimosa 200 ml"
+  },
+  {
+    "name": "Ovos Matinados Bio Classe M/L Meia Dúzia",
+    "category": "Pão com Chouriço e Especialidades",
+    "orders": 0,
+    "sortido": 5.4,
+    "continente": null,
+    "auchan": 3.25,
+    "glovo": null,
+    "bolt": null,
+    "auchan_name": "Ovos Matinados Bio Classe M/L Meia Dúzia"
   },
   {
     "name": "Amanhecer Pão de Alho e Ervas Congelado 2x175g",
@@ -1726,6 +2003,67 @@
     "bolt_name": "Pão Com Alho E Ervas Amanhecer 2 x 175 gr"
   },
   {
+    "name": "Queijo Limiano Fatias Menos 50% Gordura 200G",
+    "category": "Queijo",
+    "orders": 0,
+    "sortido": 5.27,
+    "continente": null,
+    "auchan": 2.89,
+    "glovo": 2.77,
+    "bolt": null,
+    "auchan_name": "Queijo Limiano Fatias Menos 50% Gordura 200g",
+    "glovo_name": "Limiano Queijo Flamengo Fatiado -50% Gordura 2x200g"
+  },
+  {
+    "name": "Queijo Campainha Flamengo Ralado 150g",
+    "category": "Queijo",
+    "orders": 0,
+    "sortido": 3.15,
+    "continente": null,
+    "auchan": 1.89,
+    "glovo": 2.19,
+    "bolt": 2.35,
+    "auchan_name": "Queijo Campainha Flamengo Ralado 150g",
+    "glovo_name": "Terra Nostra Queijo Ralado 150g",
+    "bolt_name": "Queijo Flamengo Ralado Terra Nostra 150 gr"
+  },
+  {
+    "name": "Queijo Flamengo Terra Nostra Fatias 200g",
+    "category": "Queijo",
+    "orders": 0,
+    "sortido": 4.83,
+    "continente": null,
+    "auchan": 2.79,
+    "glovo": 2.89,
+    "bolt": 2.65,
+    "auchan_name": "Queijo Flamengo Terra Nostra Fatias 200g",
+    "glovo_name": "Terra Nostra Queijo Flamengo Fatiado 200g",
+    "bolt_name": "Queijo Flamengo Fatiado Terra Nostra 2 x 200 gr"
+  },
+  {
+    "name": "Queijo Terra Nostra Fatiado Menos 50% Gordura 200g",
+    "category": "Queijo",
+    "orders": 0,
+    "sortido": 5.29,
+    "continente": null,
+    "auchan": 2.89,
+    "glovo": 2.89,
+    "bolt": null,
+    "auchan_name": "Queijo Terra Nostra Fatiado Menos 50% Gordura 200g",
+    "glovo_name": "Terra Nostra Queijo Flamengo Fatiado 200g"
+  },
+  {
+    "name": "Queijo Fundido Queru Para Barrar Natural 100g",
+    "category": "Queijo",
+    "orders": 0,
+    "sortido": 2.43,
+    "continente": null,
+    "auchan": 1.84,
+    "glovo": null,
+    "bolt": null,
+    "auchan_name": "Queijo Fundido Queru Para Barrar Natural 100g"
+  },
+  {
     "name": "Queijo Emmental President 250G",
     "category": "Queijo",
     "orders": 0,
@@ -1737,6 +2075,43 @@
     "auchan_name": "Queijo Emmental President 250g",
     "glovo_name": "President Queijo Com Trufas unidade 200 g - 18382008839",
     "bolt_name": "Queijo Emmental President 250 gr"
+  },
+  {
+    "name": "Queijo Creme Philadelphia:Regular 150G",
+    "category": "Queijo",
+    "orders": 0,
+    "sortido": 3.69,
+    "continente": 1.89,
+    "auchan": 2.29,
+    "glovo": null,
+    "bolt": 3.99,
+    "continente_name": "Queijo Cottage Philadelphia",
+    "auchan_name": "Queijo Creme Philadelphia Regular 150gr",
+    "bolt_name": "Queijo Barrar Ervas Philadelphia 150 gr"
+  },
+  {
+    "name": "Queijo Creme Philadelphia Light 150Gr",
+    "category": "Queijo",
+    "orders": 0,
+    "sortido": 3.69,
+    "continente": 3.39,
+    "auchan": 2.29,
+    "glovo": null,
+    "bolt": 2.65,
+    "continente_name": "Queijo para Barrar Light Philadelphia",
+    "auchan_name": "Queijo Creme Philadelphia Light 150gr",
+    "bolt_name": "Queijo Barrar Light Philadelphia 150 gr"
+  },
+  {
+    "name": "Queijo Babybel Mini 6Un 120G",
+    "category": "Queijo",
+    "orders": 0,
+    "sortido": 5.1,
+    "continente": null,
+    "auchan": 2.59,
+    "glovo": null,
+    "bolt": null,
+    "auchan_name": "Queijo Babybel Mini 6un 120g"
   },
   {
     "name": "Queijo Brie President 200g",
@@ -2040,7 +2415,7 @@
     "glovo": 1.09,
     "bolt": 1.18,
     "continente_name": "Cerveja com Álcool em Lata Sagres",
-    "auchan_name": "Cerveja Sagres Branca Lata 0.33l (Sdr)",
+    "auchan_name": "Cerveja Branca Sagres Branca Lata 24x0.33l (Sdr)",
     "glovo_name": "Sagres Cerveja Branca Lata 33cl",
     "bolt_name": "Cerveja Sagres 6 x 33 cl"
   },
@@ -2057,17 +2432,6 @@
     "bolt_name": "Sumol Laranja 1,5 lt"
   },
   {
-    "name": "SUMOL ANANAS 1,50 PET V",
-    "category": "Refrigerantes com Gás",
-    "orders": 0,
-    "sortido": 3.1,
-    "continente": null,
-    "auchan": null,
-    "glovo": null,
-    "bolt": 2.25,
-    "bolt_name": "Sumol Laranja 1,5 lt"
-  },
-  {
     "name": "Bebida Energética Monster Mango Loco 0.5l (Sdr)",
     "category": "Bebidas Energéticas",
     "orders": 0,
@@ -2077,7 +2441,7 @@
     "glovo": 1.98,
     "bolt": 2.19,
     "continente_name": "Bebida Energética em Lata Mango Loco Monster",
-    "auchan_name": "Bebida Energética Monster Energy Green 0.5l (Sdr)",
+    "auchan_name": "Bebida Energética Monster Energy 4x0.5l (Sdr)",
     "glovo_name": "Pack Bebida Energética Monster Mango Loco 4x50cl",
     "bolt_name": "❄️ Monster Juiced Mango Loco 50 cl"
   },
@@ -2087,11 +2451,10 @@
     "orders": 0,
     "sortido": 2.27,
     "continente": null,
-    "auchan": 1.74,
-    "glovo": 2.19,
+    "auchan": null,
+    "glovo": 2.15,
     "bolt": 2.19,
-    "auchan_name": "Bebida Energética Monster Energy Green 0.5l (Sdr)",
-    "glovo_name": "Pack Bebida Energética Monster Zero 4x50cl",
+    "glovo_name": "Monster Ultra White 50cl",
     "bolt_name": "Monster Energy Absolutely Zero 50 cl"
   },
   {
@@ -2165,10 +2528,11 @@
     "orders": 0,
     "sortido": 3.1,
     "continente": 1.59,
-    "auchan": null,
+    "auchan": 1.69,
     "glovo": 2.69,
     "bolt": null,
     "continente_name": "Ginger Ale Premium Schweppes",
+    "auchan_name": "Água Tónica Schweppes 1l (Sdr)",
     "glovo_name": "Pack Schweppes Ginger Ale 2x1L"
   },
   {
@@ -2194,7 +2558,7 @@
     "glovo": 1.62,
     "bolt": 2.2,
     "auchan_name": "Bebida Energetica Red Bull Sugarfree 0.25l (Sdr)",
-    "glovo_name": "Pack Bebida Energética Red Bull 6x25cl",
+    "glovo_name": "Red Bull Gaseificada 25cl",
     "bolt_name": "Red Bull 4 x 25 cl"
   },
   {
@@ -2213,11 +2577,11 @@
     "category": "Ice Tea e Kombuchas",
     "orders": 0,
     "sortido": 3.15,
-    "continente": 1.99,
+    "continente": 2.04,
     "auchan": null,
     "glovo": null,
     "bolt": null,
-    "continente_name": "Ice Tea Laranja e Manga Lipton"
+    "continente_name": "Ice Tea Manga Lipton"
   },
   {
     "name": "Ice Tea Pêssego Lipton 1,5 lt sdr",
@@ -2273,11 +2637,11 @@
     "sortido": 2.05,
     "continente": 2.95,
     "auchan": 0.89,
-    "glovo": 1.99,
+    "glovo": 1.8,
     "bolt": 1.59,
     "continente_name": "Água com Gás Pedras Salgadas",
     "auchan_name": "Água Com Gas Pedras Salgadas Pet 1l (Sdr)",
-    "glovo_name": "Pedras Salgadas Água com Gás 1L",
+    "glovo_name": "Pack Pedras Salgadas Água com Gás 4x1L",
     "bolt_name": "Água Com Gás Pedras Salgadas 1 lt"
   },
   {
@@ -2380,14 +2744,24 @@
     "category": "Cerveja Estrangeira",
     "orders": 0,
     "sortido": 23.49,
-    "continente": 14.99,
+    "continente": null,
     "auchan": 11.69,
     "glovo": 19.17,
     "bolt": 16.79,
-    "continente_name": "Cerveja com Álcool Heineken",
     "auchan_name": "Cerveja Heineken Premium 18x0.25l",
     "glovo_name": "Pack Heineken Cerveja 12x25cl",
     "bolt_name": "Cerveja Heineken 18 x 25cl"
+  },
+  {
+    "name": "Água com Gás Vidago (emb. 4 x 25 cl)",
+    "category": "Água Com Gás",
+    "orders": 0,
+    "sortido": 4.09,
+    "continente": null,
+    "auchan": 1.99,
+    "glovo": null,
+    "bolt": null,
+    "auchan_name": "Água Com Gás Pedras Salgadas Tp 4x25cl"
   },
   {
     "name": "Cerveja Heineken Lata 0.50l (Sdr)",
@@ -2401,6 +2775,17 @@
     "continente_name": "Cerveja com Álcool em Lata Heineken",
     "auchan_name": "Cerveja Heineken Lata 0.50l (Sdr)",
     "bolt_name": "Cerveja Heineken  50 cl"
+  },
+  {
+    "name": "Chourição Castelhano Fatiado 4x40g",
+    "category": "Fiambre, Mortadela e Salame",
+    "orders": 0,
+    "sortido": 3.7,
+    "continente": null,
+    "auchan": null,
+    "glovo": null,
+    "bolt": 2.99,
+    "bolt_name": "Chourição Fatiado Damatta 4 x 40 g"
   },
   {
     "name": "Damatta Cachaço Curado Fatiado 4x30g",
@@ -2451,12 +2836,23 @@
     "category": "Gelados Americanos",
     "orders": 0,
     "sortido": 10.73,
-    "continente": 4.99,
+    "continente": null,
     "auchan": null,
     "glovo": 5.03,
     "bolt": 13.69,
-    "continente_name": "Gelado Peanut Butter Cup Ben & Jerrys",
     "glovo_name": "Ben & Jerry's Gelado Strawberry Cheesecake Copo 465ml",
     "bolt_name": "❄️ Pack Ben & Jerry's Churros 465 ml & Bolo Daim Almondy 400 gr"
+  },
+  {
+    "name": "Gelo Picado  IceOlogy 2Kg",
+    "category": "Gelo",
+    "orders": 0,
+    "sortido": 4.29,
+    "continente": null,
+    "auchan": 0.99,
+    "glovo": null,
+    "bolt": 1.99,
+    "auchan_name": "Gelo Auchan Em Cubos 2kg",
+    "bolt_name": "Saco de Gelo Gelito 2 kg"
   }
 ]
