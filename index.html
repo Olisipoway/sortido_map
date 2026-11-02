@@ -389,6 +389,9 @@
     <div class="layer-row">
       <button id="competitorsBtn" class="layer-btn"><span class="btn-dot"></span>Outros (Pizzarias)</button>
     </div>
+    <div class="layer-row">
+      <button id="mcdonaldsBtn" class="layer-btn"><span class="btn-dot"></span>McDonald's</button>
+    </div>
   </div>
 
   <div class="sb-section">
@@ -1727,6 +1730,44 @@ async function toggleCompetitors() {
     btn.classList.add("active");
   }
 }
+
+// --- McDonald's layer ---
+let mcdonaldsOn = false;
+let mcdonaldsMarkers = [];
+let mcdonaldsLoaded = false;
+
+const mcIcon = L.divIcon({
+  className: "",
+  html: `<div style="width:22px;height:22px;border-radius:50%;background:#DA291C;border:2px solid white;box-shadow:0 1px 5px rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#FFC72C;line-height:1">M</div>`,
+  iconSize: [22, 22],
+  iconAnchor: [11, 11],
+});
+
+async function toggleMcdonalds() {
+  const btn = document.getElementById("mcdonaldsBtn");
+  if (mcdonaldsOn) {
+    mcdonaldsMarkers.forEach(m => map.removeLayer(m));
+    mcdonaldsOn = false;
+    btn.classList.remove("active");
+    return;
+  }
+  if (!mcdonaldsLoaded) {
+    const res = await fetch("mcdonalds.json");
+    const locs = await res.json();
+    for (const { lat, lon, addr } of locs) {
+      const m = L.marker([lat, lon], { icon: mcIcon })
+        .bindPopup(`<b style="color:#DA291C">McDonald's</b><br><span style="font-size:11px;color:#555">${addr}</span>`);
+      mcdonaldsMarkers.push(m);
+    }
+    mcdonaldsLoaded = true;
+    hint.textContent = `${mcdonaldsMarkers.length} McDonald's carregados`;
+  }
+  mcdonaldsMarkers.forEach(m => m.addTo(map));
+  mcdonaldsOn = true;
+  btn.classList.add("active");
+}
+
+document.getElementById("mcdonaldsBtn").addEventListener("click", toggleMcdonalds);
 
 // --- Supermarkets layer (OSM Overpass) ---
 let superOn = false;
@@ -3203,136 +3244,89 @@ function isTejo(lat, lng) {
 }
 
 function findSecondLocation(orders, s1Mask = null, darkStores = []) {
-  // Scoring = 60% gap demand  (population × income within delivery reach, discounted by
-  //                            competitor coverage — finds underserved high-value areas)
-  //         + 40% slow relief (existing S1 customers getting slow delivery — certain revenue)
-  // All components normalised to [0,1] before weighting.
+  // Signal: Voronoi population demand.
+  // For each candidate cell, score = Σ(pop × income) for population points that are
+  // (a) within delivery radius of candidate AND (b) closer to candidate than to S1.
+  // A candidate near S1 scores near zero (shared population). A candidate far away
+  // in an underserved area scores high (net-new reachable population).
   const SLAT = 38.7255, SLNG = -9.1480;
   const { lat0, lat1, lon0, lon1, ROWS, COLS } = GEO;
   const CELL_LAT = (lat1 - lat0) / (ROWS - 1);
   const CELL_LON = (lon1 - lon0) / (COLS - 1);
 
-  // --- Component 1: slow-order relief (30%) ---
-  const minsArr = orders.map(o => o[2]).filter(m => m != null).sort((a, b) => a - b);
-  const TARGET  = minsArr.length ? minsArr[Math.floor(minsArr.length / 2)] : 25;
-  const MIN_DIST_SQ = (4.5 / 111) ** 2;
+  const { p90km, p95km, maxKm } = getSortidoRadii();
+  const delivR   = (p90km + p95km + maxKm) / 3;
+  const delivDeg = delivR / 111;
+  const delivDegSq = delivDeg ** 2;
 
-  const slowScore = new Float32Array(ROWS * COLS);
-  const cellCnt  = new Int32Array(ROWS * COLS);
+  const candidateScore = new Float32Array(ROWS * COLS);
 
-  for (const [lat, lng, mins, , , val] of orders) {
-    if (mins == null) continue;
-    const excess = mins - TARGET;
-    if (excess <= 0) continue;
-    const oVal = val || 12;
-    const d1sq = (lat - SLAT) ** 2 + (lng - SLNG) ** 2;
-    if (d1sq === 0) continue;
-    const d1 = Math.sqrt(d1sq);
-    const r0 = Math.round((lat1 - lat) / CELL_LAT);
-    const c0 = Math.round((lng - lon0) / CELL_LON);
-    const rR = Math.ceil(d1 / CELL_LAT) + 1;
-    const cR = Math.ceil(d1 / CELL_LON) + 1;
-    for (let dr = -rR; dr <= rR; dr++) {
-      const r = r0 + dr;
-      if (r < 0 || r >= ROWS) continue;
-      const clat   = lat1 - r * CELL_LAT;
-      const dlatSq = (lat - clat) ** 2;
-      if (dlatSq >= d1sq) continue;
-      for (let dc = -cR; dc <= cR; dc++) {
-        const c = c0 + dc;
-        if (c < 0 || c >= COLS) continue;
-        const clng = lon0 + c * CELL_LON;
-        const d2sq = dlatSq + (lng - clng) ** 2;
-        if (d2sq < d1sq) {
-          const idx = r * COLS + c;
-          slowScore[idx] += oVal * excess * (1 - Math.sqrt(d2sq) / d1);
-          cellCnt[idx]++;
-        }
-      }
-    }
-  }
-
-  // --- Component 2: competitor coverage map (used as penalty) ---
-  // Measures how much of each cell's delivery catchment is already contested by competitors.
-  // High coverage = bad (we'd be fighting for the same customers they already have).
-  const dsRadius = deliveryRadiusKm(SLAT, SLNG);
-  const dsRadDeg = dsRadius / 111;
-  const compCoverage = new Float32Array(ROWS * COLS);
-
-  for (const ds of darkStores) {
-    const dr0 = Math.round((lat1 - ds.lat) / CELL_LAT);
-    const dc0 = Math.round((ds.lon - lon0) / CELL_LON);
-    const rR  = Math.ceil(dsRadDeg / CELL_LAT) + 1;
-    const cR  = Math.ceil(dsRadDeg / CELL_LON) + 1;
-    for (let dr = -rR; dr <= rR; dr++) {
-      const r = dr0 + dr;
-      if (r < 0 || r >= ROWS) continue;
-      const clat = lat1 - r * CELL_LAT;
-      for (let dc = -cR; dc <= cR; dc++) {
-        const c = dc0 + dc;
-        if (c < 0 || c >= COLS) continue;
-        const clng = lon0 + c * CELL_LON;
-        const dLat = (clat - ds.lat) * 111.32;
-        const dLng = (clng - ds.lon) * 111.32 * Math.cos(clat * Math.PI / 180);
-        const dist = Math.sqrt(dLat * dLat + dLng * dLng);
-        if (dist < dsRadius) {
-          compCoverage[r * COLS + c] += 1 - dist / dsRadius;
-        }
-      }
-    }
-  }
-
-  // --- Component 2b: population × income demand per cell ---
-  // Total addressable spending power reachable from each candidate cell.
-  const popDemand = new Float32Array(ROWS * COLS);
   if (popGrid) {
     const piLat = popGrid.cols.indexOf("lat");
     const piLon = popGrid.cols.indexOf("lon");
     const piPop = popGrid.cols.indexOf("pop");
     const piInc = popGrid.cols.indexOf("income_idx");
+
     for (const row of popGrid.rows) {
-      const rlat = row[piLat], rlon = row[piLon];
+      const plat = row[piLat], plon = row[piLon];
       const pop  = row[piPop];
       if (!pop) continue;
-      const inc  = row[piInc] || 1.0;
-      const dr0  = Math.round((lat1 - rlat) / CELL_LAT);
-      const dc0  = Math.round((rlon  - lon0) / CELL_LON);
-      const rR   = Math.ceil(dsRadDeg / CELL_LAT) + 1;
-      const cR   = Math.ceil(dsRadDeg / CELL_LON) + 1;
+      const w = pop * (row[piInc] || 1.0);
+      // Distance² from this pop cell to S1
+      const d1sq = (plat - SLAT) ** 2 + (plon - SLNG) ** 2;
+
+      // Add w to every candidate cell that is (1) within delivDeg and (2) closer to pop than S1
+      const r0 = Math.round((lat1 - plat) / CELL_LAT);
+      const c0 = Math.round((plon  - lon0) / CELL_LON);
+      const rR = Math.ceil(delivDeg / CELL_LAT) + 1;
+      const cR = Math.ceil(delivDeg / CELL_LON) + 1;
       for (let dr = -rR; dr <= rR; dr++) {
-        const r = dr0 + dr;
+        const r = r0 + dr;
         if (r < 0 || r >= ROWS) continue;
-        const clat = lat1 - r * CELL_LAT;
+        const clat   = lat1 - r * CELL_LAT;
+        const dLatSq = (plat - clat) ** 2;
+        if (dLatSq > delivDegSq) continue;
         for (let dc = -cR; dc <= cR; dc++) {
-          const c = dc0 + dc;
+          const c = c0 + dc;
           if (c < 0 || c >= COLS) continue;
           const clng = lon0 + c * CELL_LON;
-          const dLat = (clat - rlat) * 111.32;
-          const dLng = (clng - rlon) * 111.32 * Math.cos(clat * Math.PI / 180);
-          if (Math.sqrt(dLat * dLat + dLng * dLng) < dsRadius) {
-            popDemand[r * COLS + c] += pop * inc;
+          const d2sq = dLatSq + (plon - clng) ** 2;
+          // Within delivery reach AND closer to candidate than S1 (Voronoi condition)
+          if (d2sq <= delivDegSq && d2sq < d1sq) {
+            candidateScore[r * COLS + c] += w;
           }
+        }
+      }
+    }
+  } else {
+    // Fallback: Voronoi on orders (revenue-weighted) when no population data
+    for (const [olat, olng, , , , val] of orders) {
+      const w   = val > 0 ? val : 12;
+      const d1sq = (olat - SLAT) ** 2 + (olng - SLNG) ** 2;
+      const r0  = Math.round((lat1 - olat) / CELL_LAT);
+      const c0  = Math.round((olng  - lon0) / CELL_LON);
+      const rR  = Math.ceil(delivDeg / CELL_LAT) + 1;
+      const cR  = Math.ceil(delivDeg / CELL_LON) + 1;
+      for (let dr = -rR; dr <= rR; dr++) {
+        const r = r0 + dr;
+        if (r < 0 || r >= ROWS) continue;
+        const clat   = lat1 - r * CELL_LAT;
+        const dLatSq = (olat - clat) ** 2;
+        if (dLatSq > delivDegSq) continue;
+        for (let dc = -cR; dc <= cR; dc++) {
+          const c = c0 + dc;
+          if (c < 0 || c >= COLS) continue;
+          const clng = lon0 + c * CELL_LON;
+          const d2sq = dLatSq + (olng - clng) ** 2;
+          if (d2sq <= delivDegSq && d2sq < d1sq) candidateScore[r * COLS + c] += w;
         }
       }
     }
   }
 
-  // Normalise all components to [0,1]
-  let slowMax = 0, compMax = 0, popMax = 0;
-  for (let i = 0; i < ROWS * COLS; i++) {
-    if (slowScore[i]    > slowMax) slowMax = slowScore[i];
-    if (compCoverage[i] > compMax) compMax = compCoverage[i];
-    if (popDemand[i]    > popMax)  popMax  = popDemand[i];
-  }
-  const slowNorm = slowMax > 0 ? 1 / slowMax : 0;
-  const compNorm = compMax > 0 ? 1 / compMax : 0;
-  const popNorm  = popMax  > 0 ? 1 / popMax  : 0;
-  const hasPopData = popMax > 0;
-
-  // Weights: 60% gap demand (pop × income, penalised by competitor coverage)
-  //        + 40% slow-order relief
-  // Pick top 3 candidates with min 5 km separation (greedy suppression).
-  const N_CANDIDATES = 3;
+  // Greedy peak selection — top 3, min 5 km apart, respecting masks
+  const N_CANDIDATES   = 3;
+  const MIN_DIST_SQ    = (4.5 / 111) ** 2;
   const MIN_SEP_DEG_SQ = (5.0 / 111) ** 2;
   const suppressed = new Uint8Array(ROWS * COLS);
   const results = [];
@@ -3342,23 +3336,14 @@ function findSecondLocation(orders, s1Mask = null, darkStores = []) {
     for (let r = 0; r < ROWS; r++) {
       const clat = lat1 - r * CELL_LAT;
       for (let c = 0; c < COLS; c++) {
-        const idx    = r * COLS + c;
-        if (suppressed[idx]) continue;
-        const clng   = lon0 + c * CELL_LON;
-        const distSq = (clat - SLAT) ** 2 + (clng - SLNG) ** 2;
-        if (distSq < MIN_DIST_SQ) continue;
+        const idx = r * COLS + c;
+        if (suppressed[idx] || candidateScore[idx] <= 0) continue;
+        const clng = lon0 + c * CELL_LON;
+        if ((clat - SLAT) ** 2 + (clng - SLNG) ** 2 < MIN_DIST_SQ) continue;
         if (s1Mask && s1Mask[idx]) continue;
         if (noGoMask && noGoMask.data[idx]) continue;
         if (isTejo(clat, clng)) continue;
-        if (hasPopData && popDemand[idx] === 0) continue;
-        if (slowScore[idx] === 0 && popDemand[idx] === 0) continue;
-        const compFraction  = compCoverage[idx] * compNorm;
-        const gapScore      = hasPopData
-          ? popDemand[idx] * popNorm * (1 - compFraction)
-          : (1 - compFraction);
-        const combined = 0.60 * gapScore
-                       + 0.40 * slowScore[idx] * slowNorm;
-        if (combined > bestScore) { bestScore = combined; bestIdx = idx; }
+        if (candidateScore[idx] > bestScore) { bestScore = candidateScore[idx]; bestIdx = idx; }
       }
     }
     if (bestIdx < 0) break;
@@ -3368,7 +3353,6 @@ function findSecondLocation(orders, s1Mask = null, darkStores = []) {
     const c2lat = lat1 - br * CELL_LAT;
     const c2lng = lon0 + bc * CELL_LON;
 
-    // Suppress all cells within MIN_SEP of this candidate
     for (let r = 0; r < ROWS; r++) {
       const clat = lat1 - r * CELL_LAT;
       for (let c = 0; c < COLS; c++) {
@@ -3419,8 +3403,7 @@ function findSecondLocation(orders, s1Mask = null, darkStores = []) {
     const distKm = Math.round(Math.sqrt((c2lat - SLAT) ** 2 + (c2lng - SLNG) ** 2) * 111);
     results.push({ lat: c2lat, lng: c2lng, rank: k + 1, score: bestScore,
                    pct, cnt: assigned.length, rev: Math.round(rev),
-                   pctLoyal, pctAL, pctRes, avgTicket, distKm, avgMinsNow, timeSaved,
-                   target: Math.round(TARGET) });
+                   pctLoyal, pctAL, pctRes, avgTicket, distKm, avgMinsNow, timeSaved });
   }
 
   return results.length > 0 ? results : null;
@@ -3445,12 +3428,18 @@ async function toggleSegundaLoja() {
 
   hint.textContent = "A calcular cobertura da loja actual…";
   const SLAT = 38.7255, SLNG = -9.1480;
-  const s1SweepGeo  = sweepUnionGeoJSON(SLAT, SLNG);
-  const s1SweepRing = sweepUnionRing(SLAT, SLNG);
   const s1Radius = deliveryRadiusKm(SLAT, SLNG);
-  const s1Geo = s1SweepGeo || circleGeoJSON(SLAT, SLNG, s1Radius);
-  s1IsoSegunda = s1SweepRing
-    ? L.polygon(s1SweepRing, { color: '#2563eb', fillColor: '#2563eb', fillOpacity: 0.06, weight: 2.5, opacity: 0.75, dashArray: '7 4' })
+  const p90Ring = buildDirectionalReach(SLAT, SLNG, 0.90);
+  let s1Geo;
+  if (p90Ring) {
+    const coords = p90Ring.map(([lat, lng]) => [lng, lat]);
+    coords.push(coords[0]);
+    s1Geo = { type: "FeatureCollection", features: [{ type: "Feature", geometry: { type: "Polygon", coordinates: [coords] }, properties: {} }] };
+  } else {
+    s1Geo = circleGeoJSON(SLAT, SLNG, s1Radius);
+  }
+  s1IsoSegunda = p90Ring
+    ? L.polygon(p90Ring, { color: '#2563eb', fillColor: '#2563eb', fillOpacity: 0.06, weight: 2.5, opacity: 0.75, dashArray: '7 4' })
     : L.circle([SLAT, SLNG], { radius: s1Radius * 1000, color: '#2563eb', fillColor: '#2563eb', fillOpacity: 0.06, weight: 2.5, opacity: 0.75, dashArray: '7 4' });
   s1IsoSegunda.addTo(map);
   const s1Mask = buildIsoMask(s1Geo);

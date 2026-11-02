@@ -1,0 +1,302 @@
+[
+  {
+    "lat": 38.7109807,
+    "lon": -9.2137927,
+    "name": "McDonald's",
+    "addr": "Rua Gregório Lopes, São Francisco Xavier"
+  },
+  {
+    "lat": 38.7872401,
+    "lon": -9.1478398,
+    "name": "McDonald's",
+    "addr": "Rua Hermínio da Palma Inácio, Alta de Lisboa"
+  },
+  {
+    "lat": 38.7574698,
+    "lon": -9.1132525,
+    "name": "McDonald's",
+    "addr": "LT 408, Avenida Doutor Augusto de Castro"
+  },
+  {
+    "lat": 38.7628089,
+    "lon": -9.1633764,
+    "name": "McDonald's",
+    "addr": "Avenida Padre Cruz, Lumiar"
+  },
+  {
+    "lat": 38.7547965,
+    "lon": -9.188323,
+    "name": "McDonald's",
+    "addr": "Avenida Lusíada, Carnide"
+  },
+  {
+    "lat": 38.6971578,
+    "lon": -9.2032403,
+    "name": "McDonald's",
+    "addr": "Rua de Belém, São Francisco Xavier"
+  },
+  {
+    "lat": 38.7048124,
+    "lon": -9.1766733,
+    "name": "McDonald's",
+    "addr": "Rua das Fontaínhas, Alcântara"
+  },
+  {
+    "lat": 38.7143462,
+    "lon": -9.1389538,
+    "name": "McDonald's",
+    "addr": "81-83, Praça Dom Pedro IV"
+  },
+  {
+    "lat": 38.7530421,
+    "lon": -9.1433216,
+    "name": "McDonald's",
+    "addr": "14A;15D, Avenida da Igreja"
+  },
+  {
+    "lat": 38.7434275,
+    "lon": -9.1699526,
+    "name": "McDonald's",
+    "addr": "Jardim Zoológico de Lisboa, São Domingos de Benfica"
+  },
+  {
+    "lat": 38.7567748,
+    "lon": -9.1541814,
+    "name": "McDonald's",
+    "addr": "Jardim do Campo Grande, Alvalade"
+  },
+  {
+    "lat": 38.7245403,
+    "lon": -9.1508025,
+    "name": "McDonald's",
+    "addr": "3, Praça Marquês de Pombal"
+  },
+  {
+    "lat": 38.7071167,
+    "lon": -9.1528598,
+    "name": "McDonald's",
+    "addr": "Avenida Dom Carlos I, Santos-o-Velho"
+  },
+  {
+    "lat": 38.7698299,
+    "lon": -9.1290084,
+    "name": "McDonald's",
+    "addr": "Rua Interior ao Aeroporto da Portela, Olivais"
+  },
+  {
+    "lat": 38.7621801,
+    "lon": -9.1141585,
+    "name": "McDonald's",
+    "addr": "Rua Cidade de Bolama, Olivais Sul"
+  },
+  {
+    "lat": 38.7103946,
+    "lon": -9.141914,
+    "name": "McDonald's",
+    "addr": "4-7, Largo do Chiado"
+  },
+  {
+    "lat": 38.711079,
+    "lon": -9.1395037,
+    "name": "McDonald's",
+    "addr": "2, Rua do Carmo"
+  },
+  {
+    "lat": 38.7721564,
+    "lon": -9.1305541,
+    "name": "McDonald's",
+    "addr": "Alameda das Comunidades Portuguesas, Olivais"
+  },
+  {
+    "lat": 38.6997216,
+    "lon": -9.2281352,
+    "name": "McDonald's",
+    "addr": "32A;32B;32C, Rua Damião de Góis"
+  },
+  {
+    "lat": 38.7219398,
+    "lon": -9.1525238,
+    "name": "McDonald's",
+    "addr": "35, Rua Rodrigo da Fonseca"
+  },
+  {
+    "lat": 38.7645188,
+    "lon": -9.1765729,
+    "name": "McDonald's",
+    "addr": "Avenida das Nações Unidas, Alto da Faia"
+  },
+  {
+    "lat": 38.6969937,
+    "lon": -9.2032831,
+    "name": "McDonald's",
+    "addr": "2-14, Rua Vieira Portuense"
+  },
+  {
+    "lat": 38.7232262,
+    "lon": -9.1617142,
+    "name": "McDonald's",
+    "addr": "Avenida Engenheiro Duarte Pacheco, Amoreiras"
+  },
+  {
+    "lat": 38.7627142,
+    "lon": -9.1402522,
+    "name": "McDonald's",
+    "addr": "Avenida Marechal Craveiro Lopes/2ª Circular, Campo Grande"
+  },
+  {
+    "lat": 38.7419436,
+    "lon": -9.1381964,
+    "name": "McDonald's",
+    "addr": "3A;3B, Avenida de Roma"
+  },
+  {
+    "lat": 38.7354639,
+    "lon": -9.1448634,
+    "name": "McDonald's",
+    "addr": "10-F, Avenida da República"
+  },
+  {
+    "lat": 38.7514853,
+    "lon": -9.3071082,
+    "name": "McDonald's",
+    "addr": "Estrada de Paço d'Arcos, Rio de Mouro"
+  },
+  {
+    "lat": 38.7768708,
+    "lon": -9.3353512,
+    "name": "McDonald's",
+    "addr": "Rua Amílcar Antunes, Alto do Forte"
+  },
+  {
+    "lat": 38.7532187,
+    "lon": -9.2683692,
+    "name": "McDonald's",
+    "addr": "Rua da Cidade Desportiva, Monte Abraão"
+  },
+  {
+    "lat": 38.7670074,
+    "lon": -9.278587,
+    "name": "McDonald's",
+    "addr": "98, Avenida Salgueiro Maia"
+  },
+  {
+    "lat": 38.800721,
+    "lon": -9.3260385,
+    "name": "McDonald's",
+    "addr": "Estrada das Mercês-Algueirão, Tapada das Mercês"
+  },
+  {
+    "lat": 38.7807679,
+    "lon": -9.3489672,
+    "name": "McDonald's",
+    "addr": "Estrada de Mem Martins, São Carlos"
+  },
+  {
+    "lat": 38.7750348,
+    "lon": -9.3387118,
+    "name": "McDonald's",
+    "addr": "IC 19;A 37, Alto do Forte"
+  },
+  {
+    "lat": 38.7564534,
+    "lon": -9.2545441,
+    "name": "McDonald's",
+    "addr": "114;116;118, Avenida José Elias Garcia"
+  },
+  {
+    "lat": 38.7213786,
+    "lon": -9.3392202,
+    "name": "McDonald's",
+    "addr": "EN 249-4, Parque Industrial da Cotai"
+  },
+  {
+    "lat": 38.6854375,
+    "lon": -9.3131261,
+    "name": "McDonald's",
+    "addr": "Avenida Marginal, Santo Amaro de Oeiras"
+  },
+  {
+    "lat": 38.7147246,
+    "lon": -9.2872147,
+    "name": "McDonald's",
+    "addr": "Autoestrada da Costa do Estoril, Vila Fria"
+  },
+  {
+    "lat": 38.7048238,
+    "lon": -9.2947718,
+    "name": "McDonald's",
+    "addr": "48, Estrada de Paço de Arcos"
+  },
+  {
+    "lat": 38.7046825,
+    "lon": -9.302224,
+    "name": "McDonald's",
+    "addr": "Avenida António Bernardo Cabral de Macedo, Casalinho Morais"
+  },
+  {
+    "lat": 38.723395,
+    "lon": -9.2352668,
+    "name": "McDonald's",
+    "addr": "7;7A, Avenida do Forte"
+  },
+  {
+    "lat": 38.6628075,
+    "lon": -9.1629745,
+    "name": "McDonald's",
+    "addr": "1, Rua Eduardo Viana"
+  },
+  {
+    "lat": 38.613038,
+    "lon": -9.1892732,
+    "name": "McDonald's",
+    "addr": "Rua António Andrade, Quinta da Primavera"
+  },
+  {
+    "lat": 38.65974,
+    "lon": -9.1738576,
+    "name": "McDonald's",
+    "addr": "Rua Sérgio Malpique, Quinta de Santa Ana"
+  },
+  {
+    "lat": 38.6788769,
+    "lon": -9.1568132,
+    "name": "McDonald's",
+    "addr": "Praça da Liberdade, Caranguejais"
+  },
+  {
+    "lat": 38.7551773,
+    "lon": -9.217077,
+    "name": "McDonald's",
+    "addr": "23, Rua Elias Garcia"
+  },
+  {
+    "lat": 38.7772636,
+    "lon": -9.2212382,
+    "name": "McDonald's",
+    "addr": "5;7, Avenida Cruzeiro Seixas"
+  },
+  {
+    "lat": 38.759924,
+    "lon": -9.2371019,
+    "name": "McDonald's",
+    "addr": "47, Avenida Gago Coutinho"
+  },
+  {
+    "lat": 38.7276823,
+    "lon": -9.2181675,
+    "name": "McDonald's",
+    "addr": "Avenida dos Cavaleiros, Carnaxide"
+  },
+  {
+    "lat": 38.6423727,
+    "lon": -9.0597512,
+    "name": "McDonald's",
+    "addr": "80, Rua Escola dos Fuzileiros Navais"
+  },
+  {
+    "lat": 38.7914906,
+    "lon": -9.1034287,
+    "name": "McDonald's",
+    "addr": "22-24, Rua Cidade de Goa"
+  }
+]
