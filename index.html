@@ -128,85 +128,101 @@
       border: 1.5px solid rgba(0,0,0,0.2); flex-shrink: 0;
     }
 
-    /* Price comparison floating panel */
+    /* Price comparison panel */
     #priceCompFloat {
       display: none;
       position: fixed;
-      bottom: 24px; right: 24px;
-      width: 640px; max-width: calc(100vw - 264px);
-      max-height: calc(100vh - 60px);
+      bottom: 20px; right: 20px;
+      width: min(1120px, calc(100vw - 260px));
+      height: min(760px, calc(100vh - 40px));
       background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.10);
+      border-radius: 14px;
+      box-shadow: 0 12px 40px rgba(15,23,42,.22), 0 2px 8px rgba(15,23,42,.10);
       z-index: 900;
-      display: none;
       flex-direction: column;
       overflow: hidden;
+      font-size: 12px;
+      color: #0f172a;
     }
     #priceCompFloat.visible { display: flex; }
     #priceCompFloat .pcf-header {
-      padding: 14px 16px 10px;
-      border-bottom: 1px solid #f1f5f9;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-shrink: 0;
+      padding: 14px 18px 10px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+      border-bottom: 1px solid #f1f5f9; flex-shrink: 0;
     }
-    #priceCompFloat .pcf-title {
-      font-size: 13px; font-weight: 700; color: #0f172a;
-    }
+    #priceCompFloat .pcf-title { font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+    #priceCompFloat .pcf-sub { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+    #priceCompFloat .pcf-sub.warn { color: #b45309; }
     #priceCompFloat .pcf-close {
-      width: 24px; height: 24px; border-radius: 50%; border: none;
-      background: #f1f5f9; color: #64748b; cursor: pointer;
-      font-size: 14px; display: flex; align-items: center; justify-content: center;
+      background: #f1f5f9; border: none; width: 28px; height: 28px; border-radius: 8px;
+      cursor: pointer; color: #64748b; font-size: 13px; flex-shrink: 0;
     }
     #priceCompFloat .pcf-close:hover { background: #e2e8f0; }
-    #priceCompFloat .pcf-pills {
-      padding: 10px 16px 6px;
-      display: flex; flex-wrap: wrap; gap: 6px;
-      flex-shrink: 0;
-      border-bottom: 1px solid #f1f5f9;
+
+    #priceCompFloat .pcf-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 12px 18px 4px; flex-shrink: 0; }
+    #priceCompFloat .pcf-kpi { background: #f8fafc; border: 1px solid #eef2f7; border-radius: 10px; padding: 9px 12px; }
+    #priceCompFloat .pcf-kpi .v { font-size: 19px; font-weight: 700; letter-spacing: -.02em; }
+    #priceCompFloat .pcf-kpi .l { font-size: 10.5px; color: #64748b; margin-top: 1px; }
+    #priceCompFloat .pcf-kpi .v.up { color: #dc2626; }
+    #priceCompFloat .pcf-kpi .v.dn { color: #16a34a; }
+
+    #priceCompFloat .pcf-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 18px 6px; flex-shrink: 0; }
+    #priceCompFloat .pcf-controls input[type=text],
+    #priceCompFloat .pcf-controls select {
+      border: 1px solid #e2e8f0; background: #f8fafc; border-radius: 8px; padding: 6px 10px;
+      font-size: 12px; color: #0f172a; outline: none;
     }
+    #priceCompFloat .pcf-controls input[type=text] { flex: 1 1 200px; min-width: 150px; }
+    #priceCompFloat .pcf-controls input[type=text]:focus,
+    #priceCompFloat .pcf-controls select:focus { border-color: #93c5fd; background: #fff; }
+    #priceCompFloat .pcf-toggle {
+      display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 8px;
+      border: 1px solid #e2e8f0; background: #fff; cursor: pointer; user-select: none; color: #475569;
+    }
+    #priceCompFloat .pcf-toggle input { margin: 0; accent-color: #0f172a; }
+    #priceCompFloat .pcf-toggle.on { background: #0f172a; border-color: #0f172a; color: #fff; }
+    #priceCompFloat .pcf-toggle.on input { accent-color: #fff; }
+
+    #priceCompFloat .pcf-pills { display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 18px 10px; flex-shrink: 0; }
     #priceCompFloat .pcf-pill {
-      display: inline-flex; align-items: center; gap: 5px;
-      background: #f8fafc; border: 1px solid #e2e8f0;
-      border-radius: 6px; padding: 4px 10px;
-      font-size: 12px;
+      display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px;
+      border: 1px solid #e2e8f0; background: #fff; cursor: pointer; font-size: 11.5px; color: #334155; user-select: none;
     }
-    #priceCompFloat .pcf-pill .dot {
-      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-    }
-    #priceCompFloat .pcf-pill strong { font-weight: 600; color: #0f172a; }
-    #priceCompFloat .pcf-pill span { color: #94a3b8; font-size: 11px; }
-    #priceCompFloat .pcf-table-wrap {
-      overflow-y: auto; flex: 1;
-      padding: 0 16px 16px;
-    }
-    #priceCompFloat table {
-      width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px;
-    }
+    #priceCompFloat .pcf-pill .dot { width: 8px; height: 8px; border-radius: 50%; }
+    #priceCompFloat .pcf-pill span.k { color: #94a3b8; font-size: 10px; }
+    #priceCompFloat .pcf-pill.off { opacity: .4; background: #f8fafc; }
+
+    #priceCompFloat .pcf-table-wrap { flex: 1; overflow: auto; border-top: 1px solid #f1f5f9; }
+    #priceCompFloat table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 12px; }
     #priceCompFloat thead th {
-      font-size: 10px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.05em; color: #94a3b8;
-      padding: 6px 8px; border-bottom: 2px solid #f1f5f9;
-      white-space: nowrap;
+      position: sticky; top: 0; z-index: 2; background: #f8fafc; padding: 8px 6px; text-align: right;
+      font-size: 10.5px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: .04em;
+      border-bottom: 1px solid #e2e8f0; white-space: nowrap;
     }
-    #priceCompFloat thead th:first-child { text-align: left; }
-    #priceCompFloat thead th:not(:first-child) { text-align: right; }
-    #priceCompFloat tbody tr { border-bottom: 1px solid #f8fafc; }
-    #priceCompFloat tbody tr:hover { background: #f8fafc; }
-    #priceCompFloat tbody td { padding: 7px 8px; vertical-align: middle; }
-    #priceCompFloat tbody td:first-child { color: #374151; }
-    #priceCompFloat tbody td:not(:first-child) { text-align: right; white-space: nowrap; }
-    #priceCompFloat .price-val { font-weight: 600; color: #0f172a; }
+    #priceCompFloat thead th:first-child { text-align: left; padding-left: 18px; }
+    #priceCompFloat thead th.sortable { cursor: pointer; user-select: none; }
+    #priceCompFloat thead th.sortable:hover { color: #0f172a; }
+    #priceCompFloat thead th.sorted { color: #0f172a; }
+    #priceCompFloat tbody td { padding: 7px 6px; border-bottom: 1px solid #f1f5f9; text-align: right; white-space: nowrap; vertical-align: middle; }
+    #priceCompFloat tbody td:first-child { text-align: left; padding-left: 18px; white-space: normal; min-width: 190px; max-width: 250px; }
+    #priceCompFloat tbody tr:hover td { background: #f8fafc; }
+    #priceCompFloat .pname { font-weight: 500; color: #0f172a; line-height: 1.25; }
+    #priceCompFloat .pcat { font-size: 10.5px; color: #94a3b8; margin-top: 1px; }
+    #priceCompFloat .price-val { font-weight: 600; font-variant-numeric: tabular-nums; }
     #priceCompFloat .diff-up { color: #dc2626; font-size: 10px; font-weight: 700; }
     #priceCompFloat .diff-dn { color: #16a34a; font-size: 10px; font-weight: 700; }
     #priceCompFloat .no-data { color: #cbd5e1; }
-    #priceCompFloat .pcf-hint {
-      padding: 10px 16px; font-size: 11px; color: #94a3b8;
-      flex-shrink: 0; border-top: 1px solid #f1f5f9;
-    }
-    #priceCompFloat .pcf-prompt {
-      padding: 32px 16px; text-align: center; color: #94a3b8; font-size: 13px;
-    }
+    #priceCompFloat td.best { background: #f0fdf4; }
+    #priceCompFloat td.best .price-val { color: #15803d; }
+    #priceCompFloat .cheap-name { font-size: 10px; color: #94a3b8; margin-top: 1px; }
+    #priceCompFloat .markup-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 6px; font-variant-numeric: tabular-nums; }
+    #priceCompFloat .markup-high { background: #fee2e2; color: #dc2626; }
+    #priceCompFloat .markup-mid  { background: #fef3c7; color: #d97706; }
+    #priceCompFloat .markup-low  { background: #dcfce7; color: #16a34a; }
+    #priceCompFloat .leve-badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 4px; border-radius: 3px; background: #ede9fe; color: #7c3aed; margin-left: 4px; vertical-align: middle; }
+    #priceCompFloat tr.estimate td { color: #94a3b8; font-style: italic; }
+    #priceCompFloat .pcf-empty { padding: 40px 18px; text-align: center; color: #94a3b8; }
+    #priceCompFloat .pcf-hint { padding: 8px 18px; font-size: 10.5px; color: #94a3b8; border-top: 1px solid #f1f5f9; flex-shrink: 0; display: flex; justify-content: space-between; gap: 12px; }
+    @media (max-width: 900px) { #priceCompFloat .pcf-kpis { grid-template-columns: repeat(2, 1fr); } }
 
     .sb-footer { padding: 12px 14px; margin-top: auto; border-top: 1px solid #f1f5f9; flex-shrink: 0; }
     .clear-btn {
@@ -311,13 +327,6 @@
       <button id="airbnbBtn" class="layer-btn"><span class="btn-dot"></span>Airbnb AL</button>
     </div>
     <div class="layer-row">
-      <button id="rentBtn" class="layer-btn"><span class="btn-dot"></span>Rendas Lojas</button>
-    </div>
-    <div class="legend-inline" id="legendRent">
-      <div style="height:6px;border-radius:2px;background:linear-gradient(to right,#22c55e,#eab308,#ef4444);margin-bottom:2px"></div>
-      <div class="lbl-row"><span>barato</span><span>caro</span></div>
-    </div>
-    <div class="layer-row">
       <button id="uncapturedBtn" class="layer-btn"><span class="btn-dot"></span>Procura Potencial</button>
     </div>
     <div class="legend-inline" id="legendUncaptured">
@@ -345,6 +354,28 @@
     </div>
     <div class="layer-row">
       <button id="darkstoresBtn" class="layer-btn"><span class="btn-dot"></span>Dark Stores</button>
+    </div>
+    <div class="layer-row">
+      <button id="zonaEntregaBtn" class="layer-btn"><span class="btn-dot"></span>Zonas Entrega</button>
+    </div>
+    <div class="legend-inline" id="legendZonaEntrega">
+      <div style="display:flex;flex-direction:column;gap:3px;font-size:10px">
+        <div style="color:#94a3b8;font-weight:600;margin-bottom:1px">Cor por ETA (quando disponível)</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#16a34a;opacity:0.85;flex-shrink:0;display:inline-block"></span>&lt;20 min</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#84cc16;opacity:0.85;flex-shrink:0;display:inline-block"></span>20–30 min</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#f59e0b;opacity:0.85;flex-shrink:0;display:inline-block"></span>30–40 min</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#ef4444;opacity:0.85;flex-shrink:0;display:inline-block"></span>&gt;40 min</div>
+        <div style="color:#94a3b8;font-weight:600;margin-top:4px;margin-bottom:1px">Sem ETA (cor por plataforma)</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#16a34a;opacity:0.7;flex-shrink:0;display:inline-block"></span>Bolt</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#f97316;opacity:0.7;flex-shrink:0;display:inline-block"></span>Glovo</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#06b6d4;opacity:0.7;flex-shrink:0;display:inline-block"></span>Uber Eats</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#7c3aed;opacity:0.7;flex-shrink:0;display:inline-block"></span>2+ plataformas</div>
+        <div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#1d4ed8;opacity:0.7;flex-shrink:0;display:inline-block"></span>Todas (3)</div>
+        <div style="color:#94a3b8;margin-top:3px">Opacidade ∝ procura (pop × rendimento)</div>
+        <div style="color:#94a3b8">Muda com filtro de horário</div>
+        <div style="color:#94a3b8">Glovo ETA from store page (per sweep)</div>
+        <div style="color:#94a3b8">Activar "Procura Potencial" para ver lacunas</div>
+      </div>
     </div>
     <div class="layer-row">
       <button id="priceCompBtn" class="layer-btn"><span class="btn-dot"></span>Comparação de Preços</button>
@@ -568,31 +599,53 @@
 </div>
 
 <div id="legendCoverage" class="fl-legend">
-  <h4>Zona de Entrega</h4>
+  <h4>Zonas Sweep (tracejado)</h4>
+  <div class="fl-legend-row" style="align-items:center;gap:8px">
+    <span style="display:inline-block;width:22px;height:0;border-top:2px dashed #3b82f6;flex-shrink:0"></span>
+    <span>Bolt</span>
+  </div>
+  <div class="fl-legend-row" style="align-items:center;gap:8px">
+    <span style="display:inline-block;width:22px;height:0;border-top:2px dashed #f97316;flex-shrink:0"></span>
+    <span>Glovo</span>
+  </div>
+  <div class="fl-legend-row" style="align-items:center;gap:8px">
+    <span style="display:inline-block;width:22px;height:0;border-top:2px dashed #10b981;flex-shrink:0"></span>
+    <span>UberEats</span>
+  </div>
   <div class="fl-legend-row" style="align-items:center;gap:8px">
     <span style="display:inline-block;width:22px;height:3px;background:#ff6600;border-radius:1px;flex-shrink:0"></span>
-    <span>P90 — concentração das entregas</span>
-  </div>
-  <div class="fl-legend-row" style="align-items:center;gap:8px">
-    <span style="display:inline-block;width:22px;height:0;border-top:2.5px dashed #2563eb;flex-shrink:0"></span>
-    <span>P95 — alcance habitual máximo</span>
-  </div>
-  <div class="fl-legend-row" style="align-items:center;gap:8px">
-    <span style="display:inline-block;width:22px;height:0;border-top:2px dashed #dc2626;flex-shrink:0"></span>
-    <span>Total — entrega mais distante</span>
+    <span>Entregas reais (P90)</span>
   </div>
 </div>
 
 <div id="priceCompFloat">
   <div class="pcf-header">
-    <span class="pcf-title">Comparação de Preços</span>
+    <div>
+      <div class="pcf-title">Comparação de Preços</div>
+      <div class="pcf-sub" id="pcfSub">A carregar…</div>
+    </div>
     <button class="pcf-close" id="priceCompClose">✕</button>
+  </div>
+  <div class="pcf-kpis" id="pcfKpis"></div>
+  <div class="pcf-controls">
+    <input type="text" id="pcfSearch" placeholder="Filtrar por produto ou categoria…">
+    <select id="pcfCat"><option value="">Todas as categorias</option></select>
+    <select id="pcfBase" title="Contra que preço se calcula o markup">
+      <option value="all">Markup vs. todos os concorrentes</option>
+      <option value="fast">Markup vs. entrega rápida (Glovo/Bolt)</option>
+    </select>
+    <label class="pcf-toggle on" id="pcfMenuLbl" title="Só produtos com available = true no catálogo do Sortido">
+      <input type="checkbox" id="pcfActiveOnly" checked> Só ativos
+    </label>
+    <label class="pcf-toggle" id="pcfEstLbl" title="Inclui produtos sem match, com markup médio da categoria">
+      <input type="checkbox" id="pcfEst"> + Estimativas
+    </label>
   </div>
   <div class="pcf-pills" id="priceCompPills"></div>
   <div class="pcf-table-wrap" id="priceCompTableWrap">
-    <div class="pcf-prompt">Clica no mapa para ver os preços dos concorrentes mais próximos</div>
+    <div class="pcf-empty">A carregar preços…</div>
   </div>
-  <div class="pcf-hint" id="priceCompHint" style="display:none;">% vs Sortido · preços por unidade · fonte: Glovo, Bolt Market, Continente, Auchan</div>
+  <div class="pcf-hint"><span id="priceCompHint"></span><span>Verde = preço mais barato · markup = (Sortido − mais barato) ÷ mais barato</span></div>
 </div>
 
 <script>
@@ -800,72 +853,40 @@ function toggleAirbnbLayer() {
   }
 }
 
-// --- Rent layer (commercial space €/m² by parish) ---
-let rentLayerOn = false;
-let rentMarkers = [];
-let rentData = [];
 let monthlyStats = [];
 let itemCategories = [];
 let priceCompData = [];
+let catBenchmarks = {};
+let catEstimates = [];
 let priceCompOn = false;
+let pcfActiveOnly = true;
+let activeTotal = 0;
+let activeNames = null;   // names currently on Sortido's menu (null = unknown → no filtering)
+let menuStale = false;
+let menuDate = "";
+fetch("sortido_catalog.json").then(r => r.json()).then(cat => {
+  // Active = `available === true` in sortido_catalog.json
+  const s = new Set();
+  for (const p of cat) {
+    if (p.available !== true) continue;
+    s.add(p.name);
+    const m = p.name.match(/^Leve \d+ Poupe \d+%\s*[-–]\s*(.+)$/i);   // promo rows are stored under the base name
+    if (m) s.add(m[1].trim());
+  }
+  activeNames = s;
+  activeTotal = cat.filter(p => p.available === true).length;
+  if (priceCompOn) renderPriceTable();
+}).catch(() => {});
 
-fetch("rents_by_parish.json").then(r => r.json()).then(d => { rentData = d; }).catch(() => {});
 let noGoMask = null;
 fetch("no_go_mask.json").then(r => r.json()).then(d => { noGoMask = d; }).catch(() => {});
 fetch("orders_by_month.json").then(r => r.json()).then(d => { monthlyStats = d; }).catch(() => {});
 fetch("item_categories.json").then(r => r.json()).then(d => { itemCategories = d; }).catch(() => {});
-fetch("matched_prices.json").then(r => r.json()).then(d => { priceCompData = d; }).catch(() => {});
-
-function rentColor(eur_m2, min, max) {
-  const t = Math.max(0, Math.min(1, (eur_m2 - min) / (max - min)));
-  if (t < 0.5) {
-    const s = t / 0.5;
-    return `rgb(${Math.round(34+187*s)},${Math.round(197-51*s)},${Math.round(94-94*s)})`;
-  } else {
-    const s = (t - 0.5) / 0.5;
-    return `rgb(${Math.round(221+34*s)},${Math.round(146-146*s)},0)`;
-  }
-}
-
-function toggleRentLayer() {
-  const btn = document.getElementById("rentBtn");
-  const leg = document.getElementById("legendRent");
-  if (rentLayerOn) {
-    rentMarkers.forEach(m => map.removeLayer(m));
-    rentMarkers = [];
-    rentLayerOn = false;
-    btn.classList.remove("active");
-    leg.classList.remove("visible");
-    return;
-  }
-  if (!rentData.length) { hint.textContent = "Dados de rendas não carregados"; return; }
-
-  // Filter to Lisbon metro area only
-  const local = rentData.filter(d => d.lat && d.lon && d.lat > 38.65 && d.lat < 38.82 && d.lon > -9.25 && d.lon < -9.08);
-  const vals  = local.map(d => d.median_eur_m2);
-  const minV  = Math.min(...vals), maxV = Math.max(...vals);
-
-  for (const d of local) {
-    const color = rentColor(d.median_eur_m2, minV, maxV);
-    const r     = 6 + (d.count / 10);
-    const m = L.circleMarker([d.lat, d.lon], {
-      radius: Math.min(r, 18), color: "#fff", weight: 1.5,
-      fillColor: color, fillOpacity: 0.85,
-    }).bindPopup(`
-      <div class="pop-popup">
-        <b>${d.parish}</b><br>
-        <span style="color:#666;font-size:11px">${d.count} lojas analisadas</span>
-        <hr style="margin:5px 0;border-color:#eee"/>
-        <div class="row"><span>Mediana</span><span style="font-weight:700;color:${color}">${d.median_eur_m2} €/m²/mês</span></div>
-        <div class="row"><span>Média</span><span>${d.mean_eur_m2} €/m²/mês</span></div>
-      </div>
-    `).on("click", e => L.DomEvent.stopPropagation(e)).addTo(map);
-    rentMarkers.push(m);
-  }
-  rentLayerOn = true;
-  btn.classList.add("active");
-  leg.classList.add("visible");
-}
+fetch("matched_prices.json").then(r => r.json()).then(d => { priceCompData = d; if (priceCompOn) renderPriceTable(); }).catch(() => {});
+fetch("category_benchmarks.json").then(r => r.json()).then(d => {
+  catBenchmarks = d.benchmarks || {};
+  catEstimates  = d.estimates  || [];
+}).catch(() => {});
 
 // --- Uncaptured demand layer (population × income outside S1 zone) ---
 let uncapturedLayerOn = false;
@@ -889,17 +910,34 @@ const UncapturedLayer = L.Layer.extend({
     const origin = map.containerPointToLayerPoint([0, 0]);
     L.DomUtil.setPosition(cv, origin);
 
+    // Build covered-cell lookup from actual zone sweep data for the current slot.
+    // Falls back to distance-based circle if zone_data isn't loaded yet.
+    const coveredKeys = new Set();
+    if (zoneData) {
+      for (const p of ["bolt", "glovo", "ubereats"]) {
+        for (const [zlat, zlon] of getZoneSlotCells(p, currentSlot)) {
+          coveredKeys.add(`${zlat.toFixed(4)},${zlon.toFixed(4)}`);
+        }
+      }
+    }
     const s1Radius = sortidoCoverageLayer ? deliveryRadiusKm(SORTIDO_LAT, SORTIDO_LNG) : 5;
     const cosLat   = Math.cos(SORTIDO_LAT * Math.PI / 180);
+    const Z_DLAT = 0.0045, Z_DLON = 0.006, Z_LAT0 = 38.640, Z_LON0 = -9.320;
 
     for (const row of popGrid.rows) {
       const [clat, clon, pop, , , , incomeIdx] = row;
       if (!pop || pop < 10) continue;
 
-      // Skip cells inside S1's delivery zone
-      const dy = (clat - SORTIDO_LAT) * 111.32;
-      const dx = (clon - SORTIDO_LNG) * 111.32 * cosLat;
-      if (Math.sqrt(dy*dy + dx*dx) < s1Radius) continue;
+      // Skip cells inside Sortido's actual delivery zone
+      if (coveredKeys.size > 0) {
+        const slat = +(Math.round((clat - Z_LAT0) / Z_DLAT) * Z_DLAT + Z_LAT0).toFixed(4);
+        const slon = +(Math.round((clon - Z_LON0) / Z_DLON) * Z_DLON + Z_LON0).toFixed(4);
+        if (coveredKeys.has(`${slat},${slon}`)) continue;
+      } else {
+        const dy = (clat - SORTIDO_LAT) * 111.32;
+        const dx = (clon - SORTIDO_LNG) * 111.32 * cosLat;
+        if (Math.sqrt(dy*dy + dx*dx) < s1Radius) continue;
+      }
 
       const score = pop * (incomeIdx || 1.0);
 
@@ -1443,6 +1481,7 @@ function setAreaTimingMode(mode) {
   });
   updateAreaRangeUI();
   drawSortidoCoverage();
+  drawSweepCoverage();
 }
 
 (function wireAreaRange() {
@@ -1459,6 +1498,7 @@ function setAreaTimingMode(mode) {
     areaMinMins = lo; areaMaxMins = hi;
     updateAreaRangeUI();
     drawSortidoCoverage();
+    drawSweepCoverage();
   }
   rMin.addEventListener("input", sync);
   rMax.addEventListener("input", sync);
@@ -1467,12 +1507,149 @@ function setAreaTimingMode(mode) {
 function updateLabels() {} // no-op, kept for compat
 document.getElementById("incomeBtn").addEventListener("click", toggleIncomeLayer);
 document.getElementById("airbnbBtn").addEventListener("click", toggleAirbnbLayer);
-document.getElementById("rentBtn").addEventListener("click", toggleRentLayer);
 document.getElementById("uncapturedBtn").addEventListener("click", toggleUncapturedLayer);
 document.getElementById("loyalBtn").addEventListener("click", toggleLoyalLayer);
 document.getElementById("picoZonaBtn").addEventListener("click", togglePicoZonaLayer);
 document.getElementById("zonasMortasBtn").addEventListener("click", toggleZonasMortasLayer);
 document.getElementById("ticketZonaBtn").addEventListener("click", toggleTicketZonaLayer);
+
+// --- Delivery zone layer (Bolt / Glovo / UberEats grid cells) ---
+let zoneData = null;
+let zoneLayer = null;
+let zoneLayerOn = false;
+const LAT_STEP = 0.0045, LON_STEP = 0.0060;
+
+fetch("zone_data.json").then(r => r.json()).then(d => { zoneData = d; drawSweepCoverage(); }).catch(() => {});
+
+// Returns the cells array for a platform+slot. Falls back to "all" if the
+// requested slot has no data. Handles both old flat format and new slot-aware format.
+function getZoneSlotCells(platform, slot) {
+  if (!zoneData) return [];
+  const pd = zoneData[platform];
+  if (!pd) return [];
+  // New slot-aware format: {all:{cells}, manha:{cells}, almoco:{cells}, ...}
+  if (pd.all || pd.almoco || pd.tarde || pd.jantar || pd.late || pd.manha) {
+    const slotKey = slot === "all" ? "all" : slot;
+    return (pd[slotKey] || pd.all || {}).cells || [];
+  }
+  // Old flat format: {ts, cells}
+  return pd.cells || [];
+}
+
+function etaColor(eta) {
+  if (eta === null || eta === undefined) return null;
+  if (eta < 20)  return "#16a34a";  // green
+  if (eta < 30)  return "#84cc16";  // lime
+  if (eta < 40)  return "#f59e0b";  // amber
+  if (eta < 55)  return "#ef4444";  // red
+  return "#7f1d1d";                  // dark red
+}
+
+function buildZoneLayer(slot) {
+  if (!zoneData) return null;
+  slot = slot || currentSlot || "all";
+  const platforms = ["bolt", "glovo", "ubereats"];
+  const colors1 = { bolt: "#16a34a", glovo: "#f97316", ubereats: "#06b6d4" };
+  const Z_LAT0 = 38.640, Z_LON0 = -9.320, Z_DLAT = 0.0045, Z_DLON = 0.006;
+
+  // Build covered set and per-cell platform membership + ETA/fee
+  const served = {};
+  for (const p of platforms) {
+    const slotKey = slot === "all" ? "all" : slot;
+    const pd = zoneData[p];
+    if (!pd) continue;
+    const slotData = pd[slotKey] || pd.all || {};
+    for (const cell of (slotData.cells || [])) {
+      const [lat, lon] = cell;
+      const eta = cell.length > 2 ? cell[2] : null;
+      const fee = cell.length > 3 ? cell[3] : null;
+      const k = `${lat.toFixed(4)},${lon.toFixed(4)}`;
+      if (!served[k]) served[k] = { lat, lon, ps: new Set(), etas: {}, fees: {} };
+      served[k].ps.add(p);
+      if (eta !== null && eta !== undefined) served[k].etas[p] = eta;
+      if (fee !== null && fee !== undefined) served[k].fees[p] = fee;
+    }
+  }
+
+  // Build popGrid demand lookup (snap to zone grid) for tooltips
+  const demandByKey = {};
+  if (popGrid) {
+    for (const row of popGrid.rows) {
+      const [clat, clon, pop, , , , incomeIdx] = row;
+      if (!pop) continue;
+      const slat = +(Math.round((clat - Z_LAT0) / Z_DLAT) * Z_DLAT + Z_LAT0).toFixed(4);
+      const slon = +(Math.round((clon - Z_LON0) / Z_DLON) * Z_DLON + Z_LON0).toFixed(4);
+      const k = `${slat},${slon}`;
+      demandByKey[k] = (demandByKey[k] || 0) + pop * (incomeIdx || 1.0);
+    }
+  }
+  const maxDemand = Math.max(1, ...Object.values(demandByKey));
+
+  const layers = [];
+  for (const [k, { lat, lon, ps, etas, fees }] of Object.entries(served)) {
+    const n = ps.size;
+    const psArr = [...ps];
+
+    // Color: ETA-based when available for any platform, otherwise platform/overlap color
+    const anyEta = Object.values(etas)[0] ?? null;
+    const ec = etaColor(anyEta);
+    const baseColor = n === 3 ? "#1d4ed8" : n === 2 ? "#7c3aed" : colors1[psArr[0]];
+    const color = ec || baseColor;
+
+    const demand = demandByKey[k] || 0;
+    const demandPct = Math.round(demand / maxDemand * 100);
+    const rect = L.rectangle(
+      [[lat - Z_DLAT/2, lon - Z_DLON/2], [lat + Z_DLAT/2, lon + Z_DLON/2]],
+      { color, fillColor: color, fillOpacity: 0.30 + 0.25 * (demand / maxDemand), weight: 0.5, opacity: 0.5 }
+    );
+
+    const etaLines = psArr
+      .filter(p => etas[p] !== undefined)
+      .map(p => {
+        const etaLabel = `${etas[p]}min`;
+        const feeLabel = fees[p] !== undefined ? ` (€${fees[p].toFixed(2)})` : "";
+        return `${p}: ${etaLabel}${feeLabel}`;
+      });
+    const tooltip = [
+      psArr.join(" + "),
+      etaLines.length ? etaLines.join("<br>") : null,
+      `Demand: ${demandPct}% of max`,
+    ].filter(Boolean).join("<br>");
+
+    rect.bindTooltip(tooltip, { sticky: true, opacity: 0.9 });
+    layers.push(rect);
+  }
+  return L.layerGroup(layers);
+}
+
+function toggleZonaEntrega() {
+  const btn = document.getElementById("zonaEntregaBtn");
+  const legend = document.getElementById("legendZonaEntrega");
+  if (zoneLayerOn) {
+    if (zoneLayer) map.removeLayer(zoneLayer);
+    zoneLayer = null;
+    zoneLayerOn = false;
+    btn.classList.remove("active");
+    legend.classList.remove("visible");
+  } else {
+    zoneLayer = buildZoneLayer(currentSlot);
+    if (zoneLayer) {
+      zoneLayer.addTo(map);
+      zoneLayerOn = true;
+      btn.classList.add("active");
+      legend.classList.add("visible");
+    }
+  }
+}
+
+function rebuildZoneLayerIfOn() {
+  if (!zoneLayerOn) return;
+  if (zoneLayer) map.removeLayer(zoneLayer);
+  zoneLayer = buildZoneLayer(currentSlot);
+  if (zoneLayer) zoneLayer.addTo(map);
+  if (uncapturedLayerOn && uncapturedLayer) uncapturedLayer._draw();
+}
+document.getElementById("zonaEntregaBtn").addEventListener("click", toggleZonaEntrega);
 document.getElementById("diaSemanaBtn").addEventListener("click", toggleDiaSemanaLayer);
 document.getElementById("priceCompBtn").addEventListener("click", togglePriceComp);
 document.getElementById("competitorsBtn").addEventListener("click", toggleCompetitors);
@@ -1655,6 +1832,8 @@ function togglePriceComp() {
   priceCompOn = true;
   btn.classList.add("active");
   float.classList.add("visible");
+  renderPriceCompPills();
+  renderPriceTable();
 }
 
 document.getElementById("priceCompClose").addEventListener("click", () => {
@@ -1663,79 +1842,190 @@ document.getElementById("priceCompClose").addEventListener("click", () => {
   document.getElementById("priceCompFloat").classList.remove("visible");
 });
 
-map.on("click", function(e) {
-  if (!priceCompOn) return;
-  if (!darkStoresRaw.length || !priceCompData.length) return;
-  const { lat, lng } = e.latlng;
+// --- Price comparison panel ---
+const PCF_COMPS = [
+  { k: "glovo",     label: "Glovo",      color: "#ffc244", fast: true },
+  { k: "bolt",      label: "Bolt",       color: "#34d186", fast: true },
+  { k: "continente",label: "Continente", color: "#e63312", fast: false },
+  { k: "auchan",    label: "Auchan",     color: "#e97926", fast: false },
+  { k: "pingodoce", label: "Pingo Doce", color: "#16a34a", fast: false },
+];
+let pcfSearch = "";
+let pcfCategory = "";
+let pcfBase = "all";                       // "all" | "fast"
+let pcfIncludeEst = false;
+let pcfSort = { col: "markup", dir: -1 };
+const pcfVisible = new Set(PCF_COMPS.map(c => c.k));
+let pcfCatsBuilt = false;
 
-  // Find nearest darkstore per brand (for distance pills)
-  const nearestDark = {};
-  for (const s of darkStoresRaw) {
-    const d = haversineDist(lat, lng, s.lat, s.lon);
-    if (!nearestDark[s.name] || d < nearestDark[s.name].dist) {
-      nearestDark[s.name] = { store: s, dist: d };
-    }
+function markupBadge(pct) {
+  if (pct == null) return `<span class="no-data">—</span>`;
+  const cls = pct >= 80 ? "markup-high" : pct >= 30 ? "markup-mid" : "markup-low";
+  return `<span class="markup-badge ${cls}">${pct >= 0 ? "+" : ""}${Math.round(pct)}%</span>`;
+}
+
+function pcfCell(sortido, price, name, isBest) {
+  if (price == null) return `<td class="no-data">—</td>`;
+  const diff = Math.round((sortido - price) / price * 100);
+  const cls = diff > 0 ? "diff-up" : "diff-dn";
+  const title = name ? ` title="${String(name).replace(/"/g, "&quot;")}"` : "";
+  return `<td${title} class="${isBest ? "best" : ""}"><span class="price-val">€${price.toFixed(2)}</span><br><span class="${cls}">${diff > 0 ? "▲" : "▼"}${Math.abs(diff)}%</span></td>`;
+}
+
+// Enrich one data row with the values the table needs, given current column/baseline choices
+function pcfCompute(d) {
+  const vis = PCF_COMPS.filter(c => pcfVisible.has(c.k) && d[c.k] != null);
+  let cheapest = null;
+  for (const c of vis) if (!cheapest || d[c.k] < d[cheapest.k]) cheapest = c;
+  const baseSet = vis.filter(c => pcfBase === "fast" ? c.fast : true);
+  let minBase = null;
+  for (const c of baseSet) if (minBase == null || d[c.k] < minBase) minBase = d[c.k];
+  const markup = minBase != null ? (d.sortido - minBase) / minBase * 100 : null;
+  return { cheapest, minBase, markup };
+}
+
+function renderPriceCompPills() {
+  const el = document.getElementById("priceCompPills");
+  el.innerHTML = PCF_COMPS.map(c =>
+    `<div class="pcf-pill ${pcfVisible.has(c.k) ? "" : "off"}" data-k="${c.k}" title="Mostrar/ocultar ${c.label}">` +
+    `<span class="dot" style="background:${c.color}"></span><strong>${c.label}</strong><span class="k">${c.fast ? "entrega rápida" : "online"}</span></div>`
+  ).join("");
+  el.querySelectorAll(".pcf-pill").forEach(p => p.addEventListener("click", () => {
+    const k = p.dataset.k;
+    if (pcfVisible.has(k)) { if (pcfVisible.size > 1) pcfVisible.delete(k); } else pcfVisible.add(k);
+    renderPriceCompPills();
+    renderPriceTable();
+  }));
+}
+
+function pcfBuildCategories() {
+  if (pcfCatsBuilt || !priceCompData.length) return;
+  const sel = document.getElementById("pcfCat");
+  const cats = [...new Set(priceCompData.map(d => d.category).filter(Boolean))].sort((a, b) => a.localeCompare(b, "pt"));
+  sel.innerHTML = `<option value="">Todas as categorias</option>` + cats.map(c => `<option value="${c.replace(/"/g, "&quot;")}">${c}</option>`).join("");
+  pcfCatsBuilt = true;
+}
+
+function renderPriceTable() {
+  const wrap = document.getElementById("priceCompTableWrap");
+  if (!priceCompData.length) return;
+  pcfBuildCategories();
+
+  // 1) pool
+  let pool = priceCompData.filter(d => d.sortido);
+  let hiddenInactive = 0;
+  if (pcfActiveOnly && activeNames) {
+    const before = pool.length;
+    pool = pool.filter(d => activeNames.has(d.name));
+    hiddenInactive = before - pool.length;
+  }
+  if (pcfCategory) pool = pool.filter(d => d.category === pcfCategory);
+  const q = pcfSearch.trim().toLowerCase();
+  if (q) pool = pool.filter(d => d.name.toLowerCase().includes(q) || (d.category || "").toLowerCase().includes(q));
+
+  // 2) compute per row (rows with no usable competitor price under the chosen columns/baseline are dropped)
+  let rows = [];
+  for (const d of pool) {
+    const c = pcfCompute(d);
+    if (c.minBase == null) continue;
+    rows.push({ d, ...c });
   }
 
-  const pillsEl   = document.getElementById("priceCompPills");
-  const tableWrap = document.getElementById("priceCompTableWrap");
-  const hintEl    = document.getElementById("priceCompHint");
+  // 3) KPIs on exact matches
+  const mk = rows.map(r => r.markup);
+  const avg = mk.length ? mk.reduce((a, b) => a + b, 0) / mk.length : 0;
+  const pctMore = mk.length ? Math.round(mk.filter(m => m > 0).length / mk.length * 100) : 0;
+  const high = mk.filter(m => m >= 50).length;
+  document.getElementById("pcfKpis").innerHTML = `
+    <div class="pcf-kpi"><div class="v">${rows.length}</div><div class="l">produtos comparados</div></div>
+    <div class="pcf-kpi"><div class="v ${avg > 0 ? "up" : "dn"}">${avg >= 0 ? "+" : ""}${avg.toFixed(0)}%</div><div class="l">markup médio</div></div>
+    <div class="pcf-kpi"><div class="v">${pctMore}%</div><div class="l">mais caros que o mais barato</div></div>
+    <div class="pcf-kpi"><div class="v ${high ? "up" : ""}">${high}</div><div class="l">com markup ≥ 50%</div></div>`;
 
-  // Darkstore distance pills
-  const DARK_ORDER  = ["Glovo Market", "Bolt Market", "Getir"];
-  const DARK_LABELS = { "Glovo Market": "Glovo Express", "Bolt Market": "Bolt Market", "Getir": "Getir" };
-  const DARK_COLORS = { "Glovo Market": "#ffc244", "Bolt Market": "#34d186", "Getir": "#5c16c5" };
-  pillsEl.innerHTML = "";
-  for (const bname of DARK_ORDER) {
-    if (!nearestDark[bname]) continue;
-    const { store, dist } = nearestDark[bname];
-    const distStr = dist < 1 ? `${Math.round(dist*1000)} m` : `${dist.toFixed(1)} km`;
-    const pill = document.createElement("div");
-    pill.className = "pcf-pill";
-    pill.innerHTML = `<span class="dot" style="background:${DARK_COLORS[bname]}"></span><strong>${DARK_LABELS[bname]}</strong><span>${distStr}</span>`;
-    pillsEl.appendChild(pill);
-  }
-  for (const [label, color] of [["Continente", "#e63312"], ["Auchan", "#e97926"]]) {
-    const pill = document.createElement("div");
-    pill.className = "pcf-pill";
-    pill.innerHTML = `<span class="dot" style="background:${color}"></span><strong>${label}</strong><span>online</span>`;
-    pillsEl.appendChild(pill);
+  // 4) sort
+  const val = (r, col) => {
+    if (col === "markup") return r.markup ?? -9999;
+    if (col === "sortido") return r.d.sortido;
+    if (col === "cheapest") return r.minBase ?? 9999;
+    if (col === "priority") return r.d.priority ?? 0;
+    if (col === "name") return r.d.name.toLowerCase();
+    return r.d[col] ?? 9999;
+  };
+  rows.sort((a, b) => {
+    const av = val(a, pcfSort.col), bv = val(b, pcfSort.col);
+    if (typeof av === "string") return pcfSort.dir * av.localeCompare(bv, "pt");
+    return pcfSort.dir * (av - bv);
+  });
+
+  // 5) estimates (category average, no competitor price)
+  let est = [];
+  if (pcfIncludeEst) {
+    est = catEstimates.filter(e => (!pcfActiveOnly || !activeNames || activeNames.has(e.name)) && (!pcfCategory || e.category === pcfCategory) &&
+      (!q || e.name.toLowerCase().includes(q) || (e.category || "").toLowerCase().includes(q)));
   }
 
-  function diffCell(sortido, comp, matchedName) {
-    if (comp == null) return `<td class="no-data">—</td>`;
-    const diff = Math.round((sortido - comp) / comp * 100);
-    const cls  = diff > 0 ? "diff-up" : "diff-dn";
-    const arrow = diff > 0 ? "▲" : "▼";
-    const title = matchedName ? ` title="${matchedName.replace(/"/g,'&quot;')}"` : "";
-    return `<td${title}><span class="price-val">€${comp.toFixed(2)}</span><br><span class="${cls}">${arrow}${Math.abs(diff)}%</span></td>`;
-  }
-
-  let rows = "";
-  for (const item of priceCompData) {
-    if (!item.sortido) continue;
-    rows += `<tr>
-      <td>${item.name}</td>
-      <td><span class="price-val">€${item.sortido.toFixed(2)}</span></td>
-      ${diffCell(item.sortido, item.glovo, item.glovo_name)}
-      ${diffCell(item.sortido, item.bolt, item.bolt_name)}
-      ${diffCell(item.sortido, item.continente, item.continente_name)}
-      ${diffCell(item.sortido, item.auchan, item.auchan_name)}
+  // 6) table
+  const visComps = PCF_COMPS.filter(c => pcfVisible.has(c.k));
+  const sortCls = c => pcfSort.col === c ? "sorted" : "";
+  const arrow = c => pcfSort.col === c ? (pcfSort.dir === -1 ? " ↓" : " ↑") : "";
+  const th = (col, label, extra = "") => `<th class="sortable ${sortCls(col)}" data-col="${col}" ${extra}>${label}${arrow(col)}</th>`;
+  let html = `<table><thead><tr>
+    ${th("name", "Produto")}${th("sortido", "Sortido")}
+    ${visComps.map(c => th(c.k, `<span style="color:${c.color}">●</span> ${c.label}`)).join("")}
+    ${th("cheapest", "Mais barato")}${th("markup", "Markup")}${th("priority", "Prio.", 'title="markup × encomendas"')}
+  </tr></thead><tbody>`;
+  for (const r of rows) {
+    const d = r.d;
+    const leve = d.leve_n ? `<span class="leve-badge" title="preço por unidade ao comprar ${d.leve_n} (−${d.leve_pct}%)">Leve ${d.leve_n}</span>` : "";
+    const cheapName = r.cheapest ? r.cheapest.label : "";
+    html += `<tr>
+      <td><div class="pname">${d.name}${leve}</div><div class="pcat">${d.category || ""}</div></td>
+      <td><span class="price-val">€${d.sortido.toFixed(2)}</span></td>
+      ${visComps.map(c => pcfCell(d.sortido, d[c.k] ?? null, d[c.k + "_name"], r.cheapest && r.cheapest.k === c.k)).join("")}
+      <td><span class="price-val">€${r.minBase.toFixed(2)}</span><div class="cheap-name">${pcfBase === "fast" ? "entrega rápida" : cheapName}</div></td>
+      <td>${markupBadge(r.markup)}</td>
+      <td style="color:#64748b">${Math.round(d.priority ?? 0)}</td>
     </tr>`;
   }
+  for (const e of est) {
+    html += `<tr class="estimate">
+      <td><div class="pname">${e.name}</div><div class="pcat">${e.category || ""} · estimativa</div></td>
+      <td><span class="price-val">€${e.sortido.toFixed(2)}</span></td>
+      ${visComps.map(() => `<td class="no-data">—</td>`).join("")}
+      <td class="no-data">—</td><td>${markupBadge(e.markup_pct)}</td><td>${Math.round(e.priority ?? 0)}</td></tr>`;
+  }
+  html += `</tbody></table>`;
+  wrap.innerHTML = rows.length || est.length ? html : `<div class="pcf-empty">Nenhum produto com estes filtros.</div>`;
 
-  tableWrap.innerHTML = `<table>
-    <thead><tr>
-      <th>Produto</th>
-      <th>Sortido</th>
-      <th style="color:#ffc244;">Glovo</th>
-      <th style="color:#34d186;">Bolt</th>
-      <th style="color:#e63312;">Cont.</th>
-      <th style="color:#e97926;">Auchan</th>
-    </tr></thead>
-    <tbody>${rows}</tbody>
-  </table>`;
-  hintEl.style.display = "";
+  wrap.querySelectorAll("th.sortable").forEach(h => h.addEventListener("click", () => {
+    const c = h.dataset.col;
+    if (pcfSort.col === c) pcfSort.dir *= -1; else { pcfSort.col = c; pcfSort.dir = c === "name" ? 1 : -1; }
+    renderPriceTable();
+  }));
+
+  // 7) subtitle
+  const sub = document.getElementById("pcfSub");
+  sub.className = "pcf-sub";
+  sub.textContent = activeNames
+    ? `${activeTotal} produtos ativos (available = true) no catálogo · ${hiddenInactive} escondidos nesta tabela por estarem inativos`
+    : "A carregar catálogo…";
+  document.getElementById("priceCompHint").textContent =
+    `${rows.length} produtos${est.length ? " + " + est.length + " estimativas" : ""} · fontes: Glovo, Bolt, Continente, Auchan, Pingo Doce`;
+}
+
+// Controls
+document.getElementById("pcfSearch").addEventListener("input", e => { pcfSearch = e.target.value; renderPriceTable(); });
+document.getElementById("pcfCat").addEventListener("change", e => { pcfCategory = e.target.value; renderPriceTable(); });
+document.getElementById("pcfBase").addEventListener("change", e => { pcfBase = e.target.value; renderPriceTable(); });
+document.getElementById("pcfActiveOnly").addEventListener("change", e => {
+  pcfActiveOnly = e.target.checked;
+  document.getElementById("pcfMenuLbl").classList.toggle("on", pcfActiveOnly);
+  renderPriceTable();
+});
+document.getElementById("pcfEst").addEventListener("change", e => {
+  pcfIncludeEst = e.target.checked;
+  document.getElementById("pcfEstLbl").classList.toggle("on", pcfIncludeEst);
+  renderPriceTable();
 });
 
 // --- Dark stores layer (Glovo Market, Bolt Market, Getir) ---
@@ -1834,6 +2124,7 @@ const SORTIDO_LNG = -9.1480;
 let sortidoCoverageLayer = null;
 let sortidoP95Circle = null;
 let sortidoMaxCircle = null;
+let sweepCoverageLayers = {};
 
 function deliveryRadiusKm(fromLat, fromLng, slot = currentSlot, dow = currentDow) {
   if (!ordersData || ordersData.length === 0) return 5;
@@ -1865,6 +2156,46 @@ function circleGeoJSON(lat, lng, radiusKm) {
     return [lng + dlng * Math.sin(a), lat + dlat * Math.cos(a)];
   });
   return { type: "FeatureCollection", features: [{ type: "Feature", geometry: { type: "Polygon", coordinates: [coords] }, properties: {} }] };
+}
+
+// Build the union delivery zone polygon (max reach per sector across all platforms)
+// centered at any (fromLat, fromLng). Uses the sector reaches measured from Sortido —
+// a reasonable proxy for any Lisbon-area location.
+function sweepUnionRing(fromLat, fromLng) {
+  if (!zoneData) return null;
+  const srcCosLat = Math.cos(SORTIDO_LAT * Math.PI / 180);
+  const dstCosLat = Math.cos(fromLat * Math.PI / 180);
+  const SECTORS = 36, DEG = 360 / SECTORS;
+  const combined = new Array(SECTORS).fill(0);
+  for (const p of ['bolt', 'glovo', 'ubereats']) {
+    const cells = getZoneSlotCells(p, 'all');
+    for (const cell of cells) {
+      const dy = (cell[0] - SORTIDO_LAT) * 111.32;
+      const dx = (cell[1] - SORTIDO_LNG) * 111.32 * srcCosLat;
+      const dist = Math.sqrt(dy*dy + dx*dx);
+      if (dist < 0.05) continue;
+      const bearing = ((Math.atan2(dx, dy) * 180 / Math.PI) + 360) % 360;
+      const si = Math.floor(bearing / DEG) % SECTORS;
+      if (dist > combined[si]) combined[si] = dist;
+    }
+  }
+  const ring = [];
+  for (let i = 0; i < SECTORS; i++) {
+    if (combined[i] === 0) continue;
+    const a = i * DEG * Math.PI / 180;
+    ring.push([fromLat + combined[i] * Math.cos(a) / 111.32,
+               fromLng + combined[i] * Math.sin(a) / (111.32 * dstCosLat)]);
+  }
+  return ring.length >= 3 ? ring : null;
+}
+
+function sweepUnionGeoJSON(fromLat, fromLng) {
+  const ring = sweepUnionRing(fromLat, fromLng);
+  if (!ring) return null;
+  const coords = ring.map(([lat, lon]) => [lon, lat]);
+  coords.push(coords[0]);
+  return { type: "FeatureCollection", features: [{ type: "Feature",
+    geometry: { type: "Polygon", coordinates: [coords] }, properties: {} }] };
 }
 
 function drawSortidoAnchor() {
@@ -1975,8 +2306,6 @@ function getSortidoRadii() {
 
 function drawSortidoCoverage() {
   if (sortidoCoverageLayer) { map.removeLayer(sortidoCoverageLayer); sortidoCoverageLayer = null; }
-  if (sortidoP95Circle)    { map.removeLayer(sortidoP95Circle);    sortidoP95Circle = null; }
-  if (sortidoMaxCircle)    { map.removeLayer(sortidoMaxCircle);    sortidoMaxCircle = null; }
   if (!ordersData) return;
   const testSlot = SLOTS[currentSlot] || SLOTS.all;
   const testDow  = DOW_GROUPS[currentDow] || DOW_GROUPS.all;
@@ -1997,44 +2326,63 @@ function drawSortidoCoverage() {
     const dx = (lng - SORTIDO_LNG) * 111.32 * cosLat;
     return Math.sqrt(dx * dx + dy * dy);
   }).sort((a, b) => a - b);
-  const maxReach = allDists[Math.floor(allDists.length * 0.99)];
-
-  // P99 circle — red
-  sortidoMaxCircle = L.circle([SORTIDO_LAT, SORTIDO_LNG], {
-    radius: maxReach * 1000,
-    color: "#dc2626", fillColor: "transparent", fillOpacity: 0,
-    weight: 2, opacity: 0.65, dashArray: "4 6",
-  }).addTo(map);
-
-  const ring95 = buildDirectionalReach(SORTIDO_LAT, SORTIDO_LNG, 0.95);
-  if (ring95) {
-    sortidoP95Circle = L.polygon(ring95, {
-      color: "#2563eb", fillColor: "#2563eb", fillOpacity: 0.06, weight: 2, opacity: 0.75, dashArray: "6 4",
-    }).addTo(map);
-  }
-
   const ring = buildDirectionalReach(SORTIDO_LAT, SORTIDO_LNG, 0.90);
   if (!ring) return;
 
   sortidoCoverageLayer = L.polygon(ring, {
     color: "#ff6600", fillColor: "#ff6600", fillOpacity: 0.12, weight: 2.5, opacity: 0.9,
-  }).bindPopup(`
-    <div class="pop-popup">
-      <b style="color:#e85000">Zona de Entrega — Sortido</b><br>
-      <span style="color:#666;font-size:11px">${slotLabel} · ${dowLabel} · ${areaTimingMode} ${areaMinMins}–${areaMaxMins} min · ~${r.toFixed(2)} km</span>
-      <hr style="margin:6px 0;border-color:#eee"/>
-      <div style="font-size:12px;line-height:1.65;color:#374151">
-        <b>Como é calculado:</b><br>
-        Polígono direccional P90 — para cada um dos 36 sectores de 10°,
-        calcula a distância P90 das entregas reais nesse sector.
-        A forma muda por hora e dia: alarga onde há mais cobertura,
-        contrai onde há menos.
-      </div>
-      <hr style="margin:6px 0;border-color:#eee"/>
-      <div style="font-size:11px;color:#94a3b8">${n} entregas no filtro activo</div>
-    </div>
-  `).addTo(map);
-  sortidoCoverageLayer.on("click", e => L.DomEvent.stopPropagation(e));
+    interactive: false,
+  }).addTo(map);
+}
+
+const SWEEP_PLATFORM_COLORS = { bolt: "#3b82f6", glovo: "#f97316", ubereats: "#10b981" };
+const SWEEP_PLATFORM_LABELS = { bolt: "Bolt", glovo: "Glovo", ubereats: "UberEats" };
+
+function buildSweepReach(platform, slot) {
+  const cells = getZoneSlotCells(platform, slot);
+  if (!cells.length) return null;
+  const SECTORS = 36, DEG = 360 / SECTORS;
+  const cosLat = Math.cos(SORTIDO_LAT * Math.PI / 180);
+  const buckets = Array.from({length: SECTORS}, () => []);
+  for (const cell of cells) {
+    const [lat, lon] = cell;
+    const eta = cell.length > 2 ? cell[2] : null;
+    if (eta === null || eta < areaMinMins || eta > areaMaxMins) continue;
+    const dy = (lat - SORTIDO_LAT) * 111.32;
+    const dx = (lon - SORTIDO_LNG) * 111.32 * cosLat;
+    const dist = Math.sqrt(dy * dy + dx * dx);
+    if (dist < 0.05) continue;
+    const bearing = ((Math.atan2(dx, dy) * 180 / Math.PI) + 360) % 360;
+    buckets[Math.floor(bearing / DEG) % SECTORS].push(dist);
+  }
+  const ring = buckets.flatMap((b, i) => {
+    if (!b.length) return [];
+    const r = Math.max(...b);
+    const a = i * DEG * Math.PI / 180;
+    return [[SORTIDO_LAT + r * Math.cos(a) / 111.32,
+             SORTIDO_LNG + r * Math.sin(a) / (111.32 * cosLat)]];
+  });
+  if (ring.length < 3) return null;
+  return { ring, nCells: cells.length };
+}
+
+function drawSweepCoverage() {
+  for (const layer of Object.values(sweepCoverageLayers)) map.removeLayer(layer);
+  sweepCoverageLayers = {};
+  if (!zoneData) return;
+  const slotLabel = SLOT_LABELS[currentSlot] || currentSlot;
+  for (const p of ["bolt", "glovo", "ubereats"]) {
+    const result = buildSweepReach(p, currentSlot);
+    if (!result) continue;
+    const { ring, nCells } = result;
+    const color = SWEEP_PLATFORM_COLORS[p];
+    const label = SWEEP_PLATFORM_LABELS[p];
+    const layer = L.polygon(ring, {
+      color, fillColor: color, fillOpacity: 0.06, weight: 2, opacity: 0.85, dashArray: "8 5",
+      interactive: false,
+    }).addTo(map);
+    sweepCoverageLayers[p] = layer;
+  }
 }
 
 drawSortidoAnchor();
@@ -2534,10 +2882,12 @@ document.querySelectorAll("#slotBar .slot").forEach(btn => {
     btn.classList.add("active");
     addrData = buildAddrData(currentSlot, currentType, currentDow);
     drawSortidoCoverage();
+    drawSweepCoverage();
     if (delivLayer) delivLayer._draw();
     if (receitaLayerOn && receitaLayer) receitaLayer._draw();
     if (coberturaLayerOn && coberturaLayer) coberturaLayer._draw();
     if (timingLayerOn) updateTimingSplit();
+    rebuildZoneLayerIfOn();
   });
 });
 
@@ -2560,6 +2910,7 @@ document.querySelectorAll("#slotBar .dow").forEach(btn => {
     btn.classList.add("active");
     addrData = buildAddrData(currentSlot, currentType, currentDow);
     drawSortidoCoverage();
+    drawSweepCoverage();
     if (delivLayer) delivLayer._draw();
     if (receitaLayerOn && receitaLayer) receitaLayer._draw();
     if (coberturaLayerOn && coberturaLayer) coberturaLayer._draw();
@@ -2839,11 +3190,22 @@ const SegundaKDELayer = L.Layer.extend({
   }
 });
 
-function findSecondLocation(orders, s1Mask = null, darkStores = [], rentData = []) {
-  // Scoring = 50% gap demand  (population × income within delivery reach, discounted by
+// Piecewise north bank of the Tagus — cells south of this line are river/south bank.
+const TEJO_BANK = [[-9.30,38.672],[-9.24,38.680],[-9.18,38.691],[-9.15,38.700],[-9.13,38.707],[-9.10,38.716],[-9.05,38.724]];
+function isTejo(lat, lng) {
+  for (let i = 0; i < TEJO_BANK.length - 1; i++) {
+    if (lng >= TEJO_BANK[i][0] && lng <= TEJO_BANK[i+1][0]) {
+      const t = (lng - TEJO_BANK[i][0]) / (TEJO_BANK[i+1][0] - TEJO_BANK[i][0]);
+      return lat < TEJO_BANK[i][1] + t * (TEJO_BANK[i+1][1] - TEJO_BANK[i][1]);
+    }
+  }
+  return false;
+}
+
+function findSecondLocation(orders, s1Mask = null, darkStores = []) {
+  // Scoring = 60% gap demand  (population × income within delivery reach, discounted by
   //                            competitor coverage — finds underserved high-value areas)
-  //         + 30% slow relief (existing S1 customers getting slow delivery — certain revenue)
-  //         + 20% rent        (operational cost; cheaper = better)
+  //         + 40% slow relief (existing S1 customers getting slow delivery — certain revenue)
   // All components normalised to [0,1] before weighting.
   const SLAT = 38.7255, SLNG = -9.1480;
   const { lat0, lat1, lon0, lon1, ROWS, COLS } = GEO;
@@ -2955,27 +3317,6 @@ function findSecondLocation(orders, s1Mask = null, darkStores = [], rentData = [
     }
   }
 
-  // --- Component 3: rent affordability per cell (inverted — cheaper = better) ---
-  const rentScore = new Float32Array(ROWS * COLS);
-  const localRents = rentData.filter(d => d.lat && d.lon);
-  if (localRents.length > 0) {
-    for (let r = 0; r < ROWS; r++) {
-      const clat = lat1 - r * CELL_LAT;
-      for (let c = 0; c < COLS; c++) {
-        const clng = lon0 + c * CELL_LON;
-        let minDist = Infinity, nearestRent = null;
-        for (const d of localRents) {
-          const dd = (clat - d.lat) ** 2 + (clng - d.lon) ** 2;
-          if (dd < minDist) { minDist = dd; nearestRent = d.median_eur_m2; }
-        }
-        rentScore[r * COLS + c] = nearestRent || 15;
-      }
-    }
-  }
-  const rentMin = localRents.length ? Math.min(...localRents.map(d => d.median_eur_m2)) : 1;
-  const rentMax = localRents.length ? Math.max(...localRents.map(d => d.median_eur_m2)) : 1;
-  const rentRange = rentMax - rentMin || 1;
-
   // Normalise all components to [0,1]
   let slowMax = 0, compMax = 0, popMax = 0;
   for (let i = 0; i < ROWS * COLS; i++) {
@@ -2988,9 +3329,8 @@ function findSecondLocation(orders, s1Mask = null, darkStores = [], rentData = [
   const popNorm  = popMax  > 0 ? 1 / popMax  : 0;
   const hasPopData = popMax > 0;
 
-  // Weights: 50% gap demand (pop × income, penalised by competitor coverage)
-  //        + 30% slow-order relief
-  //        + 20% rent affordability
+  // Weights: 60% gap demand (pop × income, penalised by competitor coverage)
+  //        + 40% slow-order relief
   // Pick top 3 candidates with min 5 km separation (greedy suppression).
   const N_CANDIDATES = 3;
   const MIN_SEP_DEG_SQ = (5.0 / 111) ** 2;
@@ -3009,15 +3349,15 @@ function findSecondLocation(orders, s1Mask = null, darkStores = [], rentData = [
         if (distSq < MIN_DIST_SQ) continue;
         if (s1Mask && s1Mask[idx]) continue;
         if (noGoMask && noGoMask.data[idx]) continue;
+        if (isTejo(clat, clng)) continue;
+        if (hasPopData && popDemand[idx] === 0) continue;
         if (slowScore[idx] === 0 && popDemand[idx] === 0) continue;
-        const affordability = 1 - (rentScore[idx] - rentMin) / rentRange;
         const compFraction  = compCoverage[idx] * compNorm;
         const gapScore      = hasPopData
           ? popDemand[idx] * popNorm * (1 - compFraction)
           : (1 - compFraction);
-        const combined = 0.50 * gapScore
-                       + 0.30 * slowScore[idx] * slowNorm
-                       + 0.20 * affordability;
+        const combined = 0.60 * gapScore
+                       + 0.40 * slowScore[idx] * slowNorm;
         if (combined > bestScore) { bestScore = combined; bestIdx = idx; }
       }
     }
@@ -3105,15 +3445,17 @@ async function toggleSegundaLoja() {
 
   hint.textContent = "A calcular cobertura da loja actual…";
   const SLAT = 38.7255, SLNG = -9.1480;
+  const s1SweepGeo  = sweepUnionGeoJSON(SLAT, SLNG);
+  const s1SweepRing = sweepUnionRing(SLAT, SLNG);
   const s1Radius = deliveryRadiusKm(SLAT, SLNG);
-  const s1CircleGeo = circleGeoJSON(SLAT, SLNG, s1Radius);
-  s1IsoSegunda = L.circle([SLAT, SLNG], {
-    radius: s1Radius * 1000,
-    color: '#2563eb', fillColor: '#2563eb', fillOpacity: 0.06, weight: 2.5, opacity: 0.75, dashArray: '7 4'
-  }).addTo(map);
-  const s1Mask = buildIsoMask(s1CircleGeo);
+  const s1Geo = s1SweepGeo || circleGeoJSON(SLAT, SLNG, s1Radius);
+  s1IsoSegunda = s1SweepRing
+    ? L.polygon(s1SweepRing, { color: '#2563eb', fillColor: '#2563eb', fillOpacity: 0.06, weight: 2.5, opacity: 0.75, dashArray: '7 4' })
+    : L.circle([SLAT, SLNG], { radius: s1Radius * 1000, color: '#2563eb', fillColor: '#2563eb', fillOpacity: 0.06, weight: 2.5, opacity: 0.75, dashArray: '7 4' });
+  s1IsoSegunda.addTo(map);
+  const s1Mask = buildIsoMask(s1Geo);
 
-  const results = findSecondLocation(ordersData, s1Mask, darkStoresRaw, rentData);
+  const results = findSecondLocation(ordersData, s1Mask, darkStoresRaw);
   if (!results) { hint.textContent = "Dados insuficientes para calcular 2ª localização."; return; }
 
   // KDE for top candidate
@@ -3122,6 +3464,7 @@ async function toggleSegundaLoja() {
   map.addLayer(segundaKDELayer);
 
   const { p90km: s2p90, p95km: s2p95, maxKm: s2max } = getSortidoRadii();
+  const s2AvgR = (s2p90 + s2p95 + s2max) / 3;
 
   results.forEach(({ lat, lng, rank, pct, cnt, rev, distKm, pctLoyal, pctAL, pctRes, avgTicket, avgMinsNow, timeSaved }) => {
     const color = SEGUNDA_COLORS[rank - 1] || SEGUNDA_COLORS[2];
@@ -3142,9 +3485,8 @@ async function toggleSegundaLoja() {
     if (rank === 1) m.openPopup();
     segundaMarkers.push(m);
 
-    const avgR = (s2p90 + s2p95 + s2max) / 3;
     const iso = L.circle([lat, lng], {
-      radius: avgR * 1000,
+      radius: s2AvgR * 1000,
       color, fillColor: color,
       fillOpacity: rank === 1 ? 0.10 : 0.05,
       weight: rank === 1 ? 2.5 : 1.5,
@@ -3179,11 +3521,11 @@ async function toggleSegundaLoja() {
   ).join('');
 
   const isoDiv = document.getElementById("segundaIsoStats");
-  const stats = sumPopulation(circleGeoJSON(top.lat, top.lng, s2Radius));
+  const stats = sumPopulation(circleGeoJSON(top.lat, top.lng, s2AvgR));
   if (stats) {
     isoDiv.style.display = "block";
     isoDiv.innerHTML = `
-      <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Área de influência #1 (${s2Radius.toFixed(1)} km)</div>
+      <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Área de influência #1 (${s2AvgR.toFixed(1)} km)</div>
       <div style="display:flex;flex-direction:column;gap:3px;font-size:11px">
         <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Residentes</span><span style="font-weight:600">${fmt(stats.pop)}</span></div>
         <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Rendimento médio</span><span style="font-weight:600">${fmt(Math.round(stats.spendPop/stats.pop*12316))} €/ano</span></div>
@@ -3215,13 +3557,11 @@ map.on("click", async (e) => {
   const marker = L.marker([lat, lng], { icon }).addTo(map);
   hint.textContent = "A calcular zona de entrega…";
 
-  const { p90km, p95km, maxKm } = getSortidoRadii();
-  const avgRadius = (p90km + p95km + maxKm) / 3;
-  const circleGeo = circleGeoJSON(lat, lng, avgRadius);
-  const isoLayer = L.circle([lat, lng], {
-    radius: avgRadius * 1000,
-    color, fillColor: color, fillOpacity: 0.10, weight: 2.5, opacity: 0.8,
-  }).addTo(map);
+  const { p90km: cp90, p95km: cp95, maxKm: cMax } = getSortidoRadii();
+  const clickR = (cp90 + cp95 + cMax) / 3;
+  const circleGeo = circleGeoJSON(lat, lng, clickR);
+  const isoLayer  = L.circle([lat, lng], { radius: clickR * 1000, color, fillColor: color, fillOpacity: 0.10, weight: 2.5, opacity: 0.8 });
+  isoLayer.addTo(map);
 
   hint.textContent = "A contar população…";
   const stats        = sumPopulation(circleGeo);
@@ -3254,7 +3594,7 @@ map.on("click", async (e) => {
 
   marker.bindPopup(`
     <div class="pop-popup">
-      <b>#${num} · ${avgRadius.toFixed(1)} km raio</b><br>
+      <b>#${num} · zona de entrega estimada</b><br>
       <span style="color:#666;font-size:11px">${lat.toFixed(4)}, ${lng.toFixed(4)}</span>
       ${popHtml}
       <hr style="margin:6px 0;border-color:#eee"/>
