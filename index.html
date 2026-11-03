@@ -258,7 +258,7 @@
     #legend3 { bottom: 60px; right: 170px; }
     #legend6 { bottom: 60px; right: 170px; }
     #legend7 { bottom: 190px; right: 170px; }
-    #legendCoverage { bottom: 12px; right: 12px; display: block; }
+    #legendCoverage { bottom: 12px; right: 12px; }
 
     .pulse-ring {
       position: absolute; inset: -6px; border-radius: 50%;
@@ -286,24 +286,41 @@
   </div>
 
   <div class="sb-section">
+    <div class="sb-section-title">Métricas</div>
+    <div class="layer-row">
+      <button id="metricasBtn" class="layer-btn"><span class="btn-dot"></span>Desempenho de Entregas</button>
+    </div>
+    <div id="metricasPanel" style="display:none;margin-top:8px;font-size:11px"></div>
+  </div>
+
+  <div class="sb-section">
     <div class="sb-section-title">Área de Influência</div>
-    <div id="areaTimingModeBar" style="display:flex;gap:3px;margin-bottom:6px">
-      <button class="atmode-btn" data-mode="total" style="flex:1;font-size:9px;padding:3px 2px;border:1px solid #1e293b;border-radius:3px;background:#1e293b;cursor:pointer;font-weight:700;color:#f8fafc">Total</button>
-      <button class="atmode-btn" data-mode="prep"  style="flex:1;font-size:9px;padding:3px 2px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;cursor:pointer;font-weight:700;color:#6366f1">Prep</button>
-      <button class="atmode-btn" data-mode="wait"  style="flex:1;font-size:9px;padding:3px 2px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;cursor:pointer;font-weight:700;color:#d97706">Espera</button>
-      <button class="atmode-btn" data-mode="ride"  style="flex:1;font-size:9px;padding:3px 2px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;cursor:pointer;font-weight:700;color:#dc2626">Viagem</button>
+    <div class="layer-row">
+      <button id="influenceBtn" class="layer-btn"><span class="btn-dot"></span>Área de Influência</button>
     </div>
-    <div style="position:relative;height:20px;margin-bottom:2px">
-      <div style="position:absolute;top:8px;left:0;right:0;height:4px;border-radius:2px;background:#e2e8f0"></div>
-      <div id="areaRangeFill" style="position:absolute;top:8px;height:4px;border-radius:2px;background:linear-gradient(to right,#22c55e,#f59e0b,#ef4444)"></div>
-      <input type="range" id="areaRangeMin" min="0" max="60" value="0"  step="1"
-             style="position:absolute;width:100%;top:0;appearance:none;background:transparent;pointer-events:none;accent-color:#2563eb">
-      <input type="range" id="areaRangeMax" min="0" max="60" value="45" step="1"
-             style="position:absolute;width:100%;top:0;appearance:none;background:transparent;pointer-events:none;accent-color:#2563eb">
+    <div id="influenceControls" style="display:none;margin-top:8px">
+      <div id="influenceLegend" style="display:flex;flex-direction:column;gap:4px;font-size:10px;margin-bottom:8px"></div>
+      <div style="font-size:10px;color:#64748b;margin-bottom:3px">Filtrar por tempo de entrega prometido</div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <input type="range" id="operTargetSlider" min="15" max="60" value="30" step="5"
+               style="flex:1;accent-color:#f97316">
+        <span id="operTargetLbl" style="font-size:12px;font-weight:700;color:#f97316;white-space:nowrap">30 min</span>
+      </div>
+      <div id="influenceStats" style="margin-top:8px;font-size:10px;display:flex;flex-direction:column;gap:2px;padding-top:6px;border-top:1px solid #f1f5f9"></div>
     </div>
-    <div style="display:flex;justify-content:space-between;font-size:10px;font-weight:600;color:#1e293b;margin-top:3px">
-      <span id="areaRangeMinLbl">0 min</span>
-      <span id="areaRangeMaxLbl">45 min</span>
+    <div class="layer-row" style="margin-top:8px">
+      <button id="sweepZoneBtn" class="layer-btn"><span class="btn-dot"></span>Plataformas</button>
+    </div>
+    <div id="sweepZoneControls" style="display:none;margin-top:8px">
+      <div style="display:flex;gap:2px;flex-wrap:wrap;margin-bottom:8px">
+        <button class="swp-slot active" data-slot="all"    style="flex:1;font-size:9px;padding:2px 3px;border:1px solid #1e293b;border-radius:3px;background:#1e293b;color:#f8fafc;cursor:pointer;font-weight:700;min-width:28px">Todos</button>
+        <button class="swp-slot"        data-slot="manha"  style="flex:1;font-size:9px;padding:2px 3px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;color:#475569;cursor:pointer;font-weight:700;min-width:28px">Manhã</button>
+        <button class="swp-slot"        data-slot="almoco" style="flex:1;font-size:9px;padding:2px 3px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;color:#475569;cursor:pointer;font-weight:700;min-width:28px">Almoço</button>
+        <button class="swp-slot"        data-slot="tarde"  style="flex:1;font-size:9px;padding:2px 3px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;color:#475569;cursor:pointer;font-weight:700;min-width:28px">Tarde</button>
+        <button class="swp-slot"        data-slot="jantar" style="flex:1;font-size:9px;padding:2px 3px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;color:#475569;cursor:pointer;font-weight:700;min-width:28px">Jantar</button>
+        <button class="swp-slot"        data-slot="late"   style="flex:1;font-size:9px;padding:2px 3px;border:1px solid #cbd5e1;border-radius:3px;background:#f8fafc;color:#475569;cursor:pointer;font-weight:700;min-width:28px">Late</button>
+      </div>
+      <div id="sweepZoneStats" style="font-size:10px;display:flex;flex-direction:column;gap:2px"></div>
     </div>
   </div>
 
@@ -399,6 +416,7 @@
     <div class="layer-row">
       <button id="deliveriesBtn" class="layer-btn"><span class="btn-dot"></span>Entregas</button>
     </div>
+    <div id="routeStats" style="display:none;margin:2px 0 6px;padding:8px 10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0;font-size:11px"></div>
     <div class="layer-row">
       <button id="timingBtn" class="layer-btn"><span class="btn-dot"></span>Timing (grelha)</button>
     </div>
@@ -504,19 +522,13 @@
     </div>
     <div id="segundaInfo" style="display:none;margin-top:6px;padding:10px;background:#f8fafc;border-radius:7px;border:1px solid #e2e8f0;font-size:12px;line-height:1.6">
       <div style="font-weight:700;color:#7c3aed;margin-bottom:2px">Top 3 candidatos</div>
-      <div style="font-size:10px;color:#94a3b8;margin-bottom:8px">Ordenados por procura não coberta × rendimento, penalizada por concorrência</div>
-      <div id="segundaList"></div>
-      <div style="margin-top:8px;padding-top:8px;border-top:1px solid #e2e8f0">
-        <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">No mapa</div>
-        <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:6px">
-          <span style="flex-shrink:0;margin-top:2px;width:20px;height:10px;border-radius:10px;background:rgba(124,58,237,0.25);border:2px solid rgba(124,58,237,0.9);display:inline-block"></span>
-          <span style="font-size:11px;color:#374151;line-height:1.4"><b>Mancha roxa</b> — ordens que seriam captadas pelo candidato #1</span>
-        </div>
-        <div style="display:flex;align-items:flex-start;gap:8px">
-          <span style="flex-shrink:0;margin-top:2px;width:20px;height:20px;border-radius:50%;background:rgba(124,58,237,0.08);border:2px dashed rgba(124,58,237,0.7);display:inline-block"></span>
-          <span style="font-size:11px;color:#374151;line-height:1.4"><b>Círculo roxo</b> sólido = #1, tracejado = #2 e #3</span>
-        </div>
+      <div style="font-size:10px;color:#94a3b8;margin-bottom:8px;line-height:1.5">
+        Candidatos onde as encomendas actuais chegam mas ficam mais longe de Sortido do que de um ponto alternativo — ponderados por rendimento, arrendamento, Airbnb e redução de ETA; penalizados por concorrentes próximos.
+        <span style="display:block;margin-top:4px;color:#cbd5e1">
+          Pesos: encomendas reais 28% · pop×rendimento 20% · redução ETA 15% · arrendamento 10% · Airbnb 8% · gap plataformas 7% − darkstores −7% − supermercados −3%
+        </span>
       </div>
+      <div id="segundaList"></div>
       <div id="segundaIsoStats" style="margin-top:8px;padding-top:8px;border-top:1px solid #e2e8f0;display:none"></div>
     </div>
   </div>
@@ -601,21 +613,21 @@
   <div class="fl-legend-row"><span class="fl-swatch" style="background:rgba(239,68,68,0.85)"></span>&gt; 3 km</div>
 </div>
 
-<div id="legendCoverage" class="fl-legend">
-  <h4>Zonas Sweep (tracejado)</h4>
-  <div class="fl-legend-row" style="align-items:center;gap:8px">
+<div id="legendCoverage" class="fl-legend" style="display:none">
+  <h4 id="legCovHeader" style="display:none">Zonas Sweep (tracejado)</h4>
+  <div id="legCovBolt" class="fl-legend-row" style="display:none;align-items:center;gap:8px">
     <span style="display:inline-block;width:22px;height:0;border-top:2px dashed #3b82f6;flex-shrink:0"></span>
     <span>Bolt</span>
   </div>
-  <div class="fl-legend-row" style="align-items:center;gap:8px">
+  <div id="legCovGlovo" class="fl-legend-row" style="display:none;align-items:center;gap:8px">
     <span style="display:inline-block;width:22px;height:0;border-top:2px dashed #f97316;flex-shrink:0"></span>
     <span>Glovo</span>
   </div>
-  <div class="fl-legend-row" style="align-items:center;gap:8px">
+  <div id="legCovUber" class="fl-legend-row" style="display:none;align-items:center;gap:8px">
     <span style="display:inline-block;width:22px;height:0;border-top:2px dashed #10b981;flex-shrink:0"></span>
     <span>UberEats</span>
   </div>
-  <div class="fl-legend-row" style="align-items:center;gap:8px">
+  <div id="legCovP90" class="fl-legend-row" style="display:none;align-items:center;gap:8px">
     <span style="display:inline-block;width:22px;height:3px;background:#ff6600;border-radius:1px;flex-shrink:0"></span>
     <span>Entregas reais (P90)</span>
   </div>
@@ -865,6 +877,9 @@ let priceCompOn = false;
 let pcfActiveOnly = true;
 let activeTotal = 0;
 let activeNames = null;   // names currently on Sortido's menu (null = unknown → no filtering)
+let catalogTotal = 0;     // total SKUs in catalog
+let catalogCategories = 0; // number of distinct categories
+let avgSkusPerOrder = null; // from order_items.json
 let menuStale = false;
 let menuDate = "";
 fetch("sortido_catalog.json").then(r => r.json()).then(cat => {
@@ -878,7 +893,16 @@ fetch("sortido_catalog.json").then(r => r.json()).then(cat => {
   }
   activeNames = s;
   activeTotal = cat.filter(p => p.available === true).length;
+  catalogTotal = cat.length;
+  catalogCategories = new Set(cat.filter(p => p.available === true).map(p => p.category).filter(Boolean)).size;
   if (priceCompOn) renderPriceTable();
+  renderMetricas();
+}).catch(() => {});
+
+fetch("order_items.json").then(r => r.json()).then(items => {
+  const counts = items.map(o => o.items ? o.items.length : 0).filter(n => n > 0);
+  avgSkusPerOrder = counts.length ? counts.reduce((s, v) => s + v, 0) / counts.length : null;
+  renderMetricas();
 }).catch(() => {});
 
 let noGoMask = null;
@@ -923,7 +947,7 @@ const UncapturedLayer = L.Layer.extend({
         }
       }
     }
-    const s1Radius = sortidoCoverageLayer ? deliveryRadiusKm(SORTIDO_LAT, SORTIDO_LNG) : 5;
+    const s1Radius = deliveryRadiusKm(SORTIDO_LAT, SORTIDO_LNG);
     const cosLat   = Math.cos(SORTIDO_LAT * Math.PI / 180);
     const Z_DLAT = 0.0045, Z_DLON = 0.006, Z_LAT0 = 38.640, Z_LON0 = -9.320;
 
@@ -1449,63 +1473,11 @@ const clearBtn = document.getElementById("clearBtn");
 const hint     = document.getElementById("hint");
 
 let areaTimingMode = 'total';
-let areaMinMins = 0, areaMaxMins = 45;
+let areaMinMins = 0, areaMaxMins = 60;
 
-function updateAreaRangeUI() {
-  const cfg = TIMING_MODE_CFG[areaTimingMode] || TIMING_MODE_CFG.total;
-  const span = cfg.hi - cfg.lo || 1;
-  const pctLo = ((areaMinMins - cfg.lo) / span * 100).toFixed(1) + '%';
-  const pctW  = ((areaMaxMins - areaMinMins) / span * 100).toFixed(1) + '%';
-  const fill = document.getElementById("areaRangeFill");
-  if (fill) { fill.style.left = pctLo; fill.style.width = pctW; }
-  const minLbl = document.getElementById("areaRangeMinLbl");
-  const maxLbl = document.getElementById("areaRangeMaxLbl");
-  if (minLbl) minLbl.textContent = areaMinMins + " min";
-  if (maxLbl) maxLbl.textContent = areaMaxMins + " min";
-  totalRange.value = areaMaxMins; // keep compat for deliveryRadiusKm
-}
-
-function setAreaTimingMode(mode) {
-  areaTimingMode = mode;
-  const cfg = TIMING_MODE_CFG[mode] || TIMING_MODE_CFG.total;
-  areaMinMins = cfg.lo; areaMaxMins = cfg.hi;
-  const rMin = document.getElementById("areaRangeMin");
-  const rMax = document.getElementById("areaRangeMax");
-  if (rMin) { rMin.min = cfg.lo; rMin.max = cfg.hi; rMin.value = cfg.lo; }
-  if (rMax) { rMax.min = cfg.lo; rMax.max = cfg.hi; rMax.value = cfg.hi; }
-  document.querySelectorAll(".atmode-btn").forEach(b => {
-    const active = b.dataset.mode === mode;
-    b.style.background  = active ? "#1e293b" : "#f8fafc";
-    b.style.borderColor = active ? "#1e293b" : "#cbd5e1";
-    b.style.color = active ? "#f8fafc"
-      : b.dataset.mode === 'prep' ? "#6366f1"
-      : b.dataset.mode === 'wait' ? "#d97706"
-      : b.dataset.mode === 'ride' ? "#dc2626" : "#334155";
-  });
-  updateAreaRangeUI();
-  drawSortidoCoverage();
-  drawSweepCoverage();
-}
-
-(function wireAreaRange() {
-  document.querySelectorAll(".atmode-btn").forEach(btn => {
-    btn.addEventListener("click", () => setAreaTimingMode(btn.dataset.mode));
-  });
-  const rMin = document.getElementById("areaRangeMin");
-  const rMax = document.getElementById("areaRangeMax");
-  if (!rMin || !rMax) return;
-  function sync() {
-    let lo = parseInt(rMin.value), hi = parseInt(rMax.value);
-    if (lo > hi - 1) { lo = hi - 1; rMin.value = lo; }
-    if (hi < lo + 1) { hi = lo + 1; rMax.value = hi; }
-    areaMinMins = lo; areaMaxMins = hi;
-    updateAreaRangeUI();
-    drawSortidoCoverage();
-    drawSweepCoverage();
-  }
-  rMin.addEventListener("input", sync);
-  rMax.addEventListener("input", sync);
-})();
+// areaTimingMode / areaMinMins / areaMaxMins — UI removed, fixed defaults
+function updateAreaRangeUI() {}
+function setAreaTimingMode() {}
 
 function updateLabels() {} // no-op, kept for compat
 document.getElementById("incomeBtn").addEventListener("click", toggleIncomeLayer);
@@ -1522,7 +1494,7 @@ let zoneLayer = null;
 let zoneLayerOn = false;
 const LAT_STEP = 0.0045, LON_STEP = 0.0060;
 
-fetch("zone_data.json").then(r => r.json()).then(d => { zoneData = d; drawSweepCoverage(); }).catch(() => {});
+fetch("zone_data.json").then(r => r.json()).then(d => { zoneData = d; drawSweepCoverage(); if (influenceOn) drawInfluenceZone(); }).catch(() => {});
 
 // Returns the cells array for a platform+slot. Falls back to "all" if the
 // requested slot has no data. Handles both old flat format and new slot-aware format.
@@ -2077,6 +2049,9 @@ let activeDark = "all";
 let darkStoresRaw = [];
 fetch("darkstores.json").then(r => r.json()).then(d => { darkStoresRaw = d; }).catch(() => {});
 
+let supermarketPlaces = [];
+fetch("competitors_supermarkets.json").then(r => r.json()).then(d => { supermarketPlaces = d; }).catch(() => {});
+
 async function loadDarkStores() {
   if (darkLoaded) return;
   hint.textContent = "Loading dark stores…";
@@ -2184,7 +2159,7 @@ function deliveryRadiusKm(fromLat, fromLng, slot = currentSlot, dow = currentDow
     const dx = (lng - fromLng) * 111.32 * cosLat;
     return Math.sqrt(dx * dx + dy * dy);
   }).sort((a, b) => a - b);
-  return dists[Math.floor(dists.length * 0.95)]; // P95 — max is always a geocoding outlier (15.79 km in <10 min)
+  return dists[Math.floor(dists.length * 0.95)]; // P95 — max is always a geocoding outlier
 }
 
 // GeoJSON polygon approximating a circle — used for mask + stat computations.
@@ -2270,7 +2245,6 @@ function buildDirectionalReach(fromLat, fromLng, pct = 0.90, drawAt = null) {
   const cosLat = Math.cos(fromLat * Math.PI / 180);
   const SECTORS = 36, DEG = 360 / SECTORS;
   const buckets = Array.from({length: SECTORS}, () => []);
-
   for (const [lat, lng] of pts) {
     const dy = (lat - fromLat) * 111.32;
     const dx = (lng - fromLng) * 111.32 * cosLat;
@@ -2316,8 +2290,21 @@ function buildDirectionalReach(fromLat, fromLng, pct = 0.90, drawAt = null) {
   const cCosLat = Math.cos(cLat * Math.PI / 180);
   const ring = radii.map((r, i) => {
     const a = i * DEG * Math.PI / 180;
-    return [cLat + r * Math.cos(a) / 111.32,
-            cLng + r * Math.sin(a) / (111.32 * cCosLat)];
+    const ptLat = cLat + r * Math.cos(a) / 111.32;
+    const ptLng = cLng + r * Math.sin(a) / (111.32 * cCosLat);
+    // Clip to land — binary search for the river bank if point falls in the Tejo
+    if (isTejo(ptLat, ptLng)) {
+      let lo = 0, hi = r;
+      for (let k = 0; k < 18; k++) {
+        const mid = (lo + hi) / 2;
+        const mLat = cLat + mid * Math.cos(a) / 111.32;
+        const mLng = cLng + mid * Math.sin(a) / (111.32 * cCosLat);
+        if (isTejo(mLat, mLng)) hi = mid; else lo = mid;
+      }
+      return [cLat + lo * Math.cos(a) / 111.32,
+              cLng + lo * Math.sin(a) / (111.32 * cCosLat)];
+    }
+    return [ptLat, ptLng];
   });
   return ring;
 }
@@ -2345,9 +2332,19 @@ function getSortidoRadii() {
   };
 }
 
+function updateCoverageLegendVisibility() {
+  const cov = document.getElementById('legendCoverage');
+  if (!cov) return;
+  const anyVisible = [...cov.querySelectorAll('.fl-legend-row')].some(el => el.style.display !== 'none');
+  cov.style.display = anyVisible ? 'block' : 'none';
+}
+
 function drawSortidoCoverage() {
   if (sortidoCoverageLayer) { map.removeLayer(sortidoCoverageLayer); sortidoCoverageLayer = null; }
-  if (!ordersData) return;
+  const p90el = document.getElementById('legCovP90');
+  if (p90el) p90el.style.display = 'none';
+  updateCoverageLegendVisibility();
+  if (influenceOn || !ordersData) return;
   const testSlot = SLOTS[currentSlot] || SLOTS.all;
   const testDow  = DOW_GROUPS[currentDow] || DOW_GROUPS.all;
   const n = ordersData.filter(o => testSlot(o[3]) && testDow(o[6])).length || ordersData.length;
@@ -2374,6 +2371,8 @@ function drawSortidoCoverage() {
     color: "#ff6600", fillColor: "#ff6600", fillOpacity: 0.12, weight: 2.5, opacity: 0.9,
     interactive: false,
   }).addTo(map);
+  if (p90el) p90el.style.display = 'flex';
+  updateCoverageLegendVisibility();
 }
 
 const SWEEP_PLATFORM_COLORS = { bolt: "#3b82f6", glovo: "#f97316", ubereats: "#10b981" };
@@ -2407,24 +2406,595 @@ function buildSweepReach(platform, slot) {
   return { ring, nCells: cells.length };
 }
 
+// ── Influence Zone (unified) ─────────────────────────────────────────────────
+let influenceOn = false;
+let influenceLayers = [];
+
+function buildOperationalZone(targetMins) {
+  if (!ordersData || !ordersData.length) return null;
+
+  const testSlot = SLOTS[currentSlot] || SLOTS.all;
+  const testDow  = DOW_GROUPS[currentDow] || DOW_GROUPS.all;
+  let pts = ordersData.filter(o => testSlot(o[3]) && testDow(o[6]));
+  if (pts.length < 20) pts = ordersData;
+
+  // Overhead = prep + wait. Fallback: total - actual_ride when breakdown missing.
+  const overheads = pts.map(o => {
+    if (o[7] != null && o[8] != null) return o[7] + o[8];
+    if (o[2] != null && o[9] != null) return o[2] - o[9];
+    return null;
+  }).filter(v => v != null && v >= 0 && v < 45);
+
+  const avgOverhead = overheads.length
+    ? overheads.reduce((s, v) => s + v, 0) / overheads.length : 10;
+  const riderBudget = Math.max(2, targetMins - avgOverhead);
+
+  // Per-sector actual speed (km/min) from real ride times
+  const cosLat = Math.cos(SORTIDO_LAT * Math.PI / 180);
+  const SECTORS = 36, DEG = 360 / SECTORS;
+  const speedBuckets = Array.from({length: SECTORS}, () => []);
+
+  for (const o of pts) {
+    if (o[10] == null || o[9] == null || o[9] <= 0 || o[10] >= 30) continue;
+    const dy = (o[0] - SORTIDO_LAT) * 111.32;
+    const dx = (o[1] - SORTIDO_LNG) * 111.32 * cosLat;
+    if (Math.sqrt(dx*dx + dy*dy) < 0.05) continue;
+    const bearing = ((Math.atan2(dx, dy) * 180 / Math.PI) + 360) % 360;
+    speedBuckets[Math.floor(bearing / DEG) % SECTORS].push(o[10] / o[9]); // km/min
+  }
+
+  const allSpeeds = speedBuckets.flat();
+  const fallbackSpeed = allSpeeds.length
+    ? allSpeeds.slice().sort((a,b)=>a-b)[Math.floor(allSpeeds.length*0.5)] : 0.215;
+
+  const raw = speedBuckets.map(bucket => {
+    if (bucket.length < 3) return null;
+    const s = bucket.slice().sort((a, b) => a - b);
+    return s[Math.floor(s.length * 0.5)] * riderBudget; // median speed × budget
+  });
+
+  // Interpolate empty sectors
+  const filled = raw.map((r, i) => {
+    if (r !== null) return r;
+    let L = null, R = null;
+    for (let d = 1; d < SECTORS; d++) {
+      if (L === null && raw[(i-d+SECTORS)%SECTORS] !== null) L = {v: raw[(i-d+SECTORS)%SECTORS], d};
+      if (R === null && raw[(i+d)%SECTORS] !== null) R = {v: raw[(i+d)%SECTORS], d};
+      if (L && R) break;
+    }
+    const fb = fallbackSpeed * riderBudget;
+    if (!L && !R) return fb;
+    if (!L) return R.v; if (!R) return L.v;
+    return (L.v * R.d + R.v * L.d) / (L.d + R.d);
+  });
+
+  const smooth = arr => arr.map((v,i) => arr[(i-1+SECTORS)%SECTORS]*0.25 + v*0.5 + arr[(i+1)%SECTORS]*0.25);
+  const radii = smooth(smooth(filled));
+
+  const cCosLat = Math.cos(SORTIDO_LAT * Math.PI / 180);
+  const ring = radii.map((r, i) => {
+    const a = i * DEG * Math.PI / 180;
+    const pLat = SORTIDO_LAT + r * Math.cos(a) / 111.32;
+    const pLng = SORTIDO_LNG + r * Math.sin(a) / (111.32 * cCosLat);
+    if (isTejo(pLat, pLng)) {
+      let lo = 0, hi = r;
+      for (let k = 0; k < 18; k++) {
+        const mid = (lo+hi)/2;
+        if (isTejo(SORTIDO_LAT + mid*Math.cos(a)/111.32, SORTIDO_LNG + mid*Math.sin(a)/(111.32*cCosLat))) hi=mid; else lo=mid;
+      }
+      return [SORTIDO_LAT + lo*Math.cos(a)/111.32, SORTIDO_LNG + lo*Math.sin(a)/(111.32*cCosLat)];
+    }
+    return [pLat, pLng];
+  });
+
+  const avgSpeedKmh = fallbackSpeed * 60;
+  const avgReachKm  = (fallbackSpeed * riderBudget).toFixed(1);
+  return { ring, avgOverhead: Math.round(avgOverhead), riderBudget: Math.round(riderBudget), avgSpeedKmh: Math.round(avgSpeedKmh), avgReachKm };
+}
+
+function drawInfluenceZone() {
+  influenceLayers.forEach(l => map.removeLayer(l));
+  influenceLayers = [];
+  if (!influenceOn || !ordersData) return;
+
+  const SECTORS = 36, DEG = 360 / SECTORS;
+  const cosLat  = Math.cos(SORTIDO_LAT * Math.PI / 180);
+  const target  = parseInt(document.getElementById("operTargetSlider").value) || 30;
+
+  const testSlot = SLOTS[currentSlot] || SLOTS.all;
+  const testDow  = DOW_GROUPS[currentDow] || DOW_GROUPS.all;
+  let pts = ordersData.filter(o => testSlot(o[3]) && testDow(o[6]));
+  if (pts.length < 20) pts = ordersData;
+
+  function fillInterp(raw, fallback) {
+    return raw.map((r, i) => {
+      if (r !== null) return r;
+      let L = null, R = null;
+      for (let d = 1; d < SECTORS; d++) {
+        if (L === null && raw[(i-d+SECTORS)%SECTORS] !== null) L = {v: raw[(i-d+SECTORS)%SECTORS], d};
+        if (R === null && raw[(i+d)%SECTORS]          !== null) R = {v: raw[(i+d)%SECTORS],          d};
+        if (L && R) break;
+      }
+      if (!L && !R) return fallback;
+      if (!L) return R.v; if (!R) return L.v;
+      return (L.v * R.d + R.v * L.d) / (L.d + R.d);
+    });
+  }
+  const smooth = arr => arr.map((v,i) => arr[(i-1+SECTORS)%SECTORS]*0.25 + v*0.5 + arr[(i+1)%SECTORS]*0.25);
+
+  // ── Sweep zone at target ETA — "where platform says ≤ X min" ──────────────
+  const sweepAtTarget = new Array(SECTORS).fill(0);
+  if (zoneData) {
+    for (const p of ["bolt", "glovo", "ubereats"]) {
+      const cells = getZoneSlotCells(p, currentSlot);
+      for (const cell of cells) {
+        const eta = cell.length > 2 ? cell[2] : null;
+        if (eta === null || eta > target) continue;
+        const dy = (cell[0] - SORTIDO_LAT) * 111.32, dx = (cell[1] - SORTIDO_LNG) * 111.32 * cosLat;
+        const dist = Math.sqrt(dy*dy + dx*dx);
+        if (dist < 0.05) continue;
+        const si = Math.floor(((Math.atan2(dx, dy) * 180 / Math.PI) + 360) % 360 / DEG) % SECTORS;
+        sweepAtTarget[si] = Math.max(sweepAtTarget[si], dist);
+      }
+    }
+  }
+  const hasSweepTarget = sweepAtTarget.some(r => r > 0);
+  // Interpolate empty sectors; fallback to P90 if sweep unavailable
+  const fallbackR  = deliveryRadiusKm(SORTIDO_LAT, SORTIDO_LNG);
+  const innerRadii = hasSweepTarget
+    ? smooth(fillInterp(sweepAtTarget.map(r => r > 0 ? r : null), 0)).map(r => Math.max(0, r))
+    : (() => {
+        const empBuckets = Array.from({length: SECTORS}, () => []);
+        for (const o of pts) {
+          const dy = (o[0]-SORTIDO_LAT)*111.32, dx = (o[1]-SORTIDO_LNG)*111.32*cosLat;
+          const dist = Math.sqrt(dx*dx+dy*dy);
+          if (dist < 0.05) continue;
+          empBuckets[Math.floor(((Math.atan2(dx,dy)*180/Math.PI)+360)%360/DEG)%SECTORS].push(dist);
+        }
+        const raw = empBuckets.map(b => { if (b.length<3) return null; const s=b.slice().sort((a,b)=>a-b); return s[Math.floor(s.length*.90)]; });
+        return smooth(smooth(fillInterp(raw, fallbackR*0.7))).map(r => Math.min(r, fallbackR*1.6));
+      })();
+
+  // ── Operational radii (how far riders CAN go) ──────────────────────────────
+  const overheads = pts.map(o => {
+    if (o[7] != null && o[8] != null) return o[7] + o[8];
+    if (o[2] != null && o[9] != null) return o[2] - o[9];
+    return null;
+  }).filter(v => v != null && v >= 0 && v < 45);
+  const avgOverhead  = overheads.length ? overheads.reduce((s,v)=>s+v,0)/overheads.length : 10;
+  const riderBudget  = Math.max(2, target - avgOverhead);
+  const speedBuckets = Array.from({length: SECTORS}, () => []);
+  for (const o of pts) {
+    if (o[10] == null || o[9] == null || o[9] <= 0 || o[10] >= 30) continue;
+    const dy = (o[0] - SORTIDO_LAT) * 111.32, dx = (o[1] - SORTIDO_LNG) * 111.32 * cosLat;
+    if (Math.sqrt(dx*dx+dy*dy) < 0.05) continue;
+    const si = Math.floor(((Math.atan2(dx, dy) * 180 / Math.PI) + 360) % 360 / DEG) % SECTORS;
+    speedBuckets[si].push(o[10] / o[9]);
+  }
+  const allSpeeds    = speedBuckets.flat();
+  const fallbackSpd  = allSpeeds.length ? allSpeeds.slice().sort((a,b)=>a-b)[Math.floor(allSpeeds.length*0.5)] : 0.215;
+  const opRaw        = speedBuckets.map(b => { if (b.length < 3) return null; const s = b.slice().sort((a,b)=>a-b); return s[Math.floor(s.length*0.5)] * riderBudget; });
+  const opRadii      = smooth(smooth(fillInterp(opRaw, fallbackSpd * riderBudget)));
+
+  // ── Platform sweep max per sector (what the platforms allow) ───────────────
+  const sweepRaw = new Array(SECTORS).fill(0);
+  if (zoneData) {
+    for (const p of ["bolt", "glovo", "ubereats"]) {
+      const cells = getZoneSlotCells(p, currentSlot);
+      for (const cell of cells) {
+        const eta = cell.length > 2 ? cell[2] : null;
+        if (eta === null || eta < areaMinMins || eta > areaMaxMins) continue;
+        const dy = (cell[0] - SORTIDO_LAT) * 111.32, dx = (cell[1] - SORTIDO_LNG) * 111.32 * cosLat;
+        const dist = Math.sqrt(dy*dy + dx*dx);
+        if (dist < 0.05) continue;
+        const si = Math.floor(((Math.atan2(dx, dy) * 180 / Math.PI) + 360) % 360 / DEG) % SECTORS;
+        sweepRaw[si] = Math.max(sweepRaw[si], dist);
+      }
+    }
+  }
+  const hasSweep = sweepRaw.some(r => r > 0);
+
+  // ── Build lat/lng ring from radii with Tejo clipping ──────────────────────
+  function buildRing(radii) {
+    return radii.map((r, i) => {
+      const a = i * DEG * Math.PI / 180;
+      const pLat = SORTIDO_LAT + r * Math.cos(a) / 111.32;
+      const pLng = SORTIDO_LNG + r * Math.sin(a) / (111.32 * cosLat);
+      if (r > 0 && isTejo(pLat, pLng)) {
+        let lo = 0, hi = r;
+        for (let k = 0; k < 18; k++) {
+          const mid = (lo+hi)/2;
+          if (isTejo(SORTIDO_LAT + mid*Math.cos(a)/111.32, SORTIDO_LNG + mid*Math.sin(a)/(111.32*cosLat))) hi=mid; else lo=mid;
+        }
+        return [SORTIDO_LAT + lo*Math.cos(a)/111.32, SORTIDO_LNG + lo*Math.sin(a)/(111.32*cosLat)];
+      }
+      return [pLat, pLng];
+    });
+  }
+
+  const innerRing = buildRing(innerRadii);
+  const sweepRing = buildRing(sweepRaw);
+
+  // ── 1. Sweep zone at target ETA — orange fill ─────────────────────────────
+  influenceLayers.push(L.polygon(innerRing, {
+    color: '#f97316', fillColor: '#f97316', fillOpacity: 0.18,
+    weight: 2, opacity: 0.85, interactive: false,
+  }).addTo(map));
+
+  // ── 1b. P90 empirical ring — purple dashed overlay ─────────────────────────
+  const p90ring = buildDirectionalReach(SORTIDO_LAT, SORTIDO_LNG, 0.90);
+  if (p90ring) {
+    influenceLayers.push(L.polygon(p90ring, {
+      color: '#6366f1', fillOpacity: 0, weight: 2, dashArray: '5 4', opacity: 0.8, interactive: false,
+    }).addTo(map));
+  }
+
+  // ── 2. Gap trapezoids (platform allows, we don't deliver) ──────────────────
+  // Color = WHY we're not delivering there
+  let nOpportunity = 0, nRiderLimit = 0, nCompetitor = 0;
+  if (hasSweep) {
+    for (let i = 0; i < SECTORS; i++) {
+      const j   = (i + 1) % SECTORS;
+      const gap = sweepRaw[i] - innerRadii[i];
+      if (gap < 0.08) continue; // no meaningful gap
+
+      // Check midpoint of the gap sector
+      const midR  = (innerRadii[i] + sweepRaw[i]) / 2;
+      const a     = i * DEG * Math.PI / 180;
+      const midLat = SORTIDO_LAT + midR * Math.cos(a) / 111.32;
+      const midLng = SORTIDO_LNG + midR * Math.sin(a) / (111.32 * cosLat);
+
+      const competitorWins = COMPETITORS.some(c => {
+        const cdy = (midLat - c.lat) * 111.32, cdx = (midLng - c.lng) * 111.32 * cosLat;
+        return Math.sqrt(cdy*cdy + cdx*cdx) < midR;
+      });
+      if (competitorWins) continue;
+      const riderCanReach = opRadii[i] >= sweepRaw[i] * 0.85;
+
+      let color;
+      if (!riderCanReach){ color = '#f59e0b'; nRiderLimit++;  }
+      else               { color = '#22c55e'; nOpportunity++; }
+
+      influenceLayers.push(L.polygon([innerRing[i], innerRing[j], sweepRing[j], sweepRing[i]], {
+        color: 'transparent', fillColor: color, fillOpacity: 0.35,
+        weight: 0, interactive: false,
+      }).addTo(map));
+    }
+
+  }
+
+  // ── 3. Dynamic legend ─────────────────────────────────────────────────────
+  const legendEl = document.getElementById("influenceLegend");
+  if (legendEl) {
+    const items = [];
+    if (p90ring)  items.push(`<div style="display:flex;align-items:center;gap:6px"><span style="width:16px;height:0;border-top:2px dashed #6366f1;display:inline-block;flex-shrink:0"></span><span style="color:#334155">Entregas reais (P90)</span></div>`);
+    legendEl.innerHTML = items.join('');
+  }
+
+  // ── 4. Stats ───────────────────────────────────────────────────────────────
+  const statsEl = document.getElementById("influenceStats");
+  if (statsEl) statsEl.innerHTML = `
+    <div style="display:flex;justify-content:space-between"><span style="color:#64748b">ETA sweep (objetivo)</span><span style="font-weight:600;color:#f97316">≤ ${target} min</span></div>
+    <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Overhead médio</span><span style="font-weight:600">~${Math.round(avgOverhead)} min</span></div>
+    <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Budget rider real</span><span style="font-weight:600;color:#0ea5e9">${Math.round(riderBudget)} min · ${(fallbackSpd*riderBudget).toFixed(1)} km</span></div>
+    `;
+}
+
+// ─── Métricas panel ───────────────────────────────────────────────────────────
+let metricasOn = false;
+
+function renderMetricas() {
+  const panel = document.getElementById("metricasPanel");
+  if (!panel || !metricasOn || !ordersData) return;
+
+  const testSlot = SLOTS[currentSlot] || SLOTS.all;
+  const testDow  = DOW_GROUPS[currentDow] || DOW_GROUPS.all;
+  const pts  = ordersData.filter(o => testSlot(o[3]) && testDow(o[6]));
+  const mins = pts.map(o => o[2]).filter(v => v != null).sort((a, b) => a - b);
+  if (!mins.length) { panel.innerHTML = '<div style="color:#94a3b8;font-size:10px">Sem dados para o filtro actual.</div>'; return; }
+
+  const total  = mins.length;
+  const mean   = mins.reduce((s, v) => s + v, 0) / total;
+  const median = mins[Math.floor(total * 0.5)];
+  const p90    = mins[Math.floor(total * 0.9)];
+
+  const buckets = [
+    ['≤ 10 min',  mins.filter(v => v <= 10).length,              '#22c55e'],
+    ['10–15 min', mins.filter(v => v > 10 && v <= 15).length,    '#84cc16'],
+    ['15–20 min', mins.filter(v => v > 15 && v <= 20).length,    '#eab308'],
+    ['20–30 min', mins.filter(v => v > 20 && v <= 30).length,    '#f97316'],
+    ['> 30 min',  mins.filter(v => v > 30).length,               '#ef4444'],
+  ];
+
+  const row = (label, val) => `<div style="display:flex;justify-content:space-between;margin-bottom:3px"><span style="color:#64748b">${label}</span><span style="font-weight:600">${val}</span></div>`;
+
+  const prepMins = pts.map(o => o[7]).filter(v => v != null);
+  const avgPrep  = prepMins.length ? prepMins.reduce((s, v) => s + v, 0) / prepMins.length : null;
+
+  panel.innerHTML = `
+    <div style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Tempo de entrega</div>
+    <div style="margin-bottom:10px">
+      ${row('Média', `${mean.toFixed(1)} min`)}
+      ${row('Mediana', `${median.toFixed(1)} min`)}
+      ${row('P90', `${p90.toFixed(1)} min`)}
+      ${row('Encomendas', total.toLocaleString('pt-PT'))}
+      ${avgPrep != null ? row('Tempo de picking', `${avgPrep.toFixed(1)} min`) : ''}
+      ${avgSkusPerOrder != null ? row('SKUs por encomenda', `${avgSkusPerOrder.toFixed(1)}`) : ''}
+    </div>
+    <div style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Distribuição por tempo de entrega</div>
+    <div style="margin-bottom:12px">
+    ${buckets.map(([label, n, color]) => `
+      <div style="margin-bottom:6px">
+        <div style="display:flex;justify-content:space-between;font-size:10px;margin-bottom:2px">
+          <span style="color:#475569">${label}</span>
+          <span style="color:#64748b">${n.toLocaleString('pt-PT')} · ${Math.round(100 * n / total)}%</span>
+        </div>
+        <div style="background:#f1f5f9;border-radius:3px;height:6px;overflow:hidden">
+          <div style="height:6px;border-radius:3px;background:${color};width:${Math.round(100 * n / total)}%;min-width:${n > 0 ? 2 : 0}px"></div>
+        </div>
+      </div>`).join('')}
+    </div>
+    ${catalogTotal > 0 ? `
+    <div style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Catálogo</div>
+    <div>
+      ${row('SKUs disponíveis', `${activeTotal.toLocaleString('pt-PT')} / ${catalogTotal.toLocaleString('pt-PT')}`)}
+      ${row('Disponibilidade', `${Math.round(100 * activeTotal / catalogTotal)}%`)}
+      ${row('Categorias activas', catalogCategories)}
+    </div>` : ''}
+  `;
+}
+
+document.getElementById("metricasBtn").addEventListener("click", () => {
+  metricasOn = !metricasOn;
+  document.getElementById("metricasBtn").classList.toggle("active", metricasOn);
+  document.getElementById("metricasPanel").style.display = metricasOn ? "block" : "none";
+  renderMetricas();
+});
+
+document.getElementById("influenceBtn").addEventListener("click", () => {
+  const btn = document.getElementById("influenceBtn");
+  const controls = document.getElementById("influenceControls");
+  influenceOn = !influenceOn;
+  btn.classList.toggle("active", influenceOn);
+  controls.style.display = influenceOn ? "block" : "none";
+  // When toggling, the always-on rings need to clear or restore
+  drawSortidoCoverage();
+  drawSweepCoverage();
+  drawInfluenceZone();
+});
+
+document.getElementById("operTargetSlider").addEventListener("input", e => {
+  document.getElementById("operTargetLbl").textContent = `${e.target.value} min`;
+  if (influenceOn) drawInfluenceZone();
+});
+
+// ─── Effective Zone (revenue heatmap × tightest reach boundary) ───────────────
+const COMPETITORS = [
+  { name: 'Glovo Campo Ourique', lat: 38.7187881, lng: -9.1681675 },
+  { name: 'Bolt Avenidas Novas', lat: 38.7356349, lng: -9.1508527 },
+  { name: 'Bolt Arroios',        lat: 38.7201328, lng: -9.1375953 },
+  { name: 'Bolt Campo Ourique',  lat: 38.7148948, lng: -9.1683952 },
+  { name: 'Getir',               lat: 38.7635286, lng: -9.1042809 },
+];
+
+function revenueColor(t) {
+  const lo = [148, 163, 184], hi = [245, 158, 11];
+  return `rgb(${Math.round(lo[0]+(hi[0]-lo[0])*t)},${Math.round(lo[1]+(hi[1]-lo[1])*t)},${Math.round(lo[2]+(hi[2]-lo[2])*t)})`;
+}
+
+// effZoneOn / effZoneLayers removed — logic merged into drawInfluenceZone
+
+function buildEffectiveZone() {
+  if (!ordersData || !ordersData.length) return null;
+
+  const testSlot = SLOTS[currentSlot] || SLOTS.all;
+  const testDow  = DOW_GROUPS[currentDow] || DOW_GROUPS.all;
+  let pts = ordersData.filter(o => testSlot(o[3]) && testDow(o[6]));
+  if (pts.length < 20) pts = ordersData;
+
+  const SECTORS = 36, DEG = 360 / SECTORS;
+  const cosLat = Math.cos(SORTIDO_LAT * Math.PI / 180);
+
+  const empBuckets   = Array.from({length: SECTORS}, () => []);
+  const speedBuckets = Array.from({length: SECTORS}, () => []);
+  const revBuckets   = Array.from({length: SECTORS}, () => []);
+
+  for (const o of pts) {
+    const dy = (o[0] - SORTIDO_LAT) * 111.32;
+    const dx = (o[1] - SORTIDO_LNG) * 111.32 * cosLat;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist < 0.05) continue;
+    const bearing = ((Math.atan2(dx, dy) * 180 / Math.PI) + 360) % 360;
+    const si = Math.floor(bearing / DEG) % SECTORS;
+    empBuckets[si].push(dist);
+    if (o[5] != null && o[5] > 0) revBuckets[si].push(o[5]);
+    if (o[10] != null && o[9] != null && o[9] > 0 && o[10] < 30)
+      speedBuckets[si].push(o[10] / o[9]);
+  }
+
+  const fallbackR = deliveryRadiusKm(SORTIDO_LAT, SORTIDO_LNG);
+  const allSpeeds = speedBuckets.flat();
+  const fallbackSpeed = allSpeeds.length
+    ? allSpeeds.slice().sort((a,b)=>a-b)[Math.floor(allSpeeds.length*0.5)] : 0.215;
+
+  const overheads = pts.map(o => {
+    if (o[7] != null && o[8] != null) return o[7] + o[8];
+    if (o[2] != null && o[9] != null) return o[2] - o[9];
+    return null;
+  }).filter(v => v != null && v >= 0 && v < 45);
+  const avgOverhead = overheads.length
+    ? overheads.reduce((s,v)=>s+v,0) / overheads.length : 10;
+  const target = parseInt(document.getElementById("operTargetSlider").value) || 30;
+  const riderBudget = Math.max(2, target - avgOverhead);
+
+  const empRaw = empBuckets.map(d => {
+    if (d.length < 3) return null;
+    const s = d.slice().sort((a,b)=>a-b);
+    return s[Math.floor(s.length * 0.90)];
+  });
+  const opRaw = speedBuckets.map(b => {
+    if (b.length < 3) return null;
+    const s = b.slice().sort((a,b)=>a-b);
+    return s[Math.floor(s.length * 0.5)] * riderBudget;
+  });
+
+  function fillInterp(raw, fallback) {
+    return raw.map((r, i) => {
+      if (r !== null) return r;
+      let L = null, R = null;
+      for (let d = 1; d < SECTORS; d++) {
+        if (L === null && raw[(i-d+SECTORS)%SECTORS] !== null) L = {v: raw[(i-d+SECTORS)%SECTORS], d};
+        if (R === null && raw[(i+d)%SECTORS] !== null) R = {v: raw[(i+d)%SECTORS], d};
+        if (L && R) break;
+      }
+      if (!L && !R) return fallback;
+      if (!L) return R.v; if (!R) return L.v;
+      return (L.v * R.d + R.v * L.d) / (L.d + R.d);
+    });
+  }
+  const smooth = arr => arr.map((v,i) => arr[(i-1+SECTORS)%SECTORS]*0.25 + v*0.5 + arr[(i+1)%SECTORS]*0.25);
+
+  const empFilled = smooth(smooth(fillInterp(empRaw, fallbackR * 0.7))).map(r => Math.min(r, fallbackR * 1.6));
+  const opFilled  = smooth(smooth(fillInterp(opRaw,  fallbackSpeed * riderBudget)));
+
+  // Effective boundary = tighter of empirical P90 and operational reach
+  const boundary = empFilled.map((e, i) => Math.min(e, opFilled[i]));
+
+  const revenue = revBuckets.map(r => r.length ? r.reduce((s,v)=>s+v,0)/r.length : null);
+  const revVals = revenue.filter(v => v !== null);
+  const revMin  = revVals.length ? Math.min(...revVals) : 0;
+  const revMax  = revVals.length ? Math.max(...revVals) : 1;
+  const revRange = revMax - revMin || 1;
+
+  // Build ring with Tejo clipping
+  const ring = boundary.map((r, i) => {
+    const a = i * DEG * Math.PI / 180;
+    const pLat = SORTIDO_LAT + r * Math.cos(a) / 111.32;
+    const pLng = SORTIDO_LNG + r * Math.sin(a) / (111.32 * cosLat);
+    if (isTejo(pLat, pLng)) {
+      let lo = 0, hi = r;
+      for (let k = 0; k < 18; k++) {
+        const mid = (lo+hi)/2;
+        if (isTejo(SORTIDO_LAT + mid*Math.cos(a)/111.32, SORTIDO_LNG + mid*Math.sin(a)/(111.32*cosLat))) hi=mid; else lo=mid;
+      }
+      return [SORTIDO_LAT + lo*Math.cos(a)/111.32, SORTIDO_LNG + lo*Math.sin(a)/(111.32*cosLat)];
+    }
+    return [pLat, pLng];
+  });
+
+  // Contested: competitor darkstore is closer to our boundary point than Sortido is
+  const contested = boundary.map((r, i) => {
+    const [pLat, pLng] = ring[i];
+    return COMPETITORS.some(c => {
+      const cdy = (pLat - c.lat) * 111.32;
+      const cdx = (pLng - c.lng) * 111.32 * cosLat;
+      return Math.sqrt(cdy*cdy + cdx*cdx) < r;
+    });
+  });
+
+  const avgReach    = boundary.reduce((s,v)=>s+v,0) / SECTORS;
+  const nContested  = contested.filter(Boolean).length;
+  const bestRevSi   = revVals.length ? revenue.indexOf(Math.max(...revVals)) : -1;
+  const worstRevSi  = revVals.length ? revenue.indexOf(Math.min(...revVals)) : -1;
+  const dirLabel    = si => { const a = si * DEG; if (a < 45||a>=315) return 'N'; if (a<135) return 'E'; if (a<225) return 'S'; return 'O'; };
+
+  return { ring, boundary, revenue, revMin, revMax, revRange, contested,
+           avgReach, nContested, bestRevSi, worstRevSi, dirLabel };
+}
+
+
+// ────────────────────────────────────────────────────────────────────────────
+
 function drawSweepCoverage() {
   for (const layer of Object.values(sweepCoverageLayers)) map.removeLayer(layer);
   sweepCoverageLayers = {};
-  if (!zoneData) return;
-  const slotLabel = SLOT_LABELS[currentSlot] || currentSlot;
+  const ids = { bolt: 'legCovBolt', glovo: 'legCovGlovo', ubereats: 'legCovUber' };
+  for (const id of Object.values(ids)) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
+  if (influenceOn || !zoneData) { updateCoverageLegendVisibility(); return; }
   for (const p of ["bolt", "glovo", "ubereats"]) {
     const result = buildSweepReach(p, currentSlot);
     if (!result) continue;
-    const { ring, nCells } = result;
-    const color = SWEEP_PLATFORM_COLORS[p];
-    const label = SWEEP_PLATFORM_LABELS[p];
-    const layer = L.polygon(ring, {
-      color, fillColor: color, fillOpacity: 0.06, weight: 2, opacity: 0.85, dashArray: "8 5",
-      interactive: false,
+    const layer = L.polygon(result.ring, {
+      color: SWEEP_PLATFORM_COLORS[p], fillColor: SWEEP_PLATFORM_COLORS[p],
+      fillOpacity: 0.06, weight: 2, opacity: 0.85, dashArray: "8 5", interactive: false,
     }).addTo(map);
     sweepCoverageLayers[p] = layer;
+    const el = document.getElementById(ids[p]); if (el) el.style.display = 'flex';
   }
+  const hasAny = Object.keys(sweepCoverageLayers).length > 0;
+  const hdr = document.getElementById('legCovHeader'); if (hdr) hdr.style.display = hasAny ? 'block' : 'none';
+  updateCoverageLegendVisibility();
 }
+
+// ─── Platform sweep zones (independent slot selector) ─────────────────────────
+let sweepZoneOn     = false;
+let sweepZoneSlot   = 'all';
+let sweepZoneLayers = [];
+
+function drawSweepZone() {
+  sweepZoneLayers.forEach(l => map.removeLayer(l));
+  sweepZoneLayers = [];
+  if (!sweepZoneOn || !zoneData) return;
+
+  const cosLat = Math.cos(SORTIDO_LAT * Math.PI / 180);
+  const stats  = [];
+
+  for (const p of ["bolt", "glovo", "ubereats"]) {
+    const res = buildSweepReach(p, sweepZoneSlot);
+    if (!res) continue;
+    const color = SWEEP_PLATFORM_COLORS[p];
+    sweepZoneLayers.push(L.polygon(res.ring, {
+      color, fillColor: color, fillOpacity: 0.07,
+      weight: 2.5, opacity: 0.9, interactive: false,
+    }).addTo(map));
+
+    // Compute real max reach and ETA range for stats
+    const cells  = getZoneSlotCells(p, sweepZoneSlot);
+    const etas   = cells.map(c => c[2]).filter(e => e != null);
+    const dists  = res.ring.map(([lat, lng]) => {
+      const dy = (lat - SORTIDO_LAT) * 111.32, dx = (lng - SORTIDO_LNG) * 111.32 * cosLat;
+      return Math.sqrt(dy*dy + dx*dx);
+    });
+    stats.push({
+      label: SWEEP_PLATFORM_LABELS[p], color,
+      cells: cells.length,
+      maxKm: Math.max(...dists).toFixed(1),
+      etaMin: etas.length ? Math.round(Math.min(...etas)) : '?',
+      etaMax: etas.length ? Math.round(Math.max(...etas)) : '?',
+    });
+  }
+
+  const el = document.getElementById("sweepZoneStats");
+  if (el) el.innerHTML = stats.map(s => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0">
+      <span style="display:flex;align-items:center;gap:4px">
+        <span style="width:8px;height:8px;border-radius:50%;background:${s.color};display:inline-block;flex-shrink:0"></span>
+        <span style="color:#475569;font-weight:600">${s.label}</span>
+      </span>
+      <span style="color:#64748b">${s.etaMin}–${s.etaMax} min · ${s.maxKm} km</span>
+    </div>`).join('');
+}
+
+document.getElementById("sweepZoneBtn").addEventListener("click", () => {
+  sweepZoneOn = !sweepZoneOn;
+  document.getElementById("sweepZoneBtn").classList.toggle("active", sweepZoneOn);
+  document.getElementById("sweepZoneControls").style.display = sweepZoneOn ? "block" : "none";
+  if (!sweepZoneOn) { sweepZoneLayers.forEach(l => map.removeLayer(l)); sweepZoneLayers = []; }
+  else drawSweepZone();
+});
+
+document.querySelectorAll(".swp-slot").forEach(btn => {
+  btn.addEventListener("click", () => {
+    sweepZoneSlot = btn.dataset.slot;
+    document.querySelectorAll(".swp-slot").forEach(b => {
+      const active = b.dataset.slot === sweepZoneSlot;
+      b.style.background  = active ? "#1e293b" : "#f8fafc";
+      b.style.borderColor = active ? "#1e293b" : "#cbd5e1";
+      b.style.color       = active ? "#f8fafc"  : "#475569";
+    });
+    if (sweepZoneOn) drawSweepZone();
+  });
+});
 
 drawSortidoAnchor();
 
@@ -2900,18 +3470,114 @@ function toggleTimingLayer() {
   }
 }
 
-fetch("orders_geocoded.json")
+fetch("orders_routed.json")
   .then(r => r.json())
   .then(d => {
     ordersData = d;
     addrData = buildAddrData(currentSlot, currentType, currentDow);
     drawSortidoCoverage();
+    drawSweepCoverage();
+    if (influenceOn) drawInfluenceZone();
+    renderMetricas();
     if (delivLayerOn && delivLayer) delivLayer._draw();
     if (timingLayerOn && timingLayer) timingLayer._draw();
     if (receitaLayerOn && receitaLayer) receitaLayer._draw();
     if (coberturaLayerOn && coberturaLayer) coberturaLayer._draw();
+    renderRouteStats(d);
   })
   .catch(() => {});
+
+function renderRouteStats(orders) {
+  const el = document.getElementById("routeStats");
+  if (!el) return;
+
+  const validKm  = orders.filter(o => o[10] != null && o[10] < 40).sort((a, b) => a[10] - b[10]);
+  const validMin = orders.filter(o => o[11] != null && o[11] < 60).sort((a, b) => a[11] - b[11]);
+  if (!validKm.length) return;
+
+  const pct  = (arr, p) => arr[Math.floor(arr.length * p)];
+  const avg  = arr => arr.reduce((s, v) => s + v, 0) / arr.length;
+  const fmt1 = v => v.toFixed(1);
+
+  const kmVals  = validKm.map(o => o[10]);
+  const minVals = validMin.map(o => o[11]);
+
+  const makeBands = (sorted, field, unit, fmt) => {
+    const p10 = pct(sorted, 0.10), p40 = pct(sorted, 0.40),
+          p60 = pct(sorted, 0.60), p80 = pct(sorted, 0.80),
+          p95 = pct(sorted, 0.95), meanV = avg(sorted), p90v = pct(sorted, 0.90);
+    return [
+      { key: `${field}_min`, label: 'Mínimo',       val: `${fmt(sorted[0])} ${unit}`,         filter: o => o[field] != null && o[field] <= p10,              color: '#22c55e' },
+      { key: `${field}_avg`, label: 'Médio',         val: `${fmt(meanV)} ${unit}`,              filter: o => o[field] != null && Math.abs(o[field] - meanV) / meanV < 0.15, color: '#3b82f6' },
+      { key: `${field}_p50`, label: 'Mediana (P50)', val: `${fmt(pct(sorted,0.50))} ${unit}`,  filter: o => o[field] != null && o[field] >= p40 && o[field] <= p60, color: '#8b5cf6' },
+      { key: `${field}_p90`, label: 'P90',           val: `${fmt(p90v)} ${unit}`,               filter: o => o[field] != null && o[field] >= p80 && o[field] <= p95, color: '#f59e0b' },
+      { key: `${field}_max`, label: 'Máximo',        val: `${fmt(sorted[sorted.length-1])} ${unit}`, filter: o => o[field] != null && o[field] >= p95,         color: '#ef4444' },
+    ];
+  };
+
+  const kmBands  = makeBands(kmVals,  10, 'km',  fmt1);
+  const minBands = makeBands(minVals, 11, 'min', v => Math.round(v).toString());
+
+  const totalMins = orders.map(o => o[2]).filter(v => v != null && v > 0 && v < 120);
+  const overhead  = minVals.length && totalMins.length
+    ? Math.round(avg(totalMins) - avg(minVals)) : null;
+
+  const renderBands = (bands, source) => bands.map(b => `
+    <div class="stat-row" data-key="${b.key}" style="display:flex;justify-content:space-between;align-items:center;padding:3px 6px;margin:1px -6px;border-radius:5px;cursor:pointer;transition:background .12s">
+      <span style="display:flex;align-items:center;gap:5px">
+        <span style="width:7px;height:7px;border-radius:50%;background:${b.color};flex-shrink:0;display:inline-block"></span>
+        <span style="color:#475569">${b.label}</span>
+      </span>
+      <span style="font-weight:600;color:#0f172a">${b.val}</span>
+    </div>`).join('');
+
+  el.style.display = "block";
+  el.innerHTML = `
+    <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Distância por estrada · clica para ver</div>
+    ${renderBands(kmBands)}
+    <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.06em;margin:8px 0 5px">Tempo de viagem (rider) · clica para ver</div>
+    ${renderBands(minBands)}
+    ${overhead != null ? `<div style="display:flex;justify-content:space-between;padding:3px 0 1px;margin-top:4px;border-top:1px solid #f1f5f9;font-size:11px"><span style="color:#64748b">Overhead médio</span><span style="font-weight:600;color:#f59e0b">~${overhead} min</span></div>` : ''}`;
+
+  const allBands = [...kmBands, ...minBands];
+  let activeKey = null;
+  el.querySelectorAll('.stat-row').forEach(row => {
+    row.addEventListener('mouseenter', () => { if (row.dataset.key !== activeKey) row.style.background = '#f1f5f9'; });
+    row.addEventListener('mouseleave', () => { if (row.dataset.key !== activeKey) row.style.background = ''; });
+    row.addEventListener('click', () => {
+      const band = allBands.find(b => b.key === row.dataset.key);
+      if (activeKey === band.key) {
+        clearStatMarkers(); activeKey = null;
+        el.querySelectorAll('.stat-row').forEach(r => r.style.background = '');
+        return;
+      }
+      activeKey = band.key;
+      el.querySelectorAll('.stat-row').forEach(r => r.style.background = '');
+      row.style.background = '#e0f2fe';
+      const source = band.key.startsWith('10_') || band.key.startsWith('km') ? validKm : orders;
+      showStatOrders(orders.filter(band.filter), band.label, band.color);
+    });
+  });
+}
+
+let _statMarkers = [];
+function clearStatMarkers() {
+  _statMarkers.forEach(m => map.removeLayer(m));
+  _statMarkers = [];
+}
+function showStatOrders(subset, label, color) {
+  clearStatMarkers();
+  subset.forEach(o => {
+    const km   = o[10] != null ? `${o[10].toFixed(2)} km` : '—';
+    const mins = o[11] != null ? `${Math.round(o[11])} min` : '—';
+    const m = L.circleMarker([o[0], o[1]], {
+      radius: 5, color, fillColor: color, fillOpacity: 0.75, weight: 1.5,
+    }).bindTooltip(`<b>${label}</b><br>${km} · ${mins} viagem`, { sticky: true });
+    m.addTo(map);
+    _statMarkers.push(m);
+  });
+  hint.textContent = `${subset.length} entregas · ${label}`;
+}
 
 document.getElementById("deliveriesBtn").addEventListener("click", toggleDelivLayer);
 document.getElementById("timingBtn").addEventListener("click", toggleTimingLayer);
@@ -2924,6 +3590,8 @@ document.querySelectorAll("#slotBar .slot").forEach(btn => {
     addrData = buildAddrData(currentSlot, currentType, currentDow);
     drawSortidoCoverage();
     drawSweepCoverage();
+    if (influenceOn) drawInfluenceZone();
+    renderMetricas();
     if (delivLayer) delivLayer._draw();
     if (receitaLayerOn && receitaLayer) receitaLayer._draw();
     if (coberturaLayerOn && coberturaLayer) coberturaLayer._draw();
@@ -2952,6 +3620,8 @@ document.querySelectorAll("#slotBar .dow").forEach(btn => {
     addrData = buildAddrData(currentSlot, currentType, currentDow);
     drawSortidoCoverage();
     drawSweepCoverage();
+    if (influenceOn) drawInfluenceZone();
+    renderMetricas();
     if (delivLayer) delivLayer._draw();
     if (receitaLayerOn && receitaLayer) receitaLayer._draw();
     if (coberturaLayerOn && coberturaLayer) coberturaLayer._draw();
@@ -3244,87 +3914,206 @@ function isTejo(lat, lng) {
 }
 
 function findSecondLocation(orders, s1Mask = null, darkStores = []) {
-  // Signal: Voronoi population demand.
-  // For each candidate cell, score = Σ(pop × income) for population points that are
-  // (a) within delivery radius of candidate AND (b) closer to candidate than to S1.
-  // A candidate near S1 scores near zero (shared population). A candidate far away
-  // in an underserved area scores high (net-new reachable population).
   const SLAT = 38.7255, SLNG = -9.1480;
   const { lat0, lat1, lon0, lon1, ROWS, COLS } = GEO;
   const CELL_LAT = (lat1 - lat0) / (ROWS - 1);
   const CELL_LON = (lon1 - lon0) / (COLS - 1);
+  const ci = (r, c) => r * COLS + c;
+  const cLat = r => lat1 - r * CELL_LAT;
+  const cLng = c => lon0 + c * CELL_LON;
 
   const { p90km, p95km, maxKm } = getSortidoRadii();
-  const delivR   = (p90km + p95km + maxKm) / 3;
-  const delivDeg = delivR / 111;
+  const delivR     = (p90km + p95km + maxKm) / 3;
+  const delivDeg   = delivR / 111;
   const delivDegSq = delivDeg ** 2;
 
-  const candidateScore = new Float32Array(ROWS * COLS);
+  // ── Signal arrays ──────────────────────────────────────────────────────────
+  const sigOrder  = new Float32Array(ROWS * COLS); // real order demand (revenue-weighted)
+  const sigPopInc = new Float32Array(ROWS * COLS); // population × income
+  const sigRented = new Float32Array(ROWS * COLS); // rented homes density
+  const sigETA    = new Float32Array(ROWS * COLS); // ETA reduction × population
+  const sigAirbnb = new Float32Array(ROWS * COLS); // Airbnb density KDE
+  const sigGap    = new Float32Array(ROWS * COLS); // platform coverage gap
 
-  if (popGrid) {
-    const piLat = popGrid.cols.indexOf("lat");
-    const piLon = popGrid.cols.indexOf("lon");
-    const piPop = popGrid.cols.indexOf("pop");
-    const piInc = popGrid.cols.indexOf("income_idx");
-
-    for (const row of popGrid.rows) {
-      const plat = row[piLat], plon = row[piLon];
-      const pop  = row[piPop];
-      if (!pop) continue;
-      const w = pop * (row[piInc] || 1.0);
-      // Distance² from this pop cell to S1
-      const d1sq = (plat - SLAT) ** 2 + (plon - SLNG) ** 2;
-
-      // Add w to every candidate cell that is (1) within delivDeg and (2) closer to pop than S1
-      const r0 = Math.round((lat1 - plat) / CELL_LAT);
-      const c0 = Math.round((plon  - lon0) / CELL_LON);
-      const rR = Math.ceil(delivDeg / CELL_LAT) + 1;
-      const cR = Math.ceil(delivDeg / CELL_LON) + 1;
-      for (let dr = -rR; dr <= rR; dr++) {
-        const r = r0 + dr;
-        if (r < 0 || r >= ROWS) continue;
-        const clat   = lat1 - r * CELL_LAT;
-        const dLatSq = (plat - clat) ** 2;
-        if (dLatSq > delivDegSq) continue;
-        for (let dc = -cR; dc <= cR; dc++) {
-          const c = c0 + dc;
-          if (c < 0 || c >= COLS) continue;
-          const clng = lon0 + c * CELL_LON;
-          const d2sq = dLatSq + (plon - clng) ** 2;
-          // Within delivery reach AND closer to candidate than S1 (Voronoi condition)
-          if (d2sq <= delivDegSq && d2sq < d1sq) {
-            candidateScore[r * COLS + c] += w;
+  // ── Pre-compute ETA grid: average platform ETA per grid cell ───────────────
+  const etaGrid = new Float32Array(ROWS * COLS);
+  const etaCnt  = new Uint16Array(ROWS * COLS);
+  const ETA_SPREAD = 2; // ~2 cells ≈ 400m scatter radius
+  if (zoneData) {
+    for (const p of ["bolt", "glovo", "ubereats"]) {
+      for (const cell of getZoneSlotCells(p, currentSlot)) {
+        const eta = cell.length > 2 ? cell[2] : null;
+        if (!eta || eta <= 0) continue;
+        const zr = Math.round((lat1 - cell[0]) / CELL_LAT);
+        const zc = Math.round((cell[1] - lon0) / CELL_LON);
+        for (let dr = -ETA_SPREAD; dr <= ETA_SPREAD; dr++) {
+          const r = zr + dr; if (r < 0 || r >= ROWS) continue;
+          for (let dc = -ETA_SPREAD; dc <= ETA_SPREAD; dc++) {
+            const c = zc + dc; if (c < 0 || c >= COLS) continue;
+            etaGrid[ci(r, c)] += eta;
+            etaCnt[ci(r, c)]++;
           }
         }
       }
     }
-  } else {
-    // Fallback: Voronoi on orders (revenue-weighted) when no population data
-    for (const [olat, olng, , , , val] of orders) {
-      const w   = val > 0 ? val : 12;
-      const d1sq = (olat - SLAT) ** 2 + (olng - SLNG) ** 2;
-      const r0  = Math.round((lat1 - olat) / CELL_LAT);
-      const c0  = Math.round((olng  - lon0) / CELL_LON);
-      const rR  = Math.ceil(delivDeg / CELL_LAT) + 1;
-      const cR  = Math.ceil(delivDeg / CELL_LON) + 1;
+    for (let i = 0; i < ROWS * COLS; i++) if (etaCnt[i] > 0) etaGrid[i] /= etaCnt[i];
+  }
+
+  // ── Scatter population signals (Voronoi-conditioned: closer to candidate than S1) ──
+  if (popGrid) {
+    const piLat = popGrid.cols.indexOf("lat"),  piLon = popGrid.cols.indexOf("lon");
+    const piPop = popGrid.cols.indexOf("pop"),  piInc = popGrid.cols.indexOf("income_idx");
+    const piRen = popGrid.cols.indexOf("rented_homes");
+
+    for (const row of popGrid.rows) {
+      const plat = row[piLat], plon = row[piLon], pop = row[piPop];
+      if (!pop) continue;
+      const inc = row[piInc] || 1.0, ren = row[piRen] || 0;
+      const d1sq = (plat - SLAT) ** 2 + (plon - SLNG) ** 2;
+
+      // Current ETA at this population point
+      const pr = Math.max(0, Math.min(ROWS - 1, Math.round((lat1 - plat) / CELL_LAT)));
+      const pc = Math.max(0, Math.min(COLS - 1, Math.round((plon - lon0) / CELL_LON)));
+      const curETA = etaGrid[ci(pr, pc)];
+      const covered = etaCnt[ci(pr, pc)] > 0;
+
+      const r0 = Math.round((lat1 - plat) / CELL_LAT);
+      const c0 = Math.round((plon  - lon0) / CELL_LON);
+      const rR = Math.ceil(delivDeg / CELL_LAT) + 1;
+      const cR = Math.ceil(delivDeg / CELL_LON) + 1;
+
       for (let dr = -rR; dr <= rR; dr++) {
-        const r = r0 + dr;
-        if (r < 0 || r >= ROWS) continue;
-        const clat   = lat1 - r * CELL_LAT;
-        const dLatSq = (olat - clat) ** 2;
+        const r = r0 + dr; if (r < 0 || r >= ROWS) continue;
+        const dLatSq = (plat - cLat(r)) ** 2;
         if (dLatSq > delivDegSq) continue;
         for (let dc = -cR; dc <= cR; dc++) {
-          const c = c0 + dc;
-          if (c < 0 || c >= COLS) continue;
-          const clng = lon0 + c * CELL_LON;
-          const d2sq = dLatSq + (olng - clng) ** 2;
-          if (d2sq <= delivDegSq && d2sq < d1sq) candidateScore[r * COLS + c] += w;
+          const c = c0 + dc; if (c < 0 || c >= COLS) continue;
+          const d2sq = dLatSq + (plon - cLng(c)) ** 2;
+          if (d2sq > delivDegSq || d2sq >= d1sq) continue; // within radius AND Voronoi
+          const idx = ci(r, c);
+          sigPopInc[idx] += pop * inc;
+          sigRented[idx] += ren;
+          if (curETA > 0 && d1sq > 0) {
+            const ratio = Math.sqrt(d2sq / d1sq);
+            sigETA[idx] += pop * Math.max(0, curETA * (1 - ratio));
+          }
+          if (!covered) sigGap[idx] += pop;
         }
       }
     }
   }
 
-  // Greedy peak selection — top 3, min 5 km apart, respecting masks
+  // ── Order demand scatter (Voronoi-conditioned, revenue-weighted) ───────────
+  for (const [olat, olng, , , , val] of orders) {
+    const w    = val > 0 ? val : 12;
+    const d1sq = (olat - SLAT) ** 2 + (olng - SLNG) ** 2;
+    const r0   = Math.round((lat1 - olat) / CELL_LAT);
+    const c0   = Math.round((olng  - lon0) / CELL_LON);
+    const rR   = Math.ceil(delivDeg / CELL_LAT) + 1;
+    const cR   = Math.ceil(delivDeg / CELL_LON) + 1;
+    for (let dr = -rR; dr <= rR; dr++) {
+      const r = r0 + dr; if (r < 0 || r >= ROWS) continue;
+      const dLatSq = (olat - cLat(r)) ** 2;
+      if (dLatSq > delivDegSq) continue;
+      for (let dc = -cR; dc <= cR; dc++) {
+        const c = c0 + dc; if (c < 0 || c >= COLS) continue;
+        const d2sq = dLatSq + (olng - cLng(c)) ** 2;
+        if (d2sq <= delivDegSq && d2sq < d1sq) sigOrder[ci(r, c)] += w;
+      }
+    }
+  }
+
+  // ── Airbnb density KDE (not Voronoi-conditioned: nearby Airbnb benefits any candidate) ──
+  if (airbnbData) {
+    const aiLat = airbnbData.cols.indexOf("lat"), aiLon = airbnbData.cols.indexOf("lon");
+    const AB_SPR = 3; // ~3 cells ≈ 600m spread
+    const AB_SIG2 = (AB_SPR / 2) ** 2;
+    for (const row of airbnbData.rows) {
+      const ar = Math.round((lat1 - row[aiLat]) / CELL_LAT);
+      const ac = Math.round((row[aiLon] - lon0) / CELL_LON);
+      for (let dr = -AB_SPR; dr <= AB_SPR; dr++) {
+        const r = ar + dr; if (r < 0 || r >= ROWS) continue;
+        for (let dc = -AB_SPR; dc <= AB_SPR; dc++) {
+          const c = ac + dc; if (c < 0 || c >= COLS) continue;
+          if (dr * dr + dc * dc <= AB_SPR * AB_SPR)
+            sigAirbnb[ci(r, c)] += Math.exp(-(dr * dr + dc * dc) / (2 * AB_SIG2));
+        }
+      }
+    }
+  }
+
+  // ── Competitor penalties: distance-decayed exponential ────────────────────
+  const penDS = new Float32Array(ROWS * COLS); // darkstore penalty
+  const penSM = new Float32Array(ROWS * COLS); // supermarket penalty
+
+  const SIGMA_DS = 1.5 / 111, SIGMA_SM = 2.0 / 111;
+  const DS_SPR = Math.ceil(SIGMA_DS * 4 / CELL_LAT) + 1;
+  const SM_SPR = Math.ceil(SIGMA_SM * 4 / CELL_LAT) + 1;
+
+  for (const ds of darkStores) {
+    const strength = (ds.rating || 3.5) * Math.log((ds.reviews || 10) + 1);
+    const dsr = Math.round((lat1 - ds.lat) / CELL_LAT);
+    const dsc = Math.round((ds.lon - lon0) / CELL_LON);
+    for (let dr = -DS_SPR; dr <= DS_SPR; dr++) {
+      const r = dsr + dr; if (r < 0 || r >= ROWS) continue;
+      for (let dc = -DS_SPR; dc <= DS_SPR; dc++) {
+        const c = dsc + dc; if (c < 0 || c >= COLS) continue;
+        const d = Math.sqrt((dr * CELL_LAT) ** 2 + (dc * CELL_LON) ** 2);
+        penDS[ci(r, c)] += strength * Math.exp(-d / SIGMA_DS);
+      }
+    }
+  }
+
+  // Brand weights: full-service online grocery = 1.0, traditional = 0.5, discount = 0.3
+  const smBrandWeight = { 'Continente': 1.0, 'El Corte Inglés': 1.0, 'Auchan': 0.8,
+    'Pingo Doce': 0.6, 'Meu Super': 0.5, 'Mercadona': 0.5, 'Intermarché': 0.4,
+    'SPAR': 0.4, 'Supercor': 0.4, 'Lidl': 0.3, 'Aldi': 0.3, 'Minipreço': 0.3,
+    'DIA': 0.3, 'Celeiro': 0.2 };
+  for (const sm of supermarketPlaces) {
+    const strength = smBrandWeight[sm.name] || 0.4;
+    const smr = Math.round((lat1 - sm.lat) / CELL_LAT);
+    const smc = Math.round((sm.lon - lon0) / CELL_LON);
+    for (let dr = -SM_SPR; dr <= SM_SPR; dr++) {
+      const r = smr + dr; if (r < 0 || r >= ROWS) continue;
+      for (let dc = -SM_SPR; dc <= SM_SPR; dc++) {
+        const c = smc + dc; if (c < 0 || c >= COLS) continue;
+        const d = Math.sqrt((dr * CELL_LAT) ** 2 + (dc * CELL_LON) ** 2);
+        penSM[ci(r, c)] += strength * Math.exp(-d / SIGMA_SM);
+      }
+    }
+  }
+
+  // ── Normalize [0, 1] and compute composite score ──────────────────────────
+  const norm = arr => {
+    let mx = 0; for (const v of arr) if (v > mx) mx = v;
+    if (mx === 0) return arr;
+    const out = new Float32Array(arr.length);
+    for (let i = 0; i < arr.length; i++) out[i] = arr[i] / mx;
+    return out;
+  };
+  const nOrder  = norm(sigOrder);
+  const nPopInc = norm(sigPopInc);
+  const nRented = norm(sigRented);
+  const nETA    = norm(sigETA);
+  const nAirbnb = norm(sigAirbnb);
+  const nGap    = norm(sigGap);
+  const nPenDS  = norm(penDS);
+  const nPenSM  = norm(penSM);
+
+  const candidateScore = new Float32Array(ROWS * COLS);
+  for (let i = 0; i < ROWS * COLS; i++) {
+    candidateScore[i] =
+      0.28 * nOrder[i]
+    + 0.20 * nPopInc[i]
+    + 0.15 * nETA[i]
+    + 0.10 * nRented[i]
+    + 0.08 * nAirbnb[i]
+    + 0.07 * nGap[i]
+    - 0.07 * nPenDS[i]
+    - 0.03 * nPenSM[i];
+  }
+
+  // ── Greedy peak selection — top 3, min 5 km apart ────────────────────────
   const N_CANDIDATES   = 3;
   const MIN_DIST_SQ    = (4.5 / 111) ** 2;
   const MIN_SEP_DEG_SQ = (5.0 / 111) ** 2;
@@ -3334,11 +4123,11 @@ function findSecondLocation(orders, s1Mask = null, darkStores = []) {
   for (let k = 0; k < N_CANDIDATES; k++) {
     let bestIdx = -1, bestScore = -Infinity;
     for (let r = 0; r < ROWS; r++) {
-      const clat = lat1 - r * CELL_LAT;
+      const clat = cLat(r);
       for (let c = 0; c < COLS; c++) {
-        const idx = r * COLS + c;
+        const idx = ci(r, c);
         if (suppressed[idx] || candidateScore[idx] <= 0) continue;
-        const clng = lon0 + c * CELL_LON;
+        const clng = cLng(c);
         if ((clat - SLAT) ** 2 + (clng - SLNG) ** 2 < MIN_DIST_SQ) continue;
         if (s1Mask && s1Mask[idx]) continue;
         if (noGoMask && noGoMask.data[idx]) continue;
@@ -3350,19 +4139,17 @@ function findSecondLocation(orders, s1Mask = null, darkStores = []) {
 
     const br    = Math.floor(bestIdx / COLS);
     const bc    = bestIdx % COLS;
-    const c2lat = lat1 - br * CELL_LAT;
-    const c2lng = lon0 + bc * CELL_LON;
+    const c2lat = cLat(br);
+    const c2lng = cLng(bc);
 
     for (let r = 0; r < ROWS; r++) {
-      const clat = lat1 - r * CELL_LAT;
       for (let c = 0; c < COLS; c++) {
-        const clng = lon0 + c * CELL_LON;
-        if ((clat - c2lat) ** 2 + (clng - c2lng) ** 2 < MIN_SEP_DEG_SQ)
-          suppressed[r * COLS + c] = 1;
+        if ((cLat(r) - c2lat) ** 2 + (cLng(c) - c2lng) ** 2 < MIN_SEP_DEG_SQ)
+          suppressed[ci(r, c)] = 1;
       }
     }
 
-    // Stats: orders this candidate would capture vs S1 alone (Voronoi S1 vs S2)
+    // Stats: orders this candidate would capture vs S1 alone
     const assigned = orders.filter(([lat, lng]) => {
       const d1sq = (lat - SLAT)  ** 2 + (lng - SLNG)  ** 2;
       const d2sq = (lat - c2lat) ** 2 + (lng - c2lng) ** 2;
@@ -3411,14 +4198,13 @@ function findSecondLocation(orders, s1Mask = null, darkStores = []) {
 
 const SEGUNDA_COLORS = ['#7c3aed', '#a855f7', '#c084fc'];
 
-async function toggleSegundaLoja() {
+function toggleSegundaLoja() {
   const btn = document.getElementById("segundaBtn");
   const info = document.getElementById("segundaInfo");
   if (segundaOn) {
     segundaMarkers.forEach(m => map.removeLayer(m));   segundaMarkers = [];
     segundaIsoLayers.forEach(l => map.removeLayer(l)); segundaIsoLayers = [];
     if (segundaKDELayer) { map.removeLayer(segundaKDELayer); segundaKDELayer = null; }
-    if (s1IsoSegunda)   { map.removeLayer(s1IsoSegunda);    s1IsoSegunda = null; }
     segundaC2 = null;
     info.style.display = "none";
     segundaOn = false; btn.classList.remove("active");
@@ -3438,10 +4224,6 @@ async function toggleSegundaLoja() {
   } else {
     s1Geo = circleGeoJSON(SLAT, SLNG, s1Radius);
   }
-  s1IsoSegunda = p90Ring
-    ? L.polygon(p90Ring, { color: '#2563eb', fillColor: '#2563eb', fillOpacity: 0.06, weight: 2.5, opacity: 0.75, dashArray: '7 4' })
-    : L.circle([SLAT, SLNG], { radius: s1Radius * 1000, color: '#2563eb', fillColor: '#2563eb', fillOpacity: 0.06, weight: 2.5, opacity: 0.75, dashArray: '7 4' });
-  s1IsoSegunda.addTo(map);
   const s1Mask = buildIsoMask(s1Geo);
 
   const results = findSecondLocation(ordersData, s1Mask, darkStoresRaw);
@@ -3449,12 +4231,9 @@ async function toggleSegundaLoja() {
 
   // KDE for top candidate
   segundaC2 = { lat: results[0].lat, lng: results[0].lng };
-  segundaKDELayer = new SegundaKDELayer();
-  map.addLayer(segundaKDELayer);
 
-  const { p90km: s2p90, p95km: s2p95, maxKm: s2max } = getSortidoRadii();
-  const s2AvgR = (s2p90 + s2p95 + s2max) / 3;
-
+  const top = results[0];
+  const candidateAreaStats = {};
   results.forEach(({ lat, lng, rank, pct, cnt, rev, distKm, pctLoyal, pctAL, pctRes, avgTicket, avgMinsNow, timeSaved }) => {
     const color = SEGUNDA_COLORS[rank - 1] || SEGUNDA_COLORS[2];
     const pulse = rank === 1 ? `<div class="pulse-ring" style="border-color:${color}"></div>` : '';
@@ -3466,6 +4245,17 @@ async function toggleSegundaLoja() {
              </div>`,
       iconSize: [26, 26], iconAnchor: [13, 13],
     });
+
+    const { p90km, sweepKm } = getInfluenceRadii();
+    const circleGeo = circleGeoJSON(lat, lng, p90km);
+    const fillOp  = rank === 1 ? 0.12 : 0.06;
+    const lineW   = rank === 1 ? 2.5  : 1.5;
+    const lineOp  = rank === 1 ? 0.85 : 0.5;
+    if (sweepKm) {
+      segundaIsoLayers.push(L.circle([lat, lng], { radius: sweepKm * 1000, color, fillColor: color, fillOpacity: fillOp, weight: lineW * 0.6, opacity: lineOp * 0.75, interactive: false }).addTo(map));
+    }
+    segundaIsoLayers.push(L.circle([lat, lng], { radius: p90km * 1000, color, fillColor: color, fillOpacity: fillOp * 0.25, weight: lineW, dashArray: '5 4', opacity: lineOp, interactive: false }).addTo(map));
+
     const m = L.marker([lat, lng], { icon })
       .bindPopup(`<b style="color:${color}">#${rank} — candidato</b><br>
                   <span style="font-size:11px;color:#666">${lat.toFixed(5)}, ${lng.toFixed(5)}</span><br>
@@ -3474,29 +4264,31 @@ async function toggleSegundaLoja() {
     if (rank === 1) m.openPopup();
     segundaMarkers.push(m);
 
-    const iso = L.circle([lat, lng], {
-      radius: s2AvgR * 1000,
-      color, fillColor: color,
-      fillOpacity: rank === 1 ? 0.10 : 0.05,
-      weight: rank === 1 ? 2.5 : 1.5,
-      opacity: rank === 1 ? 0.85 : 0.5,
-    }).addTo(map);
-    segundaIsoLayers.push(iso);
+    // collect area stats for all candidates for the sidebar
+    const popStats    = sumPopulation(circleGeo);
+    const airbnbCount = countAirbnb(circleGeo);
+    const compCount   = countCompetitors(circleGeo);
+    candidateAreaStats[rank] = { popStats, airbnbCount, compCount };
   });
 
+  document.getElementById("segundaIsoStats").style.display = "none";
+
   // Sidebar list
-  const top = results[0];
+  const p90kmLabel = getSortidoRadii().p90km.toFixed(1);
   document.getElementById("segundaList").innerHTML = results.map(
     ({ lat, lng, rank, pct, cnt, rev, distKm, pctLoyal, pctAL, pctRes, avgTicket, avgMinsNow, timeSaved }) => {
       const color = SEGUNDA_COLORS[rank - 1] || SEGUNDA_COLORS[2];
-      const row = (label, val) => `<div style="display:flex;justify-content:space-between"><span style="color:#64748b">${label}</span><span style="font-weight:600">${val}</span></div>`;
+      const row = (label, val) => `<div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="color:#64748b">${label}</span><span style="font-weight:600">${val}</span></div>`;
+      const { popStats, airbnbCount, compCount } = candidateAreaStats[rank] || {};
+      const income = popStats && popStats.pop > 0 ? Math.round(popStats.spendPop / popStats.pop * 12316) : null;
       return `
-        <div style="padding:8px 0;${rank < results.length ? 'border-bottom:1px solid #f1f5f9;' : ''}">
-          <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px">
+        <div style="padding:10px 0;${rank < results.length ? 'border-bottom:1px solid #f1f5f9;' : ''}">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
             <span style="font-size:11px;font-weight:800;color:white;background:${color};border-radius:4px;padding:1px 6px;line-height:1.6">#${rank}</span>
             <span style="font-size:10px;color:#94a3b8">${lat.toFixed(4)}, ${lng.toFixed(4)}</span>
           </div>
-          <div style="display:flex;flex-direction:column;gap:2px;font-size:11px">
+          <div style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Procura</div>
+          <div style="display:flex;flex-direction:column;font-size:11px;margin-bottom:8px">
             ${row('Ordens captadas', `<span style="color:${color};font-weight:700">${pct}% (${cnt.toLocaleString('pt-PT')})</span>`)}
             ${row('Receita estimada', `€${rev.toLocaleString('pt-PT')}`)}
             ${avgTicket != null ? row('Ticket médio', `€${avgTicket}`) : ''}
@@ -3505,22 +4297,19 @@ async function toggleSegundaLoja() {
             ${row('Clientes fiéis', `${pctLoyal}%`)}
             ${row('Residência / AL', `${pctRes}% / ${pctAL}%`)}
           </div>
+          ${popStats ? `
+          <div style="font-size:9px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Área (raio P90 · ${p90kmLabel} km)</div>
+          <div style="display:flex;flex-direction:column;font-size:11px">
+            ${row('Residentes', fmt(popStats.pop))}
+            ${income != null ? row('Rendimento médio', `${fmt(income)} €/ano`) : ''}
+            ${row('25–64 anos', fmt(popStats.age2564))}
+            ${row('Casas arrendadas', fmt(popStats.rented))}
+            ${airbnbCount != null ? row('Airbnb', fmt(airbnbCount)) : ''}
+            ${compCount != null ? row('Concorrentes', fmt(compCount)) : ''}
+          </div>` : ''}
         </div>`;
     }
   ).join('');
-
-  const isoDiv = document.getElementById("segundaIsoStats");
-  const stats = sumPopulation(circleGeoJSON(top.lat, top.lng, s2AvgR));
-  if (stats) {
-    isoDiv.style.display = "block";
-    isoDiv.innerHTML = `
-      <div style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px">Área de influência #1 (${s2AvgR.toFixed(1)} km)</div>
-      <div style="display:flex;flex-direction:column;gap:3px;font-size:11px">
-        <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Residentes</span><span style="font-weight:600">${fmt(stats.pop)}</span></div>
-        <div style="display:flex;justify-content:space-between"><span style="color:#64748b">Rendimento médio</span><span style="font-weight:600">${fmt(Math.round(stats.spendPop/stats.pop*12316))} €/ano</span></div>
-        <div style="display:flex;justify-content:space-between"><span style="color:#64748b">25–64 anos</span><span style="font-weight:600">${fmt(stats.age2564)}</span></div>
-      </div>`;
-  } else { isoDiv.style.display = "none"; }
 
   hint.textContent = `Top 3 candidatos · #1: ${top.pct}% das ordens · €${top.rev.toLocaleString('pt-PT')} receita`;
   info.style.display = "block";
@@ -3530,7 +4319,32 @@ document.getElementById("segundaBtn").addEventListener("click", toggleSegundaLoj
 
 const placed = [];
 
-map.on("click", async (e) => {
+function getInfluenceRadii() {
+  const { p90km } = getSortidoRadii();
+  const SECTORS = 36, DEG = 360 / SECTORS;
+  const cosLat = Math.cos(SORTIDO_LAT * Math.PI / 180);
+  const target = parseInt(document.getElementById("operTargetSlider")?.value) || 30;
+  const sweepAtTarget = new Array(SECTORS).fill(0);
+  if (zoneData) {
+    for (const p of ["bolt", "glovo", "ubereats"]) {
+      const cells = getZoneSlotCells(p, currentSlot);
+      for (const cell of cells) {
+        const eta = cell.length > 2 ? cell[2] : null;
+        if (eta === null || eta > target) continue;
+        const dy = (cell[0] - SORTIDO_LAT) * 111.32, dx = (cell[1] - SORTIDO_LNG) * 111.32 * cosLat;
+        const dist = Math.sqrt(dy*dy + dx*dx);
+        if (dist < 0.05) continue;
+        const si = Math.floor(((Math.atan2(dx, dy) * 180 / Math.PI) + 360) % 360 / DEG) % SECTORS;
+        sweepAtTarget[si] = Math.max(sweepAtTarget[si], dist);
+      }
+    }
+  }
+  const nonZero = sweepAtTarget.filter(r => r > 0).sort((a, b) => a - b);
+  const sweepKm = nonZero.length ? nonZero[Math.floor(nonZero.length * 0.5)] : null;
+  return { p90km, sweepKm };
+}
+
+map.on("click", (e) => {
   const { lat, lng } = e.latlng;
   const num   = placed.length + 1;
   const color = COLORS[colorIdx % COLORS.length];
@@ -3544,30 +4358,35 @@ map.on("click", async (e) => {
   });
 
   const marker = L.marker([lat, lng], { icon }).addTo(map);
-  hint.textContent = "A calcular zona de entrega…";
+  const entry = { marker, isoLayers: [] };
+  placed.push(entry);
 
-  const { p90km: cp90, p95km: cp95, maxKm: cMax } = getSortidoRadii();
-  const clickR = (cp90 + cp95 + cMax) / 3;
-  const circleGeo = circleGeoJSON(lat, lng, clickR);
-  const isoLayer  = L.circle([lat, lng], { radius: clickR * 1000, color, fillColor: color, fillOpacity: 0.10, weight: 2.5, opacity: 0.8 });
-  isoLayer.addTo(map);
+  const { p90km, sweepKm } = getInfluenceRadii();
+  const circleGeo = circleGeoJSON(lat, lng, p90km);
+  if (sweepKm) {
+    entry.isoLayers.push(L.circle([lat, lng], {
+      radius: sweepKm * 1000, color, fillColor: color, fillOpacity: 0.12, weight: 1.5, opacity: 0.65, interactive: false,
+    }).addTo(map));
+  }
+  entry.isoLayers.push(L.circle([lat, lng], {
+    radius: p90km * 1000, color, fillColor: color, fillOpacity: 0.03, weight: 2.5, dashArray: '5 4', opacity: 0.85, interactive: false,
+  }).addTo(map));
 
   hint.textContent = "A contar população…";
-  const stats        = sumPopulation(circleGeo);
-  const airbnbCount  = countAirbnb(circleGeo);
-  const compCount    = countCompetitors(circleGeo);
+  const stats       = sumPopulation(circleGeo);
+  const airbnbCount = countAirbnb(circleGeo);
+  const compCount   = countCompetitors(circleGeo);
 
   let popHtml = "";
   if (stats) {
     popHtml = `
       <hr style="margin:6px 0;border-color:#eee"/>
-      <div class="row"><span>Residents</span><span>${fmt(stats.pop)}</span></div>
-      <div class="row"><span>Median income</span><span>${fmt(Math.round(stats.spendPop / stats.pop * 12316))} €/yr</span></div>
-      <div class="row"><span>Age 15–24</span><span>${fmt(stats.age1524)}</span></div>
-      <div class="row"><span>Age 25–64</span><span>${fmt(stats.age2564)}</span></div>
-      <div class="row"><span>Rented homes</span><span>${fmt(stats.rented)}</span></div>
-      ${airbnbCount !== null ? `<div class="row"><span>Airbnb listings</span><span>${fmt(airbnbCount)}</span></div>` : ""}
-      ${compCount !== null ? `<div class="row"><span>Competitors</span><span>${fmt(compCount)}</span></div>` : ""}`;
+      <div class="row"><span>Residentes</span><span>${fmt(stats.pop)}</span></div>
+      <div class="row"><span>Rendimento médio</span><span>${fmt(Math.round(stats.spendPop / stats.pop * 12316))} €/ano</span></div>
+      <div class="row"><span>25–64 anos</span><span>${fmt(stats.age2564)}</span></div>
+      <div class="row"><span>Casas arrendadas</span><span>${fmt(stats.rented)}</span></div>
+      ${airbnbCount !== null ? `<div class="row"><span>Airbnb</span><span>${fmt(airbnbCount)}</span></div>` : ""}
+      ${compCount !== null ? `<div class="row"><span>Concorrentes</span><span>${fmt(compCount)}</span></div>` : ""}`;
   }
 
   const delta = 0.004;
@@ -3578,12 +4397,9 @@ map.on("click", async (e) => {
     + `&search%5Bfilter_float_longitude%3Alte%5D=${(lng + delta).toFixed(5)}`
     + `&search%5Bdescription%5D=1`;
 
-  const entry = { marker, isoLayer };
-  placed.push(entry);
-
   marker.bindPopup(`
     <div class="pop-popup">
-      <b>#${num} · zona de entrega estimada</b><br>
+      <b>#${num} · zona de influência (P90 Sortido)</b><br>
       <span style="color:#666;font-size:11px">${lat.toFixed(4)}, ${lng.toFixed(4)}</span>
       ${popHtml}
       <hr style="margin:6px 0;border-color:#eee"/>
@@ -3596,22 +4412,22 @@ map.on("click", async (e) => {
     </div>
   `).openPopup();
 
-  hint.textContent = "Click anywhere to add another marker";
+  hint.textContent = "Clique no mapa para adicionar outro marcador";
 });
 
 function removePlaced(idx) {
   const entry = placed[idx];
   if (!entry) return;
   map.removeLayer(entry.marker);
-  map.removeLayer(entry.isoLayer);
+  (entry.isoLayers || (entry.isoLayer ? [entry.isoLayer] : [])).forEach(l => map.removeLayer(l));
   placed.splice(idx, 1);
   map.closePopup();
 }
 
 clearBtn.addEventListener("click", () => {
-  placed.forEach(({ marker, isoLayer }) => {
+  placed.forEach(({ marker, isoLayers, isoLayer }) => {
     map.removeLayer(marker);
-    map.removeLayer(isoLayer);
+    (isoLayers || (isoLayer ? [isoLayer] : [])).forEach(l => map.removeLayer(l));
   });
   placed.length = 0;
   colorIdx = 0;
