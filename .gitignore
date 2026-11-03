@@ -1,0 +1,8 @@
+ubereats_api_creds.json
+ubereats_session.json
+bolt_session.json
+glovo_session.json
+glovo_headers.json
+__pycache__/
+*.log
+*.pyc

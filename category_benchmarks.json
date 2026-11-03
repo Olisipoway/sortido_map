@@ -1,0 +1,6021 @@
+{
+  "benchmarks": {
+    "Ovos": {
+      "avg_markup_pct": 89.0,
+      "matched_products": 1,
+      "total_orders": 11
+    },
+    "Saúde Sexual": {
+      "avg_markup_pct": 56.2,
+      "matched_products": 3,
+      "total_orders": 10
+    },
+    "Gelo": {
+      "avg_markup_pct": 241.0,
+      "matched_products": 6,
+      "total_orders": 2
+    },
+    "Cebola e Alho": {
+      "avg_markup_pct": 143.6,
+      "matched_products": 1,
+      "total_orders": 2
+    },
+    "Banana, Maçã e Pêra": {
+      "avg_markup_pct": 65.6,
+      "matched_products": 3,
+      "total_orders": 5
+    },
+    "Batatas Lisas e Onduladas": {
+      "avg_markup_pct": 96.0,
+      "matched_products": 2,
+      "total_orders": 1
+    },
+    "Óleo, Azeite e Vinagre": {
+      "avg_markup_pct": 105.0,
+      "matched_products": 4,
+      "total_orders": 1
+    },
+    "Mais Acessórios Casa": {
+      "avg_markup_pct": 95.5,
+      "matched_products": 6,
+      "total_orders": 4
+    },
+    "Artigos Festa": {
+      "avg_markup_pct": 103.3,
+      "matched_products": 18,
+      "total_orders": 1
+    },
+    "Licores": {
+      "avg_markup_pct": 57.6,
+      "matched_products": 7,
+      "total_orders": 1
+    },
+    "Queijo": {
+      "avg_markup_pct": 68.6,
+      "matched_products": 13,
+      "total_orders": 2
+    },
+    "Cuidado Rosto": {
+      "avg_markup_pct": 79.8,
+      "matched_products": 1,
+      "total_orders": 1
+    },
+    "Uvas e Fruta Tropical": {
+      "avg_markup_pct": 26.1,
+      "matched_products": 1,
+      "total_orders": 3
+    },
+    "Whisky": {
+      "avg_markup_pct": 61.7,
+      "matched_products": 29,
+      "total_orders": 1
+    },
+    "Produtos de Papel": {
+      "avg_markup_pct": 58.5,
+      "matched_products": 5,
+      "total_orders": 0
+    },
+    "Mais Saúde": {
+      "avg_markup_pct": 38.5,
+      "matched_products": 3,
+      "total_orders": 0
+    },
+    "Água Sem Gás": {
+      "avg_markup_pct": 84.1,
+      "matched_products": 11,
+      "total_orders": 0
+    },
+    "Água Com Gás": {
+      "avg_markup_pct": 87.7,
+      "matched_products": 16,
+      "total_orders": 0
+    },
+    "Barras de Cereais": {
+      "avg_markup_pct": 85.8,
+      "matched_products": 5,
+      "total_orders": 0
+    },
+    "Aperitivos, Snacks e Pipocas": {
+      "avg_markup_pct": 69.1,
+      "matched_products": 23,
+      "total_orders": 0
+    },
+    "Cerveja Tradicional": {
+      "avg_markup_pct": 88.2,
+      "matched_products": 37,
+      "total_orders": 0
+    },
+    "Cerveja Sem Álcool": {
+      "avg_markup_pct": 105.0,
+      "matched_products": 5,
+      "total_orders": 0
+    },
+    "Sidra": {
+      "avg_markup_pct": 81.5,
+      "matched_products": 10,
+      "total_orders": 0
+    },
+    "Cerveja Estrangeira": {
+      "avg_markup_pct": 69.3,
+      "matched_products": 12,
+      "total_orders": 0
+    },
+    "Feijão e Grão de Bico": {
+      "avg_markup_pct": 87.9,
+      "matched_products": 6,
+      "total_orders": 0
+    },
+    "Conservas de Vegetais": {
+      "avg_markup_pct": 112.2,
+      "matched_products": 3,
+      "total_orders": 0
+    },
+    "Gin": {
+      "avg_markup_pct": 68.9,
+      "matched_products": 15,
+      "total_orders": 0
+    },
+    "Vodka": {
+      "avg_markup_pct": 49.7,
+      "matched_products": 12,
+      "total_orders": 0
+    },
+    "Rum": {
+      "avg_markup_pct": 59.7,
+      "matched_products": 9,
+      "total_orders": 0
+    },
+    "Chocolates": {
+      "avg_markup_pct": 42.7,
+      "matched_products": 16,
+      "total_orders": 0
+    },
+    "Ração Húmida de Gato": {
+      "avg_markup_pct": 24.6,
+      "matched_products": 6,
+      "total_orders": 0
+    },
+    "Leite": {
+      "avg_markup_pct": 100.1,
+      "matched_products": 5,
+      "total_orders": 0
+    },
+    "Vinho do Porto": {
+      "avg_markup_pct": 80.5,
+      "matched_products": 4,
+      "total_orders": 0
+    },
+    "Limpeza Geral": {
+      "avg_markup_pct": 64.8,
+      "matched_products": 7,
+      "total_orders": 0
+    },
+    "Limpeza de Cozinha": {
+      "avg_markup_pct": 69.2,
+      "matched_products": 2,
+      "total_orders": 0
+    },
+    "Tomate Polpa, Pelado e Seco": {
+      "avg_markup_pct": 89.6,
+      "matched_products": 8,
+      "total_orders": 0
+    },
+    "Pizza": {
+      "avg_markup_pct": 78.8,
+      "matched_products": 7,
+      "total_orders": 0
+    },
+    "Sumos de Fruta": {
+      "avg_markup_pct": 84.0,
+      "matched_products": 41,
+      "total_orders": 0
+    },
+    "Água Tónica e Ginder Ale": {
+      "avg_markup_pct": 79.4,
+      "matched_products": 8,
+      "total_orders": 0
+    },
+    "Refrigerantes com Gás": {
+      "avg_markup_pct": 83.5,
+      "matched_products": 27,
+      "total_orders": 0
+    },
+    "Vinho Rosé": {
+      "avg_markup_pct": 67.0,
+      "matched_products": 6,
+      "total_orders": 0
+    },
+    "Vinho Branco": {
+      "avg_markup_pct": 67.2,
+      "matched_products": 47,
+      "total_orders": 0
+    },
+    "Champanhe": {
+      "avg_markup_pct": 62.8,
+      "matched_products": 3,
+      "total_orders": 0
+    },
+    "Vinho Tinto": {
+      "avg_markup_pct": 65.6,
+      "matched_products": 48,
+      "total_orders": 0
+    },
+    "Cereais Linha e Fibra": {
+      "avg_markup_pct": 128.4,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Cereais Infantis e Juvenis": {
+      "avg_markup_pct": 54.6,
+      "matched_products": 5,
+      "total_orders": 0
+    },
+    "Gelados Familiares": {
+      "avg_markup_pct": 30.3,
+      "matched_products": 7,
+      "total_orders": 0
+    },
+    "Mini Bites e Sandwich": {
+      "avg_markup_pct": 38.9,
+      "matched_products": 9,
+      "total_orders": 0
+    },
+    "Gelados Americanos": {
+      "avg_markup_pct": 105.3,
+      "matched_products": 10,
+      "total_orders": 0
+    },
+    "Gelados de Pauzinho": {
+      "avg_markup_pct": 121.5,
+      "matched_products": 3,
+      "total_orders": 0
+    },
+    "Mais Sobremesas": {
+      "avg_markup_pct": 39.8,
+      "matched_products": 2,
+      "total_orders": 0
+    },
+    "Iogurtes": {
+      "avg_markup_pct": 72.4,
+      "matched_products": 6,
+      "total_orders": 0
+    },
+    "Bebidas Com Leite": {
+      "avg_markup_pct": 56.5,
+      "matched_products": 4,
+      "total_orders": 0
+    },
+    "Manteiga e Cremes de Barrar": {
+      "avg_markup_pct": 92.2,
+      "matched_products": 5,
+      "total_orders": 0
+    },
+    "Pão com Chouriço e Especialidades": {
+      "avg_markup_pct": 66.2,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Pão de Forma e Embalado": {
+      "avg_markup_pct": 63.3,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Papas": {
+      "avg_markup_pct": 98.2,
+      "matched_products": 2,
+      "total_orders": 0
+    },
+    "Bebidas Energéticas": {
+      "avg_markup_pct": 36.1,
+      "matched_products": 7,
+      "total_orders": 0
+    },
+    "Ice Tea e Kombuchas": {
+      "avg_markup_pct": 55.6,
+      "matched_products": 5,
+      "total_orders": 0
+    },
+    "Fiambre, Mortadela e Salame": {
+      "avg_markup_pct": 22.9,
+      "matched_products": 8,
+      "total_orders": 0
+    },
+    "Feijão, Grão de Bico e Lentilhas": {
+      "avg_markup_pct": 69.1,
+      "matched_products": 6,
+      "total_orders": 0
+    },
+    "Combos Destilados": {
+      "avg_markup_pct": 19.1,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Combos Cerveja": {
+      "avg_markup_pct": 71.3,
+      "matched_products": 8,
+      "total_orders": 0
+    },
+    "Combos Águas; Sumos e Refrigerantes": {
+      "avg_markup_pct": 39.3,
+      "matched_products": 17,
+      "total_orders": 0
+    },
+    "Arroz": {
+      "avg_markup_pct": 80.8,
+      "matched_products": 5,
+      "total_orders": 0
+    },
+    "Sardinha, Cavala, Lulas": {
+      "avg_markup_pct": 71.8,
+      "matched_products": 2,
+      "total_orders": 0
+    },
+    "Atum": {
+      "avg_markup_pct": 81.5,
+      "matched_products": 2,
+      "total_orders": 0
+    },
+    "Refeições Enlatadas": {
+      "avg_markup_pct": 57.5,
+      "matched_products": 4,
+      "total_orders": 0
+    },
+    "Bebidas Vegetais": {
+      "avg_markup_pct": 43.6,
+      "matched_products": 4,
+      "total_orders": 0
+    },
+    "Massas": {
+      "avg_markup_pct": 62.9,
+      "matched_products": 2,
+      "total_orders": 0
+    },
+    "Natas e Bechamel": {
+      "avg_markup_pct": 83.1,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Aperitivos": {
+      "avg_markup_pct": 48.8,
+      "matched_products": 3,
+      "total_orders": 0
+    },
+    "Batatas Palha e Caseiras": {
+      "avg_markup_pct": 55.8,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Bebidas Isotónicas": {
+      "avg_markup_pct": 18.4,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Bolachas": {
+      "avg_markup_pct": 48.3,
+      "matched_products": 34,
+      "total_orders": 0
+    },
+    "Bolos, Napolitanas, Queques": {
+      "avg_markup_pct": 62.0,
+      "matched_products": 3,
+      "total_orders": 0
+    },
+    "Café Torrado": {
+      "avg_markup_pct": 53.4,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Cerveja Artesanal": {
+      "avg_markup_pct": 30.6,
+      "matched_products": 6,
+      "total_orders": 0
+    },
+    "Chocolate Solúvel": {
+      "avg_markup_pct": 56.6,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Couves, Bróculos e Espinafres": {
+      "avg_markup_pct": 31.8,
+      "matched_products": 2,
+      "total_orders": 0
+    },
+    "Espumante": {
+      "avg_markup_pct": 58.6,
+      "matched_products": 5,
+      "total_orders": 0
+    },
+    "Gomas, Pastilhas e Rebuçados": {
+      "avg_markup_pct": 41.2,
+      "matched_products": 5,
+      "total_orders": 0
+    },
+    "Legumes": {
+      "avg_markup_pct": 50.1,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Patês": {
+      "avg_markup_pct": 94.4,
+      "matched_products": 4,
+      "total_orders": 0
+    },
+    "Pizzas Frescas": {
+      "avg_markup_pct": 30.5,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Refeições Prontas!": {
+      "avg_markup_pct": 125.6,
+      "matched_products": 4,
+      "total_orders": 0
+    },
+    "Refrigerantes Sem Gás": {
+      "avg_markup_pct": 10.7,
+      "matched_products": 3,
+      "total_orders": 0
+    },
+    "Tequila": {
+      "avg_markup_pct": 102.2,
+      "matched_products": 4,
+      "total_orders": 0
+    },
+    "Mortalhas e Filtros": {
+      "avg_markup_pct": 21.4,
+      "matched_products": 5,
+      "total_orders": 0
+    },
+    "Cuidado Corpo": {
+      "avg_markup_pct": 37.6,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Mais Higiene Pessoal": {
+      "avg_markup_pct": 90.0,
+      "matched_products": 3,
+      "total_orders": 0
+    },
+    "Vapes": {
+      "avg_markup_pct": 16.7,
+      "matched_products": 4,
+      "total_orders": 0
+    },
+    "Snacks de Gato": {
+      "avg_markup_pct": 47.2,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Higiene Íntima": {
+      "avg_markup_pct": 71.4,
+      "matched_products": 6,
+      "total_orders": 0
+    },
+    "Higiene Oral": {
+      "avg_markup_pct": 100.0,
+      "matched_products": 3,
+      "total_orders": 0
+    },
+    "Depilação": {
+      "avg_markup_pct": 74.6,
+      "matched_products": 2,
+      "total_orders": 1
+    },
+    "Sacos do Lixo": {
+      "avg_markup_pct": 44.6,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Limpeza de Roupa": {
+      "avg_markup_pct": 51.4,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Snacks de Cão": {
+      "avg_markup_pct": 89.3,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Primeiros Socorros": {
+      "avg_markup_pct": 86.3,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Adaptadores": {
+      "avg_markup_pct": 179.3,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Batatas com Sabores": {
+      "avg_markup_pct": 70.0,
+      "matched_products": 3,
+      "total_orders": 0
+    },
+    "Especiarias e Ervas Aromáticas": {
+      "avg_markup_pct": 98.8,
+      "matched_products": 6,
+      "total_orders": 0
+    },
+    "Massa": {
+      "avg_markup_pct": 49.1,
+      "matched_products": 10,
+      "total_orders": 0
+    },
+    "Molhos": {
+      "avg_markup_pct": 83.5,
+      "matched_products": 8,
+      "total_orders": 0
+    },
+    "Café em Cápsulas": {
+      "avg_markup_pct": 54.8,
+      "matched_products": 7,
+      "total_orders": 0
+    },
+    "Douradinhos, Nuggets e Panados": {
+      "avg_markup_pct": 96.3,
+      "matched_products": 7,
+      "total_orders": 0
+    },
+    "Chás e Infusões": {
+      "avg_markup_pct": 37.1,
+      "matched_products": 3,
+      "total_orders": 0
+    },
+    "Maionese, Ketchup e Mostarda": {
+      "avg_markup_pct": 33.0,
+      "matched_products": 4,
+      "total_orders": 0
+    },
+    "Açúcar": {
+      "avg_markup_pct": 72.1,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Farinha e Pão Ralado": {
+      "avg_markup_pct": 55.5,
+      "matched_products": 2,
+      "total_orders": 0
+    },
+    "Flocos e Papas de Aveia": {
+      "avg_markup_pct": 68.3,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Muesli e Granola": {
+      "avg_markup_pct": 62.4,
+      "matched_products": 2,
+      "total_orders": 0
+    },
+    "Sal": {
+      "avg_markup_pct": 180.5,
+      "matched_products": 2,
+      "total_orders": 0
+    },
+    "Peixe": {
+      "avg_markup_pct": 37.0,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Corn Flakes": {
+      "avg_markup_pct": 45.9,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Cremes de Barrar": {
+      "avg_markup_pct": 77.5,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Doces e Compotas": {
+      "avg_markup_pct": 123.1,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Gelados de Cone": {
+      "avg_markup_pct": 179.4,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Gelados Vegan": {
+      "avg_markup_pct": 117.8,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Salsichas": {
+      "avg_markup_pct": 36.0,
+      "matched_products": 2,
+      "total_orders": 0
+    },
+    "Brandy, Conhaque e Cachaça": {
+      "avg_markup_pct": 150.0,
+      "matched_products": 1,
+      "total_orders": 0
+    },
+    "Higiene e Limpeza de Cão": {
+      "avg_markup_pct": 79.8,
+      "matched_products": 2,
+      "total_orders": 0
+    }
+  },
+  "estimates": [
+    {
+      "name": "Bola Rústica 60 gr",
+      "category": "Pão de Forma e Embalado",
+      "orders": 7,
+      "sortido": 0.49,
+      "markup_pct": 63.3,
+      "priority": 443.1,
+      "is_estimate": true
+    },
+    {
+      "name": "Gelado Cone Chupa-Chups 130 ml",
+      "category": "Gelados de Cone",
+      "orders": 1,
+      "sortido": 3.03,
+      "markup_pct": 179.4,
+      "priority": 179.4,
+      "is_estimate": true
+    },
+    {
+      "name": "Drageias Chocolate Maltesers",
+      "category": "Chocolates",
+      "orders": 3,
+      "sortido": 1.69,
+      "markup_pct": 42.7,
+      "priority": 128.1,
+      "is_estimate": true
+    },
+    {
+      "name": "Abacate Hass 1un",
+      "category": "Uvas e Fruta Tropical",
+      "orders": 4,
+      "sortido": 1.6,
+      "markup_pct": 26.1,
+      "priority": 104.4,
+      "is_estimate": true
+    },
+    {
+      "name": "Copo de Cartão Café Amanhecer 120 ml Branco 10 un",
+      "category": "Mais Acessórios Casa",
+      "orders": 1,
+      "sortido": 1.07,
+      "markup_pct": 95.5,
+      "priority": 95.5,
+      "is_estimate": true
+    },
+    {
+      "name": "Prato Mesa Amanhecer 22,5 cm 10 un",
+      "category": "Mais Acessórios Casa",
+      "orders": 1,
+      "sortido": 2.95,
+      "markup_pct": 95.5,
+      "priority": 95.5,
+      "is_estimate": true
+    },
+    {
+      "name": "Manga 1 un",
+      "category": "Uvas e Fruta Tropical",
+      "orders": 3,
+      "sortido": 2.47,
+      "markup_pct": 26.1,
+      "priority": 78.3,
+      "is_estimate": true
+    },
+    {
+      "name": "Combo Desperados + Doritos Tex-Mex",
+      "category": "Cerveja Estrangeira",
+      "orders": 1,
+      "sortido": 28.0,
+      "markup_pct": 69.3,
+      "priority": 69.3,
+      "is_estimate": true
+    },
+    {
+      "name": "Queijo Manchego Dop Cunha Villacenteno 250g",
+      "category": "Queijo",
+      "orders": 1,
+      "sortido": 11.55,
+      "markup_pct": 68.6,
+      "priority": 68.6,
+      "is_estimate": true
+    },
+    {
+      "name": "Pão com Chouriço Congelado Masterchef 170 g",
+      "category": "Pão com Chouriço e Especialidades",
+      "orders": 1,
+      "sortido": 2.15,
+      "markup_pct": 66.2,
+      "priority": 66.2,
+      "is_estimate": true
+    },
+    {
+      "name": "Gengibre 1un",
+      "category": "Uvas e Fruta Tropical",
+      "orders": 2,
+      "sortido": 1.39,
+      "markup_pct": 26.1,
+      "priority": 52.2,
+      "is_estimate": true
+    },
+    {
+      "name": "Açúcar Amarelo RAR 1 KG",
+      "category": "Açúcar",
+      "orders": 0,
+      "sortido": 2.57,
+      "markup_pct": 72.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Frize Original 6x25cl",
+      "category": "Água Com Gás",
+      "orders": 0,
+      "sortido": 4.19,
+      "markup_pct": 87.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Massa Esparguete sem Glúten Milaneza (emb. 500 gr)",
+      "category": "Massa",
+      "orders": 0,
+      "sortido": 4.4,
+      "markup_pct": 49.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Aperitivo Tortilhas Chips Fatijas Old El Paso 185 G",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 5.4,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Lay's Batata Frita Original 125g",
+      "category": "Batatas Lisas e Onduladas",
+      "orders": 0,
+      "sortido": 3.4,
+      "markup_pct": 96.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "BAT FRIT ARTESANAIS AZEITE LAY'S 120G",
+      "category": "Batatas com Sabores",
+      "orders": 0,
+      "sortido": 3.4,
+      "markup_pct": 70.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Crackies de Milho com Sal sem Glúten Caçarola (emb. 130 gr)",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 2.37,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Bolachas Torradas Cuétara (emb. 200 gr)",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 1.69,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Somersby Sidra Maçã 33cl",
+      "category": "Sidra",
+      "orders": 0,
+      "sortido": 31.17,
+      "markup_pct": 81.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Cerveja com Álcool Sagres (garrafa 25 cl)",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 15.95,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Cerveja com Álcool Psycho Pilsner Musa (emb. 33 cl)",
+      "category": "Cerveja Artesanal",
+      "orders": 0,
+      "sortido": 4.19,
+      "markup_pct": 30.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Néctar Tutti-Frutti Compal Clássico 1 lt",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 3.79,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Sumo 100% Laranja Compal 30 cl",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 2.51,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Água com Gás San Pellegrino 75 cl tp",
+      "category": "Água Com Gás",
+      "orders": 0,
+      "sortido": 5.61,
+      "markup_pct": 87.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Sumo Tomate Compal Vital 1 lt",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 4.72,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Sumo Ananás Coco Compal Vital  1 lt",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 4.85,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Néctar Pera Rocha Compal Clássico 1 lt",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 4.59,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Néctar Pera Rocha Compal Cássico 30 cl",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 2.51,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Néctar Maracujá Compal Clássico 1 lt",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 6.38,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Néctar Pêssego Compal Clássico 1 lt",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 3.79,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Néctar Tutti Frutti Compal Clássico 30 cl",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 2.51,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Água com Gás Frutos Vermelhos Pedras Salgadas 4 x 25 cl",
+      "category": "Água Com Gás",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 87.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Sumo Frutos Vermelhos Compal Vital 30 cl",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 2.51,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Sumo Manga Laranja Compal Vital  1 lt",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 4.48,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Água Mineral Monchique 5 lt",
+      "category": "Água Sem Gás",
+      "orders": 0,
+      "sortido": 5.36,
+      "markup_pct": 84.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Sumo Frutos Vermelhos Compal Vital 1 lt",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 4.85,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Néctar Maracujá Compal Clássico 30 cl",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 2.51,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Néctar Pêssego Compal Clássico 30 cl",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 2.51,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Água com Gás Maracujá Pedras Salgadas 4 x 25 cl",
+      "category": "Água Com Gás",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 87.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Sumo Manga Laranja Compal Vital 30 cl",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 2.51,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Água com Gás Castello TP 6 x 25 cl",
+      "category": "Água Com Gás",
+      "orders": 0,
+      "sortido": 8.46,
+      "markup_pct": 87.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Água com Gás Frize 6 x 25 cl",
+      "category": "Água Com Gás",
+      "orders": 0,
+      "sortido": 7.12,
+      "markup_pct": 87.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Água com Gás Limão Pedras Salgadas 4 x 25 cl",
+      "category": "Água Com Gás",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 87.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Água com Gás Frize Limão 4 x 25 cl",
+      "category": "Água Com Gás",
+      "orders": 0,
+      "sortido": 8.67,
+      "markup_pct": 87.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Água Tónica Schweppes 6 x 20 cl",
+      "category": "Água Tónica e Ginder Ale",
+      "orders": 0,
+      "sortido": 17.12,
+      "markup_pct": 79.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Néctar Laranja do Algarve Compal Origens 30 cl",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 2.51,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Néctar Laranja Compal Clássico 1 lt",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 4.59,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Néctar Laranja do Algarve Compal Origens 1 lt",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 6.38,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Néctar Ananás Compal Clássico 1 lt",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 4.59,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Sumo 8 Frutos Um Bongo 1 lt",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 4.48,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Sumo 100% Fruta Laranja Compal 1 lt",
+      "category": "Sumos de Fruta",
+      "orders": 0,
+      "sortido": 6.64,
+      "markup_pct": 84.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Água Mineral Garrafão Luso 5,4 lt",
+      "category": "Água Sem Gás",
+      "orders": 0,
+      "sortido": 5.85,
+      "markup_pct": 84.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Refrigerante com Gás Coca-Cola 4 x 20 cl",
+      "category": "Refrigerantes com Gás",
+      "orders": 0,
+      "sortido": 14.92,
+      "markup_pct": 83.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Refrigerante com Gás Coca-Cola Zero Açúcar 4 x 20 cl",
+      "category": "Refrigerantes com Gás",
+      "orders": 0,
+      "sortido": 13.38,
+      "markup_pct": 83.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Bolachas Crackers Cream&Onion Tuc 100g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 3.36,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Crackers sem Sal na Superfície Gran Pavesi 560 g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Rech Laranja Jaffa Milka 147g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 7.29,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Recheadas Oreo Originais Saquetas 220 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 7.12,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Filipinos Chocolate Negro Artiach 128g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 5.53,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Recheadas Kinder Cards 128 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Milka Choco Biscuit Leite 150 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 8.84,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Bolachas Crackers Bacon Tuc 100g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 3.36,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Cookies Milka Choco 135 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 7.77,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Recheadas Fruit & Form de Maçã McVitie's 218 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 7.82,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas McVitie's Digestive 400 g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 7.7,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Crackies de Milho Com Sal Caçarola 130g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 4.03,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Waffers Wafferland Cacau 175 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 4.03,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Marinheiras Natural Cem Porcento 200g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 7.94,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Sortidas Cuétara 210 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 8.59,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Triunfo Manteiga 168 g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 5.9,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Maria Oro Cuétara 200 g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 2.87,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Cream Cracker Cuétara 200 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 3.66,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Belgas Original Saborosa 220g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 4.37,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolacha Shortcake Nacional 180 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 3.86,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Butter Cookies Lata Clássica DanCake 454 gr",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 19.7,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Waffers Wafferland Avelã 175 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 4.03,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Torta Dan Cake Recheada com Chocolate e Avelã 300 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 6.41,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Bolachas Coockies Pepitas de Choco Chips Ahoy 128g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 5.67,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolacha Milka Mini Chocowaffer Leite 110 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 7.29,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Filipinos Chocolate de Leite Artiach 128g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 5.53,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Bolacha Torrada Cuétara 200 gr",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 3.04,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Recheadas Nutella B-Ready T2 44 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 5.44,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Bolachas Recheadas Oreo Originais Tubo 154 G",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 4.11,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolachas Mini Cookies Pepitas Choco Chips Ahoy 4x40g",
+      "category": "Bolachas",
+      "orders": 0,
+      "sortido": 7.29,
+      "markup_pct": 48.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja Corona 6 x 35,5cl",
+      "category": "Cerveja Estrangeira",
+      "orders": 0,
+      "sortido": 29.39,
+      "markup_pct": 69.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Alcool 5,0% Craft Beer Musa Red Zeppelin 33 cl",
+      "category": "Cerveja Estrangeira",
+      "orders": 0,
+      "sortido": 7.54,
+      "markup_pct": 69.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Álcool Sagres 6 x 33 cl",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 18.45,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Sidra Maça Bandida do Pomar  1 lt",
+      "category": "Sidra",
+      "orders": 0,
+      "sortido": 8.42,
+      "markup_pct": 81.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Combo Football Sagres",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 27.0,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Combo Litrosa Super Bock",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 11.0,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Combo Litrosa Sagres",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 11.0,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Combo Bandida + Pringles Original 175g",
+      "category": "Sidra",
+      "orders": 0,
+      "sortido": 13.0,
+      "markup_pct": 81.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja Heineken 6 x 25 cl",
+      "category": "Cerveja Estrangeira",
+      "orders": 0,
+      "sortido": 14.38,
+      "markup_pct": 69.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja sem Glúten Super Bock 6x33cl",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 16.58,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Álcool Super Bock 1 L",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 5.76,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja Leffe Brune 33 cl",
+      "category": "Cerveja Estrangeira",
+      "orders": 0,
+      "sortido": 8.23,
+      "markup_pct": 69.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja Tequila Desperados Original 6 x 33 cl",
+      "category": "Cerveja Estrangeira",
+      "orders": 0,
+      "sortido": 25.31,
+      "markup_pct": 69.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja com Álcool Mini Sagres 15x25cl",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 27.12,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja com Álcool Mini Sagres 6 x 25 cl",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 10.8,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Álcool Preta Stout Super Bock 6x33cl",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 16.61,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja de Trigo com Álcool Bavaria Weiss Garrafa Super Bock 33 cl",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 5.85,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Alcool 4,5% Craft Beer Musa Blondie ALE 33 cl",
+      "category": "Cerveja Artesanal",
+      "orders": 0,
+      "sortido": 5.45,
+      "markup_pct": 30.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja com Álcool Sagres 1 L",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 5.44,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja com Álcool Super Bock 6x33cl",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 16.32,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Álcool Bud Garrafa Budweiser 33cl",
+      "category": "Cerveja Estrangeira",
+      "orders": 0,
+      "sortido": 5.45,
+      "markup_pct": 69.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Alcool 5,5% Craft Beer Musa Erva Prince 33 cl",
+      "category": "Cerveja Artesanal",
+      "orders": 0,
+      "sortido": 7.54,
+      "markup_pct": 30.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja Estrella Damm garrafa 6 x 25 cl",
+      "category": "Cerveja Estrangeira",
+      "orders": 0,
+      "sortido": 12.92,
+      "markup_pct": 69.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Álcool Ruiva Abadia Super Bock 6x33cl",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 17.23,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Sidra de Maçãs Biológicas 4% Alcool Musa Peste & Sidra 33 cl",
+      "category": "Sidra",
+      "orders": 0,
+      "sortido": 8.15,
+      "markup_pct": 81.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Sidra Maçã Bandida do Pomar 6 x 25 cl",
+      "category": "Sidra",
+      "orders": 0,
+      "sortido": 15.69,
+      "markup_pct": 81.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Alcool 5,5% Craft Beer Musa Twist and Stout 33 cl",
+      "category": "Cerveja Artesanal",
+      "orders": 0,
+      "sortido": 7.54,
+      "markup_pct": 30.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Álcool Selecção 1927 Munich Dunkel Garrafa Super Bock 33 cl",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 5.85,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja Sem Álcool 0.0% Heineken TP 6 x 25 cl",
+      "category": "Cerveja Sem Álcool",
+      "orders": 0,
+      "sortido": 14.38,
+      "markup_pct": 105.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Álcool Carlsberg 6x25cl",
+      "category": "Cerveja Estrangeira",
+      "orders": 0,
+      "sortido": 13.63,
+      "markup_pct": 69.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Alcool 4,5% Craft Beer Musa Psycho Pilsner 33 cl",
+      "category": "Cerveja Artesanal",
+      "orders": 0,
+      "sortido": 7.54,
+      "markup_pct": 30.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Alcool 5,0% Craft Beer Musa Frank APA 33 cl",
+      "category": "Cerveja Artesanal",
+      "orders": 0,
+      "sortido": 7.54,
+      "markup_pct": 30.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Alcool 6,5% Craft Beer Musa Born in the IPA 33 cl",
+      "category": "Cerveja Artesanal",
+      "orders": 0,
+      "sortido": 8.28,
+      "markup_pct": 30.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gin Bulldog London Dry 70cl",
+      "category": "Gin",
+      "orders": 0,
+      "sortido": 84.42,
+      "markup_pct": 68.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vodka Moskovskaya 70 cl",
+      "category": "Vodka",
+      "orders": 0,
+      "sortido": 41.92,
+      "markup_pct": 49.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Rum Havana Club Añejo 3 Años 70cl",
+      "category": "Rum",
+      "orders": 0,
+      "sortido": 58.84,
+      "markup_pct": 59.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Rum Spice Gold Captain Morgan 70 cl",
+      "category": "Rum",
+      "orders": 0,
+      "sortido": 44.59,
+      "markup_pct": 59.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Rum Havana Club 7 Anos 70cl",
+      "category": "Rum",
+      "orders": 0,
+      "sortido": 115.83,
+      "markup_pct": 59.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vodka Absolut 70 cl",
+      "category": "Vodka",
+      "orders": 0,
+      "sortido": 58.37,
+      "markup_pct": 49.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vodka Ciroc 70cl",
+      "category": "Vodka",
+      "orders": 0,
+      "sortido": 113.35,
+      "markup_pct": 49.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Licor Baileys Original 70 cl",
+      "category": "Licores",
+      "orders": 0,
+      "sortido": 50.02,
+      "markup_pct": 57.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Whisky Jack Daniels 70 cl",
+      "category": "Whisky",
+      "orders": 0,
+      "sortido": 78.97,
+      "markup_pct": 61.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gin Tanqueray 70 cl",
+      "category": "Gin",
+      "orders": 0,
+      "sortido": 62.8,
+      "markup_pct": 68.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Tequila José Cuervo Reposado 70cl",
+      "category": "Tequila",
+      "orders": 0,
+      "sortido": 62.37,
+      "markup_pct": 102.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gin Bombay Original 70 cl",
+      "category": "Gin",
+      "orders": 0,
+      "sortido": 49.01,
+      "markup_pct": 68.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Rum Bacardi Superior 70 cl",
+      "category": "Rum",
+      "orders": 0,
+      "sortido": 53.01,
+      "markup_pct": 59.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vodka Grey Goose 70 cl",
+      "category": "Vodka",
+      "orders": 0,
+      "sortido": 143.37,
+      "markup_pct": 49.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Tequila José Cuervo Silver 70cl",
+      "category": "Tequila",
+      "orders": 0,
+      "sortido": 58.59,
+      "markup_pct": 102.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Whisky Rare J&B 70 cl",
+      "category": "Whisky",
+      "orders": 0,
+      "sortido": 39.19,
+      "markup_pct": 61.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Whisky Ballantine's 70 cl",
+      "category": "Whisky",
+      "orders": 0,
+      "sortido": 47.21,
+      "markup_pct": 61.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Whisky Cutty Sark 700 ml",
+      "category": "Whisky",
+      "orders": 0,
+      "sortido": 41.49,
+      "markup_pct": 61.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Whisky Johnnie Walker Red Label 70 cl",
+      "category": "Whisky",
+      "orders": 0,
+      "sortido": 52.72,
+      "markup_pct": 61.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Whisky Passport 70 cl",
+      "category": "Whisky",
+      "orders": 0,
+      "sortido": 43.18,
+      "markup_pct": 61.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Whisky William Lawson's 70cl",
+      "category": "Whisky",
+      "orders": 0,
+      "sortido": 39.19,
+      "markup_pct": 61.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Licor Amêndoa Amarga Amarguinha 70cl",
+      "category": "Licores",
+      "orders": 0,
+      "sortido": 33.35,
+      "markup_pct": 57.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Licor Bols Blue Coraçao 70 cl",
+      "category": "Licores",
+      "orders": 0,
+      "sortido": 49.01,
+      "markup_pct": 57.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Licor Malibu 70 cl",
+      "category": "Licores",
+      "orders": 0,
+      "sortido": 46.6,
+      "markup_pct": 57.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Licor Pisang Ambon 70 cl",
+      "category": "Licores",
+      "orders": 0,
+      "sortido": 45.16,
+      "markup_pct": 57.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Gin Gordon's 70cl",
+      "category": "Gin",
+      "orders": 0,
+      "sortido": 38.91,
+      "markup_pct": 68.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gin Sharish 70cl",
+      "category": "Gin",
+      "orders": 0,
+      "sortido": 131.58,
+      "markup_pct": 68.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gin Tanqueray Nº Ten 70cl",
+      "category": "Gin",
+      "orders": 0,
+      "sortido": 111.94,
+      "markup_pct": 68.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vodka Eristoff 70 cl",
+      "category": "Vodka",
+      "orders": 0,
+      "sortido": 38.91,
+      "markup_pct": 49.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vodka Smirnoff 70 cl",
+      "category": "Vodka",
+      "orders": 0,
+      "sortido": 43.18,
+      "markup_pct": 49.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Whisky Grants 700 ml",
+      "category": "Whisky",
+      "orders": 0,
+      "sortido": 38.52,
+      "markup_pct": 61.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gin Beefeater London 70 cl",
+      "category": "Gin",
+      "orders": 0,
+      "sortido": 59.09,
+      "markup_pct": 68.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Licor Beirão 70 cl",
+      "category": "Licores",
+      "orders": 0,
+      "sortido": 37.75,
+      "markup_pct": 57.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Chocolate Twix 46 g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 2.77,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - M&M´s Amendoim 45g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 2.47,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Chocolate Oreo Milka 100 g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 4.55,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Chocolate Twix White 46 g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 2.61,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Tablete Chocolate Milka Chips Ahoy 100g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 4.55,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Snack de Chocolate de Leite KitKat Nestlé 41,5g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 2.29,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Tablete de Chocolate de Leite Milka 90g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 3.87,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Chocolate Snickers 50g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 2.7,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Tablete chocolate de Leite Extrafino Nestlé 125g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 7.9,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Chocolate Toblerone 35 g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 3.69,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Drageias Chocolate Maltesers",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 3.04,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Chocolate Kinder Bueno White 39 g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 5.04,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Chocolate Mars 50g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 2.84,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Pastilhas De Chocolate M&M`S Chocolate 200 G",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 11.88,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Pastilhas De Chocolate M&M`S Amendoim 200 G",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 11.88,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Chocolate Crunch Nestlé 100g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 7.02,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - M&M´s Chocolate 45g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 2.33,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Tablete Chocolate c/ Amêndoa e Caramelo Milka 300g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 16.83,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Chocolate Bounty 57 gr",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 2.35,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Pastilhas Watermelon Sunrise Trident Senses 12un",
+      "category": "Gomas, Pastilhas e Rebuçados",
+      "orders": 0,
+      "sortido": 2.87,
+      "markup_pct": 41.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Chocolate de Leite com Nougat, Mel e Amêndoa Toblerone 100g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 12.4,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Rebuçados Dr. Bayard 100g",
+      "category": "Gomas, Pastilhas e Rebuçados",
+      "orders": 0,
+      "sortido": 4.19,
+      "markup_pct": 41.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Drageias Crazy Sours Skittles 38g",
+      "category": "Gomas, Pastilhas e Rebuçados",
+      "orders": 0,
+      "sortido": 3.04,
+      "markup_pct": 41.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Pastilhas Menta Chiclets 14un",
+      "category": "Gomas, Pastilhas e Rebuçados",
+      "orders": 0,
+      "sortido": 2.7,
+      "markup_pct": 41.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 3 Pague 2 - Chupa Chupa Chups Single 12g",
+      "category": "Gomas, Pastilhas e Rebuçados",
+      "orders": 0,
+      "sortido": 0.98,
+      "markup_pct": 41.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Chocolate Oreo Brownie Milka 100 g",
+      "category": "Chocolates",
+      "orders": 0,
+      "sortido": 4.55,
+      "markup_pct": 42.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Leite Gordo UHT Mimosa 1L",
+      "category": "Leite",
+      "orders": 0,
+      "sortido": 4.27,
+      "markup_pct": 100.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Bebida Vegetal de Arroz e Coco Alpro 1 lt",
+      "category": "Bebidas Vegetais",
+      "orders": 0,
+      "sortido": 7.9,
+      "markup_pct": 43.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Leite Especial Cálcio Meio Gordo Mimosa Bem Especial 1 L",
+      "category": "Leite",
+      "orders": 0,
+      "sortido": 3.87,
+      "markup_pct": 100.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Bebida Vegetal Arroz Alpro 1L",
+      "category": "Bebidas Vegetais",
+      "orders": 0,
+      "sortido": 7.9,
+      "markup_pct": 43.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Bebida Vegetal de Soja Original sem Lactose Alpro 1L",
+      "category": "Bebidas Vegetais",
+      "orders": 0,
+      "sortido": 5.53,
+      "markup_pct": 43.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Leite MG sem Lactose Mimosa 1L",
+      "category": "Leite",
+      "orders": 0,
+      "sortido": 4.27,
+      "markup_pct": 100.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cápsulas Sical Dolce Gusto 16uni",
+      "category": "Café em Cápsulas",
+      "orders": 0,
+      "sortido": 17.01,
+      "markup_pct": 54.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Barras Fitness Morango 6 x 23,5g",
+      "category": "Barras de Cereais",
+      "orders": 0,
+      "sortido": 11.16,
+      "markup_pct": 85.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Farinha de Trigo Fina com Fermento Branca De Neve 1 kg",
+      "category": "Farinha e Pão Ralado",
+      "orders": 0,
+      "sortido": 3.96,
+      "markup_pct": 55.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Fitness Granola Chocolate 300g",
+      "category": "Muesli e Granola",
+      "orders": 0,
+      "sortido": 12.83,
+      "markup_pct": 62.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Nestum Mel 300g",
+      "category": "Flocos e Papas de Aveia",
+      "orders": 0,
+      "sortido": 6.79,
+      "markup_pct": 68.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Massa Spaguetti Barilla 500 G",
+      "category": "Massa",
+      "orders": 0,
+      "sortido": 4.59,
+      "markup_pct": 49.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cápsulas Delta Q Qharacter 10un",
+      "category": "Café em Cápsulas",
+      "orders": 0,
+      "sortido": 9.95,
+      "markup_pct": 54.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Feijão Frade Cozido Compal Da Horta 410 g",
+      "category": "Feijão, Grão de Bico e Lentilhas",
+      "orders": 0,
+      "sortido": 5.04,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cogumelos Laminados Compal Da Horta 290 g",
+      "category": "Conservas de Vegetais",
+      "orders": 0,
+      "sortido": 5.76,
+      "markup_pct": 112.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Massa Fusilli Barilla 500 G",
+      "category": "Massa",
+      "orders": 0,
+      "sortido": 5.22,
+      "markup_pct": 49.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Massa Penne Rigate Barilla 500 G",
+      "category": "Massa",
+      "orders": 0,
+      "sortido": 5.36,
+      "markup_pct": 49.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Barras Chocapic Nestlé 6 x 25g",
+      "category": "Barras de Cereais",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 85.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Massa Tagliatelle Barilla 500 G",
+      "category": "Massa",
+      "orders": 0,
+      "sortido": 8.31,
+      "markup_pct": 49.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Arroz Agulha Bom Sucesso 1 Kg",
+      "category": "Arroz",
+      "orders": 0,
+      "sortido": 5.08,
+      "markup_pct": 80.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Barra Be-Kind Chocolate Negro E Sal Marinho 40g",
+      "category": "Barras de Cereais",
+      "orders": 0,
+      "sortido": 6.41,
+      "markup_pct": 85.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Fitness Granola Mel 300g",
+      "category": "Muesli e Granola",
+      "orders": 0,
+      "sortido": 12.83,
+      "markup_pct": 62.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Massa Barilla Linguine N13 500 G",
+      "category": "Massa",
+      "orders": 0,
+      "sortido": 5.22,
+      "markup_pct": 49.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Barras de Cereais Nesquik Nestlé 6x25g",
+      "category": "Barras de Cereais",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 85.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Grão Cozido Compal Da Horta 410 g",
+      "category": "Feijão, Grão de Bico e Lentilhas",
+      "orders": 0,
+      "sortido": 5.04,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Feijão Encarnado Cozido Compal Da Horta 410 g",
+      "category": "Feijão, Grão de Bico e Lentilhas",
+      "orders": 0,
+      "sortido": 5.04,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cápsulas Café EpiQ Delta Q 10 un",
+      "category": "Café em Cápsulas",
+      "orders": 0,
+      "sortido": 9.86,
+      "markup_pct": 54.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cápsulas Buondi Dolce Gusto 16uni",
+      "category": "Café em Cápsulas",
+      "orders": 0,
+      "sortido": 17.01,
+      "markup_pct": 54.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Atum Posta em Óleo Bom Petisco 120 g",
+      "category": "Atum",
+      "orders": 0,
+      "sortido": 3.87,
+      "markup_pct": 81.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Feijão Branco Cozido Compal Da Horta 410 g",
+      "category": "Feijão, Grão de Bico e Lentilhas",
+      "orders": 0,
+      "sortido": 5.04,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cápsulas Delta Q mythiQ 10un",
+      "category": "Café em Cápsulas",
+      "orders": 0,
+      "sortido": 9.95,
+      "markup_pct": 54.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Sardinha Oléo Bom Petisco 120 g",
+      "category": "Sardinha, Cavala, Lulas",
+      "orders": 0,
+      "sortido": 4.76,
+      "markup_pct": 71.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Feijão Manteiga Cozido Compal Da Horta 410 g",
+      "category": "Feijão, Grão de Bico e Lentilhas",
+      "orders": 0,
+      "sortido": 5.04,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Espargos Verdes Ferbar 345 g",
+      "category": "Conservas de Vegetais",
+      "orders": 0,
+      "sortido": 13.05,
+      "markup_pct": 112.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cápsulas Delta Q deQafeinatus 10un",
+      "category": "Café em Cápsulas",
+      "orders": 0,
+      "sortido": 9.95,
+      "markup_pct": 54.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cápsulas Expresso Intenso Dolce Gusto 16uni",
+      "category": "Café em Cápsulas",
+      "orders": 0,
+      "sortido": 17.01,
+      "markup_pct": 54.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Sardinha em Tomate Bom Petisco 120g",
+      "category": "Sardinha, Cavala, Lulas",
+      "orders": 0,
+      "sortido": 4.64,
+      "markup_pct": 71.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Molho Inglês Lea Perrins Worcestershire150mL",
+      "category": "Molhos",
+      "orders": 0,
+      "sortido": 16.83,
+      "markup_pct": 83.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Polpa de Tomate com Cebola e Alho Compal da Horta 500g",
+      "category": "Tomate Polpa, Pelado e Seco",
+      "orders": 0,
+      "sortido": 6.46,
+      "markup_pct": 89.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Ketchup Heinz Top Down 460 g",
+      "category": "Maionese, Ketchup e Mostarda",
+      "orders": 0,
+      "sortido": 12.22,
+      "markup_pct": 33.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Polpa Tomate Compal da Horta 500g",
+      "category": "Tomate Polpa, Pelado e Seco",
+      "orders": 0,
+      "sortido": 4.91,
+      "markup_pct": 89.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Feijão Preto Cozido Compal Da Horta 410 g",
+      "category": "Feijão, Grão de Bico e Lentilhas",
+      "orders": 0,
+      "sortido": 5.04,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Mostarda Top Down Calvé 257g",
+      "category": "Maionese, Ketchup e Mostarda",
+      "orders": 0,
+      "sortido": 5.45,
+      "markup_pct": 33.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Maionese Top Down Calvé 240 ml",
+      "category": "Maionese, Ketchup e Mostarda",
+      "orders": 0,
+      "sortido": 5.15,
+      "markup_pct": 33.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Molho Pesto a la Genovese Barilla 190 g",
+      "category": "Molhos",
+      "orders": 0,
+      "sortido": 14.63,
+      "markup_pct": 83.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Molho Big Burguer Top Down Calvé 260 g",
+      "category": "Molhos",
+      "orders": 0,
+      "sortido": 6.71,
+      "markup_pct": 83.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Doritos Molho Salsa Suave 280g",
+      "category": "Molhos",
+      "orders": 0,
+      "sortido": 11.07,
+      "markup_pct": 83.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Mostarda Dijon Maille 215 g",
+      "category": "Maionese, Ketchup e Mostarda",
+      "orders": 0,
+      "sortido": 10.13,
+      "markup_pct": 33.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Molho Guacamole Old El Paso 195 G",
+      "category": "Molhos",
+      "orders": 0,
+      "sortido": 9.52,
+      "markup_pct": 83.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Massa Lasanha Barilla Semola 250 G",
+      "category": "Massa",
+      "orders": 0,
+      "sortido": 5.53,
+      "markup_pct": 49.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Atum Posta Azeite Bom Petisco 120g",
+      "category": "Atum",
+      "orders": 0,
+      "sortido": 6.64,
+      "markup_pct": 81.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Baked Beans com Molho de Tomate Heinz 415g",
+      "category": "Refeições Enlatadas",
+      "orders": 0,
+      "sortido": 5.85,
+      "markup_pct": 57.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cogumelos Inteiros em Lata Ferbar 290g",
+      "category": "Conservas de Vegetais",
+      "orders": 0,
+      "sortido": 5.85,
+      "markup_pct": 112.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Snack Gato Felix Party Mix Original 60 G",
+      "category": "Snacks de Gato",
+      "orders": 0,
+      "sortido": 5.27,
+      "markup_pct": 47.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Comida Húmida Gato Felix Fantastic Peixe Saquetas 4 X 85 G",
+      "category": "Ração Húmida de Gato",
+      "orders": 0,
+      "sortido": 7.72,
+      "markup_pct": 24.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Comida Húmida Gato Felix Tstyshrds Salmão Atum 4 X 80 gr",
+      "category": "Ração Húmida de Gato",
+      "orders": 0,
+      "sortido": 7.72,
+      "markup_pct": 24.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Comida Húmida Gato Felix Tstyshrds Vaca e Frango 4 X 80 gr",
+      "category": "Ração Húmida de Gato",
+      "orders": 0,
+      "sortido": 7.72,
+      "markup_pct": 24.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Tapete Educativo Resguardo Cão e Gato Activpet 20 uni 60 x 60",
+      "category": "Higiene e Limpeza de Cão",
+      "orders": 0,
+      "sortido": 16.47,
+      "markup_pct": 79.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Comida Húmida Gato Junior Felix Fantastic Saquetas 4 X 85 G",
+      "category": "Ração Húmida de Gato",
+      "orders": 0,
+      "sortido": 7.72,
+      "markup_pct": 24.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Comida Húmida Gato Felix Fantastic Carne Saquetas 4 X 85 G",
+      "category": "Ração Húmida de Gato",
+      "orders": 0,
+      "sortido": 7.72,
+      "markup_pct": 24.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Snack Cão Markies Original Pedigree 500 gr",
+      "category": "Snacks de Cão",
+      "orders": 0,
+      "sortido": 12.47,
+      "markup_pct": 89.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Pizza Ristorante Ristorante Mozarella sem Gluten Dr. Oetker 370g",
+      "category": "Pizza",
+      "orders": 0,
+      "sortido": 18.48,
+      "markup_pct": 78.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Croquetas de Presunto Ibérico Congelado Iglo 340 g",
+      "category": "Refeições Prontas!",
+      "orders": 0,
+      "sortido": 13.69,
+      "markup_pct": 125.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Mini Pizzas Piccolinis Prosciutto Formaggio 9 x 30gr",
+      "category": "Pizza",
+      "orders": 0,
+      "sortido": 12.12,
+      "markup_pct": 78.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - 6 Medalhões de Pescada Iglo 360g",
+      "category": "Peixe",
+      "orders": 0,
+      "sortido": 15.66,
+      "markup_pct": 37.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Noodles Galinha Banzai 67 g",
+      "category": "Refeições Enlatadas",
+      "orders": 0,
+      "sortido": 3.23,
+      "markup_pct": 57.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Pizza Ristorante Spinaci Dr. Oetker 390g",
+      "category": "Pizza",
+      "orders": 0,
+      "sortido": 12.92,
+      "markup_pct": 78.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Crocante de Frango Cordon Bleu Iglo 2un 200g",
+      "category": "Douradinhos, Nuggets e Panados",
+      "orders": 0,
+      "sortido": 16.75,
+      "markup_pct": 96.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Bacalhau à Brás Iglo 300g",
+      "category": "Refeições Prontas!",
+      "orders": 0,
+      "sortido": 22.81,
+      "markup_pct": 125.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Noodles Camarão Banzai 67 g",
+      "category": "Refeições Enlatadas",
+      "orders": 0,
+      "sortido": 3.21,
+      "markup_pct": 57.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Nuggets de Frango Capitão Iglo 10un 208g",
+      "category": "Douradinhos, Nuggets e Panados",
+      "orders": 0,
+      "sortido": 11.14,
+      "markup_pct": 96.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Douradinhos Filetes de Salmão Capitão Iglo 10 uni",
+      "category": "Douradinhos, Nuggets e Panados",
+      "orders": 0,
+      "sortido": 25.11,
+      "markup_pct": 96.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Pizza Ristorante Margherita Pomodor Dr. Oetker 340g",
+      "category": "Pizza",
+      "orders": 0,
+      "sortido": 16.58,
+      "markup_pct": 78.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Patê de Sardinha Natural La Piara 75g",
+      "category": "Patês",
+      "orders": 0,
+      "sortido": 5.85,
+      "markup_pct": 94.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cannelloni Bolonhesa Iglo 400g",
+      "category": "Refeições Prontas!",
+      "orders": 0,
+      "sortido": 19.98,
+      "markup_pct": 125.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Noodles Carne Banzai 67 g",
+      "category": "Refeições Enlatadas",
+      "orders": 0,
+      "sortido": 3.23,
+      "markup_pct": 57.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Crocantes de Frango Parmesão e Ervas Iglo 180g",
+      "category": "Douradinhos, Nuggets e Panados",
+      "orders": 0,
+      "sortido": 11.95,
+      "markup_pct": 96.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Lasanha Bolonhesa Iglo 300g",
+      "category": "Refeições Prontas!",
+      "orders": 0,
+      "sortido": 13.48,
+      "markup_pct": 125.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Noodles Caril Banzai 67 g",
+      "category": "Refeições Enlatadas",
+      "orders": 0,
+      "sortido": 3.23,
+      "markup_pct": 57.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Patê de Atum Bocadelia La Piara 180 gr",
+      "category": "Patês",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 94.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Patê de Caranguejo Bocadelia La Piara 170 gr",
+      "category": "Patês",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 94.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Pizza Ristorante Funghi Dr. Oetker 365g",
+      "category": "Pizza",
+      "orders": 0,
+      "sortido": 12.92,
+      "markup_pct": 78.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Empanadilhas de Carne Congelado Iglo 10 un 312 g",
+      "category": "Douradinhos, Nuggets e Panados",
+      "orders": 0,
+      "sortido": 18.24,
+      "markup_pct": 96.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Patê de Atum em Óleo La Piara 75 gr",
+      "category": "Patês",
+      "orders": 0,
+      "sortido": 5.85,
+      "markup_pct": 94.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Ravioli de Queijo Ricotta e Espinafres com Molho de Tomate Congelado Iglo 300 g",
+      "category": "Refeições Prontas!",
+      "orders": 0,
+      "sortido": 11.17,
+      "markup_pct": 125.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Pizza Fresca Carne, Mozzarella, Pimento e Barbecue Campofrio 410g",
+      "category": "Pizzas Frescas",
+      "orders": 0,
+      "sortido": 10.18,
+      "markup_pct": 30.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Pizza Ristorante Prociutto sem Gluten Dr. Oetker 315g",
+      "category": "Pizza",
+      "orders": 0,
+      "sortido": 18.48,
+      "markup_pct": 78.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Batata Frita Original Pringles Original 40g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 3.04,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Batata Frita Pringles Hot & Spicy 175 g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 6.97,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Batata Frita Pringles Natas & Cebolas 175 g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 6.97,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Batata Frita Pringles Natas & Cebolas 40 g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 3.04,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Batata Frita Pringles Original 175 g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 6.97,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Snacks Cheetos Palitos 96g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 6.95,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Batata Frita Pringles Paprika 175 g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 8.28,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Batatas Fritas Lays Camponesa 115g",
+      "category": "Batatas com Sabores",
+      "orders": 0,
+      "sortido": 5.78,
+      "markup_pct": 70.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Batata Frita Pringles Mini BBQ 40 g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 2.86,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Pistáchios Forno Matutano 70g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 13.65,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Snack Milho Dippas Original Doritos 150g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 6.95,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Amendoins Forno Matutano 120g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 6.72,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cocktail Forno Matutano 95g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 10.46,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Batata Frita Pringles Pizza 175 g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 6.56,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Snacks Cheetos Rolitos 100 g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 6.95,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Snacks Doritos Tex-Mex Queijo 120g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 6.95,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Aperitivo Old El Paso Nachips 185 G",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Snaks Fritos Original Matutano 130g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 6.95,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Batatas Fritas Pála-Pála Palha 170g",
+      "category": "Batatas Palha e Caseiras",
+      "orders": 0,
+      "sortido": 7.12,
+      "markup_pct": 55.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Pipocas Doces Amanhecer  150 G",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 2.87,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Snacks Cheetos Futebolas 130 g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 6.95,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Snacks Doritos Chili 140g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 6.95,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Batatas Fritas Ruffles Presunto 115g",
+      "category": "Batatas com Sabores",
+      "orders": 0,
+      "sortido": 6.27,
+      "markup_pct": 70.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Batatas Fritas Pála-Pála Rodelas 140g",
+      "category": "Batatas Lisas e Onduladas",
+      "orders": 0,
+      "sortido": 6.04,
+      "markup_pct": 96.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Batatas Fritas Ruffles Ketchup 115g",
+      "category": "Batatas com Sabores",
+      "orders": 0,
+      "sortido": 6.27,
+      "markup_pct": 70.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Aperitivo Tortilhas Chips Queijo Old El Paso 185 G",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Douro Carm Reserva 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 43.54,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Tinto Regional Alentejano Monte Velho 37,5cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 7.29,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Alentejo Trinca Bolotas 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 19.8,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Peninsula de Setúbal Catarina 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 22.12,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Champagne Veuve Clicquot Brut 75 cl",
+      "category": "Champanhe",
+      "orders": 0,
+      "sortido": 179.44,
+      "markup_pct": 62.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Champanhe Bruto Moet Et Chandon 75 cl",
+      "category": "Champanhe",
+      "orders": 0,
+      "sortido": 154.71,
+      "markup_pct": 62.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Espumante Raposeira Reserva Doce 75cl",
+      "category": "Espumante",
+      "orders": 0,
+      "sortido": 25.61,
+      "markup_pct": 58.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Espumante Asti Martini 75 cl",
+      "category": "Espumante",
+      "orders": 0,
+      "sortido": 27.76,
+      "markup_pct": 58.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Douro Vinhas Proprias Altano 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 14.63,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Branco Dão Grão Vasco 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 12.92,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Alentejo Trinca Bolotas 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 19.8,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Alentejo Esporão Reserva 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 46.17,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Branco Douro Evel 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 16.58,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Dão Duque de Viseu 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 15.66,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Rosé DOC Dão Colheita Seleccionada Cabriz 75 cl",
+      "category": "Vinho Rosé",
+      "orders": 0,
+      "sortido": 13.31,
+      "markup_pct": 67.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Vinho Tinto Douro Assobio 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 16.85,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Branco Alentejo Herdade Dos Grous 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 34.63,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Douro Duas Quintas 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 45.16,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Tinto Alentejo D. Martinho 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 18.48,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Alentejo Marques de Borba 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 19.57,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Douro Duorum 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 29.39,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Alentejo Quinta do Carmo 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 56.86,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Vinho Branco Alentejo Adega de Borba 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 8.64,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Dão Duque de Viseu 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 15.66,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Dão Casa de Santar Reserva 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 47.03,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Alentejo Esporão Colheita Alentejo 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 25.51,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Alentejo Esporão Reserva 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 43.18,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Península de Setúbal Catarina 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 22.12,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Bairrada Marquês de Marialva Colheita 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 15.66,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Tinto Douro Evel 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 16.58,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Dona Antonia Porto Reserva Branco 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 49.48,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Aperitivo Martini Rosso 1 L",
+      "category": "Aperitivos",
+      "orders": 0,
+      "sortido": 32.13,
+      "markup_pct": 48.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Vinho Branco Península de Setúbal B.S.E 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 10.4,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cabriz Colheita Seleccionada Tinto 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 13.31,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Vinho Tinto Douro Porca de Murça 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 11.44,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Branco Península de Setúbal Periquita 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 11.99,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho do Porto Ferreira Tawny 75cl",
+      "category": "Vinho do Porto",
+      "orders": 0,
+      "sortido": 20.79,
+      "markup_pct": 80.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Douro Quinta do Côtto 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 23.53,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Tinto Península de Setúbal Periquita 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 11.99,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Dona Antonia Porto Reserva Tawny 75 cl",
+      "category": "Vinho do Porto",
+      "orders": 0,
+      "sortido": 39.19,
+      "markup_pct": 80.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 3 Poupe 25% - Casal Garcia Sangria Tinta 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 14.63,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Rosé Lagosta 75 cl",
+      "category": "Vinho Rosé",
+      "orders": 0,
+      "sortido": 10.18,
+      "markup_pct": 67.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Aperitivo Aperol 70cl",
+      "category": "Aperitivos",
+      "orders": 0,
+      "sortido": 53.01,
+      "markup_pct": 48.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Alentejo Cartuxa 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 53.01,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Vinho Alentejo Mateus Rosé 375 ml",
+      "category": "Vinho Rosé",
+      "orders": 0,
+      "sortido": 21.95,
+      "markup_pct": 67.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Bairrada Marquês de Marialva Grande Reserva 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 98.1,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Tinto Península de Setúbal JP 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 8.67,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Branco Alentejo Pouca Roupa 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 12.92,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Península de Setúbal Piloto Collection Roxo 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 37.21,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Monte da Ravasqueira 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 15.66,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Tinto Regional Alentejo Adega Mayor Caiado 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 15.56,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Tinto Alentejo Sossego 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 14.79,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Tinto Alentejo Eugénio de Almeida EA 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 12.92,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Alentejo Herdade dos Grous 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 36.67,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Verde Branco Gazela 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 11.22,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Tinto Douro Esteva 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 15.13,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Champagne Don Pérignon  75cl",
+      "category": "Champanhe",
+      "orders": 0,
+      "sortido": 501.75,
+      "markup_pct": 62.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Verde Branco Casal Garcia 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 11.37,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Douro Papa Figos 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 23.74,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Branco Alentejo Monte Velho 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 11.05,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Espumante Raposeira Bruto \" Blanc de Blanc\" 75cl",
+      "category": "Espumante",
+      "orders": 0,
+      "sortido": 35.08,
+      "markup_pct": 58.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Branco Douro Planalto 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 15.13,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Espumante Raposeira Reserva Bruto 75cl",
+      "category": "Espumante",
+      "orders": 0,
+      "sortido": 25.61,
+      "markup_pct": 58.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Verde Branco Muralhas de Monção 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 14.26,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Dão Cabriz Reserva 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 31.37,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Douro Duorum 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 29.39,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Douro Duas Quintas 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 51.03,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Vinho Branco Douro Planalto 37,5cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 29.95,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Vinho Verde Branco Gazela 375 ml",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 24.95,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Península de Setúbal Casa Ermelinda Freitas Syrah 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 31.37,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Verde Branco Aveleda Loureiro 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 13.77,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Dão Casa de Santar Reserva 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 47.03,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Verde Branco Muralhas de Monção 37,5cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Branco Para Cozinhar Casal da Eira 25 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 2.16,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Branco Alentejo Eugénio de Almeida EA 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 12.92,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Verde Branco Palácio da Brejoeira Alvarinho 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 70.65,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Douro Casa Ferreirinha Vinha Grande 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 36.77,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Branco Regional Alentejo Adega Mayor Caiado 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 15.56,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Douro DOC Quinta da Pacheca 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 17.55,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Verde Branco Soalheiro Alvarinho 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 35.33,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Verde Branco Aveleda Loureiro e Alvarinho75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 13.77,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Rosé Península de Setúbal JP 75 cl",
+      "category": "Vinho Rosé",
+      "orders": 0,
+      "sortido": 8.67,
+      "markup_pct": 67.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Douro Papa Figos Douro 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 23.74,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Champagne Laurent-Perrier La Cuvée Brut 75 cl",
+      "category": "Champanhe",
+      "orders": 0,
+      "sortido": 180.34,
+      "markup_pct": 62.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Espumante Prosecco Martini 75 cl",
+      "category": "Espumante",
+      "orders": 0,
+      "sortido": 33.37,
+      "markup_pct": 58.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Península de Setúbal D. Ermelinda Reserva  75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 25.51,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Vinho Tinto Alentejo Adega de Borba 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 9.01,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Verde Branco Deu-La-Deu Alvarinho 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 23.53,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Tejo Fiuza Cabernet Sauvignon 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 14.56,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Branco Península De Setúbal João Pires  75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 11.05,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Tinto Alentejo Marquês de Borba Reserva 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 162.99,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 3 Poupe 25% - Casal Garcia Sangria Branco 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 14.63,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Branco Frisante Lambrusco Contessa Carlotta 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 7.29,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Rosé Alentejo Herdade do Esporão Assobio 75 cl",
+      "category": "Vinho Rosé",
+      "orders": 0,
+      "sortido": 18.95,
+      "markup_pct": 67.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Branco Penínsulade Setúbal JP 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 8.67,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho do Porto White Ramos Pinto Lágrima 75 cl",
+      "category": "Vinho do Porto",
+      "orders": 0,
+      "sortido": 37.21,
+      "markup_pct": 80.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinho Tinto Alentejo Monte Velho 75cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 11.05,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Alentejo Sauvignon Blanc Monte da Ravasqueira 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 18.52,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Vinho Branco Douro Casa Ferreirinha Vinha Grande 75 cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 36.77,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Ferbar Espargos Verdes 345g",
+      "category": "Conservas de Vegetais",
+      "orders": 0,
+      "sortido": 7.25,
+      "markup_pct": 112.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Heinz Beanz Feijão Cozinhado em Molho de Tomate 415g",
+      "category": "Refeições Enlatadas",
+      "orders": 0,
+      "sortido": 3.25,
+      "markup_pct": 57.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Cebola 1un",
+      "category": "Cebola e Alho",
+      "orders": 0,
+      "sortido": 0.65,
+      "markup_pct": 143.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Couve Brócolo 1 un",
+      "category": "Couves, Bróculos e Espinafres",
+      "orders": 0,
+      "sortido": 0.9,
+      "markup_pct": 31.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Comida Húmida  Gato Felix:Fantastic Selec 4X85G 12480172",
+      "category": "Ração Húmida de Gato",
+      "orders": 0,
+      "sortido": 4.29,
+      "markup_pct": 24.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Máquina Depilatória Descartável Simply Basic Venus 4 Un",
+      "category": "Depilação",
+      "orders": 0,
+      "sortido": 3.55,
+      "markup_pct": 74.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Carregador Proshield Gillette 4un",
+      "category": "Depilação",
+      "orders": 0,
+      "sortido": 14.5,
+      "markup_pct": 74.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Ambientador Absorve Odores Marine embalagem 150 g",
+      "category": "Limpeza Geral",
+      "orders": 0,
+      "sortido": 4.1,
+      "markup_pct": 64.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Óculos de Leitura Pré Graduados 2.5 Dioptrias 1un",
+      "category": "Mais Saúde",
+      "orders": 0,
+      "sortido": 6.19,
+      "markup_pct": 38.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Óculos de Leitura Pré Graduados 2 Dioptrias 1un",
+      "category": "Mais Saúde",
+      "orders": 0,
+      "sortido": 6.19,
+      "markup_pct": 38.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Óculos de Leitura Pré Graduados 3 Dioptrias 1un",
+      "category": "Mais Saúde",
+      "orders": 0,
+      "sortido": 6.19,
+      "markup_pct": 38.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Margão Pimenta Preta Moída 17g",
+      "category": "Especiarias e Ervas Aromáticas",
+      "orders": 0,
+      "sortido": 1.79,
+      "markup_pct": 98.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Canela Pau em Saqueta Margão 14 gr",
+      "category": "Especiarias e Ervas Aromáticas",
+      "orders": 0,
+      "sortido": 2.37,
+      "markup_pct": 98.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Manjericão Margão 6g",
+      "category": "Especiarias e Ervas Aromáticas",
+      "orders": 0,
+      "sortido": 1.47,
+      "markup_pct": 98.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Cravinho Moido em Saqueta Margão 14 gr",
+      "category": "Especiarias e Ervas Aromáticas",
+      "orders": 0,
+      "sortido": 2.37,
+      "markup_pct": 98.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Sal Fino Vatel 1 kg",
+      "category": "Sal",
+      "orders": 0,
+      "sortido": 0.99,
+      "markup_pct": 180.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Canela em Pau 500 gr",
+      "category": "Especiarias e Ervas Aromáticas",
+      "orders": 0,
+      "sortido": 9.3,
+      "markup_pct": 98.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Oregãos em Folhas Makro Chef 200 gr",
+      "category": "Especiarias e Ervas Aromáticas",
+      "orders": 0,
+      "sortido": 3.09,
+      "markup_pct": 98.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Caril em Saqueta Margão 17 gr",
+      "category": "Especiarias e Ervas Aromáticas",
+      "orders": 0,
+      "sortido": 1.69,
+      "markup_pct": 98.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Dr. Oetker Pizza Ristorante Funghi embalagem 365 g",
+      "category": "Pizza",
+      "orders": 0,
+      "sortido": 7.6,
+      "markup_pct": 78.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Pizza Ristorante Dr.Oetker:S/G, S/L Queijo/Fiambre 345 G",
+      "category": "Pizza",
+      "orders": 0,
+      "sortido": 10.87,
+      "markup_pct": 78.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Ginger Ale Schweppes  - Pack 6x20 CL",
+      "category": "Água Tónica e Ginder Ale",
+      "orders": 0,
+      "sortido": 8.87,
+      "markup_pct": 79.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Vinho Tinto Regional Alentejo Adega Mayor Baga 750 ml",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 9.3,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Vinho Branco Quinta Do Piloto Moscatel Roxo Setúbal 0.75L",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 20.67,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Vinho Branco Alentejo Pêra Manca 75cl",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 100.39,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Adega Mayor Alentejo Vinho Branco Adega Mayor (garrafa 75 cl)",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 9.15,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Champagne Don Pérignon  75cl",
+      "category": "Champanhe",
+      "orders": 0,
+      "sortido": 399.0,
+      "markup_pct": 62.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Vinho Branco Regional Alentejo Adega Mayor Arinto 750 ml",
+      "category": "Vinho Branco",
+      "orders": 0,
+      "sortido": 7.25,
+      "markup_pct": 67.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Azeite Virgem Delicado Gallo 75 cl",
+      "category": "Óleo, Azeite e Vinagre",
+      "orders": 0,
+      "sortido": 19.21,
+      "markup_pct": 105.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Bolo Kinder Délice T1 39 G",
+      "category": "Bolos, Napolitanas, Queques",
+      "orders": 0,
+      "sortido": 3.04,
+      "markup_pct": 62.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolo Milka Cake & Choc 175 G",
+      "category": "Bolos, Napolitanas, Queques",
+      "orders": 0,
+      "sortido": 9.13,
+      "markup_pct": 62.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bolo Milka Choco Brownie 150 G",
+      "category": "Bolos, Napolitanas, Queques",
+      "orders": 0,
+      "sortido": 9.13,
+      "markup_pct": 62.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cereais Chocapic Nestlé 375g",
+      "category": "Cereais Infantis e Juvenis",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 54.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cereais Mel Estrelitas Nestlé 270 g",
+      "category": "Cereais Infantis e Juvenis",
+      "orders": 0,
+      "sortido": 8.08,
+      "markup_pct": 54.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cereais com Chocolate Nesquik Nestlé 300g",
+      "category": "Cereais Infantis e Juvenis",
+      "orders": 0,
+      "sortido": 8.46,
+      "markup_pct": 54.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cereais Clusters Mel e Amêndoa Nestlé 325g",
+      "category": "Cereais Linha e Fibra",
+      "orders": 0,
+      "sortido": 14.35,
+      "markup_pct": 128.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Creme de Mãos Naturally Good Hidratante Nivea (emb. 75 ml)",
+      "category": "Cuidado Corpo",
+      "orders": 0,
+      "sortido": 4.1,
+      "markup_pct": 37.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Batom Crayon Hot Pink Labello (emb. 1 un)",
+      "category": "Cuidado Rosto",
+      "orders": 0,
+      "sortido": 5.14,
+      "markup_pct": 79.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Creme De Rosto Antirrugas Energizante De Dia Fp15 Q10 Energy Nivea 50 Ml",
+      "category": "Cuidado Rosto",
+      "orders": 0,
+      "sortido": 9.3,
+      "markup_pct": 79.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Batom Crayon Nude Labello (emb. 1 un)",
+      "category": "Cuidado Rosto",
+      "orders": 0,
+      "sortido": 5.14,
+      "markup_pct": 79.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Batom Crayon Poppy Red Labello (emb. 1 un)",
+      "category": "Cuidado Rosto",
+      "orders": 0,
+      "sortido": 5.14,
+      "markup_pct": 79.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Barra de Limpeza Facial Luminosidade Naturally Clean Nivea (emb. 75 gr)",
+      "category": "Cuidado Rosto",
+      "orders": 0,
+      "sortido": 5.14,
+      "markup_pct": 79.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Nivea BB Cream Hidratante Aperfeiçoador Tom Médio 50ml",
+      "category": "Cuidado Rosto",
+      "orders": 0,
+      "sortido": 7.25,
+      "markup_pct": 79.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Creme Nutella 350g",
+      "category": "Cremes de Barrar",
+      "orders": 0,
+      "sortido": 13.55,
+      "markup_pct": 77.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Elgydium Baby Escova de Dentes Suave 0-2 Anos",
+      "category": "Higiene Oral",
+      "orders": 0,
+      "sortido": 9.3,
+      "markup_pct": 100.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Cuecas Incontinência Tamanho L Tena Men 8Un",
+      "category": "Mais Higiene Pessoal",
+      "orders": 0,
+      "sortido": 20.57,
+      "markup_pct": 90.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Gelado Cornetto Morango 120 ml",
+      "category": "Gelados de Cone",
+      "orders": 0,
+      "sortido": 4.3,
+      "markup_pct": 179.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gelo em Cubos Gourmet Ice Cubers 2Kg",
+      "category": "Gelo",
+      "orders": 0,
+      "sortido": 6.12,
+      "markup_pct": 241.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gelado Cookie Dough Ben&Jerry's 465 ml",
+      "category": "Gelados Americanos",
+      "orders": 0,
+      "sortido": 19.31,
+      "markup_pct": 105.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Gelado Cornetto Clássico 6 x 90ml",
+      "category": "Gelados de Cone",
+      "orders": 0,
+      "sortido": 16.58,
+      "markup_pct": 179.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Gelado Mars Barra 41,8 g",
+      "category": "Mini Bites e Sandwich",
+      "orders": 0,
+      "sortido": 4.53,
+      "markup_pct": 38.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Gelo Picado Cocktail Cubers 2Kg",
+      "category": "Gelo",
+      "orders": 0,
+      "sortido": 7.29,
+      "markup_pct": 241.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Gelado Snickers Stick 50 ml",
+      "category": "Mini Bites e Sandwich",
+      "orders": 0,
+      "sortido": 5.04,
+      "markup_pct": 38.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Gelado Twix Barra 47 g",
+      "category": "Mini Bites e Sandwich",
+      "orders": 0,
+      "sortido": 4.53,
+      "markup_pct": 38.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Gelado Solero Exótico 90ml",
+      "category": "Gelados de Pauzinho",
+      "orders": 0,
+      "sortido": 4.17,
+      "markup_pct": 121.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gelado Pint Double Gold Caramelo Bilionário Magnum 440 ml",
+      "category": "Gelados Familiares",
+      "orders": 0,
+      "sortido": 18.41,
+      "markup_pct": 30.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Gelado Cookie Dough Ben&Jerry's 100 ml",
+      "category": "Mini Bites e Sandwich",
+      "orders": 0,
+      "sortido": 7.63,
+      "markup_pct": 38.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Gelado Magnum Amêndoas 110 ml",
+      "category": "Gelados de Pauzinho",
+      "orders": 0,
+      "sortido": 6.21,
+      "markup_pct": 121.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Gelado Magnum Sandwich Amêndoas 140ml",
+      "category": "Mini Bites e Sandwich",
+      "orders": 0,
+      "sortido": 5.36,
+      "markup_pct": 38.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gelado Pint Double Salted Caramel Magnum 440 ml",
+      "category": "Gelados Familiares",
+      "orders": 0,
+      "sortido": 18.41,
+      "markup_pct": 30.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gelado Peanut Butter Ben&Jerry's 465ml",
+      "category": "Gelados Americanos",
+      "orders": 0,
+      "sortido": 19.31,
+      "markup_pct": 105.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Gelado Caramelo Chew Chew Ben&Jerry's 100 ml",
+      "category": "Mini Bites e Sandwich",
+      "orders": 0,
+      "sortido": 7.63,
+      "markup_pct": 38.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Gelado Karamel Sutra Ben&Jerry's 427 ml",
+      "category": "Gelados Americanos",
+      "orders": 0,
+      "sortido": 18.24,
+      "markup_pct": 105.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Gelado Chocolate Fudge Brownie Ben&Jerry's 100 ml",
+      "category": "Mini Bites e Sandwich",
+      "orders": 0,
+      "sortido": 7.63,
+      "markup_pct": 38.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Gelado Perna de Pau 6 un",
+      "category": "Gelados de Pauzinho",
+      "orders": 0,
+      "sortido": 15.64,
+      "markup_pct": 121.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Gelado Dulce De-Lish Ben&Jerry's 427 ml",
+      "category": "Gelados Americanos",
+      "orders": 0,
+      "sortido": 18.24,
+      "markup_pct": 105.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Gelado Snickers Barra 48 g",
+      "category": "Mini Bites e Sandwich",
+      "orders": 0,
+      "sortido": 4.53,
+      "markup_pct": 38.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gelado Pint Chocolate Branco e Cookies Magnum 440 ml",
+      "category": "Gelados Familiares",
+      "orders": 0,
+      "sortido": 16.0,
+      "markup_pct": 30.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gelado Strawberry Cheesecake Ben&Jerry's 465 ml",
+      "category": "Gelados Americanos",
+      "orders": 0,
+      "sortido": 13.95,
+      "markup_pct": 105.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Gelado Cone Chupa-Chups 130 ml",
+      "category": "Gelados de Cone",
+      "orders": 0,
+      "sortido": 4.85,
+      "markup_pct": 179.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Gelado Chocolate Fudge Brownie Ben&Jerry's 465 ml",
+      "category": "Gelados Americanos",
+      "orders": 0,
+      "sortido": 19.31,
+      "markup_pct": 105.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "/Snicker Sorvete Esquimó s/ 73,5 gr",
+      "category": "Mini Bites e Sandwich",
+      "orders": 0,
+      "sortido": 3.15,
+      "markup_pct": 38.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "GELADO OLÁ CORNETTO MORANGO UN",
+      "category": "Gelados de Cone",
+      "orders": 0,
+      "sortido": 2.69,
+      "markup_pct": 179.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Ben & Jerry Cookie Dough Gelado Copo 100ml",
+      "category": "Mini Bites e Sandwich",
+      "orders": 0,
+      "sortido": 4.49,
+      "markup_pct": 38.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "GELADO OLÁ SOLERO FRUTOS EXOTICOS UN",
+      "category": "Gelados de Pauzinho",
+      "orders": 0,
+      "sortido": 2.45,
+      "markup_pct": 121.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Gelado Caramelo Chew Chew Ben&Jerry's 100 ml",
+      "category": "Mini Bites e Sandwich",
+      "orders": 0,
+      "sortido": 4.49,
+      "markup_pct": 38.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Ben & Jerry Chocolate Fudge Brownie Gelado Copo 100ml",
+      "category": "Mini Bites e Sandwich",
+      "orders": 0,
+      "sortido": 4.49,
+      "markup_pct": 38.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Iogurte Grego Natural Oikos Danone 900G",
+      "category": "Iogurtes",
+      "orders": 0,
+      "sortido": 13.32,
+      "markup_pct": 72.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Esparregado Iglo 750g",
+      "category": "Couves, Bróculos e Espinafres",
+      "orders": 0,
+      "sortido": 10.78,
+      "markup_pct": 31.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Espinafres em Folhas 450g + 50g",
+      "category": "Couves, Bróculos e Espinafres",
+      "orders": 0,
+      "sortido": 4.29,
+      "markup_pct": 31.8,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Leite Achocolatado Ucal 6 x 250 ml",
+      "category": "Bebidas Com Leite",
+      "orders": 0,
+      "sortido": 15.97,
+      "markup_pct": 56.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Leite Achocolatado Mimosa 4x200 ml",
+      "category": "Bebidas Com Leite",
+      "orders": 0,
+      "sortido": 5.67,
+      "markup_pct": 56.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Ovos Bio Matinados Meia Dúzia M/L",
+      "category": "Ovos",
+      "orders": 0,
+      "sortido": 9.72,
+      "markup_pct": 89.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Ovos Nostrum Meia Dúzia L",
+      "category": "Ovos",
+      "orders": 0,
+      "sortido": 5.89,
+      "markup_pct": 89.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Natas para Culinária Parmalat 200ml",
+      "category": "Natas e Bechamel",
+      "orders": 0,
+      "sortido": 2.93,
+      "markup_pct": 83.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Natas Cremosas Mimosa 200ml",
+      "category": "Manteiga e Cremes de Barrar",
+      "orders": 0,
+      "sortido": 3.22,
+      "markup_pct": 92.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Óleo Alimentar Fula 1L",
+      "category": "Mais Acessórios Casa",
+      "orders": 0,
+      "sortido": 7.46,
+      "markup_pct": 95.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Colher Madeira Amanhecer 10 un",
+      "category": "Mais Acessórios Casa",
+      "orders": 0,
+      "sortido": 1.9,
+      "markup_pct": 95.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Abre Latas Jomafe 1 un",
+      "category": "Mais Acessórios Casa",
+      "orders": 0,
+      "sortido": 5.14,
+      "markup_pct": 95.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Conjunto 2 Doseadores 2 cl MPRO",
+      "category": "Mais Acessórios Casa",
+      "orders": 0,
+      "sortido": 6.19,
+      "markup_pct": 95.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Conjunto 2 Rolhas Garrafa Champanhe MPRO",
+      "category": "Mais Acessórios Casa",
+      "orders": 0,
+      "sortido": 6.19,
+      "markup_pct": 95.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Prensa Para Lima/Limao Aluminio APS",
+      "category": "Mais Acessórios Casa",
+      "orders": 0,
+      "sortido": 20.74,
+      "markup_pct": 95.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Escorredor Para Cocktail Pro Servotel",
+      "category": "Mais Acessórios Casa",
+      "orders": 0,
+      "sortido": 5.14,
+      "markup_pct": 95.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Conjunto Arejador Vinho Irabia Mqz100301",
+      "category": "Mais Acessórios Casa",
+      "orders": 0,
+      "sortido": 40.5,
+      "markup_pct": 95.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Delta Q Máquina de Café MiniQool 0,6 l Cinzenta",
+      "category": "Mais Acessórios Casa",
+      "orders": 0,
+      "sortido": 48.85,
+      "markup_pct": 95.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Carregador USB eTransmissor FM 2 em 1 Preto Cinza 1 un",
+      "category": "Adaptadores",
+      "orders": 0,
+      "sortido": 7.25,
+      "markup_pct": 179.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Carregador de Carro Cinza Aris 5V/3,4A 2USB Aris",
+      "category": "Adaptadores",
+      "orders": 0,
+      "sortido": 5.14,
+      "markup_pct": 179.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Filtros 8mm T&T 100un",
+      "category": "Mortalhas e Filtros",
+      "orders": 0,
+      "sortido": 1.07,
+      "markup_pct": 21.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Smoking Papel Enrolar Deluxe King Size 33un",
+      "category": "Mortalhas e Filtros",
+      "orders": 0,
+      "sortido": 1.17,
+      "markup_pct": 21.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Smoking Papel Enrolar N. 8 Blue 60un",
+      "category": "Mortalhas e Filtros",
+      "orders": 0,
+      "sortido": 0.93,
+      "markup_pct": 21.4,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Queijo Flamengo Light Fatiado Terra Nostra 200g",
+      "category": "Queijo",
+      "orders": 0,
+      "sortido": 9.52,
+      "markup_pct": 68.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Queijo Brie President 200g",
+      "category": "Queijo",
+      "orders": 0,
+      "sortido": 14.09,
+      "markup_pct": 68.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Queijo para barrar Queru Real 100 g",
+      "category": "Queijo",
+      "orders": 0,
+      "sortido": 4.37,
+      "markup_pct": 68.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Queijo Mini Babybel 6 x 20g",
+      "category": "Queijo",
+      "orders": 0,
+      "sortido": 9.18,
+      "markup_pct": 68.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Queijo Mozzarella Amanhecer Ralado 200 G",
+      "category": "Queijo",
+      "orders": 0,
+      "sortido": 5.27,
+      "markup_pct": 68.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Vinagre Gallo Vinho Branco 250ml",
+      "category": "Óleo, Azeite e Vinagre",
+      "orders": 0,
+      "sortido": 3.32,
+      "markup_pct": 105.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Combo Cuba Libre sdr",
+      "category": "Combos Destilados",
+      "orders": 0,
+      "sortido": 38.0,
+      "markup_pct": 19.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Refrigerante com Gás Seven Up 1 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.79,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "REFRIGERANTE COM GÁS COCA-COLA 1,5L",
+      "category": "Refrigerantes com Gás",
+      "orders": 0,
+      "sortido": 3.47,
+      "markup_pct": 83.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Mixer Whisky Jack Daniel's & Coca Cola 33 cl sdr",
+      "category": "Combos Destilados",
+      "orders": 0,
+      "sortido": 7.11,
+      "markup_pct": 19.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Sidra Maça Bandida do Pomar  Lata 50 cl sdr",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 3.87,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Sidra Frutos Vermelhos  Bandida do Pomar  Lata 50 cl sdr",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 3.66,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Mixer Rum Bacardi & Coca Cola 25 cl sdr",
+      "category": "Combos Destilados",
+      "orders": 0,
+      "sortido": 7.11,
+      "markup_pct": 19.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja com Álcool Lata Sagres 50 cl sdr",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 3.66,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 3 Poupe 10% - Cerveja com Álcool Lata Sagres 33 cl sdr",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 3.43,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Cerveja Heineken Lata 33 cl sdr",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 8.45,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja Estrella Damm Lata 50 cl sdr",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 4.03,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja sem Álcool Lata Sagres 0.0 % 33 cl sdr",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 2.5,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja com Álcool Lata Sagres Preta 33 cl sdr",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 2.33,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja Tequila Desperados Lata 50 cl sdr",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 5.53,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Alcool Guiness Lata 44cl sdr",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 7.38,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Refrigerante com Gás Pepsi 1 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.95,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bebida Energética Monster Ultra Watermelon 50 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.86,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Refrigerante com Gás Seven Up 1,75 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 6.46,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bebida Energética Monster Ultra White 50 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.86,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Refrigerante com Gás Fanta Laranja Lata 33cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 6.85,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Refrigerante com Gás Coca-Cola Original 1 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 4.16,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Refrigerante com Gás Coca-Cola Zero Açúcar Lata 33 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 7.85,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Refrigerante Com Gás Ananás Sumol 1,5lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 4.96,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Refrigerante com Gás Pepsi 1,75 lt lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 5.2,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 3 Poupe 20% - Refrigerante Com Gás Ananás Sumol Lata 33 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.05,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bebida Energética Monster Green 50 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.91,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Refrigerante Com Gás Laranja Sumol 1,5 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 4.96,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 3 Poupe 20% - Refrigerante Com Gás Laranja Sumol Lata 33 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.05,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 25% - Refrigerante com Gás Coca-Cola Zero Açúcar Zero Cafeína Pet 1 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.9,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 25% - Refrigerante com Gás Fanta Laranja Pet 50cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.6,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 25% - Refrigerante com Gás Fanta Laranja 1,5 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.86,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 3 Poupe 20% - Refrigerante com Gás Seven Up Lata 33 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.29,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Refrigerante com Gás Coca-Cola Original Lata 33 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 7.85,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 3 Poupe 20% - Refrigerante Guaraná Antarctica Lata 33 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.29,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 25% - Água Mineral Serra da Estrela 1,5 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 1.61,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bebida Isotónica Powerade Ice Storm 50 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 4.81,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Água Mineral Luso 1,5 lt sdr",
+      "category": "Água Sem Gás",
+      "orders": 0,
+      "sortido": 5.0,
+      "markup_pct": 84.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Refrigerante com Gás Coca-Cola Zero Açúcar Pet 50 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 14.0,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Refrigerante com Gás Coca-Cola Zero Açúcar 1 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 13.0,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 4 - Refrigerante com Gás Pepsi Lata 33 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 5.88,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Água Mineral Luso 50 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 4.15,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Refrigerante com Gás Coca-Cola Original Pet 50 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 10.75,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 30% - Refrigerante com Gás Coca-Cola Zero Açúcar 1,5lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 4.86,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Refrigerante com Gás Coca-Cola Original 1,5 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 5.55,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 25% - Refrigerante com Gás Coca-Cola sem Cafeína Pet 1 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.65,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "SUMOL ANANAS 1,50 PET V",
+      "category": "Refrigerantes com Gás",
+      "orders": 0,
+      "sortido": 3.1,
+      "markup_pct": 83.5,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bebida Energética Monster Mango Loco 50 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.86,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Bebida Energética Monster Green Zero 50 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.86,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Lata Lipton Ice Tea Pêssego 33 cl sdr",
+      "category": "Ice Tea e Kombuchas",
+      "orders": 0,
+      "sortido": 1.57,
+      "markup_pct": 55.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Água das Pedras Salgadas 1 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.49,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Água Mineral Monchique 1,5 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 7.0,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Lata Lipton Ice Tea Limão 33 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 2.83,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Lata Lipton Ice Tea Manga 33 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 2.83,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Lata Lipton Ice Tea Pêssego 33 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 2.83,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Cerveja com Álcool Lata Super Bock 33cl sdr",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 6.35,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Sidra com Álcool Maçã Somersby Lata 50cl sdr",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 3.87,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Água com Gás Carvalheiros Pet 1,5 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 2.56,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Água Tónica Schweppes 1 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 5.45,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Ginger Ale Schweppes 1 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 5.27,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Bebida Energética Gaseificada Red Bull 25 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 12.85,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Bebida Energética Sem Açúcar Red Bull 25 cl sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 12.85,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Ice Tea Limão Lipton 1,5 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 5.67,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Ice Tea Pêssego Lipton 1,5 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 5.67,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Refrigerante Guaraná Antarctica 1,5L sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 4.94,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Refrigerante sem Gás Joi Manga Laranja 1,5 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.86,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Refrigerante sem Gás Laranja Joi 1,5 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.86,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Refrigerante sem Gás Limão Joi 1,5 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 3.86,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Combo Martini Tónico sdr",
+      "category": "Combos Destilados",
+      "orders": 0,
+      "sortido": 26.0,
+      "markup_pct": 19.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Combo Gin Gordons sdr",
+      "category": "Combos Destilados",
+      "orders": 0,
+      "sortido": 32.0,
+      "markup_pct": 19.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Combo Gin Bombay sdr",
+      "category": "Combos Destilados",
+      "orders": 0,
+      "sortido": 36.0,
+      "markup_pct": 19.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Combo Crazy Ivan sdr",
+      "category": "Combos Destilados",
+      "orders": 0,
+      "sortido": 49.0,
+      "markup_pct": 19.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Combo Vodka Laranja sdr",
+      "category": "Combos Destilados",
+      "orders": 0,
+      "sortido": 27.0,
+      "markup_pct": 19.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Sovina Cerveja Artesanal Lager garrafa 33 cl - 18603000615",
+      "category": "Cerveja Artesanal",
+      "orders": 0,
+      "sortido": 4.49,
+      "markup_pct": 30.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Sovina Cerveja Artesanal Amber garrafa 33 cl - 18603000607",
+      "category": "Cerveja Artesanal",
+      "orders": 0,
+      "sortido": 4.49,
+      "markup_pct": 30.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja Artesanal Sovina Ambar 6% TP 33cl",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 8.08,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Poupe 15% - Cerveja Artesanal Sovina Ambar 6% TP 33cl",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 22.9,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "VT CARVALHAIS MÉLANGE À 3 DOC DÃO 75CL",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 11.75,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Água com Gás Perrier 6 x 20 cl TP",
+      "category": "Água Com Gás",
+      "orders": 0,
+      "sortido": 10.49,
+      "markup_pct": 87.7,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Cerveja com Álcool Lata Super Bock 50 cl sdr",
+      "category": "Cerveja Tradicional",
+      "orders": 0,
+      "sortido": 3.44,
+      "markup_pct": 88.2,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Água sem Gás (emb. 1.5 lt)",
+      "category": "Água Sem Gás",
+      "orders": 0,
+      "sortido": 1.37,
+      "markup_pct": 84.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 6 Pague 5 - Água Mineral sem Gás Carvalhelhos Pet 1,5 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 6.35,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja Heineken Lata 50 cl sdr",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 3.91,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Água com Gás Vidago 4 x 25 cl TP",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 7.36,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja Heineken 18 x 25 cl",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 42.28,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cerveja com Álcool Cristal Mini 6 x 25 cl TP",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 10.52,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Cerveja com Álcool Coral 6 x 33 cl TP",
+      "category": "Combos Cerveja",
+      "orders": 0,
+      "sortido": 18.88,
+      "markup_pct": 71.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "RibEye Novilho Congelado Izidoro",
+      "category": "Refeições Prontas!",
+      "orders": 0,
+      "sortido": 22.89,
+      "markup_pct": 125.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Bife da Vazia Novilho Congelado Izidoro",
+      "category": "Refeições Prontas!",
+      "orders": 0,
+      "sortido": 16.17,
+      "markup_pct": 125.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Presunto Fatiado Fumeiro d'Aldeia Damatta 70g",
+      "category": "Fiambre, Mortadela e Salame",
+      "orders": 0,
+      "sortido": 4.93,
+      "markup_pct": 22.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Presunto Fatiado Damatta Tapas 2x75 G",
+      "category": "Fiambre, Mortadela e Salame",
+      "orders": 0,
+      "sortido": 9.49,
+      "markup_pct": 22.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 20% - Salsichas Frankfurt Izidoro Lata 8 un",
+      "category": "Salsichas",
+      "orders": 0,
+      "sortido": 3.36,
+      "markup_pct": 36.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Cachaço Curado Fatiado Damatta 4x30g",
+      "category": "Fiambre, Mortadela e Salame",
+      "orders": 0,
+      "sortido": 8.67,
+      "markup_pct": 22.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - T-Bone Novilho Congelado Izidoro",
+      "category": "Refeições Prontas!",
+      "orders": 0,
+      "sortido": 52.83,
+      "markup_pct": 125.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 10% - Bife da Vazia Novilho Congelado Izidoro",
+      "category": "Refeições Prontas!",
+      "orders": 0,
+      "sortido": 29.11,
+      "markup_pct": 125.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Combo Queijo e Fiambre",
+      "category": "Fiambre, Mortadela e Salame",
+      "orders": 0,
+      "sortido": 8.0,
+      "markup_pct": 22.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Água com Gás San Pellegrino 1 lt sdr",
+      "category": "Combos Águas; Sumos e Refrigerantes",
+      "orders": 0,
+      "sortido": 6.07,
+      "markup_pct": 39.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Leve 2 Poupe 15% - Salsichas de Aves Izidoro Lata 8 un",
+      "category": "Salsichas",
+      "orders": 0,
+      "sortido": 4.25,
+      "markup_pct": 36.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "DOURADINHOS DE PEIXE IGLO 280G (10UN)",
+      "category": "Douradinhos, Nuggets e Panados",
+      "orders": 0,
+      "sortido": 9.23,
+      "markup_pct": 96.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Bosford Gin (garrafa 70 cl)",
+      "category": "Gin",
+      "orders": 0,
+      "sortido": 28.35,
+      "markup_pct": 68.9,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Caves de Murça Douro DOC Tinto Vinho Tinto 2014, 75 cl",
+      "category": "Vinho Tinto",
+      "orders": 0,
+      "sortido": 5.27,
+      "markup_pct": 65.6,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Vinho Rosé Península de Setúbal Encostas da Arrábida 75 cl",
+      "category": "Vinho Rosé",
+      "orders": 0,
+      "sortido": 3.93,
+      "markup_pct": 67.0,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Gelado Brookies & Cream Ben&Jerry's 100 ml",
+      "category": "Gelados Americanos",
+      "orders": 0,
+      "sortido": 4.49,
+      "markup_pct": 105.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Ben&jerry Cookies On...",
+      "category": "Gelados Americanos",
+      "orders": 0,
+      "sortido": 4.49,
+      "markup_pct": 105.3,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Snacks Doritos BBQ 85g",
+      "category": "Aperitivos, Snacks e Pipocas",
+      "orders": 0,
+      "sortido": 2.53,
+      "markup_pct": 69.1,
+      "priority": 0.0,
+      "is_estimate": true
+    },
+    {
+      "name": "Gelo Stick Artesanal IceOlogy 35mm x 35mm x 120mm 6 unidades",
+      "category": "Gelo",
+      "orders": 0,
+      "sortido": 11.59,
+      "markup_pct": 241.0,
+      "priority": 0.0,
+      "is_estimate": true
+    }
+  ]
+}

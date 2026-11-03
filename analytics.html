@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Sortido · Analytics</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+header { padding: 20px 32px; border-bottom: 1px solid #1e293b; display: flex; align-items: baseline; gap: 16px; }
+header h1 { font-size: 18px; font-weight: 700; color: #f8fafc; }
+header span { font-size: 13px; color: #64748b; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; padding: 24px 32px; }
+.card { background: #1e293b; border-radius: 12px; padding: 20px; }
+.card h2 { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: #64748b; margin-bottom: 16px; }
+.card.wide { grid-column: 1 / -1; }
+canvas { max-height: 260px; }
+.stat-row { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 16px; }
+.stat { flex: 1; min-width: 120px; }
+.stat-val { font-size: 28px; font-weight: 700; color: #f8fafc; line-height: 1; }
+.stat-sub { font-size: 12px; color: #64748b; margin-top: 4px; }
+.overlap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 4px; }
+.ov { background: #0f172a; border-radius: 8px; padding: 10px 12px; text-align: center; }
+.ov-val { font-size: 20px; font-weight: 700; }
+.ov-lbl { font-size: 11px; color: #64748b; margin-top: 2px; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
+.leg { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; color: #64748b; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; padding: 6px 8px; border-bottom: 1px solid #334155; }
+td { padding: 8px 8px; border-bottom: 1px solid #1e293b; color: #cbd5e1; }
+td.hi { color: #f8fafc; font-weight: 600; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.insight { background: #0f172a; border-radius: 8px; padding: 12px 16px; margin-top: 8px; font-size: 13px; line-height: 1.6; color: #94a3b8; }
+.insight strong { color: #f8fafc; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Sortido · Delivery Analytics</h1>
+  <span>bolt=50 sweeps · glovo=31 sweeps · ubereats=22 sweeps</span>
+</header>
+<div class="grid">
+
+  <!-- Coverage summary -->
+  <div class="card">
+    <h2>Zona de entrega (total)</h2>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="stat-val" style="color:#3b82f6">910</div>
+        <div class="stat-sub">células Bolt</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" style="color:#f97316">917</div>
+        <div class="stat-sub">células Glovo</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val" style="color:#10b981">620</div>
+        <div class="stat-sub">células UberEats</div>
+      </div>
+    </div>
+    <div class="insight">
+      Cada célula ≈ 0.25 km². UberEats tem zona <strong>32% mais pequena</strong> que Glovo.
+      <strong>492 células</strong> são entregues pelas 3 plataformas em simultâneo.
+    </div>
+  </div>
+
+  <!-- Overlap -->
+  <div class="card">
+    <h2>Sobreposição de zonas</h2>
+    <div class="overlap-grid">
+      <div class="ov"><div class="ov-val" style="color:#6366f1">492</div><div class="ov-lbl">Bolt+Glovo+UberEats</div></div>
+      <div class="ov"><div class="ov-val" style="color:#3b82f6">143</div><div class="ov-lbl">Bolt+Glovo</div></div>
+      <div class="ov"><div class="ov-val" style="color:#10b981">61</div><div class="ov-lbl">Bolt+UberEats</div></div>
+      <div class="ov"><div class="ov-val" style="color:#f97316">58</div><div class="ov-lbl">Glovo+UberEats</div></div>
+      <div class="ov"><div class="ov-val" style="color:#3b82f6">214</div><div class="ov-lbl">Bolt exclusivo</div></div>
+      <div class="ov"><div class="ov-val" style="color:#f97316">224</div><div class="ov-lbl">Glovo exclusivo</div></div>
+    </div>
+  </div>
+
+  <!-- ETA by distance -->
+  <div class="card wide">
+    <h2>ETA mediana por distância ao darkstore</h2>
+    <div class="legend">
+      <div class="leg"><div class="leg-dot" style="background:#3b82f6"></div>Bolt</div><div class="leg"><div class="leg-dot" style="background:#f97316"></div>Glovo</div><div class="leg"><div class="leg-dot" style="background:#10b981"></div>UberEats</div>
+    </div>
+    <canvas id="distChart"></canvas>
+    <div class="insight" style="margin-top:12px">
+      A <strong>2-4km</strong> Bolt já é <strong>1.4× mais lento</strong> que UberEats.
+      Glovo tem zona exclusiva além de <strong>9km</strong> que as outras plataformas não cobrem.
+    </div>
+  </div>
+
+  <!-- ETA by slot -->
+  <div class="card">
+    <h2>ETA mediana por período do dia</h2>
+    <canvas id="slotEtaChart"></canvas>
+  </div>
+
+  <!-- Fee by slot -->
+  <div class="card">
+    <h2>Taxa de entrega por período do dia</h2>
+    <canvas id="slotFeeChart"></canvas>
+    <div class="insight" style="margin-top:12px">
+      Glovo aplica <strong>surge pricing ao jantar/late</strong>: €3.99 vs €2.99 ao almoço.
+      UberEats não cobra taxa de entrega.
+    </div>
+  </div>
+
+  <!-- Detailed table -->
+  <div class="card wide">
+    <h2>Detalhe por plataforma e período</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Período</th>
+          <th>Bolt — células / ETA / taxa</th>
+          <th>Glovo — células / ETA / taxa</th>
+          <th>UberEats — células / ETA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="hi">Manhã</td><td>527 cél &nbsp;·&nbsp; — &nbsp;·&nbsp; —</td><td>420 cél &nbsp;·&nbsp; — &nbsp;·&nbsp; —</td><td>299 cél &nbsp;·&nbsp; — &nbsp;·&nbsp; —</td></tr>
+        <tr><td class="hi">Almoço</td><td>527 cél &nbsp;·&nbsp; 42.5min &nbsp;·&nbsp; €2.69</td><td>420 cél &nbsp;·&nbsp; 30.4min &nbsp;·&nbsp; €2.99</td><td>299 cél &nbsp;·&nbsp; 25.5min &nbsp;·&nbsp; —</td></tr>
+        <tr><td class="hi">Tarde</td><td>527 cél &nbsp;·&nbsp; 42.5min &nbsp;·&nbsp; €2.79</td><td>420 cél &nbsp;·&nbsp; 30.4min &nbsp;·&nbsp; €2.99</td><td>299 cél &nbsp;·&nbsp; 26.5min &nbsp;·&nbsp; —</td></tr>
+        <tr><td class="hi">Jantar</td><td>910 cél &nbsp;·&nbsp; 42.5min &nbsp;·&nbsp; €2.59</td><td>917 cél &nbsp;·&nbsp; 33.75min &nbsp;·&nbsp; €3.99</td><td>620 cél &nbsp;·&nbsp; 25.5min &nbsp;·&nbsp; —</td></tr>
+        <tr><td class="hi">Late</td><td>865 cél &nbsp;·&nbsp; 42.5min &nbsp;·&nbsp; €2.59</td><td>916 cél &nbsp;·&nbsp; 35.0min &nbsp;·&nbsp; €3.99</td><td>620 cél &nbsp;·&nbsp; 22.5min &nbsp;·&nbsp; —</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+const chartDefaults = {
+  responsive: true,
+  plugins: { legend: { display: false } },
+  scales: {
+    x: { ticks: { color: "#64748b", font: { size: 11 } }, grid: { color: "#1e293b" } },
+    y: { ticks: { color: "#64748b", font: { size: 11 } }, grid: { color: "#1e293b" } }
+  }
+};
+
+// ETA by distance
+new Chart(document.getElementById("distChart"), {
+  type: "line",
+  data: {
+    labels: ["0-2km", "2-4km", "4-6km", "6-8km", "8-10km", "10-12km", "12-14km", "14-16km"],
+    datasets: [
+      { label: "Bolt",     data: [22.5, 32.5, 47.5, 52.5, null, null, null, null],     borderColor: "#3b82f6", backgroundColor: "#3b82f620", tension: 0.3, pointRadius: 4, spanGaps: true },
+      { label: "Glovo",    data: [20.0, 22.8, 30.0, 35.2, 41.2, 50.0, 55.0, 64.0],    borderColor: "#f97316", backgroundColor: "#f9731620", tension: 0.3, pointRadius: 4, spanGaps: true },
+      { label: "UberEats", data: [19.8, 22.8, 25.5, 26.5, 27.5, null, null, null], borderColor: "#10b981", backgroundColor: "#10b98120", tension: 0.3, pointRadius: 4, spanGaps: true },
+    ]
+  },
+  options: { ...chartDefaults, plugins: { legend: { display: true, labels: { color: "#94a3b8", font: { size: 12 } } } },
+    scales: { ...chartDefaults.scales, y: { ...chartDefaults.scales.y, title: { display: true, text: "minutos", color: "#64748b" } } } }
+});
+
+// ETA by slot
+const slotLabels = ["Manh\u00e3", "Almo\u00e7o", "Tarde", "Jantar", "Late"];
+new Chart(document.getElementById("slotEtaChart"), {
+  type: "bar",
+  data: {
+    labels: slotLabels,
+    datasets: [
+      { label: "Bolt",     data: [null, 42.5, 42.5, 42.5, 42.5],     backgroundColor: "#3b82f6aa" },
+      { label: "Glovo",    data: [null, 30.4, 30.4, 33.75, 35.0],    backgroundColor: "#f97316aa" },
+      { label: "UberEats", data: [null, 25.5, 26.5, 25.5, 22.5], backgroundColor: "#10b981aa" },
+    ]
+  },
+  options: { ...chartDefaults, plugins: { legend: { display: true, labels: { color: "#94a3b8", font: { size: 12 } } } },
+    scales: { ...chartDefaults.scales, y: { ...chartDefaults.scales.y, title: { display: true, text: "minutos", color: "#64748b" } } } }
+});
+
+// Fee by slot
+new Chart(document.getElementById("slotFeeChart"), {
+  type: "bar",
+  data: {
+    labels: slotLabels,
+    datasets: [
+      { label: "Bolt",     data: [null, 2.69, 2.79, 2.59, 2.59],     backgroundColor: "#3b82f6aa" },
+      { label: "Glovo",    data: [null, 2.99, 2.99, 3.99, 3.99],    backgroundColor: "#f97316aa" },
+      { label: "UberEats", data: [null, null, null, null, null], backgroundColor: "#10b981aa" },
+    ]
+  },
+  options: { ...chartDefaults, plugins: { legend: { display: true, labels: { color: "#94a3b8", font: { size: 12 } } } },
+    scales: { ...chartDefaults.scales, y: { ...chartDefaults.scales.y, title: { display: true, text: "€", color: "#64748b" } } } }
+});
+</script>
+</body>
+</html>
